@@ -1,14 +1,14 @@
 ---
-layout: "layouts/content"
 metadata:
   title: "Test content page"
   description: "Lorem ipsum"
-heading: "Florentis yolo hame "
-img: "https://framerusercontent.com/images/WljY7VDINVCuEUJTyYTpMRuNvBQ.png"
+heading: "Florentis antra in corpore ardent ratione"
+img: "https://superblog.supercdn.cloud/site_cuid_cl1n5glij25321ik1g86jpoe1/images/frame-7-2-1721999590847-compressed.png"
 imgAlt: "image"
 tags: ["First", "Blog"]
 category: "Test"
-date: 2024-01-17
+author: "Akshay"
+date: 2024-01-16
 ---
 
 ## Modo Pyrrha ludunt limina

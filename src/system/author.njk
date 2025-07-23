@@ -1,0 +1,24 @@
+---
+layout: "base.njk"
+pagination:
+  data: collections.authorPages
+  size: 1
+  alias: authorPage
+permalink: "/author/{{ authorPage.name | slugify }}/{% if authorPage.page > 1 %}{{ authorPage.page }}/{% endif %}"
+eleventyComputed:
+  title: "Posts by: {{ authorPage.name }}{% if authorPage.page > 1 %} - Page {{ authorPage.page }}{% endif %}"
+  metadata:
+    title: "Posts by: {{ authorPage.name }}{% if authorPage.page > 1 %} - Page {{ authorPage.page }}{% endif %}"
+    description: "Posts by {{ authorPage.name }}{% if authorPage.page > 1 %} (Page {{ authorPage.page }}){% endif %}"
+---
+
+<section class="text-gray-700 body-font">
+  <div class="my-10 text-center">
+    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+      Posts by: {{ authorPage.name }}{% if authorPage.page > 1 %} - Page
+      {{ authorPage.page }}{% endif %}
+    </h1>
+  </div>
+  {%- from 'macros/postlist.njk' import postlistMacro with context -%}
+  {{ postlistMacro(authorPage, "author") }}
+</section>

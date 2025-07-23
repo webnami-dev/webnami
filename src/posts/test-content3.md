@@ -1,5 +1,4 @@
 ---
-layout: "layouts/content"
 metadata:
   title: "Test content page"
   description: "Lorem ipsum"
@@ -8,6 +7,7 @@ img: "https://framerusercontent.com/images/WljY7VDINVCuEUJTyYTpMRuNvBQ.png"
 imgAlt: "image"
 tags: ["First", "Blog"]
 category: "Test1"
+author: "Akshay"
 date: 2024-01-15
 ---
 

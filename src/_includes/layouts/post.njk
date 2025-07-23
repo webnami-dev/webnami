@@ -8,7 +8,7 @@ layout: "base.njk"
     class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-headings:text-gray-700 prose-p:text-500 prose-a:text-primary-500 prose-a:hover:text-primary-500/50"
   >
     <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ heading }}</h1>
-    <div class="flex flex-row items-center justify-between gap-4 mb-4">
+    <div class="flex flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-4">
         {% if config.posts.showDate %}
         <p class="text-gray-500 text-sm">{{ date | postDate }}</p>
@@ -54,7 +54,11 @@ layout: "base.njk"
       </div>
     </div>
     {% if config.posts.showAuthor %}
-    <p class="text-gray-500 text-sm">By {{ author }}</p>
+    <a
+      href="/author/{{ author | slugify }}"
+      class="text-sm font-medium no-underline"
+      >By {{ author }}</a
+    >
     {% endif %}
     <img
       src="{{ img }}"
