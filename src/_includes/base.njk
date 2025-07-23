@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ metadata.title }}</title>
+    <meta name="title" content="{{ metadata.title }}" />
+    {%- if metadata.description -%}
+    <meta name="description" content="{{ metadata.description }}" />
+    {%- endif -%} {%- if not robots or robots != 'false' -%}
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    {%- endif -%}
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="{{ config.meta.url }}{{ page.url }}"
+    />
+    <meta property="twitter:title" content="{{ metadata.title }}" />
+    {%- if metadata.description -%}
+    <meta property="twitter:description" content="{{ metadata.description }}" />
+    {%- endif -%}
+    <meta property="twitter:image" content="{{ config.meta.image }}" />
+    <meta property="og:url" content="{{ config.meta.url }}{{ page.url }}" />
+    <meta property="og:title" content="{{ metadata.title }}" />
+    {%- if metadata.description -%}
+    <meta property="og:description" content="{{ metadata.description }}" />
+    {%- endif -%}
+    <meta property="og:image" content="{{ config.meta.image }}" />
+    <meta property="og:locale" content="en-US" />
+    <meta property="og:site_name" content="{{ config.meta.name }}" />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="{{ config.meta.url }}{{ page.url }}" />
+    <link rel="icon" href="{{ config.meta.favicon }}" type="image/svg+xml" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
+    <script
+      type="module"
+      src="{{ '/assets/js/bundle.js' | assetHash }}"
+      defer
+    ></script>
+  </head>
+  <body class="bg-white">
+    {%- include 'partials/navbar.njk' -%}
+    {{ content | safe }}
+    {%- include 'partials/footer.njk' -%}
+  </body>
+</html>

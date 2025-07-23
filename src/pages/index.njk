@@ -1,0 +1,175 @@
+---
+layout: "base.njk"
+pagination:
+  data: collections.paginatedPosts
+  size: 1
+  alias: postsPage
+permalink: "{% if postsPage.page == 1 %}/{% else %}/posts/{{ postsPage.page }}/{% endif %}"
+eleventyComputed:
+  metadata:
+    title: "{% if postsPage.page == 1 %}{{ config.home.metadata.title }}{% else %}Posts - Page {{ postsPage.page }}{% endif %}"
+    description: "{% if postsPage.page == 1 %}{{ config.home.metadata.description }}{% else %}Posts page {{ postsPage.page }}{% endif %}"
+---
+
+<section class="text-gray-700 body-font">
+  {% if postsPage.page == 1 %}
+  <!-- Page 1: Header + Featured + Grid Layout -->
+  <div class="my-10 text-center">
+    {% if config.home.showHeading %}
+    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+      {{ config.home.heading }}
+    </h1>
+    <p class="leading-relaxed text-subheader">
+      {{ config.home.subheading }}
+    </p>
+    {% endif %}
+  </div>
+  {%- include 'partials/category-nav.njk' -%}
+  <!-- Featured Post (First Item) -->
+  {% set featuredPost = postsPage.items[0] %} {% if featuredPost %}
+  <div class="w-full md:w-4/5 px-5 py-5 mx-auto flex flex-wrap mb-12">
+    <a
+      href="{{ featuredPost.url }}"
+      class="lg:w-1/2 w-full rounded overflow-hidden mt-6 sm:mt-0"
+    >
+      <img
+        class="object-cover object-center w-full h-full rounded-xl"
+        src="{{ featuredPost.data.img }}"
+        alt="{{ featuredPost.data.imgAlt }}"
+      />
+    </a>
+    <div
+      class="flex flex-wrap mt-6 lg:mt-auto mb-auto lg:w-1/2 content-start lg:p-4"
+    >
+      <div class="w-full sm:p-4 mb-6">
+        <h1
+          class="title-font font-medium sm:text-3xl text-2xl mb-4 text-stats-heading"
+        >
+          <a
+            href="{{ featuredPost.url }}"
+            class="hover:text-blue-600 transition-colors"
+          >
+            {{ featuredPost.data.heading }}
+          </a>
+        </h1>
+        <p class="hidden sm:block sm:mb-4">
+          {{ featuredPost.templateContent | excerpt }}
+        </p>
+        {% if config.posts.showDate or config.posts.showAuthor %}
+        <p class="leading-relaxed text-gray-500 text-sm mb-2">
+          {% if config.posts.showAuthor %}By {{ featuredPost.data.author }}{%
+          endif %} {% if config.posts.showAuthor and config.posts.showDate %} |
+          {% endif %} {% if config.posts.showDate %}{{
+            featuredPost.data.date | postDate
+          }}{% endif %}
+        </p>
+        {% endif %} {% if config.posts.showCategory %}
+        <div class="flex">
+          <p
+            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
+          >
+            {{ featuredPost.data.category }}
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Regular Posts Grid (Remaining Items) -->
+
+  <div class="w-full md:w-4/5 px-5 mx-auto">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {% for post in postsPage.items %} {% if not loop.first %}
+      <a
+        class="group flex flex-col h-full focus:outline-none"
+        href="{{ post.url }}"
+      >
+        <div class="flex-shrink-0">
+          <img
+            class="w-full h-48 object-cover rounded-xl"
+            src="{{ post.data.img }}"
+            alt="{{ post.data.imgAlt }}"
+          />
+        </div>
+        <div class="my-6 flex-grow">
+          <h3 class="text-xl font-semibold group-hover:text-blue-600 mb-2">
+            {{ post.data.heading }}
+          </h3>
+          {% if config.posts.showDate or config.posts.showAuthor %}
+          <p class="leading-relaxed text-gray-500 text-sm mb-2">
+            {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
+            {% if config.posts.showAuthor and config.posts.showDate %} | {%
+            endif %} {% if config.posts.showDate %}{{
+              post.data.date | postDate
+            }}{% endif %}
+          </p>
+          {% endif %} {% if config.posts.showCategory %}
+          <div class="flex">
+            <p
+              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
+            >
+              {{ post.data.category }}
+            </p>
+          </div>
+          {% endif %}
+        </div>
+      </a>
+      {% endif %} {% endfor %}
+    </div>
+    {% if postsPage.page < totalPages %}
+    <div class="flex justify-center">
+      <a
+        href="/posts/{{ postsPage.page + 1 }}"
+        class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+      >
+        Next Page
+      </a>
+    </div>
+    {% endif %}
+  </div>
+  {% else %}
+  <!-- Page 2+: Grid Layout Only -->
+  <div class="container px-5 mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for post in postsPage.items %}
+      <a
+        class="group flex flex-col h-full focus:outline-none rounded-xl"
+        href="{{ post.url }}"
+      >
+        <div class="flex-shrink-0">
+          <img
+            class="w-full h-48 object-cover rounded-xl"
+            src="{{ post.data.img }}"
+            alt="{{ post.data.imgAlt }}"
+          />
+        </div>
+        <div class="my-6 flex-grow">
+          <h3 class="text-xl font-semibold group-hover:text-blue-600 mb-2">
+            {{ post.data.heading }}
+          </h3>
+          {% if config.posts.showDate or config.posts.showAuthor %}
+          <p class="leading-relaxed text-gray-500 text-sm mb-2">
+            {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
+            {% if config.posts.showAuthor and config.posts.showDate %} | {%
+            endif %} {% if config.posts.showDate %}{{
+              post.data.date | postDate
+            }}{% endif %}
+          </p>
+          {% endif %} {% if config.posts.showCategory %}
+          <div class="flex">
+            <p
+              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
+            >
+              {{ post.data.category }}
+            </p>
+          </div>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>

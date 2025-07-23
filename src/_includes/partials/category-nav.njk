@@ -1,0 +1,24 @@
+{% if config.home.showCategoryNavigation and collections.categoryList.length > 0
+%}
+<div class="overflow-x-auto">
+  <div class="flex space-x-4 w-full md:w-4/5 min-w-max mx-auto justify-center">
+    <!-- All Tab -->
+    <a
+      href="/"
+      class="flex-shrink-0 px-8 py-2 rounded-xl font-medium whitespace-nowrap {% if page.url == '/' or page.url.includes('/posts/') %} text-blue-600 bg-blue-200 {% else %} text-gray-700 hover:text-blue-600 {% endif %}"
+    >
+      All
+    </a>
+
+    <!-- Category Tabs -->
+    {% for category in collections.categoryList %}
+    <a
+      href="/category/{{ category | slug }}/"
+      class="flex-shrink-0 px-8 py-2 rounded-xl font-medium whitespace-nowrap {% if page.url == '/category/' + (category | slug) + '/' %} text-blue-600 bg-blue-200 {% else %} text-gray-700 hover:text-blue-600 {% endif %}"
+    >
+      {{ category }}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

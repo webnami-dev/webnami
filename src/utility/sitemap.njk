@@ -1,0 +1,17 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for item in collections.all %}
+  <url>
+    <loc>{{ config.meta.url }}{{ item.url }}</loc>
+    <lastmod>{{ item.date | date('YYYY-MM-DD') }}</lastmod>
+    <changefreq
+      >{{ item.data.sitemapChangefreq | default("monthly") }}</changefreq
+    >
+    <priority>{{ item.data.sitemapPriority | default(0.9) }}</priority>
+  </url>
+  {% endfor %}
+</urlset>

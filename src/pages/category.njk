@@ -1,0 +1,94 @@
+---
+layout: "base.njk"
+pagination:
+  data: collections.categoryPages
+  size: 1
+  alias: categoryPage
+permalink: "/category/{{ categoryPage.name | slugify }}/{% if categoryPage.page > 1 %}{{ categoryPage.page }}/{% endif %}"
+eleventyComputed:
+  title: "Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} - Page {{ categoryPage.page }}{% endif %}"
+---
+
+<section class="text-gray-700 body-font">
+  <div class="my-10 text-center">
+    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+      Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} -
+      Page {{ categoryPage.page }}{% endif %}
+    </h1>
+  </div>
+  {%- include 'partials/category-nav.njk' -%}
+  <div class="w-full md:w-4/5 px-5 py-5 mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for post in categoryPage.items %}
+      <a
+        class="group flex flex-col h-full focus:outline-none rounded-xl"
+        href="{{ post.url }}"
+      >
+        <div class="flex-shrink-0">
+          <img
+            class="w-full h-48 object-cover rounded-xl"
+            src="{{ post.data.img }}"
+            alt="{{ post.data.imgAlt }}"
+          />
+        </div>
+        <div class="my-6 flex-grow">
+          <h3 class="text-xl font-semibold group-hover:text-blue-600 mb-2">
+            {{ post.data.heading }}
+          </h3>
+          {% if config.posts.showDate or config.posts.showAuthor %}
+          <p class="leading-relaxed text-gray-500 text-sm mb-2">
+            {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
+            {% if config.posts.showAuthor and config.posts.showDate %} | {%
+            endif %} {% if config.posts.showDate %}{{
+              post.data.date | postDate
+            }}{% endif %}
+          </p>
+          {% endif %} {% if config.posts.showCategory %}
+          <div class="flex">
+            <p
+              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
+            >
+              {{ post.data.category }}
+            </p>
+          </div>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if categoryPage.total > config.pagination.postsPerPage %}
+<!-- Pagination Navigation -->
+<nav class="pagination">
+  {% set totalPages = (categoryPage.total / config.pagination.postsPerPage) |
+  round(0, "ceil") %} {% if categoryPage.page > 1 %}
+  <a
+    href="/category/{{
+      categoryPage.name | slugify
+    }}/{% if categoryPage.page > 2 %}{{ categoryPage.page - 1 }}/{% endif %}"
+    class="prev"
+    >← Previous</a
+  >
+  {% endif %} {% for pageNum in range(1, totalPages + 1) %} {% if pageNum ==
+  categoryPage.page %}
+  <span class="current">{{ pageNum }}</span>
+  {% else %}
+  <a
+    href="/category/{{ categoryPage.name | slugify }}/{% if pageNum > 1 %}{{
+      pageNum
+    }}/{% endif %}"
+    >{{ pageNum }}</a
+  >
+  {% endif %} {% endfor %} {% if categoryPage.page < totalPages %}
+  <a
+    href="/category/{{ categoryPage.name | slugify }}/{{
+      categoryPage.page + 1
+    }}/"
+    class="next"
+    >Next →</a
+  >
+  {% endif %}
+</nav>
+{% endif %}

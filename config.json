@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "name": "Example",
+    "url": "http://example.com",
+    "image": "https://www.notion.com/front-static/meta/think-it-make-it.png",
+    "favicon": "/assets/images/favicon.ico",
+    "logo": {
+      "src": "/assets/images/logo.svg",
+      "alt": "Logo"
+    }
+  },
+  "pagination": {
+    "postsPerPage": 10
+  },
+  "home": {
+    "showHeading": true,
+    "heading": "Sell with Minis : Blog",
+    "subheading": "Home for all the updates on your favorite D2C selling platform",
+    "showCategoryNavigation": true,
+    "metadata": {
+      "title": "Home",
+      "description": "This is a description of our website"
+    }
+  },
+  "posts": {
+    "showAuthor": true,
+    "showDate": true,
+    "showCategory": true
+  },
+  "navbar": {
+    "links": [
+      { "name": "About", "href": "#" },
+      { "name": "Services", "href": "#" },
+      { "name": "Contact", "href": "#" },
+      { "name": "Get Started", "href": "#", "cta": true }
+    ]
+  },
+  "footer": {
+    "socialIcons": [
+      { "name": "Facebook", "href": "#" },
+      { "name": "Twitter", "href": "#" },
+      { "name": "Instagram", "href": "#" }
+    ],
+    "linkGroups": [
+      {
+        "title": "category1",
+        "displayGroupTitle": true,
+        "links": [
+          { "name": "About", "href": "#" },
+          { "name": "Services", "href": "#" }
+        ]
+      },
+      {
+        "title": "category2",
+        "displayGroupTitle": false,
+        "links": [
+          { "name": "Home", "href": "#" },
+          { "name": "Yolo", "href": "#" }
+        ]
+      }
+    ]
+  }
+}
