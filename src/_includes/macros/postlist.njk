@@ -1,0 +1,80 @@
+{% macro postlistMacro(posts, type) %}
+<div class="w-full md:w-4/5 px-5 py-5 mx-auto">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for post in posts.items %}
+    <a
+      class="group flex flex-col h-full focus:outline-none rounded-xl"
+      href="{{ post.url }}"
+    >
+      <div class="flex-shrink-0">
+        <img
+          class="w-full h-48 object-cover rounded-xl"
+          src="{{ post.data.img }}"
+          alt="{{ post.data.imgAlt }}"
+        />
+      </div>
+      <div class="my-6 flex-grow">
+        <h3 class="text-xl font-semibold group-hover:text-primary-500 mb-2">
+          {{ post.data.heading }}
+        </h3>
+        {% if config.posts.showExcerpt %}
+        <p class="hidden sm:block sm:mb-4">
+          {{ post.templateContent | excerpt }}
+        </p>
+        {% endif %} {% if config.posts.showDate or config.posts.showAuthor %}
+        <p class="leading-relaxed text-gray-500 text-sm mb-2">
+          {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
+          {% if config.posts.showAuthor and config.posts.showDate %} | {% endif
+          %} {% if config.posts.showDate %}{{ post.data.date | postDate }}{%
+          endif %}
+        </p>
+        {% endif %} {% if config.posts.showCategory %}
+        <div class="flex">
+          <p
+            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"
+          >
+            {{ post.data.category }}
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <!-- Pagination Navigation -->
+  {% if posts.total > config.pagination.postsPerPage %}
+  <div class="flex justify-between items-center gap-4 my-8">
+    {% set totalPages = (posts.total / config.pagination.postsPerPage) |
+    round(0, "ceil") %} {% if posts.page > 1 %}
+    <div class="text-left">
+      <a
+        href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{
+          type
+        }}{% if type != 'posts' %}/{{
+          posts.name | slugify
+        }}{% endif %}/{% if posts.page > 2 %}{{
+          posts.page - 1
+        }}/{% endif %}{% endif %}"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-500 transition-colors"
+        >← Previous</a
+      >
+    </div>
+    {% else %}
+    <div></div>
+    {% endif %} {% if posts.page < totalPages %}
+    <div class="text-right">
+      <a
+        href="/{{ type }}{% if type != 'posts' %}/{{
+          posts.name | slugify
+        }}{% endif %}/{{ posts.page + 1 }}/"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-500 transition-colors"
+        >Next →</a
+      >
+    </div>
+    {% else %}
+    <div></div>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}

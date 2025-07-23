@@ -10,10 +10,10 @@
     }
   },
   "pagination": {
-    "postsPerPage": 10
+    "postsPerPage": 1
   },
   "colors": {
-    "yolo": "#ffffff"
+    "primary": "#C90076"
   },
   "home": {
     "showHeading": true,
@@ -28,7 +28,8 @@
   "posts": {
     "showAuthor": true,
     "showDate": true,
-    "showCategory": true
+    "showCategory": true,
+    "showExcerpt": true
   },
   "navbar": {
     "links": [

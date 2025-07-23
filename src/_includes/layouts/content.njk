@@ -5,7 +5,7 @@ layout: "base.njk"
 <main class="min-h-screen py-10">
   <!-- Content Section -->
   <article
-    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-headings:text-gray-700 prose-p:text-500 prose-a:text-blue-600 prose-a:hover:text-blue-600/50"
+    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-headings:text-gray-700 prose-p:text-500 prose-a:text-primary-500 prose-a:hover:text-primary-500/50"
   >
     <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ heading }}</h1>
     <div class="flex flex-row items-center justify-between gap-4 mb-4">
@@ -13,11 +13,11 @@ layout: "base.njk"
         {% if config.posts.showDate %}
         <p class="text-gray-500 text-sm">{{ date | postDate }}</p>
         {% endif %} {% if config.posts.showCategory %}
-        <p
-          class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
+        <a
+          href="/category/{{ category | slugify }}"
+          class="bg-primary-200 px-4 py-1 rounded-lg text-sm font-medium no-underline"
+          >{{ category }}</a
         >
-          {{ category }}
-        </p>
         {% endif %}
       </div>
       <div class="flex space-x-3">
@@ -25,7 +25,7 @@ layout: "base.njk"
           href="https://www.facebook.com/sharer/sharer.php?u={{
             config.meta.url
           }}{{ page.url }}"
-          class="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+          class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -35,7 +35,7 @@ layout: "base.njk"
           href="https://twitter.com/intent/tweet?url={{ config.meta.url }}{{
             page.url
           }}"
-          class="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+          class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -45,7 +45,7 @@ layout: "base.njk"
           href="https://www.linkedin.com/shareArticle?mini=true&url={{
             config.meta.url
           }}{{ page.url }}"
-          class="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+          class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -62,16 +62,29 @@ layout: "base.njk"
       class="w-full h-auto mb-4 rounded-lg"
     />
     {{ content | safe }}
-    {%- if collections.posts %} {%- set previousPost = collections.posts |
-    getPreviousCollectionItem %} {%- set nextPost = collections.posts |
-    getNextCollectionItem %} {%- if nextPost or previousPost %}
+    {% if tags.length > 0 %}
+    <div class="flex flex-row items-center justify-between gap-4 my-10">
+      <div class="flex items-center gap-4">
+        {% for tag in tags %}
+        <a
+          href="/tags/{{ tag | slugify }}"
+          class="bg-primary-200 px-4 py-1 rounded-lg text-sm font-medium no-underline"
+          >{{ tag }}</a
+        >
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %} {%- if collections.posts %} {%- set previousPost =
+    collections.posts | getPreviousCollectionItem %} {%- set nextPost =
+    collections.posts | getNextCollectionItem %} {%- if nextPost or previousPost
+    %}
     <div class="flex justify-between items-start gap-4 py-6 border-t">
       {%- if previousPost %}
       <div class="text-left">
         <p class="text-gray-500 text-sm mb-1">← Previous</p>
         <a
           href="{{ previousPost.url }}"
-          class="text-blue-600 hover:text-blue-800 text-sm font-medium no-underline"
+          class="text-primary-500 hover:text-primary-800 text-sm font-medium no-underline"
         >
           {{ previousPost.data.heading }}
         </a>
@@ -83,7 +96,7 @@ layout: "base.njk"
         <p class="text-gray-500 text-sm mb-1">Next →</p>
         <a
           href="{{ nextPost.url }}"
-          class="text-blue-600 hover:text-blue-800 text-sm font-medium no-underline"
+          class="text-primary-500 hover:text-primary-800 text-sm font-medium no-underline"
         >
           {{ nextPost.data.heading }}
         </a>

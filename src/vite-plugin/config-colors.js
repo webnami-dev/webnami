@@ -19,7 +19,25 @@ function configColorsPlugin() {
       // Generate CSS custom properties
       let colorCSS = "";
       for (const [colorName, colorValue] of Object.entries(configData.colors)) {
+        // Base color
         colorCSS += `  --color-${colorName}: ${colorValue};\n`;
+
+        // Light shades
+        colorCSS += `  --color-${colorName}-50: color-mix(in srgb, ${colorValue} 5%, white);\n`;
+        colorCSS += `  --color-${colorName}-100: color-mix(in srgb, ${colorValue} 10%, white);\n`;
+        colorCSS += `  --color-${colorName}-200: color-mix(in srgb, ${colorValue} 20%, white);\n`;
+        colorCSS += `  --color-${colorName}-300: color-mix(in srgb, ${colorValue} 30%, white);\n`;
+        colorCSS += `  --color-${colorName}-400: color-mix(in srgb, ${colorValue} 40%, white);\n`;
+
+        // Base shade
+        colorCSS += `  --color-${colorName}-500: ${colorValue};\n`;
+
+        // Dark shades
+        colorCSS += `  --color-${colorName}-600: color-mix(in srgb, ${colorValue} 80%, black);\n`;
+        colorCSS += `  --color-${colorName}-700: color-mix(in srgb, ${colorValue} 70%, black);\n`;
+        colorCSS += `  --color-${colorName}-800: color-mix(in srgb, ${colorValue} 60%, black);\n`;
+        colorCSS += `  --color-${colorName}-900: color-mix(in srgb, ${colorValue} 40%, black);\n`;
+        colorCSS += `  --color-${colorName}-950: color-mix(in srgb, ${colorValue} 20%, black);\n`;
       }
 
       const cssContent = `/* Auto-generated colors from config.json */

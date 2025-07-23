@@ -47,7 +47,7 @@ eleventyComputed:
         >
           <a
             href="{{ featuredPost.url }}"
-            class="hover:text-blue-600 transition-colors"
+            class="hover:text-primary-500 transition-colors"
           >
             {{ featuredPost.data.heading }}
           </a>
@@ -66,7 +66,7 @@ eleventyComputed:
         {% endif %} {% if config.posts.showCategory %}
         <div class="flex">
           <p
-            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
+            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"
           >
             {{ featuredPost.data.category }}
           </p>
@@ -75,7 +75,18 @@ eleventyComputed:
       </div>
     </div>
   </div>
-  {% endif %}
+  {% if postsPage.postsPerPage == 1 and postsPage.total > 1 %}
+  <div>
+    <div class="flex justify-center">
+      <a
+        href="/posts/{{ postsPage.page + 1 }}"
+        class="inline-block bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-800 transition-colors"
+      >
+        View Older Posts
+      </a>
+    </div>
+  </div>
+  {% endif %} {% endif %}
 
   <!-- Regular Posts Grid (Remaining Items) -->
 
@@ -94,10 +105,14 @@ eleventyComputed:
           />
         </div>
         <div class="my-6 flex-grow">
-          <h3 class="text-xl font-semibold group-hover:text-blue-600 mb-2">
+          <h3 class="text-xl font-semibold group-hover:text-primary-500 mb-2">
             {{ post.data.heading }}
           </h3>
-          {% if config.posts.showDate or config.posts.showAuthor %}
+          {% if config.posts.showExcerpt %}
+          <p class="hidden sm:block sm:mb-4">
+            {{ post.templateContent | excerpt }}
+          </p>
+          {% endif %} {% if config.posts.showDate or config.posts.showAuthor %}
           <p class="leading-relaxed text-gray-500 text-sm mb-2">
             {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
             {% if config.posts.showAuthor and config.posts.showDate %} | {%
@@ -108,7 +123,7 @@ eleventyComputed:
           {% endif %} {% if config.posts.showCategory %}
           <div class="flex">
             <p
-              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
+              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"
             >
               {{ post.data.category }}
             </p>
@@ -118,58 +133,26 @@ eleventyComputed:
       </a>
       {% endif %} {% endfor %}
     </div>
-    {% if postsPage.page < totalPages %}
+    {% if postsPage.page < postsPage.postsPerPage %}
     <div class="flex justify-center">
       <a
         href="/posts/{{ postsPage.page + 1 }}"
-        class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+        class="inline-block bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-800 transition-colors"
       >
-        Next Page
+        View Older Posts
       </a>
     </div>
     {% endif %}
   </div>
   {% else %}
   <!-- Page 2+: Grid Layout Only -->
-  <div class="container px-5 mx-auto">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {% for post in postsPage.items %}
-      <a
-        class="group flex flex-col h-full focus:outline-none rounded-xl"
-        href="{{ post.url }}"
-      >
-        <div class="flex-shrink-0">
-          <img
-            class="w-full h-48 object-cover rounded-xl"
-            src="{{ post.data.img }}"
-            alt="{{ post.data.imgAlt }}"
-          />
-        </div>
-        <div class="my-6 flex-grow">
-          <h3 class="text-xl font-semibold group-hover:text-blue-600 mb-2">
-            {{ post.data.heading }}
-          </h3>
-          {% if config.posts.showDate or config.posts.showAuthor %}
-          <p class="leading-relaxed text-gray-500 text-sm mb-2">
-            {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
-            {% if config.posts.showAuthor and config.posts.showDate %} | {%
-            endif %} {% if config.posts.showDate %}{{
-              post.data.date | postDate
-            }}{% endif %}
-          </p>
-          {% endif %} {% if config.posts.showCategory %}
-          <div class="flex">
-            <p
-              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-blue-200 text-blue-600 font-medium"
-            >
-              {{ post.data.category }}
-            </p>
-          </div>
-          {% endif %}
-        </div>
-      </a>
-      {% endfor %}
-    </div>
+  <div class="my-10 text-center">
+    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+      All Posts - Page {{ postsPage.page }}
+    </h1>
   </div>
+  {%- include 'partials/category-nav.njk' -%} {%- from 'macros/postlist.njk'
+  import postlistMacro with context -%}
+  {{ postlistMacro(postsPage, "posts") }}
   {% endif %}
 </section>
