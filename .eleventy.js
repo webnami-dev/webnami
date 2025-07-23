@@ -149,6 +149,49 @@ module.exports = function (eleventyConfig) {
     return tagPages;
   });
 
+  eleventyConfig.addCollection("authorPages", function (collectionApi) {
+    const authorPages = [];
+    const authors = new Set();
+    const authorPosts = new Map();
+    collectionApi.getAll().forEach((item) => {
+      if ("author" in item.data) {
+        let itemAuthors = item.data.author;
+        if (typeof itemAuthors === "string") itemAuthors = [itemAuthors];
+        itemAuthors.forEach((author) => {
+          authors.add(author);
+          if (!authorPosts.has(author)) {
+            authorPosts.set(author, []);
+          }
+          authorPosts.get(author).push(item);
+        });
+      }
+    });
+
+    authors.forEach((authorName) => {
+      const posts = authorPosts.get(authorName);
+      const sortedPosts = posts.sort((a, b) => {
+        return b.date - a.date;
+      });
+      const postsPerPage = config.pagination.postsPerPage;
+      const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+      for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+        const startIndex = (pageNumber - 1) * postsPerPage;
+        const pagedItems = sortedPosts.slice(
+          startIndex,
+          startIndex + postsPerPage
+        );
+        const page = {
+          name: authorName,
+          page: pageNumber,
+          total: sortedPosts.length, // total posts for this author
+          items: pagedItems,
+        };
+        authorPages.push(page);
+      }
+    });
+    return authorPages;
+  });
+
   eleventyConfig.addCollection("categoryList", function (collectionApi) {
     const categories = new Set();
     collectionApi.getAll().forEach((item) => {
@@ -264,7 +307,7 @@ module.exports = function (eleventyConfig) {
       .getAll()
       .filter((item) => {
         const layout = item.data.layout;
-        return layout === "layouts/content" || layout === "layouts/content.njk";
+        return layout === "layouts/post" || layout === "layouts/post.njk";
       })
       .sort((a, b) => {
         const dateA = new Date(a.data.date || a.date);
@@ -279,9 +322,9 @@ module.exports = function (eleventyConfig) {
     const allPosts = collectionApi
       .getAll()
       .filter((item) => {
-        // Check if the post uses layouts/content layout
+        // Check if the post uses layouts/post layout
         const layout = item.data.layout;
-        return layout === "layouts/content" || layout === "layouts/content.njk";
+        return layout === "layouts/post" || layout === "layouts/post.njk";
       })
       .sort((a, b) => {
         // Sort by date in descending order (newest first)
@@ -314,7 +357,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: (data) => {
       // Only apply if no manual permalink is set
-      if (!data.permalink && data.layout === "layouts/content") {
+      if (!data.permalink && data.layout === "layouts/post") {
         if (data.heading === null || data.heading === undefined) {
           throw new Error(
             `Invalid heading format in "${data.inputPath}": heading cannot be null or undefined. Expected format: heading: "Page Heading"`
