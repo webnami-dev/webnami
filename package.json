@@ -3,12 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build-css": "tailwindcss -i ./src/assets/css/input.css -o ./out/assets/css/main.css --minify",
-    "watch": "tailwindcss -i ./src/assets/css/input.css -o ./out/assets/css/main.css --watch",
-    "start": "eleventy --serve",
-    "build-11ty": "eleventy",
-    "build-js": "vite build",
-    "build": "npm run build-css && npm run build-js && npm run build-11ty"
+    "build": "vite build && eleventy",
+    "dev": "vite build && eleventy --serve"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +15,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "daisyui": "^5.0.37",
     "supabase": "^2.24.3",
-    "tailwindcss": "^4.1.7",
+    "tailwindcss": "^4.1.11",
     "vite": "^6.3.5"
   },
   "dependencies": {
@@ -27,6 +23,7 @@
     "@alpinejs/intersect": "^3.14.9",
     "@supabase/supabase-js": "^2.49.8",
     "@tailwindcss/cli": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.11",
     "alpinejs": "^3.14.9",
     "cheerio": "^1.1.1",
     "embla-carousel": "^8.6.0",

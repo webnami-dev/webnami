@@ -4,3 +4,4 @@ node_modules/
 public/
 out/assets/*
 .cache/*
+colors.css

@@ -12,6 +12,9 @@
   "pagination": {
     "postsPerPage": 10
   },
+  "colors": {
+    "yolo": "#ffffff"
+  },
   "home": {
     "showHeading": true,
     "heading": "Sell with Minis : Blog",
