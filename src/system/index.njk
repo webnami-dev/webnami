@@ -35,7 +35,7 @@ eleventyComputed:
       class="lg:w-1/2 w-full overflow-hidden mt-6 sm:mt-0"
     >
       <img
-        class="object-cover object-center w-full h-full rounded-md"
+        class="object-center w-full h-full rounded-md"
         src="{{ featuredPost.data.img }}"
         alt="{{ featuredPost.data.imgAlt }}"
       />
@@ -70,7 +70,7 @@ eleventyComputed:
         {% endif %} {% if config.posts.showCategoryInPreview %}
         <div class="flex">
           <p
-            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"
+            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
           >
             {{ featuredPost.data.category }}
           </p>
@@ -103,13 +103,15 @@ eleventyComputed:
       >
         <div class="flex-shrink-0">
           <img
-            class="w-full h-48 object-cover rounded-md"
+            class="w-full h-48 rounded-md"
             src="{{ post.data.img }}"
             alt="{{ post.data.imgAlt }}"
           />
         </div>
         <div class="my-6 flex-grow">
-          <h2 class="text-xl font-semibold group-hover:text-primary-500 mb-2">
+          <h2
+            class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
+          >
             {{ post.data.heading }}
           </h2>
           {% if config.posts.showExcerptInPreview %}
@@ -128,7 +130,7 @@ eleventyComputed:
           {% endif %} {% if config.posts.showCategoryInPreview %}
           <div class="flex">
             <p
-              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"
+              class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
             >
               {{ post.data.category }}
             </p>

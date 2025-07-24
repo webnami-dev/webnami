@@ -1,6 +1,7 @@
 {
   "meta": {
     "name": "Example",
+    "language": "en",
     "url": "http://example.com",
     "image": "https://www.notion.com/front-static/meta/think-it-make-it.png",
     "favicon": "/assets/images/favicon.ico",

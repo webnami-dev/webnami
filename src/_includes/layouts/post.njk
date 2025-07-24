@@ -13,7 +13,7 @@ layout: "base.njk"
         <p class="text-gray-500 text-sm">{{ date | postDate }}</p>
         <a
           href="/category/{{ category | slugify }}"
-          class="bg-primary-200 px-4 py-1 rounded-xl text-sm font-medium no-underline"
+          class="bg-primary-100 px-4 py-1 rounded-xl text-sm font-medium no-underline"
           >{{ category }}</a
         >
       </div>
@@ -67,7 +67,7 @@ layout: "base.njk"
         {% for tag in tags %}
         <a
           href="/tags/{{ tag | slugify }}"
-          class="bg-primary-200 px-4 py-1 rounded-xl text-sm font-medium no-underline"
+          class="bg-primary-100 px-4 py-1 rounded-xl text-sm font-medium no-underline"
           >{{ tag }}</a
         >
         {% endfor %}

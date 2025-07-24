@@ -1,4 +1,5 @@
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 const { icons } = require("lucide");
 const { DateTime } = require("luxon");
 const htmlmin = require("html-minifier-terser");
@@ -10,6 +11,7 @@ const excerptGenerator = require("./src/_plugins/excerpt-generator.js");
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(seoValidator);
   eleventyConfig.addPlugin(excerptGenerator);
+  eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addGlobalData("config", config);
   eleventyConfig.addPassthroughCopy({ "./src/assets/images": "assets/images" });
   eleventyConfig.addPassthroughCopy({ "./out/assets/js": "assets/js" });
@@ -40,6 +42,11 @@ module.exports = function (eleventyConfig) {
     const timestamp = Date.now();
     return `${assetPath}?v=${timestamp}`;
   });
+
+  eleventyConfig.addFilter("slice", function (array, start, end) {
+    return array.slice(start, end);
+  });
+
   eleventyConfig.addTransform("htmlmin", function (content, outputPath) {
     if (outputPath && outputPath.endsWith(".html")) {
       return htmlmin.minify(content, {
