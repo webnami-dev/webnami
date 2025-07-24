@@ -10,7 +10,7 @@
     }
   },
   "pagination": {
-    "postsPerPage": 1
+    "postsPerPage": 10
   },
   "colors": {
     "primary": "#C90076"

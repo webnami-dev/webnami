@@ -15,7 +15,7 @@ layout: "base.njk"
         {% endif %} {% if config.posts.showCategory %}
         <a
           href="/category/{{ category | slugify }}"
-          class="bg-primary-200 px-4 py-1 rounded-lg text-sm font-medium no-underline"
+          class="bg-primary-200 px-4 py-1 rounded-xl text-sm font-medium no-underline"
           >{{ category }}</a
         >
         {% endif %}
@@ -63,7 +63,7 @@ layout: "base.njk"
     <img
       src="{{ img }}"
       alt="{{ imgAlt }}"
-      class="w-full h-auto mb-4 rounded-lg"
+      class="w-full h-auto mb-4 rounded-md"
     />
     {{ content | safe }}
     {% if tags.length > 0 %}
@@ -72,7 +72,7 @@ layout: "base.njk"
         {% for tag in tags %}
         <a
           href="/tags/{{ tag | slugify }}"
-          class="bg-primary-200 px-4 py-1 rounded-lg text-sm font-medium no-underline"
+          class="bg-primary-200 px-4 py-1 rounded-xl text-sm font-medium no-underline"
           >{{ tag }}</a
         >
         {% endfor %}

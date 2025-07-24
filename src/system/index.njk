@@ -30,10 +30,10 @@ eleventyComputed:
   <div class="w-full md:w-4/5 px-5 py-5 mx-auto flex flex-wrap mb-12">
     <a
       href="{{ featuredPost.url }}"
-      class="lg:w-1/2 w-full rounded overflow-hidden mt-6 sm:mt-0"
+      class="lg:w-1/2 w-full overflow-hidden mt-6 sm:mt-0"
     >
       <img
-        class="object-cover object-center w-full h-full rounded-xl"
+        class="object-cover object-center w-full h-full rounded-md"
         src="{{ featuredPost.data.img }}"
         alt="{{ featuredPost.data.imgAlt }}"
       />
@@ -80,7 +80,7 @@ eleventyComputed:
     <div class="flex justify-center">
       <a
         href="/posts/{{ postsPage.page + 1 }}"
-        class="inline-block bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-800 transition-colors"
+        class="inline-block bg-primary-500 text-white px-4 py-2 rounded-xl hover:bg-primary-800 transition-colors"
       >
         View Older Posts
       </a>
@@ -90,7 +90,7 @@ eleventyComputed:
 
   <!-- Regular Posts Grid (Remaining Items) -->
 
-  <div class="w-full md:w-4/5 px-5 mx-auto">
+  <div class="w-full md:w-4/5 px-5 py-5 mx-auto">
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
       {% for post in postsPage.items %} {% if not loop.first %}
       <a
@@ -99,7 +99,7 @@ eleventyComputed:
       >
         <div class="flex-shrink-0">
           <img
-            class="w-full h-48 object-cover rounded-xl"
+            class="w-full h-48 object-cover rounded-md"
             src="{{ post.data.img }}"
             alt="{{ post.data.imgAlt }}"
           />
@@ -134,10 +134,10 @@ eleventyComputed:
       {% endif %} {% endfor %}
     </div>
     {% if postsPage.page < postsPage.postsPerPage %}
-    <div class="flex justify-center">
+    <div class="flex justify-center my-8">
       <a
         href="/posts/{{ postsPage.page + 1 }}"
-        class="inline-block bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-800 transition-colors"
+        class="inline-block bg-primary-500 text-white px-4 py-2 rounded-xl hover:bg-primary-800 transition-colors"
       >
         View Older Posts
       </a>

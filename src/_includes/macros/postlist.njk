@@ -8,7 +8,7 @@
     >
       <div class="flex-shrink-0">
         <img
-          class="w-full h-48 object-cover rounded-xl"
+          class="w-full h-48 object-cover rounded-md"
           src="{{ post.data.img }}"
           alt="{{ post.data.imgAlt }}"
         />
@@ -55,7 +55,7 @@
         }}{% endif %}/{% if posts.page > 2 %}{{
           posts.page - 1
         }}/{% endif %}{% endif %}"
-        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-500 transition-colors"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-500 transition-colors"
         >← Previous</a
       >
     </div>
@@ -67,7 +67,7 @@
         href="/{{ type }}{% if type != 'posts' %}/{{
           posts.name | slugify
         }}{% endif %}/{{ posts.page + 1 }}/"
-        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-500 transition-colors"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-500 transition-colors"
         >Next →</a
       >
     </div>
