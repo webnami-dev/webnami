@@ -17,6 +17,7 @@
   },
   "home": {
     "showHeading": true,
+    "headingInCenter": true,
     "heading": "Sell with Minis : Blog",
     "subheading": "Home for all the updates on your favorite D2C selling platform",
     "showCategoryNavigation": true,
@@ -26,10 +27,11 @@
     }
   },
   "posts": {
-    "showAuthor": true,
-    "showDate": true,
-    "showCategory": true,
-    "showExcerpt": true
+    "showAuthorInPreview": true,
+    "showDateInPreview": true,
+    "showCategoryInPreview": true,
+    "showExcerptInPreview": true,
+    "excerptLength": 100
   },
   "navbar": {
     "links": [
@@ -41,9 +43,9 @@
   },
   "footer": {
     "socialIcons": [
-      { "name": "Facebook", "href": "#" },
-      { "name": "Twitter", "href": "#" },
-      { "name": "Instagram", "href": "#" }
+      { "name": "facebook", "href": "#" },
+      { "name": "twitter", "href": "#" },
+      { "name": "instagram", "href": "#" }
     ],
     "linkGroups": [
       {

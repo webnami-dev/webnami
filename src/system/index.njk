@@ -14,12 +14,14 @@ eleventyComputed:
 <section class="text-gray-700 body-font">
   {% if postsPage.page == 1 %}
   <!-- Page 1: Header + Featured + Grid Layout -->
-  <div class="my-10 text-center">
+  <div
+    class="w-full md:w-4/5 px-5 mx-auto my-10 {% if config.home.headingInCenter %}text-center{% endif %}"
+  >
     {% if config.home.showHeading %}
-    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+    <h1 class="sm:text-5xl text-4xl font-medium title-font mb-4 text-header">
       {{ config.home.heading }}
     </h1>
-    <p class="leading-relaxed text-subheader">
+    <p class="leading-relaxed">
       {{ config.home.subheading }}
     </p>
     {% endif %}
@@ -42,7 +44,7 @@ eleventyComputed:
       class="flex flex-wrap mt-6 lg:mt-auto mb-auto lg:w-1/2 content-start lg:p-4"
     >
       <div class="w-full sm:p-4 mb-6">
-        <h1
+        <h2
           class="title-font font-medium sm:text-3xl text-2xl mb-4 text-stats-heading"
         >
           <a
@@ -51,19 +53,21 @@ eleventyComputed:
           >
             {{ featuredPost.data.heading }}
           </a>
-        </h1>
+        </h2>
         <p class="hidden sm:block sm:mb-4">
           {{ featuredPost.templateContent | excerpt }}
         </p>
-        {% if config.posts.showDate or config.posts.showAuthor %}
+        {% if config.posts.showDateInPreview or config.posts.showAuthorInPreview
+        %}
         <p class="leading-relaxed text-gray-500 text-sm mb-2">
-          {% if config.posts.showAuthor %}By {{ featuredPost.data.author }}{%
-          endif %} {% if config.posts.showAuthor and config.posts.showDate %} |
-          {% endif %} {% if config.posts.showDate %}{{
+          {% if config.posts.showAuthorInPreview %}By
+          {{ featuredPost.data.author }}{% endif %} {% if
+          config.posts.showAuthorInPreview and config.posts.showDateInPreview %}
+          | {% endif %} {% if config.posts.showDateInPreview %}{{
             featuredPost.data.date | postDate
           }}{% endif %}
         </p>
-        {% endif %} {% if config.posts.showCategory %}
+        {% endif %} {% if config.posts.showCategoryInPreview %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"
@@ -105,22 +109,23 @@ eleventyComputed:
           />
         </div>
         <div class="my-6 flex-grow">
-          <h3 class="text-xl font-semibold group-hover:text-primary-500 mb-2">
+          <h2 class="text-xl font-semibold group-hover:text-primary-500 mb-2">
             {{ post.data.heading }}
-          </h3>
-          {% if config.posts.showExcerpt %}
+          </h2>
+          {% if config.posts.showExcerptInPreview %}
           <p class="hidden sm:block sm:mb-4">
             {{ post.templateContent | excerpt }}
           </p>
-          {% endif %} {% if config.posts.showDate or config.posts.showAuthor %}
+          {% endif %} {% if config.posts.showDateInPreview or
+          config.posts.showAuthorInPreview %}
           <p class="leading-relaxed text-gray-500 text-sm mb-2">
-            {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
-            {% if config.posts.showAuthor and config.posts.showDate %} | {%
-            endif %} {% if config.posts.showDate %}{{
-              post.data.date | postDate
-            }}{% endif %}
+            {% if config.posts.showAuthorInPreview %}By {{ post.data.author }}{%
+            endif %} {% if config.posts.showAuthorInPreview and
+            config.posts.showDateInPreview %} | {% endif %} {% if
+            config.posts.showDateInPreview %}{{ post.data.date | postDate }}{%
+            endif %}
           </p>
-          {% endif %} {% if config.posts.showCategory %}
+          {% endif %} {% if config.posts.showCategoryInPreview %}
           <div class="flex">
             <p
               class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"
@@ -133,7 +138,7 @@ eleventyComputed:
       </a>
       {% endif %} {% endfor %}
     </div>
-    {% if postsPage.page < postsPage.postsPerPage %}
+    {% if postsPage.total > postsPage.postsPerPage %}
     <div class="flex justify-center my-8">
       <a
         href="/posts/{{ postsPage.page + 1 }}"

@@ -20,6 +20,7 @@
   "dependencies": {
     "@11ty/eleventy-img": "^6.0.4",
     "@alpinejs/intersect": "^3.14.9",
+    "@iarna/toml": "^2.2.5",
     "@supabase/supabase-js": "^2.49.8",
     "@tailwindcss/cli": "^4.1.7",
     "@tailwindcss/vite": "^4.1.11",

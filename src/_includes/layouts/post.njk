@@ -7,18 +7,15 @@ layout: "base.njk"
   <article
     class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-headings:text-gray-700 prose-p:text-500 prose-a:text-primary-500 prose-a:hover:text-primary-500/50"
   >
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ heading }}</h1>
+    <h1 class="sm:text-5xl text-4xl font-bold mb-4">{{ heading }}</h1>
     <div class="flex flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-4">
-        {% if config.posts.showDate %}
         <p class="text-gray-500 text-sm">{{ date | postDate }}</p>
-        {% endif %} {% if config.posts.showCategory %}
         <a
           href="/category/{{ category | slugify }}"
           class="bg-primary-200 px-4 py-1 rounded-xl text-sm font-medium no-underline"
           >{{ category }}</a
         >
-        {% endif %}
       </div>
       <div class="flex space-x-3">
         <a
@@ -29,7 +26,7 @@ layout: "base.njk"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {% icon "Facebook", "w-5 h-5" | safe %}
+          {% icon "facebook", "w-5 h-5" | safe %}
         </a>
         <a
           href="https://twitter.com/intent/tweet?url={{ config.meta.url }}{{
@@ -39,7 +36,7 @@ layout: "base.njk"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {% icon "Twitter", "w-5 h-5" | safe %}
+          {% icon "twitter", "w-5 h-5" | safe %}
         </a>
         <a
           href="https://www.linkedin.com/shareArticle?mini=true&url={{
@@ -49,17 +46,15 @@ layout: "base.njk"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {% icon "Linkedin", "w-5 h-5" | safe %}
+          {% icon "linkedin", "w-5 h-5" | safe %}
         </a>
       </div>
     </div>
-    {% if config.posts.showAuthor %}
     <a
       href="/author/{{ author | slugify }}"
       class="text-sm font-medium no-underline"
       >By {{ author }}</a
     >
-    {% endif %}
     <img
       src="{{ img }}"
       alt="{{ imgAlt }}"

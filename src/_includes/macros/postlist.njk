@@ -14,21 +14,23 @@
         />
       </div>
       <div class="my-6 flex-grow">
-        <h3 class="text-xl font-semibold group-hover:text-primary-500 mb-2">
+        <h2 class="text-xl font-semibold group-hover:text-primary-500 mb-2">
           {{ post.data.heading }}
-        </h3>
-        {% if config.posts.showExcerpt %}
+        </h2>
+        {% if config.posts.showExcerptInPreview %}
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}
         </p>
-        {% endif %} {% if config.posts.showDate or config.posts.showAuthor %}
+        {% endif %} {% if config.posts.showDateInPreview or
+        config.posts.showAuthorInPreview %}
         <p class="leading-relaxed text-gray-500 text-sm mb-2">
-          {% if config.posts.showAuthor %}By {{ post.data.author }}{% endif %}
-          {% if config.posts.showAuthor and config.posts.showDate %} | {% endif
-          %} {% if config.posts.showDate %}{{ post.data.date | postDate }}{%
+          {% if config.posts.showAuthorInPreview %}By {{ post.data.author }}{%
+          endif %} {% if config.posts.showAuthorInPreview and
+          config.posts.showDateInPreview %} | {% endif %} {% if
+          config.posts.showDateInPreview %}{{ post.data.date | postDate }}{%
           endif %}
         </p>
-        {% endif %} {% if config.posts.showCategory %}
+        {% endif %} {% if config.posts.showCategoryInPreview %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-200 text-primary-500 font-medium"

@@ -35,6 +35,39 @@
     <link rel="canonical" href="{{ config.meta.url }}{{ page.url }}" />
     <link rel="icon" href="{{ config.meta.favicon }}" type="image/svg+xml" />
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
+    {%- if layout == 'layouts/post' -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ metadata.title | escape }}",
+        "description": "{{ metadata.description | escape }}",
+        "author": {
+          "@type": "Person",
+          "name": "{{ author | escape }}"
+        },
+        "datePublished": "{{ date | date('YYYY-MM-DD') }}",
+        "dateModified": "{{ date | date('YYYY-MM-DD') }}",
+        "image": {
+          "@type": "ImageObject",
+          "url": "{{ img }}",
+          "caption": "{{ imgAlt | escape }}"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ page.url | url }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ config.meta.name }}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ config.meta.logo.src }}"
+          }
+        }
+      }
+    </script>
+    {%- endif -%}
     <script
       type="module"
       src="{{ '/assets/js/bundle.js' | assetHash }}"

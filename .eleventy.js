@@ -74,28 +74,36 @@ module.exports = function (eleventyConfig) {
     },
   });
 
-  eleventyConfig.addShortcode("icon", function (iconName, className = "") {
-    const iconData = icons[iconName];
-    if (!iconData) {
-      console.log(`Icon '${iconName}' not found`);
-      return "";
-    }
-    if (!Array.isArray(iconData)) {
-      return `<!-- Invalid icon data -->`;
-    }
-    const svgElements = iconData
-      .map((element) => {
-        const [tagName, attributes] = element;
-        // Convert attributes object to attribute string
-        const attributeString = Object.entries(attributes)
-          .map(([key, value]) => `${key}="${value}"`)
-          .join(" ");
+  eleventyConfig.addShortcode(
+    "icon",
+    function (iconName, className = "w-5 h-5") {
+      // Convert kebab-case to PascalCase
+      const pascalCaseIconName = iconName
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join("");
+      const iconData = icons[pascalCaseIconName];
+      if (!iconData) {
+        console.log(`Icon '${pascalCaseIconName}' not found`);
+        return "";
+      }
+      if (!Array.isArray(iconData)) {
+        return `<!-- Invalid icon data -->`;
+      }
+      const svgElements = iconData
+        .map((element) => {
+          const [tagName, attributes] = element;
+          // Convert attributes object to attribute string
+          const attributeString = Object.entries(attributes)
+            .map(([key, value]) => `${key}="${value}"`)
+            .join(" ");
 
-        return `<${tagName} ${attributeString}/>`;
-      })
-      .join("");
-    return `<svg class="${className}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${svgElements}</svg>`;
-  });
+          return `<${tagName} ${attributeString}/>`;
+        })
+        .join("");
+      return `<svg class="${className}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${svgElements}</svg>`;
+    }
+  );
 
   eleventyConfig.addCollection("tagPages", function (collectionApi) {
     const tagPages = [];
