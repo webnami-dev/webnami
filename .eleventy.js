@@ -3,15 +3,18 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const { icons } = require("lucide");
 const { DateTime } = require("luxon");
 const htmlmin = require("html-minifier-terser");
-const slugify = require("slugify");
 const config = require("./config.json");
 const seoValidator = require("./src/_plugins/seo-validator.js");
 const excerptGenerator = require("./src/_plugins/excerpt-generator.js");
+const postManagement = require("./src/_plugins/post-management.js");
+const anchorLinks = require("./src/_plugins/anchor-links.js");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(seoValidator);
   eleventyConfig.addPlugin(excerptGenerator);
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(postManagement);
+  eleventyConfig.addPlugin(anchorLinks);
   eleventyConfig.addGlobalData("config", config);
   eleventyConfig.addPassthroughCopy({ "./src/assets/images": "assets/images" });
   eleventyConfig.addPassthroughCopy({ "./out/assets/js": "assets/js" });
@@ -63,10 +66,10 @@ module.exports = function (eleventyConfig) {
     outputDir: "./public/assets/images/",
     urlPath: "/assets/images/",
     // output image formats
-    formats: ["webp", "jpeg"],
+    formats: ["avif", "webp", "auto"],
     // output image widths
-    widths: [400, 800, 1280],
-    sizes: "100vw",
+    //widths: [400, 800, 1280],
+    //sizes: "100vw",
 
     // Add this to disable dev server transform
     transformOnRequest: false,
@@ -369,22 +372,11 @@ module.exports = function (eleventyConfig) {
     return paginatedPages;
   });
 
-  eleventyConfig.addGlobalData("eleventyComputed", {
-    permalink: (data) => {
-      // Only apply if no manual permalink is set
-      if (!data.permalink && data.layout === "layouts/post") {
-        if (data.heading === null || data.heading === undefined) {
-          throw new Error(
-            `Invalid heading format in "${data.inputPath}": heading cannot be null or undefined. Expected format: heading: "Page Heading"`
-          );
-        }
-        return `/${slugify(data.heading, { lower: true, strict: true })}/`;
-      }
-      return data.permalink;
-    },
-  });
-
   return {
+    templateFormats: ["md", "njk"],
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
+    dataTemplateEngine: "njk",
     dir: {
       input: "src",
       output: "public",

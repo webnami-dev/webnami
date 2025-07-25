@@ -5,7 +5,7 @@ layout: "base.njk"
 <main class="min-h-screen py-10">
   <!-- Content Section -->
   <article
-    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-headings:text-gray-700 prose-p:text-500 prose-a:text-primary-500 prose-a:hover:text-primary-500/50"
+    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-headings:text-gray-700 prose-p:text-500 prose-a:text-primary-500 prose-a:no-underline prose-a:hover:text-primary-500/50"
   >
     <h1 class="sm:text-5xl text-4xl font-bold mb-4">{{ heading }}</h1>
     <div class="flex flex-row items-center justify-between gap-4">
@@ -60,7 +60,7 @@ layout: "base.njk"
       alt="{{ imgAlt }}"
       class="w-full h-auto mb-4 rounded-md"
     />
-    {{ content | safe }}
+    {{ content | anchorLinks | safe }}
     {% if tags.length > 0 %}
     <div class="flex flex-row items-center justify-between gap-4 my-10">
       <div class="flex items-center gap-4">

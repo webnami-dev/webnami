@@ -11,7 +11,7 @@ At **WebNami**, we build fast, beautiful, and SEO-friendly static websites that 
 
 We’re a small team of developers and designers who believe in clean code, responsive design, and putting performance first. Whether you're a freelancer, consultant, or small business owner, we make it easy to get a website that works — without the hassle of WordPress or bloated site builders.
 
-**Why Choose Us?**
+## Why Choose Us?
 
 - 🚀 Sub-1-second load times
 - 📱 Mobile-first, responsive layouts
