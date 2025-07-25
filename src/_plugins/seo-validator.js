@@ -4,41 +4,33 @@ module.exports = function (eleventyConfig) {
   // warnings
   let allWarnings = [];
 
-  // Adding a transform to validate content after processing
-  eleventyConfig.addTransform("seoValidator", function (content, outputPath) {
-    // Only process HTML files (transformed markdown)
-    if (!outputPath || !outputPath.endsWith(".html")) {
-      return content;
-    }
-
-    // Skip if this is not from a markdown source
-    if (!this.inputPath || !this.inputPath.endsWith(".md")) {
-      return content;
-    }
-
-    const pageData = this.page || {};
-
-    const warnings = validateContent(content, this.inputPath, pageData);
-
-    if (warnings.length > 0) {
-      allWarnings.push({
-        file: this.inputPath,
-        warnings: warnings,
-      });
-    }
-
-    return content;
-  });
-
   // Adding event listener to display warnings after build
-  eleventyConfig.on("eleventy.after", function () {
+  eleventyConfig.on("eleventy.after", function (inputPath) {
+    inputPath["results"].forEach((result) => {
+      // Check if the inputPath contains /src/posts/ and ends with .md
+      if (
+        result.inputPath &&
+        result.inputPath.includes("/src/posts/") &&
+        result.inputPath.endsWith(".md")
+      ) {
+        //content
+        const content = result.content;
+        const warnings = validateContent(content);
+        if (warnings.length > 0) {
+          allWarnings.push({
+            file: result.inputPath,
+            warnings: warnings,
+          });
+        }
+      }
+    });
     displayWarnings(allWarnings);
     allWarnings = []; // reset for next build
   });
 };
 
 // Validation function
-function validateContent(htmlContent, inputPath, pageData) {
+function validateContent(htmlContent) {
   const warnings = [];
 
   // Parsing HTML content for analysis
@@ -63,11 +55,11 @@ function validateContent(htmlContent, inputPath, pageData) {
     );
   } else if (title.length < 30) {
     warnings.push(
-      `❌ Title too short (${title.length} chars). Should be 30-60 characters.`
+      `❌ Title is too short (${title.length} chars). Should be 30-60 characters.`
     );
   } else if (title.length > 60) {
     warnings.push(
-      `❌ Title too long (${title.length} chars). Should be 30-60 characters.`
+      `❌ Title is too long (${title.length} chars). Should be 30-60 characters.`
     );
   }
 
@@ -79,7 +71,7 @@ function validateContent(htmlContent, inputPath, pageData) {
     .filter((word) => word.length > 0).length;
   if (wordCount < 300) {
     warnings.push(
-      `❌ Word count too low (${wordCount} words). Should be at least 300 words.`
+      `❌ Word count is too low (${wordCount} words). Should be at least 300 words.`
     );
   }
 
@@ -91,11 +83,11 @@ function validateContent(htmlContent, inputPath, pageData) {
     );
   } else if (metaDescription.length < 120) {
     warnings.push(
-      `❌ Meta description too short (${metaDescription.length} chars). Should be 120-155 characters.`
+      `❌ Meta description is too short (${metaDescription.length} chars). Should be 120-155 characters.`
     );
   } else if (metaDescription.length > 155) {
     warnings.push(
-      `❌ Meta description too long (${metaDescription.length} chars). Should be 120-155 characters.`
+      `❌ Meta description is too long (${metaDescription.length} chars). Should be 120-155 characters.`
     );
   }
 
@@ -104,11 +96,13 @@ function validateContent(htmlContent, inputPath, pageData) {
     const alt = $(this).attr("alt") || "";
     if (alt.length === 0) {
       warnings.push(
-        `❌ Image missing alt text: ${$(this).attr("src") || "unknown source"}`
+        `❌ Image is missing alt text: ${
+          $(this).attr("src") || "unknown source"
+        }`
       );
     } else if (alt.length > 100) {
       warnings.push(
-        `❌ Alt text too long (${alt.length} chars) for image: ${
+        `❌ Alt text is too long (${alt.length} chars) for image: ${
           $(this).attr("src") || "unknown source"
         }. Should be under 100 characters.`
       );
