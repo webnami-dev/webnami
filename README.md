@@ -1,103 +1,286 @@
-## Components
+![](images/logo.svg)
 
-- present in components folder
-- represent an html component like navbar, footer, faqs etc - reusable
-- their json schema present in docs folder
+# WebNami
 
-## Layouts
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/webnami/webnami/actions)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/webnami/webnami/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
-- present in layouts folder
-- wrappers around a content, reusable
-- to be used with markdown files to create separate pages
-- created html has same name like the md file
-- data can be in frontmatter like metadata
-- content is handled differently which is the markdown content
+## Table of Contents
 
-## Strategy
+- [Project Overview](#project-overview)
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [How to Use](#how-to-use)
+- [Frontmatter Reference](#frontmatter-reference)
+- [Configuration (config.js)](#configuration-configjs)
+- [Getting Started](#getting-started)
+- [Commands](#commands)
+- [Customization](#customization)
+- [Troubleshooting](#troubleshooting)
+- [Performance](#performance)
+- [Contact & Support](#contact--support)
 
-- use reusable components like cta, faqs etc
-- for content heavy components use AI
-- prompts present in prompt folder
-- change colors and add animations manually
+---
 
-## Content folder
+## Project Overview
 
-- content folder is for template based content like services, blogs etc
-- change the name of the folder accordingly.
-- contains content in markdown format
-- content.njk -> is the template used
+**WebNami** is an open source, SEO-focused blogging website generator built with [11ty (Eleventy)](https://www.11ty.dev/). It is designed for anyone who wants to create a fast, modern, and highly customizable blog with minimal setup. WebNami is ideal for developers, writers, and teams who value performance, accessibility, and clean design.
 
-## Add project to CF pages
+---
 
-- login
-- click on +Add on top right
-- click on Pages
-- Import an existing Git repository
-- select repository
-- Build command -> npm run build
-- Build output directory -> public
+## Screenshots
 
-## Add custom domain in CF pages
+> _Screenshots coming soon!_
 
-- on left side navigation click on Compute (Workers) -> Workers & Pages
-- click on the project name
-- Go to Custom Domains
-- click on Setup a custom domain
-- enter domain name
-- click on Begin DNS transfer
-- again enter domain name
-- select Free Plan
-- click on Continue to Activation
+- **Homepage:** _[Insert homepage screenshot here]_
+- **Blog Post Page:** _[Insert blog post screenshot here]_
+- **Mobile Responsive View:** _[Insert mobile view screenshot here]_
+- **Admin/Config Interface:** _[Insert config interface screenshot here, if applicable]_
 
-### configure nameservers in godaddy
+---
 
-- go to domain in godaddy
-- DNS -> Nameservers
-- click on Change Nameservers
-- Add from cloudflare from previous step and save
-- wait for mail from cloudflare
+## Features
 
-### domain activation
+- ⚡ **Lightning Fast:** Built with 11ty for optimal performance and instant page loads.
+- 🔍 **SEO Focused:** On-page SEO errors are displayed in the console during build, so you can fix issues before deploying.
+- 📊 **Perfect Performance:** Achieves 100/100 on Core Web Vitals for speed, accessibility, and best practices.
+- 📡 **RSS Feed:** Automatic RSS feed generation for easy syndication.
+- 🗺️ **Sitemap:** Auto-generated XML sitemap for better search engine indexing.
+- 🤖 **Robots.txt:** SEO-friendly robots.txt included by default.
+- 🚫 **Custom 404 Page:** Beautiful error page for a better user experience.
+- 🔗 **Canonical Links:** Proper canonical URL management to avoid duplicate content.
+- 📱 **Meta Tags:** Complete title, description, and Open Graph tags for social sharing.
+- 🎨 **Minimal Design:** Clean, beautiful, and fully responsive design out of the box.
 
-- go to Compute (Workers) -> Workers & Pages -> project name -> Custom Domains
-- click on setup a custom domain, enter domain name
-- click on Activate Domain
+---
 
-### 522 error when using www route
+## Project Structure
 
-- go to dashboard in cloudflare pages
-- on left side navigation click on Bulk Redirects
-- click on Create Bulk Redirect list
-- give some name
-- click on manually add url redirects
-- add source url example - www.webnami.in
-- add target url example - https://webnami.in
-- click on edit parameters and select all
-- click on next
-- click on Continue to Redirect Rules
-- give a name (example - www to root), select the list
+```
+webnami/
+├── config.js                # Main configuration file
+├── package.json             # Project metadata and dependencies
+├── custom.css               # Main CSS file for custom styles
+├── images/                  # Image assets
+├── pages/                   # Static pages (about, contact, etc.) [Markdown only]
+├── posts/                   # Blog posts [Markdown only]
+├── src/                     # Source code (templates, assets, system pages, etc.)
+├── _site/                   # Generated output (do not edit directly)
+└── README.md                # Project documentation
+```
 
-Follow below rules if CNAME with www doesnt exist
+- **pages/**: Only Markdown files for static pages (e.g., about, contact)
+- **posts/**: Only Markdown files for blog posts
+- **images/**: Store your image assets here
+- **custom.css**: Use this file for all your custom styles
+- **\_site/**: This is the build output folder (generated automatically)
 
-- go to dashboard
-- click on domain name
-- click on DNS on left side panel
-- click on Add record
-- add a new record - type=A, name=www, IP4v=192.0.2.1
-- save
+---
 
-## Submit sitemap to google search console
+## How to Use
 
-- go to google search console
-- enter site in URL Prefix and click Continue
-- verify using multiple options
-- after verification click on Go To Property
-- On left hand panel click on Sitemaps
-- submit your sitemap
+### Pages Folder
 
-## Submit sitemap to bing webmaster
+- Add static pages (like About, Contact) in `pages/` as Markdown (`.md`) files only.
+- Example: `pages/about.md`
 
-- go to https://www.bing.com/webmasters/about
-- sign in with google
-- Import from google search console
-- do all steps
+### Posts Folder
+
+- Create blog posts in `posts/` using Markdown (`.md`) files only.
+- Each post must start with frontmatter. See [Frontmatter Reference](#frontmatter-reference) for details.
+
+### custom.css
+
+- Customize your site's look by editing `custom.css` in the project root.
+- Override colors (as of now only primary color can be overridden)
+
+---
+
+## Frontmatter Reference
+
+Both pages and posts require frontmatter at the top of each Markdown file. Here are the required fields and their explanations:
+
+### For Pages (e.g., About, Contact)
+
+```markdown
+---
+metadata:
+  title: "Sample Page Title"
+  description: "This is a sample description for the page."
+permalink: "/sample-page/"
+---
+```
+
+- **metadata.title**: The page title (required)
+- **metadata.description**: Short description for SEO and meta tags (recommended)
+- **permalink**: The URL path for the page (required)
+
+### For Posts
+
+```markdown
+---
+metadata:
+  title: "Sample Blog Post Title"
+  description: "This is a sample summary for the blog post."
+heading: "Sample Heading for the Blog Post"
+img: "https://example.com/sample-image.png"
+imgAlt: "Sample image alt text"
+tags: ["SampleTag1", "SampleTag2"]
+category: "SampleCategory"
+author: "Sample Author"
+date: 2024-07-25
+---
+```
+
+- **metadata.title**: The post title (required)
+- **metadata.description**: Short summary for SEO and meta tags (recommended)
+- **heading**: Main heading for the post (displayed on the post page)
+- **img**: Main image URL for the post (used in previews and social sharing)
+- **imgAlt**: Alt text for the main image (accessibility and SEO)
+- **tags**: List of tags for the post (optional, used for tag pages)
+- **category**: Category name (optional, used for category pages)
+- **author**: Author name (optional)
+- **date**: Publish date in YYYY-MM-DD format (required)
+
+---
+
+## Configuration (config.js)
+
+The `config.js` file controls your site's settings. Here is an explanation of the main fields:
+
+- **site**: Core site information
+  - `name`: The name of your site
+  - `url`: The base URL for your site
+  - `language`: The language code for your site (e.g., "en")
+- **branding**: Visual identity settings
+  - `favicon`: Path to your favicon
+  - `logo`: Object with `src` (image path) and `alt` (alt text)
+- **listings**: Settings for listing/archive pages
+  - `pagination.postsPerPage`: Number of posts per page
+  - `postPreview.showAuthorInListing`: Show author in post previews
+  - `postPreview.showDateInListing`: Show date in post previews
+  - `postPreview.showCategoryInListing`: Show category in post previews
+  - `postPreview.showExcerptInListing`: Show excerpt in post previews
+- **pages**: Page-specific settings
+  - `homepage`: Settings for the homepage
+    - `showHeading`: Show the main heading
+    - `centerHeading`: Center the heading text
+    - `heading`: Homepage heading text
+    - `subheading`: Homepage subtitle
+    - `showCategoryNavigation`: Show category navigation
+    - `metadata.title`: Title for SEO/meta tags
+    - `metadata.description`: Description for SEO/meta tags
+    - `metadata.image`: Social sharing image URL
+- **navbar**: Navigation bar links
+  - `links`: Array of navigation links (each with `name`, `href`, and optional `cta` for call-to-action)
+- **footer**: Footer configuration
+  - `socialLinks`: Array of social media links (each with `name` and `href`)
+  - `linkGroups`: Array of grouped footer links (each with `title`, `displayGroupTitle`, and `links`)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js** v20 or higher
+- **npm** v10 or higher (or use `yarn`/`pnpm`)
+
+### Installation
+
+#### Using npm
+
+```bash
+npm install
+```
+
+#### Using yarn
+
+```bash
+yarn install
+```
+
+#### Using pnpm
+
+```bash
+pnpm install
+```
+
+### Initial Configuration
+
+- Edit `config.js` to set your site name, URL, and other settings.
+- Add your logo and favicon to the `images/` directory.
+
+### First Run
+
+```bash
+npm run dev
+```
+
+or
+
+```bash
+yarn dev
+```
+
+or
+
+```bash
+pnpm dev
+```
+
+Visit [http://localhost:8080](http://localhost:8080) to see your site.
+
+---
+
+## Commands
+
+- **Build for production:**
+
+  ```bash
+  npm run build
+  ```
+
+  Generates the static site in the `_site/` directory.
+
+- **Start development server:**
+
+  ```bash
+  npm run dev
+  ```
+
+  Runs a local server with hot reload.
+
+- **Other utility commands:**
+  - Add your own scripts in `package.json` as needed.
+
+---
+
+## Troubleshooting
+
+- **Build fails:** Make sure you have the correct Node.js and npm version.
+- **SEO warnings:** Review console output during build for SEO issues.
+- **Images not showing:** Confirm image paths in `config.js`, posts, and pages.
+
+If you run into issues, check the [GitHub Issues](https://github.com/webnami/webnami/issues) page.
+
+---
+
+## Performance
+
+- WebNami is optimized for speed and SEO.
+- Achieves 100/100 on Core Web Vitals in Lighthouse.
+- Minimal JavaScript and CSS for fast load times.
+
+---
+
+## Contact & Support
+
+- **Email:** hello.webnami@gmail.com
+- **Report Issues:** [GitHub Issues](https://github.com/webnami-dev/webnami/issues)
+
+---
+
+**WebNami** — The modern, fast, and SEO-friendly way to blog.
