@@ -16,7 +16,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(postManagement);
   eleventyConfig.addPlugin(anchorLinks);
   eleventyConfig.addGlobalData("config", config);
-  eleventyConfig.addPassthroughCopy({ "./src/assets/images": "assets/images" });
+  eleventyConfig.addPassthroughCopy({ "./images": "images" });
   eleventyConfig.addPassthroughCopy({ "./out/assets/js": "assets/js" });
   eleventyConfig.addPassthroughCopy({ "./out/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "./src/assets/fonts": "assets/fonts" });
@@ -68,15 +68,16 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    outputDir: "./public/assets/images/",
-    urlPath: "/assets/images/",
+    outputDir: "./_site/images/",
+    urlPath: "/images/",
     // output image formats
     formats: ["avif", "webp", "auto"],
     // output image widths
-    //widths: [400, 800, 1280],
-    //sizes: "100vw",
+    widths: [360, 720, 1080, 1440],
+    sizes:
+      "(max-width: 360px) 360px, (max-width: 720px) 720px, (max-width: 1080px) 1080px, (max-width: 1440px) 1440px",
 
-    // Add this to disable dev server transform
+    // to disable dev server transform
     transformOnRequest: false,
 
     // optional, attributes assigned on <img> nodes override these values
@@ -86,6 +87,11 @@ export default function (eleventyConfig) {
         decoding: "async",
       },
       pictureAttributes: {},
+    },
+
+    sharpOptions: {
+      animated: true,
+      failOnError: false,
     },
   });
 
@@ -391,8 +397,10 @@ export default function (eleventyConfig) {
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
     dir: {
-      input: "src",
-      output: "public",
+      input: ".",
+      includes: "src/_includes",
+      data: "src/_data",
+      output: "_site",
     },
   };
 }

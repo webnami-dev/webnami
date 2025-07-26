@@ -12,10 +12,10 @@ export default {
   // Visual branding and identity settings
   branding: {
     // Browser tab icon
-    favicon: "/assets/images/favicon.ico",
+    favicon: "/images/favicon.ico",
     logo: {
       // Logo image path
-      src: "/assets/images/logo.svg",
+      src: "/images/logo.svg",
       // Alt text for logo accessibility
       alt: "Logo",
     },

@@ -1,7 +1,6 @@
 .vscode/
 .env
 node_modules/
-public/
+\_site/
 out/assets/*
 .cache/*
-colors.css
