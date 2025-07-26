@@ -4,12 +4,19 @@
       class="block md:flex md:flex-row md:justify-between md:items-center py-4 md:py-0 md:h-16"
     >
       <div class="flex justify-center md:justify-start mb-4 md:mb-0">
-        <a href="#" class="flex items-center">
+        {% if config.branding.logo.src %}
+        <a href="/" class="flex items-center">
           <img
             class="h-8 sm:h-12 w-auto"
             src="{{ config.branding.logo.src }}"
             alt="{{ config.branding.logo.alt }}"
           />
+        </a>
+        {% endif %}
+        <a href="/" class="flex items-center">
+          <span class="ml-2 text-xl font-bold">
+            {{ config.site.name }}
+          </span>
         </a>
       </div>
 

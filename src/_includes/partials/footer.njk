@@ -10,16 +10,21 @@
       <div
         class="flex title-font font-medium items-center justify-center text-gray-700 mb-4"
       >
+        {% if config.branding.logo.src %}
         <img
           class="h-8 sm:h-12 w-auto"
           src="{{ config.branding.logo.src }}"
           alt="{{ config.branding.logo.alt }}"
         />
+        {% endif %}
+        <span class="ml-2 text-xl font-bold">
+          {{ config.site.name }}
+        </span>
       </div>
 
       <!-- Social Icons -->
       <div class="flex justify-center space-x-3 mb-4">
-        {% for icon in config.footer.socialIcons %}
+        {% for icon in config.footer.socialLinks %}
         <a
           href="{{ icon.href }}"
           class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
@@ -64,5 +69,17 @@
       </div>
       {% endfor %}
     </div>
+  </div>
+  <div class="w-full bg-gray-100 text-gray-700 text-center text-xs py-2">
+    <p>
+      Built with
+      <a
+        class="text-primary-500"
+        href="https://github.com/webnami-dev/webnami"
+        target="_blank"
+        rel="noopener"
+        >WebNami</a
+      >
+    </p>
   </div>
 </footer>

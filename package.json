@@ -1,37 +1,55 @@
 {
-  "name": "starter-kit",
+  "name": "webnami",
   "version": "1.0.0",
+  "description": "An opinionated Eleventy-based blogging website generator optimized for SEO, speed, and performance",
   "type": "module",
-  "main": "index.js",
   "scripts": {
     "build": "vite build && eleventy",
     "dev": "vite build && eleventy --serve --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "eleventy",
+    "11ty",
+    "blog",
+    "blogging-platform",
+    "blog-starter",
+    "jamstack",
+    "static-site-generator",
+    "static-blog",
+    "tailwindcss",
+    "boilerplate",
+    "starter-template",
+    "markdown",
+    "seo"
+  ],
+  "author": {
+    "name": "Webnami",
+    "email": "hello.webnami@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webnami-dev/webnami.git"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.0",
+    "@11ty/eleventy-img": "^6.0.4",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "@tailwindcss/cli": "^4.1.11",
     "@tailwindcss/typography": "^0.5.16",
-    "supabase": "^2.24.3",
+    "@tailwindcss/vite": "^4.1.11",
+    "cheerio": "^1.1.2",
     "tailwindcss": "^4.1.11",
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "@11ty/eleventy-img": "^6.0.4",
-    "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@alpinejs/intersect": "^3.14.9",
-    "@iarna/toml": "^2.2.5",
-    "@supabase/supabase-js": "^2.49.8",
-    "@tailwindcss/cli": "^4.1.7",
-    "@tailwindcss/vite": "^4.1.11",
     "alpinejs": "^3.14.9",
-    "cheerio": "^1.1.1",
-    "embla-carousel": "^8.6.0",
     "html-minifier-terser": "^7.2.0",
-    "lucide": "^0.513.0",
-    "markdown-it": "^14.1.0",
-    "markdown-it-anchor": "^9.2.0"
+    "lucide": "^0.513.0"
   }
 }

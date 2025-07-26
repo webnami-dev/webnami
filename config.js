@@ -38,8 +38,6 @@ export default {
       showCategoryInListing: true,
       // Display post excerpt/summary in post cards
       showExcerptInListing: true,
-      // Maximum characters for post excerpts
-      excerptLength: 100,
     },
   },
 
@@ -100,7 +98,7 @@ export default {
         // Column heading
         title: "Services",
         // Whether to display the column title
-        showTitle: true,
+        displayGroupTitle: true,
         links: [
           // Individual footer link
           { name: "About", href: "#" },
@@ -111,7 +109,7 @@ export default {
         // Second column
         title: "Quick Links",
         // Hide this column's title
-        showTitle: false,
+        displayGroupTitle: false,
         links: [
           { name: "Home", href: "#" },
           { name: "Blog", href: "#" },
