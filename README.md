@@ -1,4 +1,4 @@
-![](images/logo.svg)
+<p align="center"><img src="images/logo.svg" width="200" height="200" alt="webnami Logo"></p>
 
 # WebNami
 
