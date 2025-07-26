@@ -3,25 +3,25 @@ permalink: /rss.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="{{ config.meta.url | addPathPrefixToFullUrl }}" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="{{ config.site.url | addPathPrefixToFullUrl }}" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ config.meta.name }}</title>
-    <link>{{ config.meta.url | addPathPrefixToFullUrl }}</link>
-    <atom:link href="{{ permalink | htmlBaseUrl(config.meta.url) }}" rel="self" type="application/rss+xml" />
-    <description>The latest posts from {{ config.meta.name }}, delivered via RSS</description>
-    <language>{{ config.meta.language }}</language>
+    <title>{{ config.site.name }}</title>
+    <link>{{ config.site.url | addPathPrefixToFullUrl }}</link>
+    <atom:link href="{{ permalink | htmlBaseUrl(config.site.url) }}" rel="self" type="application/rss+xml" />
+    <description>The latest posts from {{ config.site.name }}, delivered via RSS</description>
+    <language>{{ config.site.language }}</language>
     <image>
-        <title>{{ config.meta.name }}</title>
-        <url>{{ config.meta.image }}</url>
-        <link>{{ config.meta.url | addPathPrefixToFullUrl }}</link>
+        <title>{{ config.site.name }}</title>
+        <url>{{ config.pages.homepage.metadata.image }}</url>
+        <link>{{ config.site.url | addPathPrefixToFullUrl }}</link>
     </image>
     {%- set posts = collections.posts | slice(0, 10) -%}
     {%- for post in posts %}
-    {%- set absolutePostUrl = post.url | htmlBaseUrl(config.meta.url) %}
+    {%- set absolutePostUrl = post.url | htmlBaseUrl(config.site.url) %}
     <item>
       <title>{{ post.data.heading }}</title>
       <link>{{ absolutePostUrl }}</link>
-      <description>{{ post.content | renderTransforms(post.data.page, config.meta.url) }}</description>
+      <description>{{ post.content | renderTransforms(post.data.page, config.site.url) }}</description>
       <pubDate>{{ post.date | dateToRfc822 }}</pubDate>
       <dc:creator>{{ post.data.author }}</dc:creator>
       <guid>{{ absolutePostUrl }}</guid>

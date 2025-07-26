@@ -20,7 +20,7 @@ layout: "base.njk"
       <div class="flex space-x-3">
         <a
           href="https://www.facebook.com/sharer/sharer.php?u={{
-            config.meta.url
+            config.site.url
           }}{{ page.url }}"
           class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
           target="_blank"
@@ -29,7 +29,7 @@ layout: "base.njk"
           {% icon "facebook", "w-5 h-5" | safe %}
         </a>
         <a
-          href="https://twitter.com/intent/tweet?url={{ config.meta.url }}{{
+          href="https://twitter.com/intent/tweet?url={{ config.site.url }}{{
             page.url
           }}"
           class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
@@ -40,7 +40,7 @@ layout: "base.njk"
         </a>
         <a
           href="https://www.linkedin.com/shareArticle?mini=true&url={{
-            config.meta.url
+            config.site.url
           }}{{ page.url }}"
           class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
           target="_blank"

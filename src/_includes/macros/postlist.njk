@@ -19,20 +19,22 @@
         >
           {{ post.data.heading }}
         </h2>
-        {% if config.posts.showExcerptInPreview %}
+        {% if config.listings.postPreview.showExcerptInListing %}
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}
         </p>
-        {% endif %} {% if config.posts.showDateInPreview or
-        config.posts.showAuthorInPreview %}
+        {% endif %} {% if config.listings.postPreview.showDateInListing or
+        config.listings.postPreview.showAuthorInListing %}
         <p class="leading-relaxed text-gray-500 text-sm mb-2">
-          {% if config.posts.showAuthorInPreview %}By {{ post.data.author }}{%
-          endif %} {% if config.posts.showAuthorInPreview and
-          config.posts.showDateInPreview %} | {% endif %} {% if
-          config.posts.showDateInPreview %}{{ post.data.date | postDate }}{%
-          endif %}
+          {% if config.listings.postPreview.showAuthorInListing %}By
+          {{ post.data.author }}{% endif %} {% if
+          config.listings.postPreview.showAuthorInListing and
+          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
+          config.listings.postPreview.showDateInListing %}{{
+            post.data.date | postDate
+          }}{% endif %}
         </p>
-        {% endif %} {% if config.posts.showCategoryInPreview %}
+        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -46,10 +48,10 @@
     {% endfor %}
   </div>
   <!-- Pagination Navigation -->
-  {% if posts.total > config.pagination.postsPerPage %}
+  {% if posts.total > config.listings.pagination.postsPerPage %}
   <div class="flex justify-between items-center gap-4 my-8">
-    {% set totalPages = (posts.total / config.pagination.postsPerPage) |
-    round(0, "ceil") %} {% if posts.page > 1 %}
+    {% set totalPages = (posts.total / config.listings.pagination.postsPerPage)
+    | round(0, "ceil") %} {% if posts.page > 1 %}
     <div class="text-left">
       <a
         href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{

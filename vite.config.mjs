@@ -1,9 +1,8 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
-import configColorsPlugin from "./src/vite-plugin/config-colors.js";
 
 export default defineConfig({
-  plugins: [configColorsPlugin(), tailwindcss()],
+  plugins: [tailwindcss()],
   build: {
     outDir: "./out",
     rollupOptions: {

@@ -3,7 +3,8 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const { icons } = require("lucide");
 const { DateTime } = require("luxon");
 const htmlmin = require("html-minifier-terser");
-const config = require("./config.json");
+//const config = require("./config.json");
+const config = require("./config.js");
 const seoValidator = require("./src/_plugins/seo-validator.js");
 const excerptGenerator = require("./src/_plugins/excerpt-generator.js");
 const postManagement = require("./src/_plugins/post-management.js");
@@ -143,7 +144,7 @@ module.exports = function (eleventyConfig) {
       const sortedPosts = posts.sort((a, b) => {
         return b.date - a.date;
       });
-      const postsPerPage = config.pagination.postsPerPage;
+      const postsPerPage = config.listings.pagination.postsPerPage;
       const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
       for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
@@ -190,7 +191,7 @@ module.exports = function (eleventyConfig) {
       const sortedPosts = posts.sort((a, b) => {
         return b.date - a.date;
       });
-      const postsPerPage = config.pagination.postsPerPage;
+      const postsPerPage = config.listings.pagination.postsPerPage;
       const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
       for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
         const startIndex = (pageNumber - 1) * postsPerPage;
@@ -296,7 +297,7 @@ module.exports = function (eleventyConfig) {
       const sortedPosts = posts.sort((a, b) => {
         return b.date - a.date;
       });
-      const postsPerPage = config.pagination.postsPerPage;
+      const postsPerPage = config.listings.pagination.postsPerPage;
       const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
       for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
@@ -352,7 +353,7 @@ module.exports = function (eleventyConfig) {
       });
 
     const paginatedPages = [];
-    const postsPerPage = config.pagination.postsPerPage;
+    const postsPerPage = config.listings.pagination.postsPerPage;
     const totalPages = Math.ceil(allPosts.length / postsPerPage);
 
     for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {

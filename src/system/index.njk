@@ -7,22 +7,22 @@ pagination:
 permalink: "{% if postsPage.page == 1 %}/{% else %}/posts/{{ postsPage.page }}/{% endif %}"
 eleventyComputed:
   metadata:
-    title: "{% if postsPage.page == 1 %}{{ config.home.metadata.title }}{% else %}Posts - Page {{ postsPage.page }}{% endif %}"
-    description: "{% if postsPage.page == 1 %}{{ config.home.metadata.description }}{% else %}Posts page {{ postsPage.page }}{% endif %}"
+    title: "{% if postsPage.page == 1 %}{{ config.pages.homepage.metadata.title }}{% else %}Posts - Page {{ postsPage.page }}{% endif %}"
+    description: "{% if postsPage.page == 1 %}{{ config.pages.homepage.metadata.description }}{% else %}Posts page {{ postsPage.page }}{% endif %}"
 ---
 
 <section class="text-gray-700 body-font">
   {% if postsPage.page == 1 %}
   <!-- Page 1: Header + Featured + Grid Layout -->
   <div
-    class="w-full md:w-4/5 px-5 mx-auto my-10 {% if config.home.headingInCenter %}text-center{% endif %}"
+    class="w-full md:w-4/5 px-5 mx-auto my-10 {% if config.pages.homepage.centerHeading %}text-center{% endif %}"
   >
-    {% if config.home.showHeading %}
+    {% if config.pages.homepage.showHeading %}
     <h1 class="sm:text-5xl text-4xl font-medium title-font mb-4 text-header">
-      {{ config.home.heading }}
+      {{ config.pages.homepage.heading }}
     </h1>
     <p class="leading-relaxed">
-      {{ config.home.subheading }}
+      {{ config.pages.homepage.subheading }}
     </p>
     {% endif %}
   </div>
@@ -57,17 +57,18 @@ eleventyComputed:
         <p class="hidden sm:block sm:mb-4">
           {{ featuredPost.templateContent | excerpt }}
         </p>
-        {% if config.posts.showDateInPreview or config.posts.showAuthorInPreview
-        %}
+        {% if config.listings.postPreview.showDateInListing or
+        config.listings.postPreview.showAuthorInListing %}
         <p class="leading-relaxed text-gray-500 text-sm mb-2">
-          {% if config.posts.showAuthorInPreview %}By
+          {% if config.listings.postPreview.showAuthorInListing %}By
           {{ featuredPost.data.author }}{% endif %} {% if
-          config.posts.showAuthorInPreview and config.posts.showDateInPreview %}
-          | {% endif %} {% if config.posts.showDateInPreview %}{{
+          config.listings.postPreview.showAuthorInListing and
+          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
+          config.listings.postPreview.showDateInListing %}{{
             featuredPost.data.date | postDate
           }}{% endif %}
         </p>
-        {% endif %} {% if config.posts.showCategoryInPreview %}
+        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -114,20 +115,22 @@ eleventyComputed:
           >
             {{ post.data.heading }}
           </h2>
-          {% if config.posts.showExcerptInPreview %}
+          {% if config.listings.postPreview.showExcerptInListing %}
           <p class="hidden sm:block sm:mb-4">
             {{ post.templateContent | excerpt }}
           </p>
-          {% endif %} {% if config.posts.showDateInPreview or
-          config.posts.showAuthorInPreview %}
+          {% endif %} {% if config.listings.postPreview.showDateInListing or
+          config.listings.postPreview.showAuthorInListing %}
           <p class="leading-relaxed text-gray-500 text-sm mb-2">
-            {% if config.posts.showAuthorInPreview %}By {{ post.data.author }}{%
-            endif %} {% if config.posts.showAuthorInPreview and
-            config.posts.showDateInPreview %} | {% endif %} {% if
-            config.posts.showDateInPreview %}{{ post.data.date | postDate }}{%
-            endif %}
+            {% if config.listings.postPreview.showAuthorInListing %}By
+            {{ post.data.author }}{% endif %} {% if
+            config.listings.postPreview.showAuthorInListing and
+            config.listings.postPreview.showDateInListing %} | {% endif %} {% if
+            config.listings.postPreview.showDateInListing %}{{
+              post.data.date | postDate
+            }}{% endif %}
           </p>
-          {% endif %} {% if config.posts.showCategoryInPreview %}
+          {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
           <div class="flex">
             <p
               class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
