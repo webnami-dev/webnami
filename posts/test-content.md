@@ -2,13 +2,13 @@
 metadata:
   title: "Test content page"
   description: "Lorem ipsum"
-heading: "Florentis antra in corpore ardent ratione"
-img: "https://superblog.supercdn.cloud/site_cuid_cl1n5glij25321ik1g86jpoe1/images/frame-7-2-1721999590847-compressed.png"
+heading: "My second blog title"
+img: "https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ"
 imgAlt: "image"
-tags: ["First", "Blog"]
-category: "Test"
-author: "Akshay"
-date: 2024-01-16
+tags: ["Second", "News"]
+category: "Blog"
+author: "WebNami"
+date: 2025-07-24
 ---
 
 ## Modo Pyrrha ludunt limina

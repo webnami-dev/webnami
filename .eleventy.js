@@ -92,6 +92,7 @@ export default function (eleventyConfig) {
     sharpOptions: {
       animated: true,
       failOnError: false,
+      withoutEnlargement: true,
     },
   });
 

@@ -2,13 +2,13 @@
 metadata:
   title: "Test content page"
   description: "Lorem ipsum"
-heading: "Florentis yolo hame "
-img: "https://framerusercontent.com/images/WljY7VDINVCuEUJTyYTpMRuNvBQ.png"
+heading: "This is the latest post"
+img: "https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4"
 imgAlt: "image"
-tags: ["First", "Blog"]
-category: "Test"
-author: "Akshay"
-date: 2024-01-17
+tags: ["Latest", "Tech"]
+category: "Blog"
+author: "WebNami"
+date: 2025-07-25
 ---
 
 ## Modo Pyrrha ludunt limina

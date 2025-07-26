@@ -2,7 +2,7 @@ export default {
   // Core site information used across the platform
   site: {
     // Site name shown in title tags and navigation
-    name: "Example",
+    name: "WebNami",
     // Base URL for generating absolute links and sitemaps
     url: "http://example.com",
     // Language code for HTML lang attribute and SEO
@@ -50,10 +50,10 @@ export default {
       // Whether to center the heading text
       centerHeading: true,
       // Main homepage heading text
-      heading: "Sell with Minis : Blog",
+      heading: "Welcome to WebNami",
       // Homepage subtitle
       subheading:
-        "Home for all the updates on your favorite D2C selling platform",
+        "Your beautiful blog is ready to go! Start writing your first post",
       // Whether to show category navigation below heading
       showCategoryNavigation: true,
       // SEO metadata for homepage
@@ -63,7 +63,8 @@ export default {
         // Meta description for search engines
         description: "This is a description of our website",
         // Social sharing image - used in open graph tags
-        image: "https://www.notion.com/front-static/meta/think-it-make-it.png",
+        image:
+          "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
       },
     },
   },
@@ -73,9 +74,7 @@ export default {
   navbar: {
     links: [
       // Regular navigation link
-      { name: "About", href: "#" },
-      // Regular navigation link
-      { name: "Services", href: "#" },
+      { name: "About", href: "/about" },
       // Regular navigation link
       { name: "Contact", href: "#" },
       // Call-to-action button (styled differently)
@@ -96,23 +95,23 @@ export default {
     linkGroups: [
       {
         // Column heading
-        title: "Services",
+        title: "CATEGORY 1",
         // Whether to display the column title
         displayGroupTitle: true,
         links: [
           // Individual footer link
-          { name: "About", href: "#" },
-          { name: "Services", href: "#" },
+          { name: "About", href: "/about" },
+          { name: "Home", href: "/" },
         ],
       },
       {
         // Second column
-        title: "Quick Links",
+        title: "CATEGORY 2",
         // Hide this column's title
         displayGroupTitle: false,
         links: [
-          { name: "Home", href: "#" },
-          { name: "Blog", href: "#" },
+          { name: "Privacy Policy", href: "#" },
+          { name: "Terms", href: "#" },
         ],
       },
     ],

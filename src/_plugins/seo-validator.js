@@ -7,10 +7,10 @@ export default function (eleventyConfig) {
   // Adding event listener to display warnings after build
   eleventyConfig.on("eleventy.after", function (inputPath) {
     inputPath["results"].forEach((result) => {
-      // Check if the inputPath contains /src/posts/ and ends with .md
+      // Check if the inputPath contains /posts/ and ends with .md
       if (
         result.inputPath &&
-        result.inputPath.includes("/src/posts/") &&
+        result.inputPath.includes("/posts/") &&
         result.inputPath.endsWith(".md")
       ) {
         //content
