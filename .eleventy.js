@@ -1,16 +1,15 @@
-const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const { icons } = require("lucide");
-const { DateTime } = require("luxon");
-const htmlmin = require("html-minifier-terser");
-//const config = require("./config.json");
-const config = require("./config.js");
-const seoValidator = require("./src/_plugins/seo-validator.js");
-const excerptGenerator = require("./src/_plugins/excerpt-generator.js");
-const postManagement = require("./src/_plugins/post-management.js");
-const anchorLinks = require("./src/_plugins/anchor-links.js");
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import pluginRss from "@11ty/eleventy-plugin-rss";
+import { icons } from "lucide";
+import { DateTime } from "luxon";
+import htmlmin from "html-minifier-terser";
+import config from "./config.js";
+import seoValidator from "./src/_plugins/seo-validator.js";
+import excerptGenerator from "./src/_plugins/excerpt-generator.js";
+import postManagement from "./src/_plugins/post-management.js";
+import anchorLinks from "./src/_plugins/anchor-links.js";
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.addPlugin(seoValidator);
   eleventyConfig.addPlugin(excerptGenerator);
   eleventyConfig.addPlugin(pluginRss);
@@ -30,7 +29,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
 
   eleventyConfig.addFilter("date", function (date, format) {
-    const d = new Date(date);
+    let d;
+    if (date == "") {
+      d = new Date();
+    } else {
+      d = new Date(date);
+    }
     if (format === "YYYY-MM-DD") {
       return (
         d.getFullYear() +
@@ -337,6 +341,14 @@ module.exports = function (eleventyConfig) {
     return allPosts;
   });
 
+  eleventyConfig.addCollection("pages", function (collectionApi) {
+    const allPages = collectionApi.getAll().filter((item) => {
+      const layout = item.data.layout;
+      return layout === "layouts/page" || layout === "layouts/page.njk";
+    });
+    return allPages;
+  });
+
   eleventyConfig.addCollection("paginatedPosts", function (collectionApi) {
     const allPosts = collectionApi
       .getAll()
@@ -383,4 +395,4 @@ module.exports = function (eleventyConfig) {
       output: "public",
     },
   };
-};
+}

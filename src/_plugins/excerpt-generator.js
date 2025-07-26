@@ -1,4 +1,4 @@
-const cheerio = require("cheerio");
+import * as cheerio from "cheerio";
 
 class ExcerptGenerator {
   getExcerpt(content, options = {}) {
@@ -64,10 +64,10 @@ class ExcerptGenerator {
 }
 
 // Eleventy plugin function
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   const excerptGenerator = new ExcerptGenerator();
   // Add as a filter
   eleventyConfig.addFilter("excerpt", function (content) {
     return excerptGenerator.getExcerpt(content);
   });
-};
+}

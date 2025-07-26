@@ -1,5 +1,5 @@
+import slugify from "slugify";
 const todaysDate = new Date();
-const slugify = require("slugify");
 
 function showDraft(data) {
   const isDraft = "draft" in data && data.draft !== false;
@@ -7,7 +7,7 @@ function showDraft(data) {
   return !isDraft && !isPostInFuture;
 }
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: (data) => {
       if (!data.permalink && data.layout === "layouts/post") {
@@ -26,4 +26,4 @@ module.exports = function (eleventyConfig) {
     eleventyExcludeFromCollections: (data) =>
       showDraft(data) ? data.eleventyExcludeFromCollections : true,
   });
-};
+}

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   // Core site information used across the platform
   site: {
     // Site name shown in title tags and navigation

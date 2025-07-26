@@ -1,3 +1,5 @@
 sitemap.njk
+sitemap-pages.njk
+sitemap-posts.njk
 robots.njk
 rss.njk

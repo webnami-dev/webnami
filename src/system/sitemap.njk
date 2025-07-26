@@ -3,15 +3,13 @@ permalink: /sitemap.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% for item in collections.all %}
-  <url>
-    <loc>{{ config.site.url }}{{ item.url }}</loc>
-    <lastmod>{{ item.date | date('YYYY-MM-DD') }}</lastmod>
-    <changefreq
-      >{{ item.data.sitemapChangefreq | default("monthly") }}</changefreq
-    >
-    <priority>{{ item.data.sitemapPriority | default(0.9) }}</priority>
-  </url>
-  {% endfor %}
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>{{ config.site.url }}/sitemap-pages.xml</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>{{ config.site.url }}/sitemap-posts.xml</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+  </sitemap>
+</sitemapindex>

@@ -1,5 +1,5 @@
-const cheerio = require("cheerio");
-const slugify = require("slugify");
+import * as cheerio from "cheerio";
+import slugify from "slugify";
 
 function getAnchorLinks(content) {
   const $ = cheerio.load(content);
@@ -21,9 +21,9 @@ function getAnchorLinks(content) {
 }
 
 // Eleventy plugin function
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   // Add as a filter
   eleventyConfig.addFilter("anchorLinks", function (content) {
     return getAnchorLinks(content);
   });
-};
+}

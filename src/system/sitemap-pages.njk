@@ -1,0 +1,47 @@
+---
+permalink: /sitemap-pages.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for item in collections.paginatedPosts %}
+  <url>
+    <loc>{{ config.site.url }}{% if item.page == 1 %}/{% else %}/posts/{{ item.page }}/{% endif %}</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  {% endfor %}
+  {% for item in collections.pages %}
+  <url>
+    <loc>{{ config.site.url }}{{ item.url }}</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  {% endfor %}
+  {% for item in collections.tagPages %}
+  <url>
+    <loc>{{ config.site.url }}/tags/{{ item.name | slugify }}/{% if item.page > 1 %}{{ item.page }}/{% endif %}</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  {% endfor %}
+  {% for item in collections.categoryPages %}
+  <url>
+    <loc>{{ config.site.url }}/category/{{ item.name | slugify }}/{% if item.page > 1 %}{{ item.page }}/{% endif %}</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  {% endfor %}
+  {% for item in collections.authorPages %}
+  <url>
+    <loc>{{ config.site.url }}/author/{{ item.name | slugify }}/{% if item.page > 1 %}{{ item.page }}/{% endif %}</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  {% endfor %}
+</urlset>

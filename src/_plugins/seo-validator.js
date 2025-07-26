@@ -1,6 +1,6 @@
-const cheerio = require("cheerio");
+import * as cheerio from "cheerio";
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   // warnings
   let allWarnings = [];
 
@@ -27,7 +27,7 @@ module.exports = function (eleventyConfig) {
     displayWarnings(allWarnings);
     allWarnings = []; // reset for next build
   });
-};
+}
 
 // Validation function
 function validateContent(htmlContent) {
