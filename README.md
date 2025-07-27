@@ -1,10 +1,14 @@
-<p align="center"><img src="images/logo.svg" width="200" height="200" alt="webnami Logo"></p>
+<p><img src="images/logo.svg" width="200" height="200" alt="webnami Logo"></p>
 
 # WebNami
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/webnami/webnami/actions)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/webnami/webnami/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
+
+<p>
+  <b>Live Demo:</b> <a href="https://webnami-blog.pages.dev/" target="_blank">https://webnami-blog.pages.dev/</a>
+</p>
 
 ## Table of Contents
 
@@ -32,12 +36,15 @@
 
 ## Screenshots
 
-> _Screenshots coming soon!_
+- **SEO Audit in Terminal:**
 
-- **Homepage:** _[Insert homepage screenshot here]_
-- **Blog Post Page:** _[Insert blog post screenshot here]_
-- **Mobile Responsive View:** _[Insert mobile view screenshot here]_
-- **Admin/Config Interface:** _[Insert config interface screenshot here, if applicable]_
+  ![SEO Audit Build Output](docs/screenshots/seo-audit-build.png)
+  <br/><sub>SEO issues and warnings are displayed in the terminal during build.</sub>
+
+- **Core Web Vitals (Lighthouse):**
+
+  ![Core Web Vitals](docs/screenshots/core-web-vitals.png)
+  <br/><sub>WebNami achieves perfect scores on Core Web Vitals.</sub>
 
 ---
 
@@ -195,22 +202,23 @@ The `config.js` file controls your site's settings. Here is an explanation of th
 
 ### Installation
 
-#### Using npm
+#### Make a directory and navigate to it
+
+```bash
+mkdir my-blog-name
+cd my-blog-name
+```
+
+#### Clone this Repository
+
+```bash
+git clone https://github.com/webnami-dev/webnami.git .
+```
+
+#### Install dependencies
 
 ```bash
 npm install
-```
-
-#### Using yarn
-
-```bash
-yarn install
-```
-
-#### Using pnpm
-
-```bash
-pnpm install
 ```
 
 ### Initial Configuration
@@ -222,18 +230,6 @@ pnpm install
 
 ```bash
 npm run dev
-```
-
-or
-
-```bash
-yarn dev
-```
-
-or
-
-```bash
-pnpm dev
 ```
 
 Visit [http://localhost:8080](http://localhost:8080) to see your site.
