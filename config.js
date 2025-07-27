@@ -7,6 +7,13 @@ export default {
     url: "http://example.com",
     // Language code for HTML lang attribute and SEO
     language: "en",
+    // Content Security Policy (CSP) settings
+    csp: {
+      // Whether to enable CSP headers
+      enabled: true,
+      // CSP policy
+      policy: "object-src 'none'; base-uri 'self'; upgrade-insecure-requests;",
+    },
   },
 
   // Visual branding and identity settings
@@ -63,8 +70,7 @@ export default {
         // Meta description for search engines
         description: "This is a description of our website",
         // Social sharing image - used in open graph tags
-        image:
-          "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
+        img: "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
       },
     },
   },

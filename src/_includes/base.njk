@@ -4,10 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ metadata.title }}</title>
+    {% if config.site.csp.enabled %}
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="{{ config.site.csp.policy }}"
+    />
+    {% endif %}
     <meta name="title" content="{{ metadata.title }}" />
-    {%- if metadata.description -%}
     <meta name="description" content="{{ metadata.description }}" />
-    {%- endif -%} {%- if not robots or robots != 'false' -%}
+    {%- if not robots or robots != 'false' -%}
     <meta
       name="robots"
       content="index, follow, max-snippet:-1, max-image-preview:large"
@@ -19,21 +24,21 @@
       content="{{ config.site.url }}{{ page.url }}"
     />
     <meta property="twitter:title" content="{{ metadata.title }}" />
-    {%- if metadata.description -%}
     <meta property="twitter:description" content="{{ metadata.description }}" />
-    {%- endif -%}
     <meta
       property="twitter:image"
-      content="{{ config.pages.homepage.metadata.image }}"
+      content="{% if layout == 'layouts/post' %}{{ img }}{% else %}{{
+        metadata.img
+      }}{% endif %}"
     />
     <meta property="og:url" content="{{ config.site.url }}{{ page.url }}" />
     <meta property="og:title" content="{{ metadata.title }}" />
-    {%- if metadata.description -%}
     <meta property="og:description" content="{{ metadata.description }}" />
-    {%- endif -%}
     <meta
       property="og:image"
-      content="{{ config.pages.homepage.metadata.image }}"
+      content="{% if layout == 'layouts/post' %}{{ img }}{% else %}{{
+        metadata.img
+      }}{% endif %}"
     />
     <meta property="og:locale" content="en-US" />
     <meta property="og:site_name" content="{{ config.site.name }}" />

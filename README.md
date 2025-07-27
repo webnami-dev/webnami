@@ -109,12 +109,14 @@ Both pages and posts require frontmatter at the top of each Markdown file. Here 
 metadata:
   title: "Sample Page Title"
   description: "This is a sample description for the page."
+  img: "https://example.com/sample-image.png"
 permalink: "/sample-page/"
 ---
 ```
 
 - **metadata.title**: The page title (required)
 - **metadata.description**: Short description for SEO and meta tags (recommended)
+- **metadata.img**: Image for and meta tags (recommended)
 - **permalink**: The URL path for the page (required)
 
 ### For Posts
@@ -154,6 +156,9 @@ The `config.js` file controls your site's settings. Here is an explanation of th
   - `name`: The name of your site
   - `url`: The base URL for your site
   - `language`: The language code for your site (e.g., "en")
+  - `csp`: Content Security Policy (CSP) settings
+    - `enabled`: Set to `true` to enable CSP headers for your site, or `false` to disable them.
+    - `policy`: The CSP policy string. This defines the allowed sources for content on your site.
 - **branding**: Visual identity settings
   - `favicon`: Path to your favicon
   - `logo`: Object with `src` (image path) and `alt` (alt text)

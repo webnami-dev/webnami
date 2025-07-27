@@ -9,6 +9,7 @@ eleventyComputed:
   metadata:
     title: "{% if postsPage.page == 1 %}{{ config.pages.homepage.metadata.title }}{% else %}Posts - Page {{ postsPage.page }}{% endif %}"
     description: "{% if postsPage.page == 1 %}{{ config.pages.homepage.metadata.description }}{% else %}Posts page {{ postsPage.page }}{% endif %}"
+    img: "{{ config.pages.homepage.metadata.img }}"
 ---
 
 <section class="text-gray-700 body-font">
