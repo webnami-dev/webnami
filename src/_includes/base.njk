@@ -27,18 +27,18 @@
     <meta property="twitter:description" content="{{ metadata.description }}" />
     <meta
       property="twitter:image"
-      content="{% if layout == 'layouts/post' %}{{ img }}{% else %}{{
-        metadata.img
-      }}{% endif %}"
+      content="{{ config.site.url }}{% if layout == 'layouts/post' %}{{
+        img | imageFilter
+      }}{% else %}{{ metadata.img | imageFilter }}{% endif %}"
     />
     <meta property="og:url" content="{{ config.site.url }}{{ page.url }}" />
     <meta property="og:title" content="{{ metadata.title }}" />
     <meta property="og:description" content="{{ metadata.description }}" />
     <meta
       property="og:image"
-      content="{% if layout == 'layouts/post' %}{{ img }}{% else %}{{
-        metadata.img
-      }}{% endif %}"
+      content="{{ config.site.url }}{% if layout == 'layouts/post' %}{{
+        img | imageFilter
+      }}{% else %}{{ metadata.img | imageFilter }}{% endif %}"
     />
     <meta property="og:locale" content="en-US" />
     <meta property="og:site_name" content="{{ config.site.name }}" />
@@ -65,19 +65,19 @@
         "dateModified": "{{ date | date('YYYY-MM-DD') }}",
         "image": {
           "@type": "ImageObject",
-          "url": "{{ img }}",
+          "url": "{{ config.site.url }}{{ img | imageFilter }}",
           "caption": "{{ imgAlt | escape }}"
         },
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "{{ page.url | url }}"
+          "@id": "{{ config.site.url }}{{ page.url | url }}"
         },
         "publisher": {
           "@type": "Organization",
           "name": "{{ config.site.name }}",
           "logo": {
             "@type": "ImageObject",
-            "url": "{{ config.branding.logo.src }}"
+            "url": "{{ config.site.url }}{{ config.branding.logo.src }}"
           }
         }
       }

@@ -3,6 +3,7 @@ import pluginRss from "@11ty/eleventy-plugin-rss";
 import { icons } from "lucide";
 import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
+import Image from "@11ty/eleventy-img";
 import config from "./config.js";
 import seoValidator from "./src/_plugins/seo-validator.js";
 import excerptGenerator from "./src/_plugins/excerpt-generator.js";
@@ -80,6 +81,11 @@ export default function (eleventyConfig) {
     // to disable dev server transform
     transformOnRequest: false,
 
+    cacheOptions: {
+      duration: "1d",
+      directory: ".cache",
+    },
+
     // optional, attributes assigned on <img> nodes override these values
     htmlOptions: {
       imgAttributes: {
@@ -94,6 +100,39 @@ export default function (eleventyConfig) {
       failOnError: false,
       withoutEnlargement: true,
     },
+  });
+
+  eleventyConfig.addAsyncFilter("imageFilter", async function (src) {
+    if (!src) return "";
+
+    try {
+      let metadata = await Image(src, {
+        widths: [360, 720, 1080, 1440],
+        formats: ["avif", "webp", "jpeg", "auto"],
+        outputDir: "./_site/images/",
+        urlPath: "/images/",
+        // Force caching for all images
+        cacheOptions: {
+          duration: "1d",
+          directory: ".cache",
+        },
+        sharpOptions: {
+          animated: true,
+          failOnError: false,
+          withoutEnlargement: true,
+        },
+      });
+
+      const format = metadata.webp || metadata.jpeg;
+      if (format && format.length > 0) {
+        const optimizedUrl = format[format.length - 1].url;
+        return optimizedUrl;
+      }
+
+      throw new Error("No suitable format found");
+    } catch (error) {
+      return src;
+    }
   });
 
   eleventyConfig.addShortcode(
