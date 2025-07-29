@@ -6,11 +6,13 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/webnami/webnami/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
+![Hero Section](docs/screenshots/hero-section.png)
+
 <p>
   <b>Live Demo:</b> <a href="https://webnami-blog.pages.dev/" target="_blank">https://webnami-blog.pages.dev/</a>
 </p>
 
-## Table of Contents
+## 📑 Table of Contents
 
 - [Project Overview](#project-overview)
 - [Screenshots](#screenshots)
@@ -28,13 +30,13 @@
 
 ---
 
-## Project Overview
+## 📝 Project Overview
 
 **WebNami** is an open source, SEO-focused blogging website generator built with [11ty (Eleventy)](https://www.11ty.dev/). It is designed for anyone who wants to create a fast, modern, and highly customizable blog with minimal setup. WebNami is ideal for developers, writers, and teams who value performance, accessibility, and clean design.
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 - **SEO Audit in Terminal:**
 
@@ -48,7 +50,7 @@
 
 ---
 
-## Features
+## ✨ Features
 
 - ⚡ **Lightning Fast:** Built with 11ty for optimal performance and instant page loads.
 - 🔍 **SEO Focused:** On-page SEO errors are displayed in the console during build, so you can fix issues before deploying.
@@ -63,7 +65,7 @@
 
 ---
 
-## Project Structure
+## 🗂️ Project Structure
 
 ```
 webnami/
@@ -86,7 +88,7 @@ webnami/
 
 ---
 
-## How to Use
+## 🛠️ How to Use
 
 ### Pages Folder
 
@@ -105,7 +107,7 @@ webnami/
 
 ---
 
-## Frontmatter Reference
+## 🏷️ Frontmatter Reference
 
 Both pages and posts require frontmatter at the top of each Markdown file. Here are the required fields and their explanations:
 
@@ -155,7 +157,7 @@ date: 2024-07-25
 
 ---
 
-## Configuration (config.js)
+## ⚙️ Configuration (config.js)
 
 The `config.js` file controls your site's settings. Here is an explanation of the main fields:
 
@@ -193,7 +195,7 @@ The `config.js` file controls your site's settings. Here is an explanation of th
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -236,7 +238,7 @@ Visit [http://localhost:8080](http://localhost:8080) to see your site.
 
 ---
 
-## Commands
+## ⌨️ Commands
 
 - **Build for production:**
 
@@ -259,7 +261,7 @@ Visit [http://localhost:8080](http://localhost:8080) to see your site.
 
 ---
 
-## Troubleshooting
+## 🐞 Troubleshooting
 
 - **Build fails:** Make sure you have the correct Node.js and npm version.
 - **SEO warnings:** Review console output during build for SEO issues.
@@ -269,7 +271,7 @@ If you run into issues, check the [GitHub Issues](https://github.com/webnami/web
 
 ---
 
-## Performance
+## ⚡ Performance
 
 - WebNami is optimized for speed and SEO.
 - Achieves 100/100 on Core Web Vitals in Lighthouse.
@@ -277,7 +279,7 @@ If you run into issues, check the [GitHub Issues](https://github.com/webnami/web
 
 ---
 
-## Contact & Support
+## 📬 Contact & Support
 
 - **Email:** hello.webnami@gmail.com
 - **Report Issues:** [GitHub Issues](https://github.com/webnami-dev/webnami/issues)
