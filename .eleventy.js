@@ -1,5 +1,6 @@
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { icons } from "lucide";
 import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
@@ -14,6 +15,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(seoValidator);
   eleventyConfig.addPlugin(excerptGenerator);
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(pluginSyntaxHighlight, {
+    preAttributes: { tabindex: 0 },
+  });
   eleventyConfig.addPlugin(postManagement);
   eleventyConfig.addPlugin(anchorLinks);
   eleventyConfig.addGlobalData("config", config);

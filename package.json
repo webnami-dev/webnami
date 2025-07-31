@@ -39,10 +39,12 @@
     "@11ty/eleventy": "^3.1.0",
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
     "@tailwindcss/cli": "^4.1.11",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
     "cheerio": "^1.1.2",
+    "prismjs": "^1.30.0",
     "tailwindcss": "^4.1.11",
     "vite": "^6.3.5"
   },
