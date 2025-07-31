@@ -23,6 +23,7 @@
 
 @import "tailwindcss";
 @import "../../../custom.css";
+@import "../../../node_modules/prismjs/themes/prism-tomorrow.min.css";
 @plugin "@tailwindcss/typography";
 
 @theme {

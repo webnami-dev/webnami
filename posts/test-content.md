@@ -24,6 +24,18 @@ extrema tamen flebile [voce](http://www.undas.io/), nec in et sororis perfida
 silentum curat debita Aeoliden suo campi? Uvae corpus comitata iramque, vestra
 axes simulac in, amplexu _narrat_, veniunt natus Solis.
 
+```python
+# python loop example
+
+adj = ["red", "big", "tasty"]
+fruits = ["apple", "banana", "cherry"]
+
+for x in adj:
+  for y in fruits:
+    print(x, y)
+
+```
+
 ![test image](https://fastly.picsum.photos/id/29/4000/2670.jpg?hmac=rCbRAl24FzrSzwlR5tL-Aqzyu5tX_PA95VJtnUXegGU)
 
 ## Imperat ad in iaculum silvis nunc luctatusque
