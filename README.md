@@ -20,23 +20,6 @@
   <img src="https://img.shields.io/github/issues-closed/webnami-dev/webnami" />
 </p>
 
-## 📑 Table of Contents
-
-- [Project Overview](#project-overview)
-- [Screenshots](#screenshots)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [How to Use](#how-to-use)
-- [Frontmatter Reference](#frontmatter-reference)
-- [Configuration (config.js)](#configuration-configjs)
-- [Getting Started](#getting-started)
-- [Commands](#commands)
-- [Customization](#customization)
-- [Troubleshooting](#troubleshooting)
-- [Performance](#performance)
-- [Star History](#star-history)
-- [Contact & Support](#contact--support)
-
 ---
 
 ## 📝 Project Overview
