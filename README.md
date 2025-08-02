@@ -1,15 +1,23 @@
-<p><img src="images/logo.svg" width="200" height="200" alt="webnami Logo"></p>
+<p align="center"><img src="images/logo.svg" width="200" alt="WebNami logo"></p>
 
-# WebNami
+<h1 align="center">WebNami</h1>
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/webnami/webnami/actions)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/webnami/webnami/releases)
-[![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
+<p align="center">
+🚀 <b>The fastest way to launch a modern, SEO-optimized blog with 11ty.</b><br/>
+100/100 Lighthouse scores, built-in SEO audits, and ready-to-deploy in minutes.
+</p>
 
-![Hero Section](docs/screenshots/hero-section.png)
+<p align="center">
+  <a href="https://webnami-blog.pages.dev/" target="_blank">🌐 Live Demo</a> •
+  <a href="#getting-started">📦 Install</a> •
+  <a href="#features">✨ Features</a>
+</p>
 
-<p>
-  <b>Live Demo:</b> <a href="https://webnami-blog.pages.dev/" target="_blank">https://webnami-blog.pages.dev/</a>
+<p align="center">
+  <img src="https://img.shields.io/github/stars/webnami-dev/webnami?style=social" />
+  <img src="https://img.shields.io/github/license/webnami-dev/webnami" />
+  <img src="https://img.shields.io/github/issues/webnami-dev/webnami" />
+  <img src="https://img.shields.io/github/issues-closed/webnami-dev/webnami" />
 </p>
 
 ## 📑 Table of Contents
@@ -26,6 +34,7 @@
 - [Customization](#customization)
 - [Troubleshooting](#troubleshooting)
 - [Performance](#performance)
+- [Star History](#star-history)
 - [Contact & Support](#contact--support)
 
 ---
@@ -53,7 +62,7 @@
 ## ✨ Features
 
 - ⚡ **Lightning Fast:** Built with 11ty for optimal performance and instant page loads.
-- 🔍 **SEO Focused:** On-page SEO errors are displayed in the console during build, so you can fix issues before deploying.
+- 🔍 **SEO Audit:** On-page SEO errors are displayed in the console during build, so you can fix issues before deploying.
 - 📊 **Perfect Performance:** Achieves 100/100 on Core Web Vitals for speed, accessibility, and best practices.
 - 📡 **RSS Feed:** Automatic RSS feed generation for easy syndication.
 - 🗺️ **Sitemap:** Auto-generated XML sitemap for better search engine indexing.
@@ -61,6 +70,8 @@
 - 🚫 **Custom 404 Page:** Beautiful error page for a better user experience.
 - 🔗 **Canonical Links:** Proper canonical URL management to avoid duplicate content.
 - 📱 **Meta Tags:** Complete title, description, and Open Graph tags for social sharing.
+- 💻 **Syntax Highlighting:** Built-in code syntax highlighting.
+- 📋 **Structured Data Markup:** Rich snippets and structured data for enhanced SEO and search engine visibility.
 - 🎨 **Minimal Design:** Clean, beautiful, and fully responsive design out of the box.
 
 ---
@@ -276,6 +287,12 @@ If you run into issues, check the [GitHub Issues](https://github.com/webnami/web
 - WebNami is optimized for speed and SEO.
 - Achieves 100/100 on Core Web Vitals in Lighthouse.
 - Minimal JavaScript and CSS for fast load times.
+
+---
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=webnami-dev/webnami&type=Timeline)](https://www.star-history.com/#webnami-dev/webnami&Timeline)
 
 ---
 
