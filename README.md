@@ -20,6 +20,8 @@
   <img src="https://img.shields.io/github/issues-closed/webnami-dev/webnami" />
 </p>
 
+![Hero Section](docs/screenshots/hero-section.png)
+
 ---
 
 ## 📝 Project Overview
