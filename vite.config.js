@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [tailwindcss()],
   build: {
-    outDir: "./out",
+    outDir: "./_site",
     rollupOptions: {
       input: {
         bundle: "./src/assets/js/main.js",

@@ -30,20 +30,6 @@
 
 ---
 
-## 📸 Screenshots
-
-- **SEO Audit in Terminal:**
-
-  ![SEO Audit Build Output](docs/screenshots/seo-audit-build.png)
-  <br/><sub>SEO issues and warnings are displayed in the terminal during build.</sub>
-
-- **Core Web Vitals (Lighthouse):**
-
-  ![Core Web Vitals](docs/screenshots/core-web-vitals.png)
-  <br/><sub>WebNami achieves perfect scores on Core Web Vitals.</sub>
-
----
-
 ## ✨ Features
 
 - ⚡ **Lightning Fast:** Built with 11ty for optimal performance and instant page loads.
@@ -58,6 +44,20 @@
 - 💻 **Syntax Highlighting:** Built-in code syntax highlighting.
 - 📋 **Structured Data Markup:** Rich snippets and structured data for enhanced SEO and search engine visibility.
 - 🎨 **Minimal Design:** Clean, beautiful, and fully responsive design out of the box.
+
+---
+
+## 📸 Screenshots
+
+- **SEO Audit in Terminal:**
+
+  ![SEO Audit Build Output](docs/screenshots/seo-audit-build.png)
+  <br/><sub>SEO issues and warnings are displayed in the terminal during build.</sub>
+
+- **Core Web Vitals (Lighthouse):**
+
+  ![Core Web Vitals](docs/screenshots/core-web-vitals.png)
+  <br/><sub>WebNami achieves perfect scores on Core Web Vitals.</sub>
 
 ---
 
@@ -200,22 +200,26 @@ The `config.js` file controls your site's settings. Here is an explanation of th
 
 ### Installation
 
-#### Make a directory and navigate to it
+#### Option 1: Using npx (Recommended)
+
+```bash
+npx create-webnami-blog my-blog-name
+cd my-blog-name
+```
+
+#### Option 2: Using npm
+
+```bash
+npm create webnami-blog my-blog-name
+cd my-blog-name
+```
+
+#### Option 3: Manual Clone
 
 ```bash
 mkdir my-blog-name
 cd my-blog-name
-```
-
-#### Clone this Repository
-
-```bash
 git clone https://github.com/webnami-dev/webnami.git .
-```
-
-#### Install dependencies
-
-```bash
 npm install
 ```
 
@@ -231,6 +235,8 @@ npm run dev
 ```
 
 Visit [http://localhost:8080](http://localhost:8080) to see your site.
+
+> **Note:** If you used Option 1 or 2 above, dependencies are automatically installed. Only Option 3 (manual clone) requires running `npm install` separately.
 
 ---
 

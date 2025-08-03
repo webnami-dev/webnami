@@ -22,8 +22,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(anchorLinks);
   eleventyConfig.addGlobalData("config", config);
   eleventyConfig.addPassthroughCopy({ "./images": "images" });
-  eleventyConfig.addPassthroughCopy({ "./out/assets/js": "assets/js" });
-  eleventyConfig.addPassthroughCopy({ "./out/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "./src/assets/fonts": "assets/fonts" });
   // Add date filter for sitemap
 
@@ -76,11 +74,11 @@ export default function (eleventyConfig) {
     outputDir: "./_site/images/",
     urlPath: "/images/",
     // output image formats
-    formats: ["avif", "webp", "auto"],
+    formats: ["avif", "webp"],
     // output image widths
-    widths: [360, 720, 1080, 1440],
+    widths: [360, 720, 1080],
     sizes:
-      "(max-width: 360px) 360px, (max-width: 720px) 720px, (max-width: 1080px) 1080px, (max-width: 1440px) 1440px",
+      "(max-width: 360px) 360px, (max-width: 720px) 720px, (max-width: 1080px) 1080px",
 
     // to disable dev server transform
     transformOnRequest: false,

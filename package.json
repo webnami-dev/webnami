@@ -1,12 +1,31 @@
 {
-  "name": "webnami",
+  "name": "create-webnami-blog",
   "version": "1.0.0",
   "description": "An opinionated Eleventy-based blogging website generator optimized for SEO, speed, and performance",
   "type": "module",
+  "main": "bin/cli.js",
+  "bin": {
+    "create-webnami-blog": "./bin/cli.js"
+  },
   "scripts": {
     "build": "vite build && eleventy",
     "dev": "vite build && eleventy --serve --watch"
   },
+  "files": [
+    "bin/",
+    "config.js",
+    "custom.css",
+    "images/",
+    "pages/",
+    "posts/",
+    "src/",
+    ".eleventy.js",
+    ".eleventyignore",
+    "vite.config.js",
+    "package.json",
+    "package-lock.json",
+    ".gitignore"
+  ],
   "keywords": [
     "eleventy",
     "11ty",
@@ -22,11 +41,12 @@
     "markdown",
     "seo"
   ],
-  "author": {
-    "name": "Webnami",
-    "email": "hello.webnami@gmail.com"
-  },
+  "author": "",
   "license": "MIT",
+  "homepage": "https://webnami.in",
+  "bugs": {
+    "url": "https://github.com/webnami-dev/webnami/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/webnami-dev/webnami.git"
@@ -51,6 +71,7 @@
   "dependencies": {
     "@alpinejs/intersect": "^3.14.9",
     "alpinejs": "^3.14.9",
+    "fs-extra": "^11.3.0",
     "html-minifier-terser": "^7.2.0",
     "lucide": "^0.513.0"
   }

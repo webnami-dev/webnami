@@ -3,7 +3,7 @@ config.js
 node_modules/
 package-lock.json
 \_site/
-out/
+bin/
 .cache/
 package.json
 vite.config.js
