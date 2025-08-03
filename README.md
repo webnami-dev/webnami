@@ -9,8 +9,6 @@
 
 <p align="center">
   <a href="https://webnami-blog.pages.dev/" target="_blank">🌐 Live Demo</a> •
-  <a href="#getting-started">📦 Install</a> •
-  <a href="#features">✨ Features</a>
 </p>
 
 <p align="center">
