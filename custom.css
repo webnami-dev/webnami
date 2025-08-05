@@ -1,3 +1,18 @@
-@theme {
+/* Color palette - edit these values */
+:root[data-theme="light"] {
+  /* Light theme colors */
   --color-primary: #155dfc;
+  --color-background: #ffffff;
+  --color-content: #364153;
+  --color-accent: #6a7282;
+  --color-footer: #f3f4f6;
+}
+
+:root[data-theme="dark"] {
+  /* Dark theme colors */
+  --color-primary: #155dfc;
+  --color-background: #121212;
+  --color-content: #faf9f6;
+  --color-accent: #ffffff;
+  --color-footer: #000000;
 }

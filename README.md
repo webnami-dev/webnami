@@ -41,6 +41,7 @@
 - 📱 **Meta Tags:** Complete title, description, and Open Graph tags for social sharing.
 - 💻 **Syntax Highlighting:** Built-in code syntax highlighting.
 - 📋 **Structured Data Markup:** Rich snippets and structured data for enhanced SEO and search engine visibility.
+- 🌙 **Dark/Light Theme:** Toggle between dark and light modes with automatic system preference detection.
 - 🎨 **Minimal Design:** Clean, beautiful, and fully responsive design out of the box.
 
 ---
@@ -97,7 +98,7 @@ webnami/
 ### custom.css
 
 - Customize your site's look by editing `custom.css` in the project root.
-- Override colors (as of now only primary color can be overridden)
+- Override colors for both light and dark themes (primary, background, content, accent, and footer colors)
 
 ---
 

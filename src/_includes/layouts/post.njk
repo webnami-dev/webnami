@@ -5,12 +5,12 @@ layout: "base.njk"
 <main class="min-h-screen py-10">
   <!-- Content Section -->
   <article
-    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-headings:text-gray-700 prose-p:text-500 prose-a:text-primary-500 prose-a:no-underline prose-a:hover:text-primary-500/50"
+    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content prose-a:text-primary-500 prose-a:no-underline prose-a:hover:text-primary-500/50"
   >
     <h1 class="sm:text-5xl text-4xl font-bold mb-4">{{ heading }}</h1>
     <div class="flex flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-4">
-        <p class="text-gray-500 text-sm">{{ date | postDate }}</p>
+        <p class="text-accent text-sm">{{ date | postDate }}</p>
         <a
           href="/category/{{ category | slugify }}"
           class="bg-primary-100 px-4 py-1 rounded-xl text-sm font-medium no-underline"
@@ -22,7 +22,7 @@ layout: "base.njk"
           href="https://www.facebook.com/sharer/sharer.php?u={{
             config.site.url
           }}{{ page.url }}"
-          class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
+          class="text-content hover:text-primary-500 transition-colors duration-200"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Share on Facebook"
@@ -33,7 +33,7 @@ layout: "base.njk"
           href="https://twitter.com/intent/tweet?url={{ config.site.url }}{{
             page.url
           }}"
-          class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
+          class="text-content hover:text-primary-500 transition-colors duration-200"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Share on Twitter"
@@ -44,7 +44,7 @@ layout: "base.njk"
           href="https://www.linkedin.com/shareArticle?mini=true&url={{
             config.site.url
           }}{{ page.url }}"
-          class="text-gray-700 hover:text-primary-500 transition-colors duration-200"
+          class="text-content hover:text-primary-500 transition-colors duration-200"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Share on LinkedIn"
@@ -83,7 +83,7 @@ layout: "base.njk"
     <div class="flex justify-between items-start gap-4 py-6 border-t">
       {%- if previousPost %}
       <div class="text-left">
-        <p class="text-gray-500 text-sm mb-1">← Previous</p>
+        <p class="text-accent text-sm mb-1">← Previous</p>
         <a
           href="{{ previousPost.url }}"
           class="text-primary-500 hover:text-primary-800 text-sm font-medium no-underline"
@@ -95,7 +95,7 @@ layout: "base.njk"
       <div></div>
       {% endif %} {%- if nextPost %}
       <div class="text-right">
-        <p class="text-gray-500 text-sm mb-1">Next →</p>
+        <p class="text-accent text-sm mb-1">Next →</p>
         <a
           href="{{ nextPost.url }}"
           class="text-primary-500 hover:text-primary-800 text-sm font-medium no-underline"

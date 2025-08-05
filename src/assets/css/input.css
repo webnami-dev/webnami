@@ -30,6 +30,12 @@
   --font-body: "Inter", sans-serif;
   --font-headings: "FigTree", sans-serif;
 
+  --color-primary: #155dfc;
+  --color-background: #ffffff;
+  --color-content: #364153;
+  --color-accent: #6a7282;
+  --color-footer: #f3f4f6;
+
   /* primary color variables */
   --color-primary-50: color-mix(in srgb, var(--color-primary) 5%, white);
   --color-primary-100: color-mix(in srgb, var(--color-primary) 10%, white);

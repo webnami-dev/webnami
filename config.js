@@ -116,8 +116,8 @@ export default {
         // Hide this column's title
         displayGroupTitle: false,
         links: [
-          { name: "Privacy Policy", href: "#" },
-          { name: "Terms", href: "#" },
+          { name: "RSS", href: "/rss.xml" },
+          { name: "Sitemap", href: "/sitemap.xml" },
         ],
       },
     ],

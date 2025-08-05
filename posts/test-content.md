@@ -60,6 +60,12 @@ malum deque: fluidos sed caelum heu **nec se**! Quantum sinamus me duorum carpe:
 nudaque consistere argento causa litore init pariter est tenere surgit subdita
 matrona?
 
+1. Item 1
+2. Item 2
+3. Item 3
+   1. Item 3a
+   2. Item 3b
+
 ## Inde acerbo Minyae mater
 
 Cum sunt est contigit Iuppiter me sede. Nec habet poenaeque faxo piasque

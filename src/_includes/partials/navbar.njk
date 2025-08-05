@@ -14,7 +14,7 @@
         </a>
         {% endif %}
         <a href="/" class="flex items-center">
-          <span class="ml-2 text-xl font-bold">
+          <span class="ml-2 text-content text-xl font-bold">
             {{ config.site.name }}
           </span>
         </a>
@@ -24,12 +24,33 @@
         <ul
           class="flex flex-row justify-center items-center md:space-y-0 md:space-x-4 list-none"
         >
+          <li x-data>
+            <!-- Sun icon for light mode (shows when theme is dark) -->
+            <button
+              @click="$store.theme.lightTheme()"
+              class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+              aria-label="Toggle dark mode"
+              x-show="$store.theme.dark"
+            >
+              {% icon "sun", "w-5 h-5"| safe %}
+            </button>
+
+            <!-- Moon icon for dark mode (shows when theme is light) -->
+            <button
+              @click="$store.theme.darkTheme()"
+              class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+              aria-label="Toggle dark mode"
+              x-show="!$store.theme.dark"
+            >
+              {% icon "moon", "w-5 h-5" | safe %}
+            </button>
+          </li>
           {% for link in config.navbar.links %}
           <li>
             {% if not link.cta %}
             <a
               href="{{ link.href }}"
-              class="text-gray-700 hover:text-primary-500 px-3 py-2 text-sm font-light transition-colors duration-200"
+              class="text-content hover:text-primary-500 px-3 py-2 text-sm font-light transition-colors duration-200"
             >
               {{ link.name }}
             </a>
