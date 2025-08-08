@@ -1,0 +1,65 @@
+{% macro featuredPostMacro(postsPage) %} {% set featuredPost =
+postsPage.items[0] %} {% if featuredPost %}
+<div class="w-full md:w-4/5 px-5 py-5 mx-auto flex flex-wrap mb-12">
+  <a
+    href="{{ featuredPost.url }}"
+    class="lg:w-1/2 w-full overflow-hidden mt-6 sm:mt-0"
+  >
+    <img
+      class="object-center w-full h-full rounded-md"
+      src="{{ featuredPost.data.img }}"
+      alt="{{ featuredPost.data.imgAlt }}"
+    />
+  </a>
+  <div
+    class="flex flex-wrap mt-6 lg:mt-auto mb-auto lg:w-1/2 content-start lg:p-4"
+  >
+    <div class="w-full sm:p-4 mb-6">
+      <h2
+        class="title-font font-medium sm:text-3xl text-2xl mb-4 text-stats-heading"
+      >
+        <a
+          href="{{ featuredPost.url }}"
+          class="hover:text-primary-500 transition-colors"
+        >
+          {{ featuredPost.data.heading }}
+        </a>
+      </h2>
+      <p class="hidden sm:block sm:mb-4">
+        {{ featuredPost.templateContent | excerpt }}
+      </p>
+      {% if config.listings.postPreview.showDateInListing or
+      config.listings.postPreview.showAuthorInListing %}
+      <p class="leading-relaxed text-accent text-sm mb-2">
+        {% if config.listings.postPreview.showAuthorInListing %}By
+        {{ featuredPost.data.author }}{% endif %} {% if
+        config.listings.postPreview.showAuthorInListing and
+        config.listings.postPreview.showDateInListing %} | {% endif %} {% if
+        config.listings.postPreview.showDateInListing %}{{
+          featuredPost.data.date | postDate
+        }}{% endif %}
+      </p>
+      {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
+      <div class="flex">
+        <p
+          class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
+        >
+          {{ featuredPost.data.category }}
+        </p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% if postsPage.postsPerPage == 1 and postsPage.total > 1 %}
+<div>
+  <div class="flex justify-center">
+    <a
+      href="/posts/{{ postsPage.page + 1 }}"
+      class="inline-block bg-primary-500 text-white px-4 py-2 rounded-xl hover:bg-primary-800 transition-colors"
+    >
+      View Older Posts
+    </a>
+  </div>
+</div>
+{% endif %} {% endif %} {% endmacro %}

@@ -1,0 +1,152 @@
+<!-- Index page regular posts -->
+{% macro indexPostlistMacro(postsPage) %}
+
+<!-- Regular Posts Grid (Remaining Items) -->
+<div class="w-full md:w-4/5 px-5 py-5 mx-auto">
+  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+    {% for post in postsPage.items %}
+    <a
+      class="group flex flex-col h-full focus:outline-none"
+      href="{{ post.url }}"
+    >
+      <div class="flex-shrink-0 h-60 w-full">
+        <img
+          class="w-full h-full object-cover rounded-md"
+          src="{{ post.data.img }}"
+          alt="{{ post.data.imgAlt }}"
+        />
+      </div>
+      <div class="my-6 flex-grow">
+        <h2
+          class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
+        >
+          {{ post.data.heading }}
+        </h2>
+        {% if config.listings.postPreview.showExcerptInListing %}
+        <p class="hidden sm:block sm:mb-4">
+          {{ post.templateContent | excerpt }}
+        </p>
+        {% endif %} {% if config.listings.postPreview.showDateInListing or
+        config.listings.postPreview.showAuthorInListing %}
+        <p class="leading-relaxed text-accent text-sm mb-2">
+          {% if config.listings.postPreview.showAuthorInListing %}By
+          {{ post.data.author }}{% endif %} {% if
+          config.listings.postPreview.showAuthorInListing and
+          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
+          config.listings.postPreview.showDateInListing %}{{
+            post.data.date | postDate
+          }}{% endif %}
+        </p>
+        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
+        <div class="flex">
+          <p
+            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
+          >
+            {{ post.data.category }}
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% if postsPage.total > postsPage.postsPerPage %}
+  <div class="flex justify-center my-8">
+    <a
+      href="/posts/{{ postsPage.page + 1 }}"
+      class="inline-block bg-primary-500 text-white px-4 py-2 rounded-xl hover:bg-primary-800 transition-colors"
+    >
+      View Older Posts
+    </a>
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}
+
+<!-- Post List for other pages-->
+{% macro postlistMacro(posts, type) %}
+<div class="w-full md:w-4/5 px-5 py-5 mx-auto">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for post in posts.items %}
+    <a
+      class="group flex flex-col h-full focus:outline-none rounded-xl"
+      href="{{ post.url }}"
+    >
+      <div class="flex-shrink-0 h-60 w-full">
+        <img
+          class="w-full h-full object-cover rounded-md"
+          src="{{ post.data.img }}"
+          alt="{{ post.data.imgAlt }}"
+        />
+      </div>
+      <div class="my-6 flex-grow">
+        <h2
+          class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
+        >
+          {{ post.data.heading }}
+        </h2>
+        {% if config.listings.postPreview.showExcerptInListing %}
+        <p class="hidden sm:block sm:mb-4">
+          {{ post.templateContent | excerpt }}
+        </p>
+        {% endif %} {% if config.listings.postPreview.showDateInListing or
+        config.listings.postPreview.showAuthorInListing %}
+        <p class="leading-relaxed text-accent text-sm mb-2">
+          {% if config.listings.postPreview.showAuthorInListing %}By
+          {{ post.data.author }}{% endif %} {% if
+          config.listings.postPreview.showAuthorInListing and
+          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
+          config.listings.postPreview.showDateInListing %}{{
+            post.data.date | postDate
+          }}{% endif %}
+        </p>
+        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
+        <div class="flex">
+          <p
+            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
+          >
+            {{ post.data.category }}
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <!-- Pagination Navigation -->
+  {% if posts.total > config.listings.pagination.postsPerPage %}
+  <div class="flex justify-between items-center gap-4 my-8">
+    {% set totalPages = (posts.total / config.listings.pagination.postsPerPage)
+    | round(0, "ceil") %} {% if posts.page > 1 %}
+    <div class="text-left">
+      <a
+        href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{
+          type
+        }}{% if type != 'posts' %}/{{
+          posts.name | slugify
+        }}{% endif %}/{% if posts.page > 2 %}{{
+          posts.page - 1
+        }}/{% endif %}{% endif %}"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-500 transition-colors"
+        >← Previous</a
+      >
+    </div>
+    {% else %}
+    <div></div>
+    {% endif %} {% if posts.page < totalPages %}
+    <div class="text-right">
+      <a
+        href="/{{ type }}{% if type != 'posts' %}/{{
+          posts.name | slugify
+        }}{% endif %}/{{ posts.page + 1 }}/"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-500 transition-colors"
+        >Next →</a
+      >
+    </div>
+    {% else %}
+    <div></div>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}

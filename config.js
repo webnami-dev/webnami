@@ -1,5 +1,6 @@
 export default {
   // Core site information used across the platform
+  theme: "duo",
   site: {
     // Site name shown in title tags and navigation
     name: "WebNami",
