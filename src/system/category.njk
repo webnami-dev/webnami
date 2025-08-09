@@ -16,7 +16,7 @@ eleventyComputed:
       Page {{ categoryPage.page }}{% endif %}
     </h1>
   </div>
-  {%- include 'partials/category-nav.njk' -%} {%- from 'macros/postlist.njk'
-  import postlistMacro with context -%}
+  {%- include 'partials/category-nav.njk' -%} {%- from 'macros/presets/' +
+  config.theme + '.njk' import postlistMacro with context -%}
   {{ postlistMacro(categoryPage, "category") }}
 </section>

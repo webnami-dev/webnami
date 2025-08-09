@@ -1,6 +1,6 @@
 export default {
+  theme: "monofeatured",
   // Core site information used across the platform
-  theme: "duo",
   site: {
     // Site name shown in title tags and navigation
     name: "WebNami",
@@ -8,71 +8,29 @@ export default {
     url: "http://example.com",
     // Language code for HTML lang attribute and SEO
     language: "en",
-    // Content Security Policy (CSP) settings
-    csp: {
-      // Whether to enable CSP headers
-      enabled: true,
-      // CSP policy
-      policy: "object-src 'none'; base-uri 'self'; upgrade-insecure-requests;",
-    },
-  },
-
-  // Visual branding and identity settings
-  branding: {
+    // Logo image path
+    logo: "/images/logo.png",
     // Browser tab icon
     favicon: "/images/favicon.ico",
-    logo: {
-      // Logo image path
-      src: "/images/logo.svg",
-      // Alt text for logo accessibility
-      alt: "Logo",
-    },
+    // Content Security Policy (CSP)
+    csp: "object-src 'none'; base-uri 'self'; upgrade-insecure-requests;",
   },
 
-  // Configuration for listing pages (homepage, categories, tags etc)
-  listings: {
-    // Pagination settings for all listing pages
-    pagination: {
-      // Number of posts per page on listing pages
-      postsPerPage: 10,
-    },
-    // What to show in post previews/cards on listing pages
-    postPreview: {
-      // Display author name in post cards
-      showAuthorInListing: true,
-      // Display publish date in post cards
-      showDateInListing: true,
-      // Display post category in post cards
-      showCategoryInListing: true,
-      // Display post excerpt/summary in post cards
-      showExcerptInListing: true,
-    },
-  },
+  // Number of posts per page on listing pages
+  postsPerPage: 10,
 
-  // Page-specific configurations
-  pages: {
-    // Homepage specific settings
-    homepage: {
-      // Whether to display the main heading
-      showHeading: true,
-      // Whether to center the heading text
-      centerHeading: true,
-      // Main homepage heading text
-      heading: "Welcome to WebNami",
-      // Homepage subtitle
-      subheading:
-        "Your beautiful blog is ready to go! Start writing your first post",
-      // Whether to show category navigation below heading
-      showCategoryNavigation: true,
-      // SEO metadata for homepage
-      metadata: {
-        // HTML title tag content
-        title: "Home",
-        // Meta description for search engines
-        description: "This is a description of our website",
-        // Social sharing image - used in open graph tags
-        img: "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
-      },
+  // Homepage specific settings
+  homepage: {
+    // Main homepage heading text
+    heading: "WebNami - a simple and lightweight blogging tool",
+    // SEO metadata for homepage
+    metadata: {
+      // HTML title tag content
+      title: "Home",
+      // Meta description for search engines
+      description: "This is a description of our website",
+      // Social sharing image - used in open graph tags
+      img: "/images/logo.png",
     },
   },
 
@@ -103,8 +61,6 @@ export default {
       {
         // Column heading
         title: "CATEGORY 1",
-        // Whether to display the column title
-        displayGroupTitle: true,
         links: [
           // Individual footer link
           { name: "About", href: "/about" },
@@ -112,10 +68,7 @@ export default {
         ],
       },
       {
-        // Second column
-        title: "CATEGORY 2",
-        // Hide this column's title
-        displayGroupTitle: false,
+        // Second column - empty column heading
         links: [
           { name: "RSS", href: "/rss.xml" },
           { name: "Sitemap", href: "/sitemap.xml" },

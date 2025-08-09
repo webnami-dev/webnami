@@ -1,8 +1,7 @@
-{% if config.pages.homepage.showCategoryNavigation and
-collections.categoryList.length > 0 %}
+{% if collections.categoryList.length > 0 %}
 <div class="overflow-x-auto mb-12">
   <div
-    class="flex space-x-4 w-full md:w-4/5 px-5 min-w-max mx-auto {% if config.pages.homepage.centerHeading %}justify-center{% endif %}"
+    class="flex space-x-4 w-full md:w-4/5 px-5 min-w-max mx-auto justify-center"
   >
     <!-- All Tab -->
     <a

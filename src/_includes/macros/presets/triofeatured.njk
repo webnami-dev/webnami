@@ -30,18 +30,10 @@
       <p class="hidden sm:block sm:mb-4">
         {{ featuredPost.templateContent | excerpt }}
       </p>
-      {% if config.listings.postPreview.showDateInListing or
-      config.listings.postPreview.showAuthorInListing %}
       <p class="leading-relaxed text-accent text-sm mb-2">
-        {% if config.listings.postPreview.showAuthorInListing %}By
-        {{ featuredPost.data.author }}{% endif %} {% if
-        config.listings.postPreview.showAuthorInListing and
-        config.listings.postPreview.showDateInListing %} | {% endif %} {% if
-        config.listings.postPreview.showDateInListing %}{{
-          featuredPost.data.date | postDate
-        }}{% endif %}
+        By {{ featuredPost.data.author }} |
+        {{ featuredPost.data.date | postDate }}
       </p>
-      {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
       <div class="flex">
         <p
           class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -49,7 +41,6 @@
           {{ featuredPost.data.category }}
         </p>
       </div>
-      {% endif %}
     </div>
   </div>
 </div>
@@ -88,22 +79,12 @@
         >
           {{ post.data.heading }}
         </h2>
-        {% if config.listings.postPreview.showExcerptInListing %}
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}
         </p>
-        {% endif %} {% if config.listings.postPreview.showDateInListing or
-        config.listings.postPreview.showAuthorInListing %}
         <p class="leading-relaxed text-accent text-sm mb-2">
-          {% if config.listings.postPreview.showAuthorInListing %}By
-          {{ post.data.author }}{% endif %} {% if
-          config.listings.postPreview.showAuthorInListing and
-          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
-          config.listings.postPreview.showDateInListing %}{{
-            post.data.date | postDate
-          }}{% endif %}
+          By {{ post.data.author }} | {{ post.data.date | postDate }}
         </p>
-        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -111,7 +92,6 @@
             {{ post.data.category }}
           </p>
         </div>
-        {% endif %}
       </div>
     </a>
     {% endif %} {% endfor %}
@@ -151,22 +131,12 @@
         >
           {{ post.data.heading }}
         </h2>
-        {% if config.listings.postPreview.showExcerptInListing %}
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}
         </p>
-        {% endif %} {% if config.listings.postPreview.showDateInListing or
-        config.listings.postPreview.showAuthorInListing %}
         <p class="leading-relaxed text-accent text-sm mb-2">
-          {% if config.listings.postPreview.showAuthorInListing %}By
-          {{ post.data.author }}{% endif %} {% if
-          config.listings.postPreview.showAuthorInListing and
-          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
-          config.listings.postPreview.showDateInListing %}{{
-            post.data.date | postDate
-          }}{% endif %}
+          By {{ post.data.author }} | {{ post.data.date | postDate }}
         </p>
-        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -174,16 +144,15 @@
             {{ post.data.category }}
           </p>
         </div>
-        {% endif %}
       </div>
     </a>
     {% endfor %}
   </div>
   <!-- Pagination Navigation -->
-  {% if posts.total > config.listings.pagination.postsPerPage %}
+  {% if posts.total > config.postsPerPage %}
   <div class="flex justify-between items-center gap-4 my-8">
-    {% set totalPages = (posts.total / config.listings.pagination.postsPerPage)
-    | round(0, "ceil") %} {% if posts.page > 1 %}
+    {% set totalPages = (posts.total / config.postsPerPage) | round(0, "ceil")
+    %} {% if posts.page > 1 %}
     <div class="text-left">
       <a
         href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{

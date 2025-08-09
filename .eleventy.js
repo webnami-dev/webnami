@@ -196,7 +196,7 @@ export default function (eleventyConfig) {
       const sortedPosts = posts.sort((a, b) => {
         return b.date - a.date;
       });
-      const postsPerPage = config.listings.pagination.postsPerPage;
+      const postsPerPage = config.postsPerPage;
       const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
       for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
@@ -243,7 +243,7 @@ export default function (eleventyConfig) {
       const sortedPosts = posts.sort((a, b) => {
         return b.date - a.date;
       });
-      const postsPerPage = config.listings.pagination.postsPerPage;
+      const postsPerPage = config.postsPerPage;
       const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
       for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
         const startIndex = (pageNumber - 1) * postsPerPage;
@@ -349,7 +349,7 @@ export default function (eleventyConfig) {
       const sortedPosts = posts.sort((a, b) => {
         return b.date - a.date;
       });
-      const postsPerPage = config.listings.pagination.postsPerPage;
+      const postsPerPage = config.postsPerPage;
       const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
       for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
@@ -413,7 +413,7 @@ export default function (eleventyConfig) {
       });
 
     const paginatedPages = [];
-    const postsPerPage = config.listings.pagination.postsPerPage;
+    const postsPerPage = config.postsPerPage;
     const totalPages = Math.ceil(allPosts.length / postsPerPage);
 
     for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {

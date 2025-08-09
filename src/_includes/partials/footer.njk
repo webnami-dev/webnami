@@ -10,11 +10,11 @@
       <div
         class="flex title-font font-medium items-center justify-center text-content mb-4"
       >
-        {% if config.branding.logo.src %}
+        {% if config.site.logo %}
         <img
           class="h-8 sm:h-12 w-auto"
-          src="{{ config.branding.logo.src }}"
-          alt="{{ config.branding.logo.alt }}"
+          src="{{ config.site.logo }}"
+          alt="{{ config.site.name }}"
         />
         {% endif %}
         <span class="ml-2 text-xl font-bold">
@@ -49,7 +49,7 @@
     >
       {% for group in config.footer.linkGroups %}
       <div class="lg:w-1/3 md:w-1/2 w-full pb-10">
-        {% if group.displayGroupTitle %}
+        {% if group.title %}
         <h2
           class="title-font font-bold tracking-widest text-sm mb-3 text-content uppercase"
         >

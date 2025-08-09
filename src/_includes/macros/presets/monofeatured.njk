@@ -24,22 +24,13 @@
           >{{ featuredPost.data.heading }}</a
         >
       </h2>
-      {% if config.listings.postPreview.showExcerptInListing %}
       <p class="hidden sm:block sm:mb-4">
         {{ featuredPost.templateContent | excerpt }}
       </p>
-      {% endif %} {% if config.listings.postPreview.showDateInListing or
-      config.listings.postPreview.showAuthorInListing %}
       <p class="leading-relaxed text-accent text-sm mb-2">
-        {% if config.listings.postPreview.showAuthorInListing %}By
-        {{ featuredPost.data.author }}{% endif %} {% if
-        config.listings.postPreview.showAuthorInListing and
-        config.listings.postPreview.showDateInListing %} | {% endif %} {% if
-        config.listings.postPreview.showDateInListing %}{{
-          featuredPost.data.date | postDate
-        }}{% endif %}
+        By {{ featuredPost.data.author }} |
+        {{ featuredPost.data.date | postDate }}
       </p>
-      {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
       <div class="flex">
         <p
           class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -47,7 +38,6 @@
           {{ featuredPost.data.category }}
         </p>
       </div>
-      {% endif %}
     </div>
   </div>
   {% endif %}
@@ -71,20 +61,10 @@
         >
           {{ post.data.heading }}
         </h2>
-        {% if config.listings.postPreview.showExcerptInListing %}
         <p class="sm:mb-4">{{ post.templateContent | excerpt }}</p>
-        {% endif %} {% if config.listings.postPreview.showDateInListing or
-        config.listings.postPreview.showAuthorInListing %}
         <p class="leading-relaxed text-accent text-sm mb-2">
-          {% if config.listings.postPreview.showAuthorInListing %}By
-          {{ post.data.author }}{% endif %} {% if
-          config.listings.postPreview.showAuthorInListing and
-          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
-          config.listings.postPreview.showDateInListing %}{{
-            post.data.date | postDate
-          }}{% endif %}
+          By {{ post.data.author }} | {{ post.data.date | postDate }}
         </p>
-        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -92,7 +72,6 @@
             {{ post.data.category }}
           </p>
         </div>
-        {% endif %}
       </div>
     </a>
     {% endif %} {% endfor %}
@@ -113,7 +92,7 @@
   <div class="flex flex-col">
     {% for post in posts.items %}
     <a
-      class="group flex flex-col lg:flex-row gap-5 py-6 border-b border-gray-200 focus:outline-none rounded-xl"
+      class="group flex flex-col lg:flex-row gap-5 py-6 border-b border-gray-200 focus:outline-none"
       href="{{ post.url }}"
     >
       <div class="w-full lg:w-64 h-48 lg:h-40 flex-shrink-0">
@@ -129,20 +108,10 @@
         >
           {{ post.data.heading }}
         </h2>
-        {% if config.listings.postPreview.showExcerptInListing %}
         <p class="sm:mb-4">{{ post.templateContent | excerpt }}</p>
-        {% endif %} {% if config.listings.postPreview.showDateInListing or
-        config.listings.postPreview.showAuthorInListing %}
         <p class="leading-relaxed text-accent text-sm mb-2">
-          {% if config.listings.postPreview.showAuthorInListing %}By
-          {{ post.data.author }}{% endif %} {% if
-          config.listings.postPreview.showAuthorInListing and
-          config.listings.postPreview.showDateInListing %} | {% endif %} {% if
-          config.listings.postPreview.showDateInListing %}{{
-            post.data.date | postDate
-          }}{% endif %}
+          By {{ post.data.author }} | {{ post.data.date | postDate }}
         </p>
-        {% endif %} {% if config.listings.postPreview.showCategoryInListing %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -150,16 +119,15 @@
             {{ post.data.category }}
           </p>
         </div>
-        {% endif %}
       </div>
     </a>
     {% endfor %}
   </div>
 
-  {% if posts.total > config.listings.pagination.postsPerPage %}
+  {% if posts.total > config.postsPerPage %}
   <div class="flex justify-between items-center gap-4 my-8">
-    {% set totalPages = (posts.total / config.listings.pagination.postsPerPage)
-    | round(0, "ceil") %} {% if posts.page > 1 %}
+    {% set totalPages = (posts.total / config.postsPerPage) | round(0, "ceil")
+    %} {% if posts.page > 1 %}
     <div class="text-left">
       <a
         href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{

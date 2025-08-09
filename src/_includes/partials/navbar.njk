@@ -5,12 +5,12 @@
       class="block md:flex md:flex-row md:justify-between md:items-center py-4 md:py-0 md:h-16"
     >
       <div class="flex justify-center md:justify-start mb-4 md:mb-0">
-        {% if config.branding.logo.src %}
+        {% if config.site.logo %}
         <a href="/" class="flex items-center">
           <img
             class="h-8 sm:h-12 w-auto"
-            src="{{ config.branding.logo.src }}"
-            alt="{{ config.branding.logo.alt }}"
+            src="{{ config.site.logo }}"
+            alt="{{ config.site.name }}"
           />
         </a>
         {% endif %}

@@ -4,12 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ metadata.title }}</title>
-    {% if config.site.csp.enabled %}
     <meta
       http-equiv="Content-Security-Policy"
-      content="{{ config.site.csp.policy }}"
+      content="{{ config.site.csp }}"
     />
-    {% endif %}
     <meta name="title" content="{{ metadata.title }}" />
     <meta name="description" content="{{ metadata.description }}" />
     {%- if not robots or robots != 'false' -%}
@@ -44,11 +42,7 @@
     <meta property="og:site_name" content="{{ config.site.name }}" />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="{{ config.site.url }}{{ page.url }}" />
-    <link
-      rel="icon"
-      href="{{ config.branding.favicon }}"
-      type="image/svg+xml"
-    />
+    <link rel="icon" href="{{ config.site.favicon }}" type="image/svg+xml" />
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
     {%- if layout == 'layouts/post' -%}
     <script type="application/ld+json">
@@ -77,7 +71,7 @@
           "name": "{{ config.site.name }}",
           "logo": {
             "@type": "ImageObject",
-            "url": "{{ config.site.url }}{{ config.branding.logo.src }}"
+            "url": "{{ config.site.url }}{{ config.site.logo }}"
           }
         }
       }
