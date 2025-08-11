@@ -1,6 +1,6 @@
 ---
 metadata:
-  title: "Test content page"
+  title: "This is the latest post"
   description: "Lorem ipsum"
 heading: "This is the latest post"
 img: "https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4"

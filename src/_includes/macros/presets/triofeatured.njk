@@ -31,8 +31,8 @@
         {{ featuredPost.templateContent | excerpt }}
       </p>
       <p class="leading-relaxed text-accent text-sm mb-2">
-        By {{ featuredPost.data.author }} |
-        {{ featuredPost.data.date | postDate }}
+        {% if featuredPost.data.author %}By {{ featuredPost.data.author }} | {%
+        endif %}{{ featuredPost.data.date | postDate }}
       </p>
       <div class="flex">
         <p
@@ -83,7 +83,9 @@
           {{ post.templateContent | excerpt }}
         </p>
         <p class="leading-relaxed text-accent text-sm mb-2">
-          By {{ post.data.author }} | {{ post.data.date | postDate }}
+          {% if post.data.author %}By {{ post.data.author }} | {% endif %}{{
+            post.data.date | postDate
+          }}
         </p>
         <div class="flex">
           <p
@@ -135,7 +137,9 @@
           {{ post.templateContent | excerpt }}
         </p>
         <p class="leading-relaxed text-accent text-sm mb-2">
-          By {{ post.data.author }} | {{ post.data.date | postDate }}
+          {% if post.data.author %}By {{ post.data.author }} | {% endif %}{{
+            post.data.date | postDate
+          }}
         </p>
         <div class="flex">
           <p

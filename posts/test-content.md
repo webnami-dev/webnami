@@ -1,6 +1,6 @@
 ---
 metadata:
-  title: "Test content page"
+  title: "My second blog title"
   description: "Lorem ipsum"
 heading: "My second blog title"
 img: "https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ"

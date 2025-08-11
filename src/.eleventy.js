@@ -5,13 +5,14 @@ import { icons } from "lucide";
 import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
 import Image from "@11ty/eleventy-img";
-import config from "./config.js";
-import seoValidator from "./src/_plugins/seo-validator.js";
-import excerptGenerator from "./src/_plugins/excerpt-generator.js";
-import postManagement from "./src/_plugins/post-management.js";
-import anchorLinks from "./src/_plugins/anchor-links.js";
+import config from "../config.js";
+import seoValidator from "./_plugins/seo-validator.js";
+import excerptGenerator from "./_plugins/excerpt-generator.js";
+import postManagement from "./_plugins/post-management.js";
+import anchorLinks from "./_plugins/anchor-links.js";
 
 export default function (eleventyConfig) {
+  eleventyConfig.ignores.add("*.md");
   eleventyConfig.addPlugin(seoValidator);
   eleventyConfig.addPlugin(excerptGenerator);
   eleventyConfig.addPlugin(pluginRss);
@@ -439,9 +440,9 @@ export default function (eleventyConfig) {
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
     dir: {
-      input: ".",
+      input: "./",
       includes: "src/_includes",
-      data: "src/_data",
+      data: "_data",
       output: "_site",
     },
   };

@@ -4,11 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [tailwindcss()],
   build: {
-    outDir: "./_site",
+    outDir: "_site",
     rollupOptions: {
       input: {
-        bundle: "./src/assets/js/main.js",
-        main: "./src/assets/css/input.css", // CSS entry point
+        bundle: "src/assets/js/main.js",
+        main: "src/assets/css/input.css", // CSS entry point
       },
       output: {
         entryFileNames: "assets/js/[name].js",

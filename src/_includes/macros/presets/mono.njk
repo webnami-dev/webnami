@@ -15,7 +15,9 @@
       </h2>
       <p class="mt-2">{{ post.templateContent | excerpt }}</p>
       <p class="mt-2 leading-relaxed text-accent text-sm">
-        By {{ post.data.author }} | {{ post.data.date | postDate }}
+        {% if post.data.author %}By {{ post.data.author }} | {% endif %}{{
+          post.data.date | postDate
+        }}
       </p>
       <div class="mt-2">
         <span
@@ -52,7 +54,9 @@
       </h2>
       <p class="mt-2">{{ post.templateContent | excerpt }}</p>
       <p class="mt-2 leading-relaxed text-accent text-sm">
-        By {{ post.data.author }} | {{ post.data.date | postDate }}
+        {% if post.data.author %}By {{ post.data.author }} | {% endif %}{{
+          post.data.date | postDate
+        }}
       </p>
       <div class="mt-2">
         <span

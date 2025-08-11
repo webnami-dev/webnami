@@ -8,8 +8,8 @@
     "create-webnami-blog": "./bin/cli.js"
   },
   "scripts": {
-    "build": "vite build && eleventy",
-    "dev": "vite build && eleventy --serve --watch"
+    "build": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
+    "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch"
   },
   "files": [
     "bin/",
@@ -19,9 +19,6 @@
     "pages/",
     "posts/",
     "src/",
-    ".eleventy.js",
-    ".eleventyignore",
-    "vite.config.js",
     "package.json",
     "package-lock.json",
     ".gitignore"
