@@ -9,8 +9,8 @@
   >
     <img
       class="object-center w-full h-full rounded-md"
-      src="{{ featuredPost.data.img }}"
-      alt="{{ featuredPost.data.imgAlt }}"
+      src="{{ featuredPost | previewImage(config.site.logo) }}"
+      alt="{{ featuredPost.data.title }}"
     />
   </a>
   <div
@@ -69,8 +69,8 @@
       <div class="flex-shrink-0 h-60 w-full">
         <img
           class="w-full h-full object-cover rounded-md"
-          src="{{ post.data.img }}"
-          alt="{{ post.data.imgAlt }}"
+          src="{{ post | previewImage(config.site.logo) }}"
+          alt="{{ post.data.title }}"
         />
       </div>
       <div class="my-6 flex-grow">
@@ -123,8 +123,8 @@
       <div class="flex-shrink-0 h-60 w-full">
         <img
           class="w-full h-full object-cover rounded-md"
-          src="{{ post.data.img }}"
-          alt="{{ post.data.imgAlt }}"
+          src="{{ post | previewImage(config.site.logo) }}"
+          alt="{{ post.data.title }}"
         />
       </div>
       <div class="my-6 flex-grow">

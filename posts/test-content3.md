@@ -1,13 +1,12 @@
 ---
 title: "My first blog with a long title"
-description: "Lorem ipsum"
-img: "https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g"
-imgAlt: "image"
 tags: ["First", "News"]
 category: "Journal"
 author: "WebNami"
 date: 2025-07-23
 ---
+
+![test image](https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g)
 
 ## Modo Pyrrha ludunt limina
 

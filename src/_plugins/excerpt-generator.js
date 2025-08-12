@@ -68,6 +68,11 @@ export default function (eleventyConfig) {
   const excerptGenerator = new ExcerptGenerator();
   // Add as a filter
   eleventyConfig.addFilter("excerpt", function (content) {
-    return excerptGenerator.getExcerpt(content);
+    var result = excerptGenerator.getExcerpt(content);
+    return result
+      .replace(/\n/g, " ")
+      .replace(/\r/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
   });
 }

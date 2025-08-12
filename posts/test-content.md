@@ -1,13 +1,12 @@
 ---
 title: "My second blog title"
-description: "Lorem ipsum"
-img: "https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ"
-imgAlt: "image"
 tags: ["Second", "News"]
 category: "Blog"
 author: "WebNami"
 date: 2025-07-24
 ---
+
+![test image](https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ)
 
 ## Modo Pyrrha ludunt limina
 

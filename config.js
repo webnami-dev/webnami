@@ -42,8 +42,6 @@ export default {
       { name: "About", href: "/about" },
       // Regular navigation link
       { name: "Contact", href: "#" },
-      // Call-to-action button (styled differently)
-      { name: "Get Started", href: "#", cta: true },
     ],
   },
 

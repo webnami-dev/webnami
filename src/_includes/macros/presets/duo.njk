@@ -11,8 +11,8 @@
       <div class="flex-shrink-0 h-60 w-full">
         <img
           class="w-full h-full object-cover rounded-md"
-          src="{{ post.data.img }}"
-          alt="{{ post.data.imgAlt }}"
+          src="{{ post | previewImage(config.site.logo) }}"
+          alt="{{ post.data.title }}"
         />
       </div>
       <div class="my-6 flex-grow">
@@ -62,8 +62,8 @@
       <div class="flex-shrink-0 h-60 w-full">
         <img
           class="w-full h-full object-cover rounded-md"
-          src="{{ post.data.img }}"
-          alt="{{ post.data.imgAlt }}"
+          src="{{ post | previewImage(config.site.logo) }}"
+          alt="{{ post.data.title }}"
         />
       </div>
       <div class="my-6 flex-grow">

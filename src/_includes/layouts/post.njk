@@ -10,7 +10,9 @@ layout: "base.njk"
     <h1 class="sm:text-5xl text-4xl font-bold mb-4">{{ title }}</h1>
     <div class="flex flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-4">
-        <p class="text-accent text-sm">{{ date | postDate }}</p>
+        <div>
+          <span class="text-accent text-sm">{{ date | postDate }}</span>
+        </div>
         <a
           href="/category/{{ category | slugify }}"
           class="bg-primary-100 px-4 py-1 rounded-xl text-sm font-medium no-underline"
@@ -58,11 +60,6 @@ layout: "base.njk"
       class="text-sm font-medium no-underline"
       >By {{ author }}</a
     >
-    <img
-      src="{{ img }}"
-      alt="{{ imgAlt }}"
-      class="w-full h-auto mb-4 rounded-md"
-    />
     {{ content | anchorLinks | safe }}
     {% if tags.length > 0 %}
     <div class="flex flex-row items-center justify-between gap-4 my-10">

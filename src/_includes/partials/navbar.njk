@@ -48,22 +48,12 @@
           </li>
           {% for link in config.navbar.links %}
           <li>
-            {% if not link.cta %}
             <a
               href="{{ link.href }}"
               class="text-content hover:text-primary-500 px-3 py-2 text-sm font-light transition-colors duration-200"
             >
               {{ link.name }}
             </a>
-            {% else %}
-            <a
-              href="{{ link.href }}"
-              class="bg-primary-500 hover:bg-primary-500/50 text-white text-sm font-medium py-2 px-4 rounded-xl transition-colors"
-              role="button"
-            >
-              {{ link.name }}
-            </a>
-            {% endif %}
           </li>
           {% endfor %}
         </ul>
