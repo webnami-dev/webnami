@@ -14,12 +14,12 @@ export default function (eleventyConfig) {
         if (!showDraft(data)) {
           return false;
         }
-        if (data.heading === null || data.heading === undefined) {
+        if (data.title === null || data.title === undefined) {
           throw new Error(
             `Invalid heading format in "${data.inputPath}": heading cannot be null or undefined. Expected format: heading: "Page Heading"`
           );
         }
-        return `/${slugify(data.heading, { lower: true, strict: true })}/`;
+        return `/${slugify(data.title, { lower: true, strict: true })}/`;
       }
       return data.permalink;
     },

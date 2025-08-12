@@ -1,8 +1,6 @@
 ---
-metadata:
-  title: "My first blog with a long title"
-  description: "Lorem ipsum"
-heading: "My first blog with a long title"
+title: "My first blog with a long title"
+description: "Lorem ipsum"
 img: "https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g"
 imgAlt: "image"
 tags: ["First", "News"]

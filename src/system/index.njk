@@ -6,10 +6,9 @@ pagination:
   alias: postsPage
 permalink: "{% if postsPage.page == 1 %}/{% else %}/posts/{{ postsPage.page }}/{% endif %}"
 eleventyComputed:
-  metadata:
-    title: "{% if postsPage.page == 1 %}{{ config.homepage.metadata.title }}{% else %}Posts - Page {{ postsPage.page }}{% endif %}"
-    description: "{% if postsPage.page == 1 %}{{ config.homepage.metadata.description }}{% else %}Posts page {{ postsPage.page }}{% endif %}"
-    img: "{{ config.homepage.metadata.img }}"
+  title: "{% if postsPage.page == 1 %}{{ config.homepage.metadata.title }}{% else %}Posts - Page {{ postsPage.page }}{% endif %}"
+  description: "{% if postsPage.page == 1 %}{{ config.homepage.metadata.description }}{% else %}Posts page {{ postsPage.page }}{% endif %}"
+  img: "{{ config.homepage.metadata.img }}"
 ---
 
 {%- from 'macros/presets/' + config.theme + '.njk' import indexPostlistMacro,

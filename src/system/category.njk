@@ -7,6 +7,7 @@ pagination:
 permalink: "/category/{{ categoryPage.name | slugify }}/{% if categoryPage.page > 1 %}{{ categoryPage.page }}/{% endif %}"
 eleventyComputed:
   title: "Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} - Page {{ categoryPage.page }}{% endif %}"
+  description: "Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} (Page {{ categoryPage.page }}){% endif %}"
 ---
 
 <section class="text-content body-font">

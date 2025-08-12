@@ -17,7 +17,7 @@
           <h2
             class="title-font font-medium sm:text-3xl text-2xl mb-4 text-stats-heading group-hover:text-primary-500"
           >
-            {{ featuredPost.data.heading }}
+            {{ featuredPost.data.title }}
           </h2>
           <p class="hidden sm:block sm:mb-4">
             {{ featuredPost.templateContent | excerpt }}
@@ -57,7 +57,7 @@
         <h2
           class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
         >
-          {{ post.data.heading }}
+          {{ post.data.title }}
         </h2>
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}
@@ -108,7 +108,7 @@
         <h2
           class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
         >
-          {{ post.data.heading }}
+          {{ post.data.title }}
         </h2>
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}

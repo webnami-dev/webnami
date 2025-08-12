@@ -24,7 +24,7 @@
           href="{{ featuredPost.url }}"
           class="hover:text-primary-500 transition-colors"
         >
-          {{ featuredPost.data.heading }}
+          {{ featuredPost.data.title }}
         </a>
       </h2>
       <p class="hidden sm:block sm:mb-4">
@@ -77,7 +77,7 @@
         <h2
           class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
         >
-          {{ post.data.heading }}
+          {{ post.data.title }}
         </h2>
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}
@@ -131,7 +131,7 @@
         <h2
           class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
         >
-          {{ post.data.heading }}
+          {{ post.data.title }}
         </h2>
         <p class="hidden sm:block sm:mb-4">
           {{ post.templateContent | excerpt }}

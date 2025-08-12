@@ -19,7 +19,7 @@ eleventyExcludeFromCollections: true
     {%- for post in posts %}
     {%- set absolutePostUrl = post.url | htmlBaseUrl(config.site.url) %}
     <item>
-      <title>{{ post.data.heading }}</title>
+      <title>{{ post.data.title }}</title>
       <link>{{ absolutePostUrl }}</link>
       <description>{{ post.content | renderTransforms(post.data.page, config.site.url) }}</description>
       <pubDate>{{ post.date | dateToRfc822 }}</pubDate>

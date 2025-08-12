@@ -1,8 +1,6 @@
 ---
-metadata:
-  title: "This is the latest post"
-  description: "Lorem ipsum"
-heading: "This is the latest post"
+title: "This is the latest post"
+description: "Lorem ipsum"
 img: "https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4"
 imgAlt: "image"
 tags: ["Latest", "Tech"]

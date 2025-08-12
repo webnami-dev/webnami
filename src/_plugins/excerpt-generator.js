@@ -7,7 +7,7 @@ class ExcerptGenerator {
     }
 
     const {
-      length = 100, // More reasonable default
+      length = 150, // More reasonable default
       addEllipsis = true, // Add "..." when truncated
       preserveWords = true, // Don't cut words in half
     } = options;

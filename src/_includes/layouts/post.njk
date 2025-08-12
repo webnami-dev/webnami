@@ -7,7 +7,7 @@ layout: "base.njk"
   <article
     class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content prose-a:text-primary-500 prose-a:no-underline prose-a:hover:text-primary-500/50"
   >
-    <h1 class="sm:text-5xl text-4xl font-bold mb-4">{{ heading }}</h1>
+    <h1 class="sm:text-5xl text-4xl font-bold mb-4">{{ title }}</h1>
     <div class="flex flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-4">
         <p class="text-accent text-sm">{{ date | postDate }}</p>
@@ -88,7 +88,7 @@ layout: "base.njk"
           href="{{ previousPost.url }}"
           class="text-primary-500 hover:text-primary-800 text-sm font-medium no-underline"
         >
-          {{ previousPost.data.heading }}
+          {{ previousPost.data.title }}
         </a>
       </div>
       {% else %}
@@ -100,7 +100,7 @@ layout: "base.njk"
           href="{{ nextPost.url }}"
           class="text-primary-500 hover:text-primary-800 text-sm font-medium no-underline"
         >
-          {{ nextPost.data.heading }}
+          {{ nextPost.data.title }}
         </a>
       </div>
       {% else %}
