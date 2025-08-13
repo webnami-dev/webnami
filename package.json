@@ -9,6 +9,8 @@
   },
   "scripts": {
     "build": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
+    "seo": "node src/scripts/seo-analyzer.js",
+    "post": "node src/scripts/new-post.js",
     "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch"
   },
   "files": [
@@ -69,6 +71,7 @@
     "@alpinejs/intersect": "^3.14.9",
     "alpinejs": "^3.14.9",
     "fs-extra": "^11.3.0",
+    "glob": "^11.0.3",
     "html-minifier-terser": "^7.2.0",
     "lucide": "^0.513.0"
   }

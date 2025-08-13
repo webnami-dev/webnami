@@ -6,7 +6,7 @@ author: "WebNami"
 date: 2025-07-24
 ---
 
-![test image](https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ)
+![test image](/images/image1.jpg)
 
 ## Modo Pyrrha ludunt limina
 
@@ -33,7 +33,7 @@ for x in adj:
 
 ```
 
-![test image](https://fastly.picsum.photos/id/29/4000/2670.jpg?hmac=rCbRAl24FzrSzwlR5tL-Aqzyu5tX_PA95VJtnUXegGU)
+![test image](/images/image4.jpg)
 
 ## Imperat ad in iaculum silvis nunc luctatusque
 

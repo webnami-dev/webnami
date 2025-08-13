@@ -19,12 +19,14 @@
           post.data.date | postDate
         }}
       </p>
+      {% if post.data.category %}
       <div class="mt-2">
         <span
           class="px-3 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
           >{{ post.data.category }}</span
         >
       </div>
+      {% endif %}
     </a>
     {% endfor %}
   </div>
@@ -58,12 +60,14 @@
           post.data.date | postDate
         }}
       </p>
+      {% if post.data.category %}
       <div class="mt-2">
         <span
           class="px-3 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
           >{{ post.data.category }}</span
         >
       </div>
+      {% endif %}
     </a>
     {% endfor %}
   </div>

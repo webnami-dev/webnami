@@ -34,6 +34,7 @@
         {% if featuredPost.data.author %}By {{ featuredPost.data.author }} | {%
         endif %}{{ featuredPost.data.date | postDate }}
       </p>
+      {% if featuredPost.data.category %}
       <div class="flex">
         <p
           class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -41,6 +42,7 @@
           {{ featuredPost.data.category }}
         </p>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -87,6 +89,7 @@
             post.data.date | postDate
           }}
         </p>
+        {% if post.data.category %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -94,6 +97,7 @@
             {{ post.data.category }}
           </p>
         </div>
+        {% endif %}
       </div>
     </a>
     {% endif %} {% endfor %}
@@ -141,6 +145,7 @@
             post.data.date | postDate
           }}
         </p>
+        {% if post.data.category %}
         <div class="flex">
           <p
             class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
@@ -148,6 +153,7 @@
             {{ post.data.category }}
           </p>
         </div>
+        {% endif %}
       </div>
     </a>
     {% endfor %}

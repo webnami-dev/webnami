@@ -7,17 +7,19 @@ layout: "base.njk"
   <article
     class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content prose-a:text-primary-500 prose-a:no-underline prose-a:hover:text-primary-500/50"
   >
-    <h1 class="sm:text-5xl text-4xl font-bold mb-4">{{ title }}</h1>
+    <h1 class="sm:text-4xl text-3xl font-bold mb-4">{{ title }}</h1>
     <div class="flex flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-4">
         <div>
           <span class="text-accent text-sm">{{ date | postDate }}</span>
         </div>
+        {% if category %}
         <a
           href="/category/{{ category | slugify }}"
           class="bg-primary-100 px-4 py-1 rounded-xl text-sm font-medium no-underline"
           >{{ category }}</a
         >
+        {% endif %}
       </div>
       <div class="flex space-x-3">
         <a
@@ -55,11 +57,13 @@ layout: "base.njk"
         </a>
       </div>
     </div>
+    {% if author %}
     <a
       href="/author/{{ author | slugify }}"
       class="text-sm font-medium no-underline"
       >By {{ author }}</a
     >
+    {% endif %}
     {{ content | anchorLinks | safe }}
     {% if tags.length > 0 %}
     <div class="flex flex-row items-center justify-between gap-4 my-10">

@@ -6,7 +6,6 @@ import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
 import Image from "@11ty/eleventy-img";
 import config from "../config.js";
-import seoValidator from "./_plugins/seo-validator.js";
 import excerptGenerator from "./_plugins/excerpt-generator.js";
 import postManagement from "./_plugins/post-management.js";
 import anchorLinks from "./_plugins/anchor-links.js";
@@ -14,7 +13,7 @@ import previewImage from "./_plugins/preview-image.js";
 
 export default function (eleventyConfig) {
   eleventyConfig.ignores.add("*.md");
-  eleventyConfig.addPlugin(seoValidator);
+  eleventyConfig.ignores.add("*.njk");
   eleventyConfig.addPlugin(excerptGenerator);
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight, {
