@@ -11,7 +11,7 @@ eleventyComputed:
   img: "{{ config.homepage.metadata.img }}"
 ---
 
-{%- from 'macros/presets/' + config.theme + '.njk' import indexPostlistMacro,
+{%- from 'macros/presets/' + config.layout + '.njk' import indexPostlistMacro,
 postlistMacro with context -%} {%- from 'macros/presetFuncs.njk' import
 widthClass with context -%}
 <section class="text-content body-font">

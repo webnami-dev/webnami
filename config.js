@@ -1,5 +1,5 @@
 export default {
-  theme: "monofeatured",
+  layout: "duofeatured",
   // Core site information used across the platform
   site: {
     // Site name shown in title tags and navigation

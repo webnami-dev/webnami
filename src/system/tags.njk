@@ -17,7 +17,7 @@ eleventyComputed:
       {{ tagPage.page }}{% endif %}
     </h1>
   </div>
-  {%- from 'macros/presets/' + config.theme + '.njk' import postlistMacro with
+  {%- from 'macros/presets/' + config.layout + '.njk' import postlistMacro with
   context -%}
   {{ postlistMacro(tagPage, "tags") }}
 </section>

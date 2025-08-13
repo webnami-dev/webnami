@@ -12,6 +12,7 @@ import anchorLinks from "./_plugins/anchor-links.js";
 import previewImage from "./_plugins/preview-image.js";
 
 export default function (eleventyConfig) {
+  eleventyConfig.addWatchTarget("config.js");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.addPlugin(excerptGenerator);

@@ -3,8 +3,7 @@
 <h1 align="center">WebNami</h1>
 
 <p align="center">
-🚀 <b>The fastest way to launch a modern, SEO-optimized blog with 11ty.</b><br/>
-100/100 Lighthouse scores, built-in SEO audits, and ready-to-deploy in minutes.
+🚀 <b>A Fast, Lightweight, SEO-ready blogging tool</b>
 </p>
 
 <p align="center">
@@ -24,14 +23,15 @@
 
 ## 📝 Project Overview
 
-**WebNami** is an open source, SEO-focused blogging website generator built with [11ty (Eleventy)](https://www.11ty.dev/). It is designed for anyone who wants to create a fast, modern, and highly customizable blog with minimal setup. WebNami is ideal for developers, writers, and teams who value performance, accessibility, and clean design.
+**WebNami** is an opinionated fast, lightweight, SEO-focused blogging website generator built with [11ty (Eleventy)](https://www.11ty.dev/). It is designed for anyone who wants to create a fast, modern blog with built-in SEO and minimal setup.
 
 ---
 
 ## ✨ Features
 
 - ⚡ **Lightning Fast:** Built with 11ty for optimal performance and instant page loads.
-- 🔍 **SEO Audit:** On-page SEO errors are displayed in the console during build, so you can fix issues before deploying.
+- 🔍 **SEO Audit:** Dedicated command (`npm run seo`) to analyze your site for SEO issues and best practices.
+- 🎨 **Multiple Layouts:** Choose from 6 built-in layouts (trio, triofeatured, mono, duo, monofeatured, duofeatured).
 - 📊 **Perfect Performance:** Achieves 100/100 on Core Web Vitals for speed, accessibility, and best practices.
 - 📡 **RSS Feed:** Automatic RSS feed generation for easy syndication.
 - 🗺️ **Sitemap:** Auto-generated XML sitemap for better search engine indexing.
@@ -41,7 +41,7 @@
 - 📱 **Meta Tags:** Complete title, description, and Open Graph tags for social sharing.
 - 💻 **Syntax Highlighting:** Built-in code syntax highlighting.
 - 📋 **Structured Data Markup:** Rich snippets and structured data for enhanced SEO and search engine visibility.
-- 🌙 **Dark/Light Theme:** Toggle between dark and light modes with automatic system preference detection.
+- 🌙 **Dark/Light Mode:** Toggle between dark and light modes with automatic system preference detection.
 - 🎨 **Minimal Design:** Clean, beautiful, and fully responsive design out of the box.
 
 ---
@@ -51,7 +51,7 @@
 - **SEO Audit in Terminal:**
 
   ![SEO Audit Build Output](docs/screenshots/seo-audit-build.png)
-  <br/><sub>SEO issues and warnings are displayed in the terminal during build.</sub>
+  <br/><sub>SEO issues and warnings are displayed in the terminal.</sub>
 
 - **Core Web Vitals (Lighthouse):**
 
@@ -68,17 +68,23 @@ webnami/
 ├── package.json             # Project metadata and dependencies
 ├── custom.css               # Main CSS file for custom styles
 ├── images/                  # Image assets
-├── pages/                   # Static pages (about, contact, etc.) [Markdown only]
+├── pages/                   # Static pages (only about.md allowed)
 ├── posts/                   # Blog posts [Markdown only]
-├── src/                     # Source code (templates, assets, system pages, etc.)
+├── src/                     # Source code (templates, assets, system pages, scripts)
+│   ├── _includes/           # Nunjucks templates and layouts
+│   ├── _plugins/            # Eleventy plugins
+│   ├── assets/              # CSS, JS, and font files
+│   ├── scripts/             # Build and utility scripts
+│   └── system/              # System-generated pages
 ├── _site/                   # Generated output (do not edit directly)
 └── README.md                # Project documentation
 ```
 
-- **pages/**: Only Markdown files for static pages (e.g., about, contact)
+- **pages/**: Only `about.md` is allowed for the about page
 - **posts/**: Only Markdown files for blog posts
 - **images/**: Store your image assets here
 - **custom.css**: Use this file for all your custom styles
+- **src/**: Contains all templates, plugins, and build system
 - **\_site/**: This is the build output folder (generated automatically)
 
 ---
@@ -87,18 +93,19 @@ webnami/
 
 ### Pages Folder
 
-- Add static pages (like About, Contact) in `pages/` as Markdown (`.md`) files only.
-- Example: `pages/about.md`
+- Only `pages/about.md` is allowed for the about page
+- Do not add additional page files - only the about page is supported
 
 ### Posts Folder
 
-- Create blog posts in `posts/` using Markdown (`.md`) files only.
-- Each post must start with frontmatter. See [Frontmatter Reference](#frontmatter-reference) for details.
+- Create blog posts in `posts/` using Markdown (`.md`) files only
+- Use the command `npm run post "Your Post Title"` to generate new posts automatically
+- Each post must start with frontmatter.
 
 ### custom.css
 
 - Customize your site's look by editing `custom.css` in the project root.
-- Override colors for both light and dark themes (primary, background, content, accent, and footer colors)
+- Override colors for both light and dark modes (primary, background, content, accent, and footer colors)
 
 ---
 
@@ -106,49 +113,42 @@ webnami/
 
 Both pages and posts require frontmatter at the top of each Markdown file. Here are the required fields and their explanations:
 
-### For Pages (e.g., About, Contact)
+### For Pages (About Page)
 
 ```markdown
 ---
 metadata:
-  title: "Sample Page Title"
-  description: "This is a sample description for the page."
+  title: "About Us"
+  description: "About Us"
   img: "https://example.com/sample-image.png"
-permalink: "/sample-page/"
+permalink: "/about/"
 ---
 ```
 
 - **metadata.title**: The page title (required)
 - **metadata.description**: Short description for SEO and meta tags (recommended)
-- **metadata.img**: Image for and meta tags (recommended)
+- **metadata.img**: Image for social sharing and meta tags (recommended)
 - **permalink**: The URL path for the page (required)
 
 ### For Posts
 
 ```markdown
 ---
-metadata:
-  title: "Sample Blog Post Title"
-  description: "This is a sample summary for the blog post."
-heading: "Sample Heading for the Blog Post"
-img: "https://example.com/sample-image.png"
-imgAlt: "Sample image alt text"
-tags: ["SampleTag1", "SampleTag2"]
-category: "SampleCategory"
-author: "Sample Author"
+title: "Sample Blog Post Title"
+tags:
+category:
+author:
 date: 2024-07-25
 ---
 ```
 
-- **metadata.title**: The post title (required)
-- **metadata.description**: Short summary for SEO and meta tags (recommended)
-- **heading**: Main heading for the post (displayed on the post page)
-- **img**: Main image URL for the post (used in previews and social sharing)
-- **imgAlt**: Alt text for the main image (accessibility and SEO)
+- **title**: The post title (required)
 - **tags**: List of tags for the post (optional, used for tag pages)
 - **category**: Category name (optional, used for category pages)
 - **author**: Author name (optional)
 - **date**: Publish date in YYYY-MM-DD format (required)
+
+**Note**: Use `npm run post "Your Post Title"` to automatically generate posts with the correct frontmatter structure.
 
 ---
 
@@ -156,37 +156,25 @@ date: 2024-07-25
 
 The `config.js` file controls your site's settings. Here is an explanation of the main fields:
 
+- **layout**: Choose from available layouts (`"triofeatured"`, `"trio"`, `"mono"`, `"duo"`, `"monofeatured"`, `"duofeatured"`)
 - **site**: Core site information
   - `name`: The name of your site
   - `url`: The base URL for your site
   - `language`: The language code for your site (e.g., "en")
-  - `csp`: Content Security Policy (CSP) settings
-    - `enabled`: Set to `true` to enable CSP headers for your site, or `false` to disable them.
-    - `policy`: The CSP policy string. This defines the allowed sources for content on your site.
-- **branding**: Visual identity settings
+  - `logo`: Path to your logo image
   - `favicon`: Path to your favicon
-  - `logo`: Object with `src` (image path) and `alt` (alt text)
-- **listings**: Settings for listing/archive pages
-  - `pagination.postsPerPage`: Number of posts per page
-  - `postPreview.showAuthorInListing`: Show author in post previews
-  - `postPreview.showDateInListing`: Show date in post previews
-  - `postPreview.showCategoryInListing`: Show category in post previews
-  - `postPreview.showExcerptInListing`: Show excerpt in post previews
-- **pages**: Page-specific settings
-  - `homepage`: Settings for the homepage
-    - `showHeading`: Show the main heading
-    - `centerHeading`: Center the heading text
-    - `heading`: Homepage heading text
-    - `subheading`: Homepage subtitle
-    - `showCategoryNavigation`: Show category navigation
-    - `metadata.title`: Title for SEO/meta tags
-    - `metadata.description`: Description for SEO/meta tags
-    - `metadata.image`: Social sharing image URL
+  - `csp`: Content Security Policy string
+- **postsPerPage**: Number of posts per page on listing pages
+- **homepage**: Homepage specific settings
+  - `heading`: Main homepage heading text
+  - `metadata.title`: Title for SEO/meta tags
+  - `metadata.description`: Description for SEO/meta tags
+  - `metadata.img`: Social sharing image URL
 - **navbar**: Navigation bar links
-  - `links`: Array of navigation links (each with `name`, `href`, and optional `cta` for call-to-action)
+  - `links`: Array of navigation links (each with `name` and `href`)
 - **footer**: Footer configuration
   - `socialLinks`: Array of social media links (each with `name` and `href`)
-  - `linkGroups`: Array of grouped footer links (each with `title`, `displayGroupTitle`, and `links`)
+  - `linkGroups`: Array of grouped footer links (each with optional `title` and `links`)
 
 ---
 
@@ -213,15 +201,6 @@ npm create webnami-blog my-blog-name
 cd my-blog-name
 ```
 
-#### Option 3: Manual Clone
-
-```bash
-mkdir my-blog-name
-cd my-blog-name
-git clone https://github.com/webnami-dev/webnami.git .
-npm install
-```
-
 ### Initial Configuration
 
 - Edit `config.js` to set your site name, URL, and other settings.
@@ -234,8 +213,6 @@ npm run dev
 ```
 
 Visit [http://localhost:8080](http://localhost:8080) to see your site.
-
-> **Note:** If you used Option 1 or 2 above, dependencies are automatically installed. Only Option 3 (manual clone) requires running `npm install` separately.
 
 ---
 
@@ -257,26 +234,21 @@ Visit [http://localhost:8080](http://localhost:8080) to see your site.
 
   Runs a local server with hot reload.
 
-- **Other utility commands:**
-  - Add your own scripts in `package.json` as needed.
+- **Create a new post:**
 
----
+  ```bash
+  npm run post "Your Post Title"
+  ```
 
-## 🐞 Troubleshooting
+  Automatically generates a new post with proper frontmatter.
 
-- **Build fails:** Make sure you have the correct Node.js and npm version.
-- **SEO warnings:** Review console output during build for SEO issues.
-- **Images not showing:** Confirm image paths in `config.js`, posts, and pages.
+- **Run SEO analysis:**
 
-If you run into issues, check the [GitHub Issues](https://github.com/webnami/webnami/issues) page.
+  ```bash
+  npm run seo
+  ```
 
----
-
-## ⚡ Performance
-
-- WebNami is optimized for speed and SEO.
-- Achieves 100/100 on Core Web Vitals in Lighthouse.
-- Minimal JavaScript and CSS for fast load times.
+  Analyzes all HTML files for SEO issues and best practices.
 
 ---
 
