@@ -6,7 +6,7 @@ author: "WebNami"
 date: 2025-07-25
 ---
 
-![test image](/images/image2.jpg)
+![test image](/images/image2.png)
 
 ## Modo Pyrrha ludunt limina
 
@@ -21,7 +21,7 @@ extrema tamen flebile [voce](http://www.undas.io/), nec in et sororis perfida
 silentum curat debita Aeoliden suo campi? Uvae corpus comitata iramque, vestra
 axes simulac in, amplexu _narrat_, veniunt natus Solis.
 
-![test image](/images/image4.jpg)
+![test image](/images/image4.png)
 
 ## Imperat ad in iaculum silvis nunc luctatusque
 

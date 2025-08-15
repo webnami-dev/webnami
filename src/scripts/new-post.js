@@ -23,8 +23,9 @@ function createPost(title) {
   // Create frontmatter
   const frontmatter = `---
 title: "${title}"
-tags:
-category: 
+tags: []
+category: ""
+author: ""
 date: ${currentDate}
 ---
 `;

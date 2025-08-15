@@ -109,11 +109,13 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addAsyncFilter("imageFilter", async function (src) {
     if (!src) return "";
+    src = `.${src}`;
+    console.log(src);
 
     try {
       let metadata = await Image(src, {
-        widths: [360, 720, 1080, 1440],
-        formats: ["avif", "webp", "jpeg", "auto"],
+        widths: [1080],
+        formats: ["avif", "webp"],
         outputDir: "./_site/images/",
         urlPath: "/images/",
         // Force caching for all images
@@ -136,6 +138,7 @@ export default function (eleventyConfig) {
 
       throw new Error("No suitable format found");
     } catch (error) {
+      console.error("Error optimizing image:", error);
       return src;
     }
   });

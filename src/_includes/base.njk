@@ -36,7 +36,7 @@
     <meta
       property="twitter:image"
       content="{{ config.site.url }}{% if layout == 'layouts/post' %}{{
-        img | imageFilter
+        content | previewImage(config.site.logo) | imageFilter
       }}{% else %}{{ img | imageFilter }}{% endif %}"
     />
     <meta property="og:url" content="{{ config.site.url }}{{ page.url }}" />
@@ -50,7 +50,7 @@
     <meta
       property="og:image"
       content="{{ config.site.url }}{% if layout == 'layouts/post' %}{{
-        img | imageFilter
+        content | previewImage(config.site.logo) | imageFilter
       }}{% else %}{{ img | imageFilter }}{% endif %}"
     />
     <meta property="og:locale" content="en-US" />
@@ -76,7 +76,9 @@
         "dateModified": "{{ date | date('YYYY-MM-DD') }}",
         "image": {
           "@type": "ImageObject",
-          "url": "{{ config.site.url }}{{ img | imageFilter }}",
+          "url": "{{ config.site.url }}{% if layout == 'layouts/post' %}{{
+            content | previewImage(config.site.logo) | imageFilter
+          }}{% else %}{{ img | imageFilter }}{% endif %}",
           "caption": "{{ title | escape }}"
         },
         "mainEntityOfPage": {

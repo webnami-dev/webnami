@@ -6,7 +6,7 @@
     <!-- All Tab -->
     <a
       href="/"
-      class="text-sm flex-shrink-0 px-6 py-2 rounded-xl font-medium whitespace-nowrap {% if page.url == '/' or page.url.includes('/posts/') %} text-white bg-primary-500 {% else %} text-primary-500 bg-primary-100 hover:bg-primary-200 {% endif %}"
+      class="text-sm flex-shrink-0 px-6 py-2 rounded-md font-medium whitespace-nowrap {% if page.url == '/' or page.url.includes('/posts/') %} text-white bg-primary-500 {% else %} text-primary-500 bg-primary-100 hover:bg-primary-200 {% endif %}"
     >
       All
     </a>
@@ -15,7 +15,7 @@
     {% for category in collections.categoryList %}
     <a
       href="/category/{{ category | slug }}/"
-      class="text-sm flex-shrink-0 px-6 py-2 rounded-xl font-medium whitespace-nowrap {% if page.url == '/category/' + (category | slug) + '/' %} text-white bg-primary-500 {% else %} text-primary-500 bg-primary-100 hover:bg-primary-200 {% endif %}"
+      class="text-sm flex-shrink-0 px-6 py-2 rounded-md font-medium whitespace-nowrap {% if page.url == '/category/' + (category | slug) + '/' %} text-white bg-primary-500 {% else %} text-primary-500 bg-primary-100 hover:bg-primary-200 {% endif %}"
     >
       {{ category }}
     </a>

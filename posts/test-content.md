@@ -6,7 +6,7 @@ author: "WebNami"
 date: 2025-07-24
 ---
 
-![test image](/images/image1.jpg)
+![test image](/images/image1.png)
 
 ## Modo Pyrrha ludunt limina
 
@@ -33,7 +33,7 @@ for x in adj:
 
 ```
 
-![test image](/images/image4.jpg)
+![test image](/images/image4.png)
 
 ## Imperat ad in iaculum silvis nunc luctatusque
 

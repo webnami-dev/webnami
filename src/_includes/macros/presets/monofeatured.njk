@@ -34,7 +34,7 @@
       {% if featuredPost.data.category %}
       <div class="flex">
         <p
-          class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
+          class="leading-relaxed px-4 py-1 text-sm rounded-md bg-primary-100 text-primary-500 font-medium"
         >
           {{ featuredPost.data.category }}
         </p>
@@ -72,7 +72,7 @@
         {% if post.data.category %}
         <div class="flex">
           <p
-            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
+            class="leading-relaxed px-4 py-1 text-sm rounded-md bg-primary-100 text-primary-500 font-medium"
           >
             {{ post.data.category }}
           </p>
@@ -87,7 +87,7 @@
   <div class="flex justify-center my-8">
     <a
       href="/posts/{{ postsPage.page + 1 }}"
-      class="inline-block bg-primary-500 text-white px-4 py-2 rounded-xl hover:bg-primary-800 transition-colors"
+      class="inline-block bg-primary-500 text-white px-4 py-2 rounded-md hover:bg-primary-800 transition-colors"
       >View Older Posts</a
     >
   </div>
@@ -123,7 +123,7 @@
         {% if post.data.category %}
         <div class="flex">
           <p
-            class="leading-relaxed px-4 py-1 text-sm rounded-xl bg-primary-100 text-primary-500 font-medium"
+            class="leading-relaxed px-4 py-1 text-sm rounded-md bg-primary-100 text-primary-500 font-medium"
           >
             {{ post.data.category }}
           </p>
@@ -147,7 +147,7 @@
         }}{% endif %}/{% if posts.page > 2 %}{{
           posts.page - 1
         }}/{% endif %}{% endif %}"
-        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-500 transition-colors"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-md font-medium hover:bg-primary-500 transition-colors"
         >← Previous</a
       >
     </div>
@@ -159,7 +159,7 @@
         href="/{{ type }}{% if type != 'posts' %}/{{
           posts.name | slugify
         }}{% endif %}/{{ posts.page + 1 }}/"
-        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-500 transition-colors"
+        class="px-3 py-3 text-sm bg-primary-500 text-white rounded-md font-medium hover:bg-primary-500 transition-colors"
         >Next →</a
       >
     </div>

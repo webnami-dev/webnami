@@ -5,7 +5,7 @@ layout: "base.njk"
 <main class="min-h-screen py-10">
   <!-- Content Section -->
   <article
-    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content prose-a:text-primary-500 prose-a:no-underline prose-a:hover:text-primary-500/50"
+    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-base prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content prose-a:text-primary-500 prose-a:no-underline prose-a:hover:text-primary-500/50"
   >
     <h1 class="sm:text-4xl text-3xl font-bold mb-4">{{ title }}</h1>
     <div class="flex flex-row items-center justify-between gap-4">
@@ -16,7 +16,7 @@ layout: "base.njk"
         {% if category %}
         <a
           href="/category/{{ category | slugify }}"
-          class="bg-primary-100 px-4 py-1 rounded-xl text-sm font-medium no-underline"
+          class="bg-primary-100 px-4 py-1 rounded-md text-sm font-medium no-underline"
           >{{ category }}</a
         >
         {% endif %}
@@ -71,7 +71,7 @@ layout: "base.njk"
         {% for tag in tags %}
         <a
           href="/tags/{{ tag | slugify }}"
-          class="bg-primary-100 px-4 py-1 rounded-xl text-sm font-medium no-underline"
+          class="bg-primary-100 px-4 py-1 rounded-md text-sm font-medium no-underline"
           >{{ tag }}</a
         >
         {% endfor %}
