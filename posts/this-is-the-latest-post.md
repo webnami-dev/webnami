@@ -1,12 +1,13 @@
 ---
-title: "My second blog title"
-tags: ["Second", "News"]
+layout: "layouts/post"
+title: "This is the latest post"
+tags: ["Latest", "Tech"]
 category: "Blog"
 author: "WebNami"
-date: 2025-07-24
+date: 2025-07-25
 ---
 
-![test image](/images/image1.jpg)
+![test image](/images/image2.png)
 
 ## Modo Pyrrha ludunt limina
 
@@ -20,18 +21,6 @@ Astyages voragine mons? Tempto et supponat famae natarum ipsa! Est mei leto
 extrema tamen flebile [voce](http://www.undas.io/), nec in et sororis perfida
 silentum curat debita Aeoliden suo campi? Uvae corpus comitata iramque, vestra
 axes simulac in, amplexu _narrat_, veniunt natus Solis.
-
-```python
-# python loop example
-
-adj = ["red", "big", "tasty"]
-fruits = ["apple", "banana", "cherry"]
-
-for x in adj:
-  for y in fruits:
-    print(x, y)
-
-```
 
 ![test image](/images/image4.jpg)
 
@@ -56,12 +45,6 @@ sustinet percutiensque Styga; terra quot quoque praebebat. Invadunt alternae
 malum deque: fluidos sed caelum heu **nec se**! Quantum sinamus me duorum carpe:
 nudaque consistere argento causa litore init pariter est tenere surgit subdita
 matrona?
-
-1. Item 1
-2. Item 2
-3. Item 3
-   1. Item 3a
-   2. Item 3b
 
 ## Inde acerbo Minyae mater
 

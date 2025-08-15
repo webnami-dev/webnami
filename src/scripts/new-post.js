@@ -22,6 +22,7 @@ function createPost(title) {
 
   // Create frontmatter
   const frontmatter = `---
+layout: "layouts/post"
 title: "${title}"
 tags: []
 category: ""

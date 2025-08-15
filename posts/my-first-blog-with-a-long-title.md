@@ -1,12 +1,13 @@
 ---
-title: "This is the latest post"
-tags: ["Latest", "Tech"]
-category: "Blog"
+layout: "layouts/post"
+title: "My first blog with a long title"
+tags: ["First", "News"]
+category: "Journal"
 author: "WebNami"
-date: 2025-07-25
+date: 2025-07-23
 ---
 
-![test image](/images/image2.png)
+![test image](/images/image3.jpg)
 
 ## Modo Pyrrha ludunt limina
 

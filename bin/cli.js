@@ -43,7 +43,7 @@ fs.copySync(templateDir, targetDir, {
 });
 
 fs.copySync(
-  path.join(templateDir, ".gitignore"),
+  path.join(templateDir, ".gitignore.template"),
   path.join(targetDir, ".gitignore")
 );
 

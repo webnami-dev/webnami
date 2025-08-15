@@ -117,17 +117,18 @@ Both pages and posts require frontmatter at the top of each Markdown file. Here 
 
 ```markdown
 ---
-metadata:
-  title: "About Us"
-  description: "About Us"
-  img: "https://example.com/sample-image.png"
+layout: "layouts/page"
+eleventyComputed:
+  title: "About Us - Learn More About {{ config.site.name }}"
+  description: "About Us - Learn More About {{ config.site.name }}"
+  img: "{{ config.homepage.metadata.img }}"
 permalink: "/about/"
 ---
 ```
 
-- **metadata.title**: The page title (required)
-- **metadata.description**: Short description for SEO and meta tags (recommended)
-- **metadata.img**: Image for social sharing and meta tags (recommended)
+- **title**: The page title (required)
+- **description**: Short description for SEO and meta tags (recommended)
+- **img**: Image for social sharing and meta tags (recommended)
 - **permalink**: The URL path for the page (required)
 
 ### For Posts
