@@ -110,7 +110,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addAsyncFilter("imageFilter", async function (src) {
     if (!src) return "";
     src = `.${src}`;
-    console.log(src);
 
     try {
       let metadata = await Image(src, {
