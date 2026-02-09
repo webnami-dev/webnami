@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  {% set contentMeta = content |  postMeta(config.site.logo) %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,8 +12,8 @@
     <meta name="title" content="{{ title }}" />
     <meta
       name="description"
-      content="{% if layout == 'layouts/post' %}{{
-        content | excerpt
+      content="{% if layout == 'post' %}{{
+        contentMeta.excerpt
       }}{% else %}{{ description }}{% endif %}"
     />
     {%- if not robots or robots != 'false' -%}
@@ -29,28 +30,28 @@
     <meta property="twitter:title" content="{{ title }}" />
     <meta
       property="twitter:description"
-      content="{% if layout == 'layouts/post' %}{{
-        content | excerpt
+      content="{% if layout == 'post' %}{{
+        contentMeta.excerpt
       }}{% else %}{{ description }}{% endif %}"
     />
     <meta
       property="twitter:image"
-      content="{{ config.site.url }}{% if layout == 'layouts/post' %}{{
-        content | previewImage(config.site.logo) | imageFilter
+      content="{{ config.site.url }}{% if layout == 'post' %}{{
+        contentMeta.image | imageFilter
       }}{% else %}{{ img | imageFilter }}{% endif %}"
     />
     <meta property="og:url" content="{{ config.site.url }}{{ page.url }}" />
     <meta property="og:title" content="{{ title }}" />
     <meta
       property="og:description"
-      content="{% if layout == 'layouts/post' %}{{
-        content | excerpt
+      content="{% if layout == 'post' %}{{
+        contentMeta.excerpt
       }}{% else %}{{ description }}{% endif %}"
     />
     <meta
       property="og:image"
-      content="{{ config.site.url }}{% if layout == 'layouts/post' %}{{
-        content | previewImage(config.site.logo) | imageFilter
+      content="{{ config.site.url }}{% if layout == 'post' %}{{
+        contentMeta.image | imageFilter
       }}{% else %}{{ img | imageFilter }}{% endif %}"
     />
     <meta property="og:locale" content="en-US" />
@@ -59,14 +60,14 @@
     <link rel="canonical" href="{{ config.site.url }}{{ page.url }}" />
     <link rel="icon" href="{{ config.site.favicon }}" type="image/svg+xml" />
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
-    {%- if layout == 'layouts/post' -%}
+    {%- if layout == 'post' -%}
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "{{ title | escape }}",
-        "description": "{% if layout == 'layouts/post' %}{{
-          content | excerpt
+        "description": "{% if layout == 'post' %}{{
+          contentMeta.excerpt
         }}{% else %}{{ description | escape }}{% endif %}",
         "author": {
           "@type": "Person",
@@ -76,8 +77,8 @@
         "dateModified": "{{ date | date('YYYY-MM-DD') }}",
         "image": {
           "@type": "ImageObject",
-          "url": "{{ config.site.url }}{% if layout == 'layouts/post' %}{{
-            content | previewImage(config.site.logo) | imageFilter
+          "url": "{{ config.site.url }}{% if layout == 'post' %}{{
+            contentMeta.image | imageFilter
           }}{% else %}{{ img | imageFilter }}{% endif %}",
           "caption": "{{ title | escape }}"
         },

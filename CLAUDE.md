@@ -19,7 +19,7 @@ There are no test or lint commands configured.
 
 ### Build Pipeline
 
-Vite runs first (bundles CSS/JS from `src/assets/` into `_site/`), then Eleventy processes templates and content. Configuration lives in:
+Vite runs first (bundles CSS/JS from `themes/default/assets/` into `_site/`), then Eleventy processes templates and content. Configuration lives in:
 
 - `src/.eleventy.js` — Eleventy config: collections, filters, plugins, image transforms, shortcodes
 - `src/vite.config.js` — Vite config with Tailwind CSS plugin
@@ -35,6 +35,7 @@ Vite runs first (bundles CSS/JS from `src/assets/` into `_site/`), then Eleventy
 ### Theming & Templates
 
 Templates use Nunjucks and live under `themes/default/_includes/`:
+
 - **Layouts:** `layouts/base.njk` (root HTML), `layouts/post.njk`, `layouts/page.njk`
 - **Macros:** `macros/homepage.njk`, `macros/postlist.njk`, `macros/pages.njk` — reusable template blocks
 - **Partials:** `partials/navbar.njk`, `partials/footer.njk`, `partials/category-nav.njk`
@@ -44,6 +45,7 @@ Layout hierarchy: `base.njk` wraps `post.njk`/`page.njk`. Base includes SEO meta
 ### Plugins (`src/_plugins/`)
 
 Custom Eleventy plugins that add filters/computed data:
+
 - `post-management.js` — hides drafts and future-dated posts
 - `excerpt-generator.js` — auto-generates 150-char excerpts from content
 - `anchor-links.js` — adds anchor IDs to H2 headings
@@ -56,7 +58,7 @@ Eleventy builds these collections: `posts`, `pages`, `paginatedPosts`, `tagPages
 
 ### Client-Side JS
 
-Minimal — Alpine.js manages dark/light theme toggle (persisted to localStorage). Entry point: `src/assets/js/main.js`.
+Minimal — Alpine.js manages dark/light theme toggle (persisted to localStorage). Entry point: `themes/default/assets/js/main.js`.
 
 ### Icons
 

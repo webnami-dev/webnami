@@ -64,7 +64,8 @@ layout: "base.njk"
       >By {{ author }}</a
     >
     {% endif %}
-    {{ content | anchorLinks | safe }}
+    {% set meta = content |  postMeta(config.site.logo) %}
+    {{ meta.contentAnchorLinks | safe }}
     {% if tags.length > 0 %}
     <div class="flex flex-row items-center justify-between gap-4 my-10">
       <div class="flex items-center gap-4">
