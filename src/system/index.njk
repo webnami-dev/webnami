@@ -11,6 +11,6 @@ eleventyComputed:
   img: "{{ config.homepage.metadata.img }}"
 ---
 
-{% import "macros/homepage.njk" as page with context %}
+{% import "macros/pages.njk" as page with context %}
 {{ page.renderHomePage(postsPage) }}
 

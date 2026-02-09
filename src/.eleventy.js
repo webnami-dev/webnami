@@ -82,11 +82,10 @@ export default function (eleventyConfig) {
     outputDir: "./_site/images/",
     urlPath: "/images/",
     // output image formats
-    formats: ["avif", "webp"],
+    formats: ["webp"],
     // output image widths
     widths: [360, 720, 1080],
-    sizes:
-      "(max-width: 360px) 360px, (max-width: 720px) 720px, (max-width: 1080px) 1080px",
+    sizes: "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw",
 
     // to disable dev server transform
     transformOnRequest: false,
@@ -119,7 +118,7 @@ export default function (eleventyConfig) {
     try {
       let metadata = await Image(src, {
         widths: [1080],
-        formats: ["avif", "webp"],
+        formats: ["webp"],
         outputDir: "./_site/images/",
         urlPath: "/images/",
         // Force caching for all images

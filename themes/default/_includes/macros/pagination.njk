@@ -1,0 +1,50 @@
+<!-- Pagination navigation -->
+{% macro pagination(posts, type) %}
+{% if posts.total > config.postsPerPage %}
+<div class="flex justify-between items-center gap-4 my-8">
+  {% set totalPages = (posts.total / config.postsPerPage) | round(0, "ceil") %}
+  {% if posts.page > 1 %}
+  <div class="text-left">
+    <a
+      href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{
+        type
+      }}{% if type != 'posts' %}/{{
+        posts.name | slugify
+      }}{% endif %}/{% if posts.page > 2 %}{{
+        posts.page - 1
+      }}/{% endif %}{% endif %}"
+      class="px-3 py-3 text-sm bg-primary-500 text-white rounded-md font-medium hover:bg-primary-500 transition-colors"
+      >← Previous</a
+    >
+  </div>
+  {% else %}
+  <div></div>
+  {% endif %}
+  {% if posts.page < totalPages %}
+  <div class="text-right">
+    <a
+      href="/{{ type }}{% if type != 'posts' %}/{{
+        posts.name | slugify
+      }}{% endif %}/{{ posts.page + 1 }}/"
+      class="px-3 py-3 text-sm bg-primary-500 text-white rounded-md font-medium hover:bg-primary-500 transition-colors"
+      >Next →</a
+    >
+  </div>
+  {% else %}
+  <div></div>
+  {% endif %}
+</div>
+{% endif %}
+{% endmacro %}
+
+<!-- Pagination navigation for home page-->
+{% macro paginationHomePage(postsPage) %}
+<div class="flex justify-center my-8">
+  <a
+    href="/posts/{{ postsPage.page + 1 }}"
+    class="inline-block bg-primary-500 text-white px-4 py-2 rounded-md hover:bg-primary-800 transition-colors"
+  >
+    View Older Posts
+  </a>
+</div>
+{% endmacro %}

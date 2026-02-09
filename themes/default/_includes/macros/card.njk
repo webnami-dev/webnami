@@ -1,0 +1,86 @@
+<!-- Reusable post card -->
+{% macro postCard(post, extraClass) %}
+{% set meta = post | postMeta(config.site.logo) %}
+<a
+  class="group flex flex-col h-full focus:outline-none {{ extraClass }}"
+  href="{{ post.url }}"
+>
+  <div class="flex-shrink-0 h-60 w-full">
+    <img
+      class="w-full h-full object-cover rounded-md"
+      src="{{ meta.image }}"
+      alt="{{ post.data.title }}"
+    />
+  </div>
+  <div class="my-6 flex-grow">
+    <h2
+      class="sm:text-2xl text-xl font-semibold group-hover:text-primary-500 mb-2"
+    >
+      {{ post.data.title }}
+    </h2>
+    <p class="hidden sm:block sm:mb-4">
+      {{ meta.excerpt }}
+    </p>
+    {{ postByline(post) }}
+    {{ categoryBadge(post) }}
+  </div>
+</a>
+{% endmacro %}
+
+<!-- Featured post (hero layout) -->
+{% macro featuredCard(post) %}
+{% set meta = post | postMeta(config.site.logo) %}
+<div class="w-full md:w-4/5 px-5 py-5 mx-auto flex flex-wrap mb-12">
+  <a
+    href="{{ post.url }}"
+    class="lg:w-1/2 w-full overflow-hidden mt-6 sm:mt-0"
+  >
+    <img
+      class="object-center w-full h-full rounded-md"
+      src="{{ meta.image }}"
+      alt="{{ post.data.title }}"
+    />
+  </a>
+  <div
+    class="flex flex-wrap mt-6 lg:mt-auto mb-auto lg:w-1/2 content-start lg:p-4"
+  >
+    <div class="w-full sm:p-4 mb-6">
+      <h2
+        class="title-font font-medium sm:text-3xl text-2xl mb-4 text-stats-heading"
+      >
+        <a
+          href="{{ post.url }}"
+          class="hover:text-primary-500 transition-colors"
+        >
+          {{ post.data.title }}
+        </a>
+      </h2>
+      <p class="hidden sm:block sm:mb-4">
+        {{ meta.excerpt }}
+      </p>
+      {{ postByline(post) }}
+      {{ categoryBadge(post) }}
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+<!-- Post byline (author + date) -->
+{% macro postByline(post) %}
+<p class="leading-relaxed text-accent text-sm mb-2">
+  {% if post.data.author %}By {{ post.data.author }} | {% endif %}{{ post.data.date | postDate }}
+</p>
+{% endmacro %}
+
+<!-- Category badge -->
+{% macro categoryBadge(post) %}
+{% if post.data.category %}
+<div class="flex">
+  <p
+    class="leading-relaxed px-4 py-1 text-sm rounded-md bg-primary-100 text-primary-500 font-medium"
+  >
+    {{ post.data.category }}
+  </p>
+</div>
+{% endif %}
+{% endmacro %}
