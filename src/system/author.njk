@@ -10,14 +10,5 @@ eleventyComputed:
   description: "Posts by {{ authorPage.name }}{% if authorPage.page > 1 %} (Page {{ authorPage.page }}){% endif %}"
 ---
 
-<section class="text-content body-font">
-  <div class="my-10 text-center">
-    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
-      Posts by: {{ authorPage.name }}{% if authorPage.page > 1 %} - Page
-      {{ authorPage.page }}{% endif %}
-    </h1>
-  </div>
-  {%- from 'macros/presets/' + config.layout + '.njk' import postlistMacro with
-  context -%}
-  {{ postlistMacro(authorPage, "author") }}
-</section>
+{% import "macros/pages.njk" as pages %}
+{{ pages.renderAuthorPage(authorPage) }}

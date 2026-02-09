@@ -1,5 +1,5 @@
 ---
-layout: "layouts/post"
+layout: "post"
 title: "My second blog title"
 tags: ["Second", "News"]
 category: "Blog"

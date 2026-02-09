@@ -1,9 +1,0 @@
-<!-- Index page header width class -->
-{% macro widthClass() %} {%- if config.layout == 'trio' or config.layout ==
-'triofeatured' -%} md:w-4/5 {%- elif config.layout == 'duo' or config.layout ==
-'duofeatured' -%} lg:w-3/5 {%- else -%} lg:w-1/2 {%- endif -%} {% endmacro %}
-
-<!-- Navbar width class -->
-{% macro navWidthClass() %} {%- if config.layout == 'trio' or config.layout ==
-'triofeatured' -%} max-w-7xl {%- elif config.layout == 'duo' or config.layout ==
-'duofeatured' -%} max-w-4xl {%- else -%} max-w-3xl {%- endif -%} {% endmacro %}

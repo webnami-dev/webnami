@@ -11,27 +11,6 @@ eleventyComputed:
   img: "{{ config.homepage.metadata.img }}"
 ---
 
-{%- from 'macros/presets/' + config.layout + '.njk' import indexPostlistMacro,
-postlistMacro with context -%} {%- from 'macros/presetFuncs.njk' import
-widthClass with context -%}
-<section class="text-content body-font">
-  {% if postsPage.page == 1 %}
-  <!-- Page 1: Header + Featured + Grid Layout -->
-  <div class="w-full {{ widthClass() }} px-5 mx-auto my-10 text-center">
-    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
-      {{ config.homepage.heading }}
-    </h1>
-  </div>
-  {%- include 'partials/category-nav.njk' -%}
-  <!-- Featured Post (First Item) -->
-  {{ indexPostlistMacro(postsPage) }}
-  {% else %}
-  <!-- Page 2+: Grid Layout Only -->
-  <div class="my-10 text-center">
-    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
-      All Posts - Page {{ postsPage.page }}
-    </h1>
-  </div>
-  {{ postlistMacro(postsPage, "posts") }}
-  {% endif %}
-</section>
+{% import "macros/homepage.njk" as page with context %}
+{{ page.renderHomePage(postsPage) }}
+

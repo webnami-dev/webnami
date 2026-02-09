@@ -1,10 +1,69 @@
-<!-- Index page regular posts -->
+<!-- Index page featured post -->
 {% macro indexPostlistMacro(postsPage) %}
+<!-- Featured Post -->
+{% set featuredPost = postsPage.items[0] %} {% if featuredPost %}
+<div class="w-full md:w-4/5 px-5 py-5 mx-auto flex flex-wrap mb-12">
+  <a
+    href="{{ featuredPost.url }}"
+    class="lg:w-1/2 w-full overflow-hidden mt-6 sm:mt-0"
+  >
+    <img
+      class="object-center w-full h-full rounded-md"
+      src="{{ featuredPost | previewImage(config.site.logo) }}"
+      alt="{{ featuredPost.data.title }}"
+    />
+  </a>
+  <div
+    class="flex flex-wrap mt-6 lg:mt-auto mb-auto lg:w-1/2 content-start lg:p-4"
+  >
+    <div class="w-full sm:p-4 mb-6">
+      <h2
+        class="title-font font-medium sm:text-3xl text-2xl mb-4 text-stats-heading"
+      >
+        <a
+          href="{{ featuredPost.url }}"
+          class="hover:text-primary-500 transition-colors"
+        >
+          {{ featuredPost.data.title }}
+        </a>
+      </h2>
+      <p class="hidden sm:block sm:mb-4">
+        {{ featuredPost.templateContent | excerpt }}
+      </p>
+      <p class="leading-relaxed text-accent text-sm mb-2">
+        {% if featuredPost.data.author %}By {{ featuredPost.data.author }} | {%
+        endif %}{{ featuredPost.data.date | postDate }}
+      </p>
+      {% if featuredPost.data.category %}
+      <div class="flex">
+        <p
+          class="leading-relaxed px-4 py-1 text-sm rounded-md bg-primary-100 text-primary-500 font-medium"
+        >
+          {{ featuredPost.data.category }}
+        </p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% if postsPage.postsPerPage == 1 and postsPage.total > 1 %}
+<div>
+  <div class="flex justify-center">
+    <a
+      href="/posts/{{ postsPage.page + 1 }}"
+      class="inline-block bg-primary-500 text-white px-4 py-2 rounded-md hover:bg-primary-800 transition-colors"
+    >
+      View Older Posts
+    </a>
+  </div>
+</div>
+{% endif %} {% endif %}
 
 <!-- Regular Posts Grid (Remaining Items) -->
+
 <div class="w-full md:w-4/5 px-5 py-5 mx-auto">
   <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-    {% for post in postsPage.items %}
+    {% for post in postsPage.items %} {% if not loop.first %}
     <a
       class="group flex flex-col h-full focus:outline-none"
       href="{{ post.url }}"
@@ -41,7 +100,7 @@
         {% endif %}
       </div>
     </a>
-    {% endfor %}
+    {% endif %} {% endfor %}
   </div>
   {% if postsPage.total > postsPage.postsPerPage %}
   <div class="flex justify-center my-8">
@@ -56,7 +115,7 @@
 </div>
 {% endmacro %}
 
-<!-- Post List for other pages-->
+<!-- Post List for pages-->
 {% macro postlistMacro(posts, type) %}
 <div class="w-full md:w-4/5 px-5 py-5 mx-auto">
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

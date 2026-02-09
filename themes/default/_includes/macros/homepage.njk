@@ -1,0 +1,26 @@
+
+{% import "macros/postlist.njk" as pl %}
+
+{% macro renderHomePage(postsPage) %}
+<section class="text-content body-font">
+  {% if postsPage.page == 1 %}
+  <!-- Page 1: Header + Featured + Grid Layout -->
+  <div class="w-full md:w-4/5 px-5 mx-auto my-10 text-center">
+    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+      {{ config.homepage.heading }}
+    </h1>
+  </div>
+  {%- include 'partials/category-nav.njk' -%}
+  <!-- Featured Post (First Item) -->
+  {{ pl.indexPostlistMacro(postsPage) }}
+  {% else %}
+  <!-- Page 2+: Grid Layout Only -->
+  <div class="my-10 text-center">
+    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+      All Posts - Page {{ postsPage.page }}
+    </h1>
+  </div>
+  {{ pl.postlistMacro(postsPage, "posts") }}
+  {% endif %}
+</section>
+{% endmacro %}

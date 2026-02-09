@@ -171,7 +171,7 @@ export default function (eleventyConfig) {
         })
         .join("");
       return `<svg class="${className}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${svgElements}</svg>`;
-    }
+    },
   );
 
   eleventyConfig.addCollection("tagPages", function (collectionApi) {
@@ -209,7 +209,7 @@ export default function (eleventyConfig) {
         const startIndex = (pageNumber - 1) * postsPerPage;
         const pagedItems = sortedPosts.slice(
           startIndex,
-          startIndex + postsPerPage
+          startIndex + postsPerPage,
         );
 
         const page = {
@@ -255,7 +255,7 @@ export default function (eleventyConfig) {
         const startIndex = (pageNumber - 1) * postsPerPage;
         const pagedItems = sortedPosts.slice(
           startIndex,
-          startIndex + postsPerPage
+          startIndex + postsPerPage,
         );
         const page = {
           name: authorName,
@@ -277,7 +277,7 @@ export default function (eleventyConfig) {
         // Validate category format
         if (category === null || category === undefined) {
           throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be null or undefined. Expected format: category: "CategoryName"`
+            `Invalid category format in "${item.inputPath}": category cannot be null or undefined. Expected format: category: "CategoryName"`,
           );
         }
 
@@ -285,19 +285,19 @@ export default function (eleventyConfig) {
           throw new Error(
             `Invalid category format in "${
               item.inputPath
-            }": category must be a string. Found: ${typeof category}. Expected format: category: "CategoryName"`
+            }": category must be a string. Found: ${typeof category}. Expected format: category: "CategoryName"`,
           );
         }
 
         if (category.trim() === "") {
           throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be empty. Expected format: category: "CategoryName"`
+            `Invalid category format in "${item.inputPath}": category cannot be empty. Expected format: category: "CategoryName"`,
           );
         }
 
         if (Array.isArray(category)) {
           throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be an array. Use tags for multiple values. Expected format: category: "CategoryName"`
+            `Invalid category format in "${item.inputPath}": category cannot be an array. Use tags for multiple values. Expected format: category: "CategoryName"`,
           );
         }
         categories.add(category);
@@ -318,7 +318,7 @@ export default function (eleventyConfig) {
         // Validate category format
         if (category === null || category === undefined) {
           throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be null or undefined. Expected format: category: "CategoryName"`
+            `Invalid category format in "${item.inputPath}": category cannot be null or undefined. Expected format: category: "CategoryName"`,
           );
         }
 
@@ -326,19 +326,19 @@ export default function (eleventyConfig) {
           throw new Error(
             `Invalid category format in "${
               item.inputPath
-            }": category must be a string. Found: ${typeof category}. Expected format: category: "CategoryName"`
+            }": category must be a string. Found: ${typeof category}. Expected format: category: "CategoryName"`,
           );
         }
 
         if (category.trim() === "") {
           throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be empty. Expected format: category: "CategoryName"`
+            `Invalid category format in "${item.inputPath}": category cannot be empty. Expected format: category: "CategoryName"`,
           );
         }
 
         if (Array.isArray(category)) {
           throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be an array. Use tags for multiple values. Expected format: category: "CategoryName"`
+            `Invalid category format in "${item.inputPath}": category cannot be an array. Use tags for multiple values. Expected format: category: "CategoryName"`,
           );
         }
         categories.add(category);
@@ -362,7 +362,7 @@ export default function (eleventyConfig) {
         const startIndex = (pageNumber - 1) * postsPerPage;
         const pagedItems = sortedPosts.slice(
           startIndex,
-          startIndex + postsPerPage
+          startIndex + postsPerPage,
         );
 
         const page = {
@@ -384,7 +384,7 @@ export default function (eleventyConfig) {
       .getAll()
       .filter((item) => {
         const layout = item.data.layout;
-        return layout === "layouts/post" || layout === "layouts/post.njk";
+        return layout === "post" || layout === "post.njk";
       })
       .sort((a, b) => {
         const dateA = new Date(a.data.date || a.date);
@@ -398,7 +398,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("pages", function (collectionApi) {
     const allPages = collectionApi.getAll().filter((item) => {
       const layout = item.data.layout;
-      return layout === "layouts/page" || layout === "layouts/page.njk";
+      return layout === "page" || layout === "page.njk";
     });
     return allPages;
   });
@@ -409,7 +409,7 @@ export default function (eleventyConfig) {
       .filter((item) => {
         // Check if the post uses layouts/post layout
         const layout = item.data.layout;
-        return layout === "layouts/post" || layout === "layouts/post.njk";
+        return layout === "post" || layout === "post.njk";
       })
       .sort((a, b) => {
         // Sort by date in descending order (newest first)
@@ -446,7 +446,8 @@ export default function (eleventyConfig) {
     dataTemplateEngine: "njk",
     dir: {
       input: "./",
-      includes: "src/_includes",
+      includes: "themes/default/_includes",
+      layouts: "themes/default/_includes/layouts",
       data: "_data",
       output: "_site",
     },

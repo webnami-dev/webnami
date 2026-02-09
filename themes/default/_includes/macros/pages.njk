@@ -1,0 +1,38 @@
+
+{% import "macros/postlist.njk" as pl %}
+
+{% macro renderCategoryPage(categoryPage) %}
+    <section class="text-content body-font">
+        <div class="my-10 text-center">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+            Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} -
+            Page {{ categoryPage.page }}{% endif %}
+        </h1>
+        </div>
+        {{ pl.postlistMacro(categoryPage, "category") }}
+    </section>
+{% endmacro %}
+
+{% macro renderTagPage(tagPage) %}
+    <section class="text-content body-font">
+        <div class="my-10 text-center">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+            Posts tagged: {{ tagPage.name }}{% if tagPage.page > 1 %} - Page
+            {{ tagPage.page }}{% endif %}
+        </h1>
+        </div>
+        {{ pl.postlistMacro(tagPage, "tags") }}
+    </section>
+{% endmacro %}
+
+{% macro renderAuthorPage(authorPage) %}
+    <section class="text-content body-font">
+        <div class="my-10 text-center">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
+            Posts by: {{ authorPage.name }}{% if authorPage.page > 1 %} - Page
+            {{ authorPage.page }}{% endif %}
+        </h1>
+        </div>
+        {{pl.postlistMacro(authorPage, "author") }}
+    </section>
+{% endmacro %}

@@ -47,6 +47,25 @@ fs.copySync(
   path.join(targetDir, ".gitignore")
 );
 
+const gitignoreTarget = path.join(targetDir, ".gitignore");
+
+const gitignoreSource = gitignoreCandidates.find((p) => fs.existsSync(p));
+
+if (gitignoreSource) {
+  fs.copySync(gitignoreSource, gitignoreTarget);
+} else {
+  // Last-resort: keep scaffolding working even if template was not packaged.
+  fs.writeFileSync(
+    gitignoreTarget,
+    ["node_modules/", "_site/", ".cache/", ".env", "*.log", "dist/"].join(
+      "\n"
+    ) + "\n"
+  );
+  console.warn(
+    "⚠️  .gitignore template not found in package; created a minimal .gitignore."
+  );
+}
+
 // Install dependencies
 console.log("Installing dependencies...");
 execSync("npm install", { cwd: targetDir, stdio: "inherit" });

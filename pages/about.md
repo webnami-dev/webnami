@@ -1,5 +1,5 @@
 ---
-layout: "layouts/page"
+layout: "page"
 eleventyComputed:
   title: "About Us - Learn More About {{ config.site.name }}"
   description: "About Us - Learn More About {{ config.site.name }}"

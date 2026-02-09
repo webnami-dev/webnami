@@ -1,5 +1,5 @@
 ---
-layout: "layouts/post"
+layout: "post"
 title: "This is the latest post"
 tags: ["Latest", "Tech"]
 category: "Blog"
