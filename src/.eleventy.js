@@ -26,7 +26,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(previewImage);
   eleventyConfig.addGlobalData("config", config);
   eleventyConfig.addPassthroughCopy({ "./images": "images" });
-  eleventyConfig.addPassthroughCopy({ "./src/assets/fonts": "assets/fonts" });
+  eleventyConfig.addPassthroughCopy({
+    [`./themes/${config.theme}/assets/fonts`]: "assets/fonts",
+  });
   // Add date filter for sitemap
 
   eleventyConfig.addFilter("postDate", function (date) {
@@ -446,8 +448,8 @@ export default function (eleventyConfig) {
     dataTemplateEngine: "njk",
     dir: {
       input: "./",
-      includes: "themes/default/_includes",
-      layouts: "themes/default/_includes/layouts",
+      includes: "themes/" + config.theme + "/_includes",
+      layouts: "themes/" + config.theme + "/_includes/layouts",
       data: "_data",
       output: "_site",
     },

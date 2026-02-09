@@ -1,5 +1,8 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
+import config from "../config.js";
+
+const theme = config.theme;
 
 export default defineConfig({
   plugins: [tailwindcss()],
@@ -7,8 +10,8 @@ export default defineConfig({
     outDir: "_site",
     rollupOptions: {
       input: {
-        bundle: "src/assets/js/main.js",
-        main: "src/assets/css/input.css", // CSS entry point
+        bundle: `themes/${theme}/assets/js/main.js`,
+        main: `themes/${theme}/assets/css/input.css`, // CSS entry point
       },
       output: {
         entryFileNames: "assets/js/[name].js",
