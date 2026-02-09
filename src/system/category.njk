@@ -10,6 +10,6 @@ eleventyComputed:
   description: "Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} (Page {{ categoryPage.page }}){% endif %}"
 ---
 
-{% import "macros/pages.njk" as pages %}
+{% import "macros/pages.njk" as pages with context %}
 {{ pages.renderCategoryPage(categoryPage) }}
 

@@ -1,63 +1,129 @@
 
-<nav class="">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div
-      class="block md:flex md:flex-row md:justify-between md:items-center py-4 md:py-0 md:h-16"
-    >
-      <div class="flex justify-center md:justify-start mb-4 md:mb-0">
-        {% if config.site.logo %}
-        <a href="/" class="flex items-center">
-          <img
-            class="h-8 sm:h-12 w-auto"
-            src="{{ config.site.logo }}"
-            alt="{{ config.site.name }}"
-          />
-        </a>
-        {% endif %}
-        <a href="/" class="flex items-center">
-          <span class="ml-2 text-content text-xl font-bold">
-            {{ config.site.name }}
-          </span>
-        </a>
-      </div>
+<div x-data="{ open: false }">
+  <nav>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4 md:py-0 md:h-16">
+        <div class="flex items-center">
+          {% if config.site.logo %}
+          <a href="/" class="flex items-center">
+            <img
+              class="h-8 sm:h-12 w-auto"
+              src="{{ config.site.logo }}"
+              alt="{{ config.site.name }}"
+            />
+          </a>
+          {% endif %}
+          <a href="/" class="flex items-center">
+            <span class="ml-2 text-content text-xl font-bold">
+              {{ config.site.name }}
+            </span>
+          </a>
+        </div>
 
-      <nav>
-        <ul
-          class="flex flex-row justify-center items-center md:space-y-0 md:space-x-4 list-none"
-        >
-          <li x-data>
-            <!-- Sun icon for light mode (shows when theme is dark) -->
+        <div class="flex items-center">
+          <!-- Theme toggle (always visible) -->
+          <div x-data>
             <button
               @click="$store.theme.lightTheme()"
               class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
-              aria-label="Toggle dark mode"
+              aria-label="Switch to light mode"
               x-show="$store.theme.dark"
             >
-              {% icon "sun", "w-5 h-5"| safe %}
+              {% icon "sun", "w-5 h-5" | safe %}
             </button>
-
-            <!-- Moon icon for dark mode (shows when theme is light) -->
             <button
               @click="$store.theme.darkTheme()"
               class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
-              aria-label="Toggle dark mode"
+              aria-label="Switch to dark mode"
               x-show="!$store.theme.dark"
             >
               {% icon "moon", "w-5 h-5" | safe %}
             </button>
-          </li>
-          {% for link in config.navbar.links %}
-          <li>
-            <a
-              href="{{ link.href }}"
-              class="text-content hover:text-primary-500 px-3 py-2 text-sm font-light transition-colors duration-200"
-            >
-              {{ link.name }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </nav>
+          </div>
+
+          <!-- Hamburger button (mobile only) -->
+          <button
+            @click="open = !open"
+            class="lg:hidden p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+            aria-label="Toggle menu"
+            :aria-expanded="open"
+          >
+            <span x-show="!open">{% icon "menu", "w-5 h-5" | safe %}</span>
+            <span x-show="open">{% icon "x", "w-5 h-5" | safe %}</span>
+          </button>
+
+          <!-- Desktop nav links -->
+          <nav class="hidden lg:block">
+            <ul class="flex flex-row items-center space-x-4 list-none">
+              {% for link in config.navbar.links %}
+              <li>
+                <a
+                  href="{{ link.href }}"
+                  class="text-content hover:text-primary-500 px-3 py-2 text-sm font-light transition-colors duration-200"
+                >
+                  {{ link.name }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile slide-in panel -->
+  <div
+    x-show="open"
+    @keydown.escape.window="open = false"
+    class="fixed inset-0 z-50 md:hidden"
+  >
+    <!-- Backdrop -->
+    <div
+      x-show="open"
+      x-transition:enter="transition-opacity duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition-opacity duration-300"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+      @click="open = false"
+      class="absolute inset-0 bg-black/50"
+    ></div>
+
+    <!-- Panel -->
+    <div
+      x-show="open"
+      x-transition:enter="transition-transform duration-300"
+      x-transition:enter-start="translate-x-full"
+      x-transition:enter-end="translate-x-0"
+      x-transition:leave="transition-transform duration-300"
+      x-transition:leave-start="translate-x-0"
+      x-transition:leave-end="translate-x-full"
+      class="absolute top-0 right-0 h-full w-64 bg-background shadow-lg"
+    >
+      <div class="flex justify-end p-4">
+        <button
+          @click="open = false"
+          class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+          aria-label="Close menu"
+        >
+          {% icon "x", "w-5 h-5" | safe %}
+        </button>
+      </div>
+      <ul class="flex flex-col space-y-2 px-6 list-none">
+        {% for link in config.navbar.links %}
+        <li>
+          <a
+            href="{{ link.href }}"
+            @click="open = false"
+            class="block text-content hover:text-primary-500 py-2 text-sm font-light transition-colors duration-200"
+          >
+            {{ link.name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
-</nav>
+</div>

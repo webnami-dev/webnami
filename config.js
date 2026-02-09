@@ -17,7 +17,7 @@ export default {
   },
 
   // Number of posts per page on listing pages
-  postsPerPage: 10,
+  postsPerPage: 20,
 
   // Homepage specific settings
   homepage: {

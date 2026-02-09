@@ -6,10 +6,7 @@ import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
 import Image from "@11ty/eleventy-img";
 import config from "../config.js";
-import excerptGenerator from "./_plugins/excerpt-generator.js";
 import postManagement from "./_plugins/post-management.js";
-import anchorLinks from "./_plugins/anchor-links.js";
-import previewImage from "./_plugins/preview-image.js";
 import contentFilters from "./_plugins/content-filters.js";
 
 export default function (eleventyConfig) {
@@ -17,15 +14,12 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add("pages/!(about.md)");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
-  eleventyConfig.addPlugin(excerptGenerator);
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight, {
     preAttributes: { tabindex: 0 },
   });
   eleventyConfig.addPlugin(postManagement);
-  eleventyConfig.addPlugin(anchorLinks);
   eleventyConfig.addPlugin(contentFilters);
-  eleventyConfig.addPlugin(previewImage);
   eleventyConfig.addGlobalData("config", config);
   eleventyConfig.addPassthroughCopy({ "./images": "images" });
   eleventyConfig.addPassthroughCopy({

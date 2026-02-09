@@ -9,6 +9,7 @@
             Page {{ categoryPage.page }}{% endif %}
         </h1>
         </div>
+        {%- include 'partials/categorynav.njk' -%}
         {{ cl.postsGrid(categoryPage, "category") }}
     </section>
 {% endmacro %}
@@ -47,7 +48,7 @@
       {{ config.homepage.heading }}
     </h1>
   </div>
-  {%- include 'partials/category-nav.njk' -%}
+  {%- include 'partials/categorynav.njk' -%}
   {{ cl.homePagePostsGrid(postsPage) }}
   {% else %}
   <!-- Page 2+: Grid Layout Only -->
