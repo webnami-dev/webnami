@@ -7,4 +7,3 @@ bin/
 .cache/
 package.json
 vite.config.js
-custom.css

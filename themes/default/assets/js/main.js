@@ -1,4 +1,5 @@
 import Alpine from "alpinejs";
+import collapse from "@alpinejs/collapse";
 
 function isDark() {
   return (
@@ -29,5 +30,6 @@ Alpine.store("theme", {
   },
 });
 
+Alpine.plugin(collapse);
 window.Alpine = Alpine;
 Alpine.start();

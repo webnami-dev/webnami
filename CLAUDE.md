@@ -24,7 +24,6 @@ Vite runs first (bundles CSS/JS from `themes/default/assets/` into `_site/`), th
 - `src/.eleventy.js` — Eleventy config: collections, filters, plugins, image transforms, shortcodes
 - `src/vite.config.js` — Vite config with Tailwind CSS plugin
 - `config.js` — Site-wide settings (site name, URL, navbar, footer, pagination)
-- `custom.css` — Theme color CSS variables (light/dark mode)
 
 ### Content
 

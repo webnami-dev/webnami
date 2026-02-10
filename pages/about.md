@@ -1,10 +1,7 @@
 ---
 layout: "page"
-eleventyComputed:
-  title: "About Us - Learn More About {{ config.site.name }}"
-  description: "About Us - Learn More About {{ config.site.name }}"
-  img: "{{ config.homepage.metadata.img }}"
-permalink: "/about/"
+title: "About Us"
+description: "About Us - Learn More about Webnami"
 ---
 
 # About Us

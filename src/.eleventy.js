@@ -11,7 +11,6 @@ import contentFilters from "./_plugins/content-filters.js";
 
 export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("config.js");
-  eleventyConfig.ignores.add("pages/!(about.md)");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.addPlugin(pluginRss);

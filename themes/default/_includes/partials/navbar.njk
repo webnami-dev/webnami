@@ -72,58 +72,25 @@
     </div>
   </nav>
 
-  <!-- Mobile slide-in panel -->
+  <!-- Mobile collapse dropdown -->
   <div
     x-show="open"
+    x-collapse
     @keydown.escape.window="open = false"
-    class="fixed inset-0 z-50 md:hidden"
+    class="lg:hidden bg-background shadow-lg overflow-hidden"
   >
-    <!-- Backdrop -->
-    <div
-      x-show="open"
-      x-transition:enter="transition-opacity duration-300"
-      x-transition:enter-start="opacity-0"
-      x-transition:enter-end="opacity-100"
-      x-transition:leave="transition-opacity duration-300"
-      x-transition:leave-start="opacity-100"
-      x-transition:leave-end="opacity-0"
-      @click="open = false"
-      class="absolute inset-0 bg-black/50"
-    ></div>
-
-    <!-- Panel -->
-    <div
-      x-show="open"
-      x-transition:enter="transition-transform duration-300"
-      x-transition:enter-start="translate-x-full"
-      x-transition:enter-end="translate-x-0"
-      x-transition:leave="transition-transform duration-300"
-      x-transition:leave-start="translate-x-0"
-      x-transition:leave-end="translate-x-full"
-      class="absolute top-0 right-0 h-full w-64 bg-background shadow-lg"
-    >
-      <div class="flex justify-end p-4">
-        <button
+    <ul class="flex flex-col space-y-1 px-6 py-4 list-none">
+      {% for link in config.navbar.links %}
+      <li>
+        <a
+          href="{{ link.href }}"
           @click="open = false"
-          class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
-          aria-label="Close menu"
+          class="block text-content hover:text-primary-500 py-2 text-sm font-light transition-colors duration-200"
         >
-          {% icon "x", "w-5 h-5" | safe %}
-        </button>
-      </div>
-      <ul class="flex flex-col space-y-2 px-6 list-none">
-        {% for link in config.navbar.links %}
-        <li>
-          <a
-            href="{{ link.href }}"
-            @click="open = false"
-            class="block text-content hover:text-primary-500 py-2 text-sm font-light transition-colors duration-200"
-          >
-            {{ link.name }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
+          {{ link.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
