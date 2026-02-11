@@ -170,13 +170,13 @@ export default function (eleventyConfig) {
     },
   );
 
-  // Build all collections in a single pass over collectionApi.getAll()
+  // Build all collections in a single pass over collectionsApi.getAll()
   let collectionsCache = null;
 
-  function buildCollections(collectionApi) {
+  function buildCollections(collectionsApi) {
     if (collectionsCache) return collectionsCache;
 
-    const allItems = collectionApi.getAll();
+    const allItems = collectionsApi.getAllSorted().reverse();
     const postsPerPage = config.postsPerPage;
 
     const posts = [];
@@ -245,12 +245,6 @@ export default function (eleventyConfig) {
       }
     }
 
-    // Sort posts by date descending
-    const sortByDateDesc = (a, b) => {
-      return new Date(b.data.date || b.date) - new Date(a.data.date || a.date);
-    };
-    posts.sort(sortByDateDesc);
-
     // Helper to paginate a sorted list of posts
     function paginate(sortedItems, name) {
       const result = [];
@@ -283,21 +277,18 @@ export default function (eleventyConfig) {
     // Build tag pages
     const tagPages = [];
     for (const [tagName, items] of tagPosts) {
-      items.sort(sortByDateDesc);
       tagPages.push(...paginate(items, tagName));
     }
 
     // Build author pages
     const authorPages = [];
     for (const [authorName, items] of authorPosts) {
-      items.sort(sortByDateDesc);
       authorPages.push(...paginate(items, authorName));
     }
 
     // Build category pages
     const categoryPages = [];
     for (const [categoryName, items] of categoryPosts) {
-      items.sort(sortByDateDesc);
       categoryPages.push(...paginate(items, categoryName));
     }
 
