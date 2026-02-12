@@ -1,0 +1,16 @@
+---
+permalink: /api/posts.json
+---
+[
+{%- for post in collections.posts %}
+  {
+    "title": {{ post.data.title | dump | safe }},    
+    "slug": "{{ post.fileSlug }}",
+    "url": "{{ post.url }}",
+    "date": "{{ post.date | date('YYYY-MM-DD') }}",  
+    "author": {{ post.data.author | dump | safe }},  
+    "category": {{ post.data.category | dump | safe }},
+    "tags": {{ post.data.tags | dump | safe }}
+  }{% if not loop.last %},{% endif %}
+{%- endfor %}
+]

@@ -10,9 +10,14 @@ import postManagement from "./_plugins/post-management.js";
 import contentFilters from "./_plugins/content-filters.js";
 
 export default function (eleventyConfig) {
+  const isProd = process.env.NODE_ENV === "production";
   eleventyConfig.addWatchTarget("config.js");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
+  eleventyConfig.ignores.add("admin/**");
+  if (isProd) {
+    eleventyConfig.ignores.add("api/**");
+  }
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight, {
     preAttributes: { tabindex: 0 },
@@ -71,38 +76,40 @@ export default function (eleventyConfig) {
     return content;
   });
 
-  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    outputDir: "./_site/images/",
-    urlPath: "/images/",
-    // output image formats
-    formats: ["webp"],
-    // output image widths
-    widths: [360, 720, 1080],
-    sizes: "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw",
+  if (isProd) {
+    eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+      outputDir: "./_site/images/",
+      urlPath: "/images/",
+      // output image formats
+      formats: ["webp"],
+      // output image widths
+      widths: [360, 720, 1080],
+      sizes: "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw",
 
-    // to disable dev server transform
-    transformOnRequest: false,
+      // to disable dev server transform
+      transformOnRequest: false,
 
-    cacheOptions: {
-      duration: "1d",
-      directory: ".cache",
-    },
-
-    // optional, attributes assigned on <img> nodes override these values
-    htmlOptions: {
-      imgAttributes: {
-        loading: "lazy",
-        decoding: "async",
+      cacheOptions: {
+        duration: "1d",
+        directory: ".cache",
       },
-      pictureAttributes: {},
-    },
 
-    sharpOptions: {
-      animated: true,
-      failOnError: false,
-      withoutEnlargement: true,
-    },
-  });
+      // optional, attributes assigned on <img> nodes override these values
+      htmlOptions: {
+        imgAttributes: {
+          loading: "lazy",
+          decoding: "async",
+        },
+        pictureAttributes: {},
+      },
+
+      sharpOptions: {
+        animated: true,
+        failOnError: false,
+        withoutEnlargement: true,
+      },
+    });
+  }
 
   eleventyConfig.addAsyncFilter("imageFilter", async function (src) {
     if (!src) return "";
@@ -174,7 +181,7 @@ export default function (eleventyConfig) {
   let collectionsCache = null;
 
   function buildCollections(collectionsApi) {
-    if (collectionsCache) return collectionsCache;
+    //if (collectionsCache) return collectionsCache;
 
     const allItems = collectionsApi.getAllSorted().reverse();
     const postsPerPage = config.postsPerPage;

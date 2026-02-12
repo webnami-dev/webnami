@@ -1,0 +1,12 @@
+---
+permalink: /api/pages.json
+---
+[
+{%- for page in collections.pages %}
+  {
+    "title": {{ page.data.title | dump | safe }},    
+    "slug": "{{ page.fileSlug }}",
+    "url": "{{ page.url }}"
+  }{% if not loop.last %},{% endif %}
+{%- endfor %}
+]

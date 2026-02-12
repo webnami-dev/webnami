@@ -1,0 +1,26 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  <h1>{{ message }}</h1>
+  <button id="build-btn" onclick="triggerBuild()">Build Site</button>
+  <p id="build-status"></p>
+
+  <script>
+    async function triggerBuild() {
+      const btn = document.getElementById("build-btn");
+      const status = document.getElementById("build-status");
+      btn.disabled = true;
+      status.textContent = "Building...";
+
+      try {
+        const res = await fetch("/admin/build", { method: "POST" });
+        const data = await res.json();
+        status.textContent = data.message;
+      } catch (err) {
+        status.textContent = "Build failed: " + err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+{% endblock %}

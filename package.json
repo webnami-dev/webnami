@@ -8,7 +8,7 @@
     "create-webnami-blog": "./bin/cli.js"
   },
   "scripts": {
-    "build": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
+    "build": "set NODE_ENV=production && vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
     "seo": "node src/scripts/seo-analyzer.js",
     "post": "node src/scripts/new-post.js",
     "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch"
@@ -71,6 +71,7 @@
     "@alpinejs/collapse": "^3.15.8",
     "@alpinejs/intersect": "^3.14.9",
     "alpinejs": "^3.14.9",
+    "express": "^5.2.1",
     "fs-extra": "^11.3.0",
     "glob": "^11.0.3",
     "html-minifier-terser": "^7.2.0",
