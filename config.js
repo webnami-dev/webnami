@@ -39,7 +39,7 @@ export default {
   navbar: {
     links: [
       // Regular navigation link
-      { name: "About", href: "/about-us" },
+      { name: "About", href: "/about" },
       // Regular navigation link
       { name: "Contact", href: "#" },
     ],

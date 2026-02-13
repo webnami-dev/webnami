@@ -23,6 +23,7 @@ nunjucks.configure(path.join(__dirname, "views"), {
 app.set("view engine", "njk");
 
 await viteBuild({ configFile: "src/vite.config.js" });
+await viteBuild({ configFile: "admin/vite.config.js" });
 const elev = new Eleventy("./", "./_site", {
   configPath: "src/.eleventy.js",
 });
@@ -30,11 +31,14 @@ await elev.init();
 await elev.watch();
 
 app.use(express.static(path.join(rootDir, "_site")));
+app.use("/admin", express.static(path.join(__dirname, "dist")));
 
 app.get("/admin", (req, res) => {
+  const greetings = ["Hello", "Howdy", "Hey there", "Welcome back", "Hi there"];
+  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
   res.render("index.njk", {
     title: "WebNami Dashboard",
-    message: "Hello from Express + Nunjucks",
+    greeting,
   });
 });
 

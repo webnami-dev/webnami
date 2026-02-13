@@ -1,26 +1,18 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <h1>{{ message }}</h1>
-  <button id="build-btn" onclick="triggerBuild()">Build Site</button>
-  <p id="build-status"></p>
+  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-3.5rem-3rem)]">
+    <h1 class="text-5xl font-semibold text-content mb-6">{{ greeting }}</h1>
 
-  <script>
-    async function triggerBuild() {
-      const btn = document.getElementById("build-btn");
-      const status = document.getElementById("build-status");
-      btn.disabled = true;
-      status.textContent = "Building...";
-
-      try {
-        const res = await fetch("/admin/build", { method: "POST" });
-        const data = await res.json();
-        status.textContent = data.message;
-      } catch (err) {
-        status.textContent = "Build failed: " + err.message;
-      } finally {
-        btn.disabled = false;
-      }
-    }
-  </script>
+    <div class="flex gap-3">
+      <a href="/admin/posts/new" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
+        <i data-lucide="plus" class="w-4 h-4"></i>
+        New Post
+      </a>
+      <a href="/admin/pages/new" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
+        <i data-lucide="plus" class="w-4 h-4"></i>
+        New Page
+      </a>
+    </div>
+  </div>
 {% endblock %}

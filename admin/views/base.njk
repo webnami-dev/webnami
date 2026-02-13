@@ -1,9 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="light">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
+  <link rel="stylesheet" href="/admin/css/main.css">
 </head>
-<body>
-  {% block content %}{% endblock %}
+<body class="bg-background text-content min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-surface border-b border-border px-6 h-10 flex items-center justify-between sticky top-0 z-50">
+    <!-- Left: Logo -->
+
+    <!-- Center: Navigation -->
+    <div class="flex items-center gap-1">
+      <a href="/admin" class="flex items-center gap-2 shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="34" viewBox="0 0 159 195" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(0,195) scale(0.05,-0.05)" fill="#155dfc" stroke="none">
+            <path d="M1350 3138 c-1008 -249 -1250 -1616 -390 -2198 1059 -716 2367 496 1746 1617 -244 441 -859 705 -1356 581z m676 -135 c463 -166 785 -652 742 -1120 -49 -544 -995 -531 -995 13 1 266 201 442 446 392 109 -23 111 -17 28 116 -225 361 -808 231 -1224 -272 -174 -210 -261 -291 -373 -344 l-100 -47 -13 44 c-23 79 -17 261 12 401 137 642 856 1040 1477 817z"/>
+          </g>
+        </svg>
+      </a>
+      <a href="/admin/posts" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+        <i data-lucide="file-text" class="w-4 h-4"></i>
+        Posts
+      </a>
+      <a href="/admin/pages" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+        <i data-lucide="file" class="w-4 h-4"></i>
+        Pages
+      </a>
+      <a href="/admin/settings" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+        Settings
+      </a>
+    </div>
+
+    <!-- Right: Preview, Gear, Theme Toggle -->
+    <div class="flex items-center gap-1 shrink-0">
+      <a href="/" target="_blank" title="Preview Site" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+        <i data-lucide="external-link" class="w-4 h-4"></i>
+        Preview
+      </a>
+      <div x-data>
+        <button
+          @click="$store.adminTheme.lightTheme()"
+          class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+          aria-label="Switch to light mode"
+          x-show="$store.adminTheme.dark"
+        >
+        <i data-lucide="sun" class="w-4 h-4"></i>
+        </button>
+        <button
+          @click="$store.adminTheme.darkTheme()"
+          class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+          aria-label="Switch to dark mode"
+          x-show="!$store.adminTheme.dark"
+        >
+        <i data-lucide="moon" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <main class="p-6">
+    {% block content %}{% endblock %}
+  </main>
+
+  <script type="module" src="/admin/js/admin.js"></script>
 </body>
 </html>
