@@ -8,8 +8,11 @@ import {
   Sun,
   Moon,
   Plus,
+  Trash2,
 } from "lucide";
 import Alpine from "alpinejs";
+import EasyMDE from "easymde";
+import flatpickr from "flatpickr";
 
 const icons = {
   FileText,
@@ -20,6 +23,7 @@ const icons = {
   Sun,
   Moon,
   Plus,
+  Trash2,
 };
 
 createIcons({ icons });
@@ -54,4 +58,6 @@ Alpine.store("adminTheme", {
 });
 
 window.Alpine = Alpine;
+window.EasyMDE = EasyMDE;
+window.flatpickr = flatpickr;
 Alpine.start();

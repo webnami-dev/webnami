@@ -1,0 +1,55 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-2xl font-semibold text-content mb-6">New Post</h1>
+
+    <form id="post-form" class="flex flex-col gap-4">
+      <div>
+        <label for="title" class="block text-sm font-medium text-content mb-1">Title</label>
+        <input type="text" id="title" name="title" required
+          class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+      </div>
+      <div>
+        <label for="description" class="block text-sm font-medium text-content mb-1">Description</label>
+        <input type="text" id="description" name="description"
+          class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="tags" class="block text-sm font-medium text-content mb-1">Tags (comma separated)</label>
+          <input type="text" id="tags" name="tags" placeholder="News, Updates"
+            class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+        <div>
+          <label for="category" class="block text-sm font-medium text-content mb-1">Category</label>
+          <input type="text" id="category" name="category"
+            class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="author" class="block text-sm font-medium text-content mb-1">Author</label>
+          <input type="text" id="author" name="author"
+            class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+        <div>
+          <label for="date" class="block text-sm font-medium text-content mb-1">Date</label>
+          <input type="text" id="date" name="date" required
+            class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+      </div>
+      <div>
+        <label for="content" class="block text-sm font-medium text-content mb-1">Content</label>
+        <textarea id="content" name="content"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
+          Create Post
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script type="module" src="/admin/js/newPost.js"></script>
+{% endblock %}

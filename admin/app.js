@@ -21,6 +21,7 @@ nunjucks.configure(path.join(__dirname, "views"), {
 });
 
 app.set("view engine", "njk");
+app.use(express.json());
 
 await viteBuild({ configFile: "src/vite.config.js" });
 await viteBuild({ configFile: "admin/vite.config.js" });
