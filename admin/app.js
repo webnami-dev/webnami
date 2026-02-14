@@ -2,11 +2,11 @@ import express from "express";
 import nunjucks from "nunjucks";
 import path from "path";
 import { fileURLToPath } from "url";
-import Eleventy from "@11ty/eleventy";
 import { build as viteBuild } from "vite";
 import pagesRouter from "./routes/pages.js";
 import postsRouter from "./routes/posts.js";
 import settingsRouter from "./routes/settings.js";
+import { buildSite } from "./eleventy.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, "..");
@@ -25,11 +25,9 @@ app.use(express.json());
 
 await viteBuild({ configFile: "src/vite.config.js" });
 await viteBuild({ configFile: "admin/vite.config.js" });
-const elev = new Eleventy("./", "./_site", {
-  configPath: "src/.eleventy.js",
-});
-await elev.init();
-await elev.watch();
+
+process.env.NODE_ENV = "development";
+await buildSite();
 
 app.use(express.static(path.join(rootDir, "_site")));
 app.use("/admin", express.static(path.join(__dirname, "dist")));

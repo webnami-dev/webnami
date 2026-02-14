@@ -2,6 +2,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { buildSite } from "../eleventy.js";
 
 const router = express.Router();
 const postsDir = path.resolve("posts");
@@ -21,8 +22,9 @@ router.get("/new", (req, res) => {
   });
 });
 
-router.post("/new", (req, res) => {
-  const { title, description, tags, category, author, date, content } = req.body;
+router.post("/new", async (req, res) => {
+  const { title, description, tags, category, author, date, content } =
+    req.body;
   const slug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -31,13 +33,17 @@ router.post("/new", (req, res) => {
     layout: "post",
     title,
     description,
-    tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+    tags: tags
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean),
     category,
     author,
     date: new Date(date),
   };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(path.join(postsDir, `${slug}.md`), fileContent);
+  await buildSite();
   res.json({ slug });
 });
 
@@ -55,35 +61,43 @@ router.get("/:slug", (req, res) => {
       tags: (file.data.tags || []).join(", "),
       category: file.data.category || "",
       author: file.data.author || "",
-      date: file.data.date ? new Date(file.data.date).toISOString().split("T")[0] : "",
+      date: file.data.date
+        ? new Date(file.data.date).toISOString().split("T")[0]
+        : "",
       content: file.content,
       slug: req.params.slug,
     },
   });
 });
 
-router.put("/:slug", (req, res) => {
-  const { title, description, tags, category, author, date, content } = req.body;
+router.put("/:slug", async (req, res) => {
+  const { title, description, tags, category, author, date, content } =
+    req.body;
   const filePath = path.join(postsDir, `${req.params.slug}.md`);
   const frontmatter = {
     layout: "post",
     title,
     description,
-    tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+    tags: tags
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean),
     category,
     author,
     date: new Date(date),
   };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(filePath, fileContent);
+  await buildSite();
   res.json({ slug: req.params.slug });
 });
 
-router.delete("/:slug", (req, res) => {
+router.delete("/:slug", async (req, res) => {
   const filePath = path.join(postsDir, `${req.params.slug}.md`);
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath);
   }
+  await buildSite();
   res.json({ success: true });
 });
 

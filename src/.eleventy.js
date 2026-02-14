@@ -14,6 +14,8 @@ import contentFilters from "./_plugins/content-filters.js";
 export default function (eleventyConfig) {
   const isProd = process.env.NODE_ENV === "production";
   //eleventyConfig.addWatchTarget("config.js");
+  eleventyConfig.addWatchTarget("posts/**");
+  eleventyConfig.addWatchTarget("pages/**");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.ignores.add("admin/**");
@@ -121,35 +123,38 @@ export default function (eleventyConfig) {
     if (!src) return "";
     src = `.${src}`;
 
-    try {
-      let metadata = await Image(src, {
-        widths: [1080],
-        formats: ["webp"],
-        outputDir: "./_site/images/",
-        urlPath: "/images/",
-        // Force caching for all images
-        cacheOptions: {
-          duration: "1d",
-          directory: ".cache",
-        },
-        sharpOptions: {
-          animated: true,
-          failOnError: false,
-          withoutEnlargement: true,
-        },
-      });
+    if (isProd) {
+      try {
+        let metadata = await Image(src, {
+          widths: [1080],
+          formats: ["webp"],
+          outputDir: "./_site/images/",
+          urlPath: "/images/",
+          // Force caching for all images
+          cacheOptions: {
+            duration: "1d",
+            directory: ".cache",
+          },
+          sharpOptions: {
+            animated: true,
+            failOnError: false,
+            withoutEnlargement: true,
+          },
+        });
 
-      const format = metadata.webp || metadata.jpeg;
-      if (format && format.length > 0) {
-        const optimizedUrl = format[format.length - 1].url;
-        return optimizedUrl;
+        const format = metadata.webp || metadata.jpeg;
+        if (format && format.length > 0) {
+          const optimizedUrl = format[format.length - 1].url;
+          return optimizedUrl;
+        }
+
+        throw new Error("No suitable format found");
+      } catch (error) {
+        console.error("Error optimizing image:", error);
+        return src;
       }
-
-      throw new Error("No suitable format found");
-    } catch (error) {
-      console.error("Error optimizing image:", error);
-      return src;
     }
+    return src;
   });
 
   eleventyConfig.addShortcode(

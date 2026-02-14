@@ -2,6 +2,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { buildSite } from "../eleventy.js";
 
 const router = express.Router();
 const pagesDir = path.resolve("pages");
@@ -21,7 +22,7 @@ router.get("/new", (req, res) => {
   });
 });
 
-router.post("/new", (req, res) => {
+router.post("/new", async (req, res) => {
   const { title, description, content } = req.body;
   const slug = title
     .toLowerCase()
@@ -30,6 +31,7 @@ router.post("/new", (req, res) => {
   const frontmatter = { layout: "page", title, description };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(path.join(pagesDir, `${slug}.md`), fileContent);
+  await buildSite();
   res.json({ slug });
 });
 
@@ -50,20 +52,22 @@ router.get("/:slug", (req, res) => {
   });
 });
 
-router.put("/:slug", (req, res) => {
+router.put("/:slug", async (req, res) => {
   const { title, description, content } = req.body;
   const filePath = path.join(pagesDir, `${req.params.slug}.md`);
   const frontmatter = { layout: "page", title, description };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(filePath, fileContent);
+  await buildSite();
   res.json({ slug: req.params.slug });
 });
 
-router.delete("/:slug", (req, res) => {
+router.delete("/:slug", async (req, res) => {
   const filePath = path.join(pagesDir, `${req.params.slug}.md`);
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath);
   }
+  await buildSite();
   res.json({ success: true });
 });
 
