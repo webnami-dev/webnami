@@ -14,6 +14,7 @@ export default defineConfig({
         page: "admin/assets/js/page.js",
         newPost: "admin/assets/js/new-post.js",
         post: "admin/assets/js/post.js",
+        settings: "admin/assets/js/settings.js",
         main: "admin/assets/css/admin.css",
       },
       output: {

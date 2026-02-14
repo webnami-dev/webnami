@@ -9,6 +9,10 @@ import {
   Moon,
   Plus,
   Trash2,
+  Menu,
+  LayoutTemplate,
+  Save,
+  X,
 } from "lucide";
 import Alpine from "alpinejs";
 import EasyMDE from "easymde";
@@ -24,6 +28,10 @@ const icons = {
   Moon,
   Plus,
   Trash2,
+  Menu,
+  LayoutTemplate,
+  Save,
+  X,
 };
 
 createIcons({ icons });
@@ -57,6 +65,7 @@ Alpine.store("adminTheme", {
   },
 });
 
+window.lucide = { createIcons: () => createIcons({ icons }) };
 window.Alpine = Alpine;
 window.EasyMDE = EasyMDE;
 window.flatpickr = flatpickr;

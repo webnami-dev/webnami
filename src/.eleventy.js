@@ -1,3 +1,4 @@
+import { readFileSync } from "fs";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
@@ -5,13 +6,14 @@ import { icons } from "lucide";
 import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
 import Image from "@11ty/eleventy-img";
-import config from "../config.js";
+
+const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
 import postManagement from "./_plugins/post-management.js";
 import contentFilters from "./_plugins/content-filters.js";
 
 export default function (eleventyConfig) {
   const isProd = process.env.NODE_ENV === "production";
-  eleventyConfig.addWatchTarget("config.js");
+  //eleventyConfig.addWatchTarget("config.js");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.ignores.add("admin/**");
@@ -62,6 +64,10 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter("slice", function (array, start, end) {
     return array.slice(start, end);
+  });
+
+  eleventyConfig.addFilter("imagePath", function (filename) {
+    return `/images/${filename}`;
   });
 
   eleventyConfig.addTransform("htmlmin", function (content, outputPath) {

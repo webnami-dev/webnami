@@ -1,0 +1,48 @@
+{
+  "theme": "default",
+  "site": {
+    "name": "WebNami",
+    "url": "http://example.com",
+    "language": "en",
+    "logo": "logo.png",
+    "favicon": "favicon.ico",
+    "csp": "object-src 'none'; base-uri 'self'; upgrade-insecure-requests;"
+  },
+  "postsPerPage": 20,
+  "homepage": {
+    "heading": "WebNami - a simple and lightweight blogging tool",
+    "metadata": {
+      "title": "Home",
+      "description": "This is a description of our website",
+      "img": "logo.png"
+    }
+  },
+  "navbar": {
+    "links": [
+      { "name": "About", "href": "/about" },
+      { "name": "Contact", "href": "#" }
+    ]
+  },
+  "footer": {
+    "socialLinks": [
+      { "name": "facebook", "href": "#" },
+      { "name": "twitter", "href": "#" },
+      { "name": "instagram", "href": "#" }
+    ],
+    "linkGroups": [
+      {
+        "title": "CATEGORY 1",
+        "links": [
+          { "name": "About", "href": "/about" },
+          { "name": "Home", "href": "/" }
+        ]
+      },
+      {
+        "links": [
+          { "name": "RSS", "href": "/rss.xml" },
+          { "name": "Sitemap", "href": "/sitemap.xml" }
+        ]
+      }
+    ]
+  }
+}

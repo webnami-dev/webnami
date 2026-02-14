@@ -14,7 +14,7 @@ export default function (eleventyConfig) {
     const $ = cheerio.load(htmlContent);
 
     // Extract preview image
-    const image = $("img").first().attr("src") || logo;
+    const image = $("img").first().attr("src") || "/images/" + logo;
 
     // Extract excerpt
     const maxLength = 150;

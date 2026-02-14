@@ -38,7 +38,7 @@
       property="twitter:image"
       content="{{ config.site.url }}{% if layout == 'post' %}{{
         contentMeta.image | imageFilter
-      }}{% else %}{{ config.homepage.metadata.img | imageFilter }}{% endif %}"
+      }}{% else %}{{ config.homepage.metadata.img | imagePath | imageFilter }}{% endif %}"
     />
     <meta property="og:url" content="{{ config.site.url }}{{ page.url }}" />
     <meta property="og:title" content="{{ title }}" />
@@ -52,13 +52,13 @@
       property="og:image"
       content="{{ config.site.url }}{% if layout == 'post' %}{{
         contentMeta.image | imageFilter
-      }}{% else %}{{ config.homepage.metadata.img | imageFilter }}{% endif %}"
+      }}{% else %}{{ config.homepage.metadata.img | imagePath | imageFilter }}{% endif %}"
     />
     <meta property="og:locale" content="en-US" />
     <meta property="og:site_name" content="{{ config.site.name }}" />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="{{ config.site.url }}{{ page.url }}" />
-    <link rel="icon" href="{{ config.site.favicon }}" type="image/svg+xml" />
+    <link rel="icon" href="{{ config.site.favicon | imagePath }}" type="image/svg+xml" />
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
     {%- if layout == 'post' -%}
     <script type="application/ld+json">
@@ -79,7 +79,7 @@
           "@type": "ImageObject",
           "url": "{{ config.site.url }}{% if layout == 'post' %}{{
             contentMeta.image | imageFilter
-          }}{% else %}{{ config.homepage.metadata.img | imageFilter }}{% endif %}",
+          }}{% else %}{{ config.homepage.metadata.img | imagePath | imageFilter }}{% endif %}",
           "caption": "{{ title | escape }}"
         },
         "mainEntityOfPage": {

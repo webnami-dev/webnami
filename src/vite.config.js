@@ -1,7 +1,8 @@
+import { readFileSync } from "fs";
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
-import config from "../config.js";
 
+const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
 const theme = config.theme;
 
 export default defineConfig({
