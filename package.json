@@ -11,7 +11,9 @@
     "build": "set NODE_ENV=production && vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
     "seo": "node src/scripts/seo-analyzer.js",
     "post": "node src/scripts/new-post.js",
-    "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch"
+    "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch",
+    "test": "npx playwright test",
+    "test:e2e": "npx playwright test"
   },
   "files": [
     "bin/",
@@ -59,6 +61,7 @@
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/cli": "^4.1.11",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",

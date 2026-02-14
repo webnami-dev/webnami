@@ -14,8 +14,6 @@ import contentFilters from "./_plugins/content-filters.js";
 export default function (eleventyConfig) {
   const isProd = process.env.NODE_ENV === "production";
   //eleventyConfig.addWatchTarget("config.js");
-  eleventyConfig.addWatchTarget("posts/**");
-  eleventyConfig.addWatchTarget("pages/**");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.ignores.add("admin/**");
