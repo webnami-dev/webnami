@@ -1,6 +1,6 @@
 <!-- Reusable post card -->
 {% macro postCard(post, extraClass) %}
-{% set meta = post | postMeta(config.site.logo) %}
+{% set meta = post | postMeta %}
 <a
   class="group flex flex-col h-full focus:outline-none {{ extraClass }}"
   href="{{ post.url }}"
@@ -29,7 +29,7 @@
 
 <!-- Featured post (hero layout) -->
 {% macro featuredCard(post) %}
-{% set meta = post | postMeta(config.site.logo) %}
+{% set meta = post | postMeta %}
 <div class="w-full md:w-4/5 px-5 py-5 mx-auto flex flex-wrap mb-12">
   <a
     href="{{ post.url }}"

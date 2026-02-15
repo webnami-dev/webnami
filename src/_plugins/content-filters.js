@@ -1,15 +1,19 @@
 import * as cheerio from "cheerio";
 import slugify from "slugify";
+import { readFileSync } from "fs";
+
+const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
 
 export default function (eleventyConfig) {
   // Single filter that parses content once and returns both excerpt and preview image.
   // Usage in templates:
-  //   {% set meta = post.templateContent | postMeta(config.site.logo) %}
+  //   {% set meta = post.templateContent | postMeta %}
   //   {{ meta.excerpt }}
   //   {{ meta.image }}
-  eleventyConfig.addFilter("postMeta", function (content, logo = "") {
+  eleventyConfig.addFilter("postMeta", function (content) {
+    const logo = config.site?.logo || "";
     const htmlContent = content?.templateContent || content || "";
-    if (!htmlContent) return { excerpt: "", image: logo };
+    if (!htmlContent) return { excerpt: "", image: "/images/" + logo };
 
     const $ = cheerio.load(htmlContent);
 

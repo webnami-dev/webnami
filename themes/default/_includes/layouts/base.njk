@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% set contentMeta = content |  postMeta(config.site.logo) %}
+  {% set contentMeta = content | postMeta %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,9 +12,7 @@
     <meta name="title" content="{{ title }}" />
     <meta
       name="description"
-      content="{% if layout == 'post' %}{{
-        contentMeta.excerpt
-      }}{% else %}{{ description }}{% endif %}"
+      content="{{ description }}"
     />
     {%- if not robots or robots != 'false' -%}
     <meta
@@ -30,9 +28,7 @@
     <meta property="twitter:title" content="{{ title }}" />
     <meta
       property="twitter:description"
-      content="{% if layout == 'post' %}{{
-        contentMeta.excerpt
-      }}{% else %}{{ description }}{% endif %}"
+      content="{{ description }}"
     />
     <meta
       property="twitter:image"
@@ -44,9 +40,7 @@
     <meta property="og:title" content="{{ title }}" />
     <meta
       property="og:description"
-      content="{% if layout == 'post' %}{{
-        contentMeta.excerpt
-      }}{% else %}{{ description }}{% endif %}"
+      content="{{ description }}"
     />
     <meta
       property="og:image"
@@ -66,9 +60,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "{{ title | escape }}",
-        "description": "{% if layout == 'post' %}{{
-          contentMeta.excerpt
-        }}{% else %}{{ description | escape }}{% endif %}",
+        "description": "{{ description | escape }}",
         "author": {
           "@type": "Person",
           "name": "{{ author | escape }}"

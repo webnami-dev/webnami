@@ -7,3 +7,5 @@ node_modules/
 admin/dist/
 test-results/
 CLAUDE.md
+.claude/
+.playwright-mcp/

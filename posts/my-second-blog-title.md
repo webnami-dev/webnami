@@ -1,6 +1,7 @@
 ---
 layout: "post"
 title: "My second blog title"
+description: "second blog description"
 tags: ["Second", "News"]
 category: "Blog"
 author: "WebNami"
