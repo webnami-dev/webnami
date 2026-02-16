@@ -68,6 +68,7 @@ Alpine.store("adminTheme", {
 });
 
 let alertId = 0;
+let alertListenerRegistered = false;
 
 Alpine.data("alertComponent", () => ({
   alerts: [],
@@ -78,9 +79,12 @@ Alpine.data("alertComponent", () => ({
       const { type, message } = JSON.parse(flash);
       this.show(type, message);
     }
-    document.addEventListener("show-alert", (e) => {
-      this.show(e.detail.type, e.detail.message);
-    });
+    if (!alertListenerRegistered) {
+      alertListenerRegistered = true;
+      document.addEventListener("show-alert", (e) => {
+        this.show(e.detail.type, e.detail.message);
+      });
+    }
   },
   show(type, message) {
     const id = ++alertId;

@@ -34,6 +34,9 @@ router.post("/new", async (req, res) => {
   if (RESERVED_SLUGS.includes(slug)) {
     return res.status(400).json({ error: `The slug "${slug}" is reserved and cannot be used.` });
   }
+  if (fs.existsSync(path.join(postsDir, `${slug}.md`))) {
+    return res.status(400).json({ error: `A post with the slug "${slug}" already exists.` });
+  }
   const frontmatter = {
     layout: "post",
     title,
