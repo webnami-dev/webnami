@@ -10,19 +10,19 @@ export default function (eleventyConfig) {
   //   {% set meta = post.templateContent | postMeta %}
   //   {{ meta.excerpt }}
   //   {{ meta.image }}
-  eleventyConfig.addFilter("postMeta", function (content) {
+  eleventyConfig.addFilter("postMeta", (content) => {
     const logo = config.site?.logo || "";
     const htmlContent = content?.templateContent || content || "";
-    if (!htmlContent) return { excerpt: "", image: "/images/" + logo };
+    if (!htmlContent) return { excerpt: "", image: `/images/${logo}` };
 
     const $ = cheerio.load(htmlContent);
 
     // Extract preview image
-    const image = $("img").first().attr("src") || "/images/" + logo;
+    const image = $("img").first().attr("src") || `/images/${logo}`;
 
     // Extract excerpt
     const maxLength = 150;
-    let excerptParagraphs = [];
+    const excerptParagraphs = [];
     let currentLength = 0;
     let truncated = false;
 
@@ -75,7 +75,7 @@ export default function (eleventyConfig) {
       );
     });
 
-    var contentAnchorLinks = $.html();
+    const contentAnchorLinks = $.html();
 
     return { excerpt, image, contentAnchorLinks };
   });

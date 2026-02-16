@@ -44,11 +44,15 @@ fs.copySync(templateDir, targetDir, {
 
 fs.copySync(
   path.join(templateDir, ".gitignore.template"),
-  path.join(targetDir, ".gitignore")
+  path.join(targetDir, ".gitignore"),
 );
 
 const gitignoreTarget = path.join(targetDir, ".gitignore");
 
+const gitignoreCandidates = [
+  path.join(templateDir, ".gitignore.template"),
+  path.join(templateDir, ".gitignore"),
+];
 const gitignoreSource = gitignoreCandidates.find((p) => fs.existsSync(p));
 
 if (gitignoreSource) {
@@ -57,12 +61,12 @@ if (gitignoreSource) {
   // Last-resort: keep scaffolding working even if template was not packaged.
   fs.writeFileSync(
     gitignoreTarget,
-    ["node_modules/", "_site/", ".cache/", ".env", "*.log", "dist/"].join(
-      "\n"
-    ) + "\n"
+    `${["node_modules/", "_site/", ".cache/", ".env", "*.log", "dist/"].join(
+      "\n",
+    )}\n`,
   );
   console.warn(
-    "⚠️  .gitignore template not found in package; created a minimal .gitignore."
+    "⚠️  .gitignore template not found in package; created a minimal .gitignore.",
   );
 }
 

@@ -1,5 +1,5 @@
 const form = document.getElementById("page-form");
-const slug = form.dataset.slug;
+const { slug } = form.dataset;
 
 const editor = new EasyMDE({
   element: document.getElementById("content"),

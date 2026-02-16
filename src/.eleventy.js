@@ -1,11 +1,10 @@
 import { readFileSync } from "fs";
-import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import { eleventyImageTransformPlugin, Image } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { icons } from "lucide";
 import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
-import Image from "@11ty/eleventy-img";
 
 const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
 import postManagement from "./_plugins/post-management.js";
@@ -33,44 +32,41 @@ export default function (eleventyConfig) {
   });
   // Add date filter for sitemap
 
-  eleventyConfig.addFilter("postDate", function (date) {
+  eleventyConfig.addFilter("postDate", (date) => {
     return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
   });
 
   eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
 
-  eleventyConfig.addFilter("date", function (date, format) {
+  eleventyConfig.addFilter("date", (date, format) => {
     let d;
-    if (date == "") {
+    if (date === "") {
       d = new Date();
     } else {
       d = new Date(date);
     }
     if (format === "YYYY-MM-DD") {
-      return (
-        d.getFullYear() +
-        "-" +
-        String(d.getMonth() + 1).padStart(2, "0") +
-        "-" +
-        String(d.getDate()).padStart(2, "0")
-      );
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
+        2,
+        "0",
+      )}-${String(d.getDate()).padStart(2, "0")}`;
     }
     return d.toISOString();
   });
-  eleventyConfig.addFilter("assetHash", function (assetPath) {
+  eleventyConfig.addFilter("assetHash", (assetPath) => {
     const timestamp = Date.now();
     return `${assetPath}?v=${timestamp}`;
   });
 
-  eleventyConfig.addFilter("slice", function (array, start, end) {
+  eleventyConfig.addFilter("slice", (array, start, end) => {
     return array.slice(start, end);
   });
 
-  eleventyConfig.addFilter("imagePath", function (filename) {
+  eleventyConfig.addFilter("imagePath", (filename) => {
     return `/images/${filename}`;
   });
 
-  eleventyConfig.addTransform("htmlmin", function (content, outputPath) {
+  eleventyConfig.addTransform("htmlmin", (content, outputPath) => {
     if (outputPath && outputPath.endsWith(".html")) {
       return htmlmin.minify(content, {
         removeComments: true,
@@ -117,13 +113,13 @@ export default function (eleventyConfig) {
     });
   }
 
-  eleventyConfig.addAsyncFilter("imageFilter", async function (src) {
+  eleventyConfig.addAsyncFilter("imageFilter", async (src) => {
     if (!src) return "";
     src = `.${src}`;
 
     if (isProd) {
       try {
-        let metadata = await Image(src, {
+        const metadata = await Image(src, {
           widths: [1080],
           formats: ["webp"],
           outputDir: "./_site/images/",
@@ -155,36 +151,33 @@ export default function (eleventyConfig) {
     return src;
   });
 
-  eleventyConfig.addShortcode(
-    "icon",
-    function (iconName, className = "w-5 h-5") {
-      // Convert kebab-case to PascalCase
-      const pascalCaseIconName = iconName
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join("");
-      const iconData = icons[pascalCaseIconName];
-      if (!iconData) {
-        console.log(`Icon '${pascalCaseIconName}' not found`);
-        return "";
-      }
-      if (!Array.isArray(iconData)) {
-        return `<!-- Invalid icon data -->`;
-      }
-      const svgElements = iconData
-        .map((element) => {
-          const [tagName, attributes] = element;
-          // Convert attributes object to attribute string
-          const attributeString = Object.entries(attributes)
-            .map(([key, value]) => `${key}="${value}"`)
-            .join(" ");
+  eleventyConfig.addShortcode("icon", (iconName, className = "w-5 h-5") => {
+    // Convert kebab-case to PascalCase
+    const pascalCaseIconName = iconName
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join("");
+    const iconData = icons[pascalCaseIconName];
+    if (!iconData) {
+      console.log(`Icon '${pascalCaseIconName}' not found`);
+      return "";
+    }
+    if (!Array.isArray(iconData)) {
+      return `<!-- Invalid icon data -->`;
+    }
+    const svgElements = iconData
+      .map((element) => {
+        const [tagName, attributes] = element;
+        // Convert attributes object to attribute string
+        const attributeString = Object.entries(attributes)
+          .map(([key, value]) => `${key}="${value}"`)
+          .join(" ");
 
-          return `<${tagName} ${attributeString}/>`;
-        })
-        .join("");
-      return `<svg class="${className}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${svgElements}</svg>`;
-    },
-  );
+        return `<${tagName} ${attributeString}/>`;
+      })
+      .join("");
+    return `<svg class="${className}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${svgElements}</svg>`;
+  });
 
   // Build all collections in a single pass over collectionsApi.getAll()
   let collectionsCache = null;
@@ -193,7 +186,7 @@ export default function (eleventyConfig) {
     //if (collectionsCache) return collectionsCache;
 
     const allItems = collectionsApi.getAllSorted().reverse();
-    const postsPerPage = config.postsPerPage;
+    const { postsPerPage } = config;
 
     const posts = [];
     const pages = [];
@@ -203,7 +196,7 @@ export default function (eleventyConfig) {
     const categorySet = new Set();
 
     for (const item of allItems) {
-      const layout = item.data.layout;
+      const { layout } = item.data;
 
       // Classify posts and pages
       if (layout === "post" || layout === "post.njk") {
@@ -235,7 +228,7 @@ export default function (eleventyConfig) {
 
       // Collect and validate categories
       if ("category" in item.data && item.data.category) {
-        const category = item.data.category;
+        const { category } = item.data;
 
         if (typeof category !== "string") {
           throw new Error(
@@ -351,8 +344,8 @@ export default function (eleventyConfig) {
     dataTemplateEngine: "njk",
     dir: {
       input: "./",
-      includes: "themes/" + config.theme + "/_includes",
-      layouts: "themes/" + config.theme + "/_includes/layouts",
+      includes: `themes/${config.theme}/_includes`,
+      layouts: `themes/${config.theme}/_includes/layouts`,
       data: "_data",
       output: "_site",
     },

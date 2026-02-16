@@ -14,9 +14,7 @@ const log = {
   error: (msg) =>
     console.log(`${chalk.gray(timestamp())} ${chalk.red("[ERR]")} ${msg}`),
   server: (msg) =>
-    console.log(
-      `${chalk.gray(timestamp())} ${chalk.magenta.bold("[SERVER]")} ${msg}`,
-    ),
+    console.log(`${chalk.gray(timestamp())} ${chalk.magenta.bold(msg)}`),
 };
 
 export default log;

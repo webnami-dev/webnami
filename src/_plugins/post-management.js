@@ -5,7 +5,7 @@ export default function (eleventyConfig) {
         !data.permalink &&
         (data.layout === "post" || data.layout === "page")
       ) {
-        return "/" + data.page.fileSlug + "/";
+        return `/${data.page.fileSlug}/`;
       }
       return data.permalink;
     },

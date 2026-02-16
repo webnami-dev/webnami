@@ -28,12 +28,11 @@ class SEOAnalyzer {
         status: "fail",
         message: `No H1 tag found. Should have exactly one H1 per page.`,
       };
-    } else {
-      return {
-        status: "fail",
-        message: `Multiple H1 tags found (${h1Count}). Should have only one H1 per page.`,
-      };
     }
+    return {
+      status: "fail",
+      message: `Multiple H1 tags found (${h1Count}). Should have only one H1 per page.`,
+    };
   }
 
   // Check title length
@@ -53,12 +52,11 @@ class SEOAnalyzer {
         status: "fail",
         message: `Title too short (${title.length} chars). Should be 30-60 characters.`,
       };
-    } else {
-      return {
-        status: "fail",
-        message: `Title too long (${title.length} chars). Should be 30-60 characters.`,
-      };
     }
+    return {
+      status: "fail",
+      message: `Title too long (${title.length} chars). Should be 30-60 characters.`,
+    };
   }
 
   // Check word count
@@ -73,12 +71,11 @@ class SEOAnalyzer {
         status: "pass",
         message: `Word count is good (${wordCount} words)`,
       };
-    } else {
-      return {
-        status: "fail",
-        message: `Word count too low (${wordCount} words). Should be at least 300 words.`,
-      };
     }
+    return {
+      status: "fail",
+      message: `Word count too low (${wordCount} words). Should be at least 300 words.`,
+    };
   }
 
   // Check meta description
@@ -97,20 +94,18 @@ class SEOAnalyzer {
         status: "fail",
         message: `Meta description too short (${metaDescription.length} chars). Should be 120-155 characters.`,
       };
-    } else {
-      return {
-        status: "fail",
-        message: `Meta description too long (${metaDescription.length} chars). Should be 120-155 characters.`,
-      };
     }
+    return {
+      status: "fail",
+      message: `Meta description too long (${metaDescription.length} chars). Should be 120-155 characters.`,
+    };
   }
 
   // Check image alt text
   checkImageAltText($) {
     const images = $("img");
     const issues = [];
-    let totalImages = images.length;
-    let imagesWithAlt = 0;
+    const totalImages = images.length;
 
     if (totalImages === 0) {
       return { status: "info", message: `No images found on page` };
@@ -124,8 +119,6 @@ class SEOAnalyzer {
         issues.push(`Missing alt text: ${src}`);
       } else if (alt.length > 100) {
         issues.push(`Alt text too long (${alt.length} chars): ${src}`);
-      } else {
-        imagesWithAlt++;
       }
     });
 
@@ -134,12 +127,11 @@ class SEOAnalyzer {
         status: "pass",
         message: `All ${totalImages} images have proper alt text`,
       };
-    } else {
-      return {
-        status: "fail",
-        message: `${issues.length} image(s) with issues: ${issues.join("; ")}`,
-      };
     }
+    return {
+      status: "fail",
+      message: `${issues.length} image(s) with issues: ${issues.join("; ")}`,
+    };
   }
 
   // Check H2 structure
@@ -151,12 +143,11 @@ class SEOAnalyzer {
         status: "pass",
         message: `Found ${h2Count} H2 tag(s) for good content structure`,
       };
-    } else {
-      return {
-        status: "fail",
-        message: `No H2 tags found. Should have at least one H2 for better content structure.`,
-      };
     }
+    return {
+      status: "fail",
+      message: `No H2 tags found. Should have at least one H2 for better content structure.`,
+    };
   }
 
   // Check duplicate H2s
@@ -177,12 +168,11 @@ class SEOAnalyzer {
 
     if (duplicateH2s.length === 0) {
       return { status: "pass", message: `No duplicate H2 tags found` };
-    } else {
-      return {
-        status: "fail",
-        message: `Duplicate H2 tags found: "${duplicateH2s.join('", "')}"`,
-      };
     }
+    return {
+      status: "fail",
+      message: `Duplicate H2 tags found: "${duplicateH2s.join('", "')}"`,
+    };
   }
 
   // Check Open Graph tags
@@ -202,12 +192,11 @@ class SEOAnalyzer {
         status: "pass",
         message: `All essential Open Graph tags present`,
       };
-    } else {
-      return {
-        status: "fail",
-        message: `Missing Open Graph tags: ${missing.join(", ")}`,
-      };
     }
+    return {
+      status: "fail",
+      message: `Missing Open Graph tags: ${missing.join(", ")}`,
+    };
   }
 
   // Check canonical URL
@@ -216,9 +205,8 @@ class SEOAnalyzer {
 
     if (canonical.length > 0) {
       return { status: "pass", message: `Canonical URL found: ${canonical}` };
-    } else {
-      return { status: "fail", message: `No canonical URL found` };
     }
+    return { status: "fail", message: `No canonical URL found` };
   }
 
   // Analyze single HTML file

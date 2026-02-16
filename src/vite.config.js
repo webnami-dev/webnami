@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 
 const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
-const theme = config.theme;
+const { theme } = config;
 
 export default defineConfig({
   plugins: [tailwindcss()],

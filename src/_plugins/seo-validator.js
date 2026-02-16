@@ -5,7 +5,7 @@ export default function (eleventyConfig) {
   let allWarnings = [];
 
   // Adding event listener to display warnings after build
-  eleventyConfig.on("eleventy.after", function (inputPath) {
+  eleventyConfig.on("eleventy.after", (inputPath) => {
     inputPath["results"].forEach((result) => {
       // Check if the inputPath contains /posts/ and ends with .md
       if (
@@ -14,12 +14,12 @@ export default function (eleventyConfig) {
         result.inputPath.endsWith(".md")
       ) {
         //content
-        const content = result.content;
+        const { content } = result;
         const warnings = validateContent(content);
         if (warnings.length > 0) {
           allWarnings.push({
             file: result.inputPath,
-            warnings: warnings,
+            warnings,
           });
         }
       }
@@ -40,7 +40,7 @@ function validateContent(htmlContent) {
   const h1Count = $("h1").length;
   if (h1Count > 1) {
     warnings.push(
-      `❌ Multiple H1 tags found (${h1Count}). Should have only one H1 per page.`
+      `❌ Multiple H1 tags found (${h1Count}). Should have only one H1 per page.`,
     );
   } else if (h1Count === 0) {
     warnings.push(`⚠️  No H1 tag found. Consider adding one for better SEO.`);
@@ -51,15 +51,15 @@ function validateContent(htmlContent) {
   const title = titleElement.length ? titleElement.text().trim() : "";
   if (title.length === 0) {
     warnings.push(
-      `❌ No <title> tag found. Please add a title tag in your HTML.`
+      `❌ No <title> tag found. Please add a title tag in your HTML.`,
     );
   } else if (title.length < 30) {
     warnings.push(
-      `❌ Title is too short (${title.length} chars). Should be 30-60 characters.`
+      `❌ Title is too short (${title.length} chars). Should be 30-60 characters.`,
     );
   } else if (title.length > 60) {
     warnings.push(
-      `❌ Title is too long (${title.length} chars). Should be 30-60 characters.`
+      `❌ Title is too long (${title.length} chars). Should be 30-60 characters.`,
     );
   }
 
@@ -71,7 +71,7 @@ function validateContent(htmlContent) {
     .filter((word) => word.length > 0).length;
   if (wordCount < 300) {
     warnings.push(
-      `❌ Word count is too low (${wordCount} words). Should be at least 300 words.`
+      `❌ Word count is too low (${wordCount} words). Should be at least 300 words.`,
     );
   }
 
@@ -79,15 +79,15 @@ function validateContent(htmlContent) {
   const metaDescription = $('meta[name="description"]').attr("content") || "";
   if (metaDescription.length === 0) {
     warnings.push(
-      `❌ No meta description found. Please add <meta name="description" content="..."> tag.`
+      `❌ No meta description found. Please add <meta name="description" content="..."> tag.`,
     );
   } else if (metaDescription.length < 120) {
     warnings.push(
-      `❌ Meta description is too short (${metaDescription.length} chars). Should be 120-155 characters.`
+      `❌ Meta description is too short (${metaDescription.length} chars). Should be 120-155 characters.`,
     );
   } else if (metaDescription.length > 155) {
     warnings.push(
-      `❌ Meta description is too long (${metaDescription.length} chars). Should be 120-155 characters.`
+      `❌ Meta description is too long (${metaDescription.length} chars). Should be 120-155 characters.`,
     );
   }
 
@@ -98,13 +98,13 @@ function validateContent(htmlContent) {
       warnings.push(
         `❌ Image is missing alt text: ${
           $(this).attr("src") || "unknown source"
-        }`
+        }`,
       );
     } else if (alt.length > 100) {
       warnings.push(
         `❌ Alt text is too long (${alt.length} chars) for image: ${
           $(this).attr("src") || "unknown source"
-        }. Should be under 100 characters.`
+        }. Should be under 100 characters.`,
       );
     }
   });
@@ -113,7 +113,7 @@ function validateContent(htmlContent) {
   const h2Count = $("h2").length;
   if (h2Count === 0) {
     warnings.push(
-      `❌ No H2 tags found. Should have at least one H2 for better content structure.`
+      `❌ No H2 tags found. Should have at least one H2 for better content structure.`,
     );
   }
 
@@ -157,12 +157,12 @@ function displayWarnings(allWarnings) {
     });
   });
 
-  console.log("\n" + "=".repeat(60));
+  console.log(`\n${"=".repeat(60)}`);
   console.log(`\n⚠️  Total files with issues: ${allWarnings.length}`);
   console.log(
     `⚠️  Total warnings: ${allWarnings.reduce(
       (sum, fw) => sum + fw.warnings.length,
-      0
-    )}\n`
+      0,
+    )}\n`,
   );
 }

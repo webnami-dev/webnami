@@ -12,6 +12,8 @@
     "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch",
     "test": "npx playwright test",
     "test:e2e": "npx playwright test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prepare": "husky"
   },
   "files": [
@@ -60,12 +62,15 @@
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/cli": "^4.1.11",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
     "chalk": "^5.6.2",
     "cheerio": "^1.1.2",
+    "eslint": "^10.0.0",
+    "globals": "^17.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
@@ -85,6 +90,10 @@
     "lucide": "^0.513.0"
   },
   "lint-staged": {
-    "*.{js,json,css,html}": "prettier --write"
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,html}": "prettier --write"
   }
 }
