@@ -7,6 +7,7 @@ import log from "../logger.js";
 const router = express.Router();
 const configPath = path.resolve("src/_data/config.json");
 const imagesDir = path.resolve("images");
+const themesDir = path.resolve("themes");
 
 router.get("/", (req, res) => {
   const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
@@ -14,11 +15,16 @@ router.get("/", (req, res) => {
     .readdirSync(imagesDir)
     .filter((f) => /\.(png|jpg|jpeg|gif|svg|ico|webp|avif)$/i.test(f))
     .map((f) => `${f}`);
+  const themes = fs
+    .readdirSync(themesDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
 
   res.render("settings/settings.njk", {
     title: "Settings",
     config,
     images,
+    themes,
   });
 });
 
@@ -26,7 +32,7 @@ router.put("/", async (req, res) => {
   const data = req.body;
 
   const config = {
-    theme: "default",
+    theme: data.theme || "default",
     site: {
       name: data.siteName,
       url: data.siteUrl,

@@ -8,7 +8,7 @@
     "create-webnami-blog": "./bin/cli.js"
   },
   "scripts": {
-    "build": "set NODE_ENV=production && vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
+    "build": "cross-env NODE_ENV=production vite --config src/vite.config.js build && cross-env NODE_ENV=production eleventy --config=src/.eleventy.js",
     "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch",
     "test": "npx playwright test",
     "test:e2e": "npx playwright test",
@@ -69,6 +69,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "chalk": "^5.6.2",
     "cheerio": "^1.1.2",
+    "cross-env": "^10.1.0",
     "eslint": "^10.0.0",
     "globals": "^17.3.0",
     "husky": "^9.1.7",

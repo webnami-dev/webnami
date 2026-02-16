@@ -37,7 +37,7 @@
                 class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
           </div>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-3 gap-4">
             <div>
               <label for="siteLanguage" class="block text-sm font-medium text-content mb-1">Language</label>
               <input type="text" id="siteLanguage" name="siteLanguage" value="{{ config.site.language }}"
@@ -47,6 +47,15 @@
               <label for="postsPerPage" class="block text-sm font-medium text-content mb-1">Posts Per Page</label>
               <input type="number" id="postsPerPage" name="postsPerPage" value="{{ config.postsPerPage }}" min="1"
                 class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            </div>
+            <div>
+              <label for="theme" class="block text-sm font-medium text-content mb-1">Theme</label>
+              <select id="theme" name="theme"
+                class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                {% for t in themes %}
+                  <option value="{{ t }}" {% if t == config.theme %}selected{% endif %}>{{ t }}</option>
+                {% endfor %}
+              </select>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">

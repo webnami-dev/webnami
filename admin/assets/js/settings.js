@@ -133,6 +133,7 @@ form.addEventListener("submit", async (e) => {
     siteFavicon: document.getElementById("siteFavicon").value,
     siteCsp: document.getElementById("siteCsp").value,
     postsPerPage: document.getElementById("postsPerPage").value,
+    theme: document.getElementById("theme").value,
     homepageHeading: document.getElementById("homepageHeading").value,
     homepageTitle: document.getElementById("homepageTitle").value,
     homepageDescription: document.getElementById("homepageDescription").value,

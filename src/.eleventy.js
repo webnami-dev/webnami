@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { eleventyImageTransformPlugin, Image } from "@11ty/eleventy-img";
+import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { icons } from "lucide";
