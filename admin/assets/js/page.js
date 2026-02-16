@@ -18,8 +18,9 @@ form.addEventListener("submit", async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, description, content }),
   });
+  const data = await res.json();
   if (!res.ok) {
-    showAlert("error", "Failed to update page.");
+    showAlert("error", data.error || "Failed to update page.");
     return;
   }
   flashAlert("success", "Page updated successfully.");

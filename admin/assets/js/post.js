@@ -34,8 +34,9 @@ form.addEventListener("submit", async (e) => {
       content,
     }),
   });
+  const data = await res.json();
   if (!res.ok) {
-    showAlert("error", "Failed to update post.");
+    showAlert("error", data.error || "Failed to update post.");
     return;
   }
   flashAlert("success", "Post updated successfully.");

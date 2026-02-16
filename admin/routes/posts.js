@@ -85,7 +85,25 @@ router.get("/:slug", (req, res) => {
 router.put("/:slug", async (req, res) => {
   const { title, description, tags, category, author, date, content } =
     req.body;
-  const filePath = path.join(postsDir, `${req.params.slug}.md`);
+  const oldSlug = req.params.slug;
+  const newSlug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+  if (newSlug !== oldSlug) {
+    if (RESERVED_SLUGS.includes(newSlug)) {
+      return res
+        .status(400)
+        .json({
+          error: `The slug "${newSlug}" is reserved and cannot be used.`,
+        });
+    }
+    if (fs.existsSync(path.join(postsDir, `${newSlug}.md`))) {
+      return res
+        .status(400)
+        .json({ error: `A post with the slug "${newSlug}" already exists.` });
+    }
+  }
   const frontmatter = {
     layout: "post",
     title,
@@ -99,9 +117,12 @@ router.put("/:slug", async (req, res) => {
     date: new Date(date),
   };
   const fileContent = matter.stringify(content || "", frontmatter);
-  fs.writeFileSync(filePath, fileContent);
+  if (newSlug !== oldSlug) {
+    fs.unlinkSync(path.join(postsDir, `${oldSlug}.md`));
+  }
+  fs.writeFileSync(path.join(postsDir, `${newSlug}.md`), fileContent);
   await buildSite();
-  res.json({ slug: req.params.slug });
+  res.json({ slug: newSlug });
 });
 
 router.get("/:slug/seo", (req, res) => {

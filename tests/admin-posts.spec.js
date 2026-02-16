@@ -4,13 +4,14 @@ import path from "path";
 
 const postsDir = path.resolve("posts");
 const testSlug = "playwright-test-post";
+const renamedSlug = "updated-test-post";
 const testFile = path.join(postsDir, `${testSlug}.md`);
+const renamedFile = path.join(postsDir, `${renamedSlug}.md`);
 
-// Clean up test post after all tests
+// Clean up test posts after all tests
 test.afterAll(() => {
-  if (fs.existsSync(testFile)) {
-    fs.unlinkSync(testFile);
-  }
+  if (fs.existsSync(testFile)) fs.unlinkSync(testFile);
+  if (fs.existsSync(renamedFile)) fs.unlinkSync(renamedFile);
 });
 
 test.describe("Posts CRUD", () => {
@@ -83,9 +84,7 @@ test.describe("Posts CRUD", () => {
     await expect(page.locator("#author")).toHaveValue("Tester");
   });
 
-  test("should update a post via the form and show a success alert", async ({
-    page,
-  }) => {
+  test("should rename file when title is updated", async ({ page }) => {
     await page.goto(`/admin/posts/${testSlug}`);
     await page.locator("#title").fill("Updated Test Post");
     await page.locator("#description").fill("Updated description");
@@ -96,32 +95,95 @@ test.describe("Posts CRUD", () => {
       "Post updated successfully",
     );
 
-    const fileContent = fs.readFileSync(testFile, "utf-8");
+    // Old file should be gone, new file should exist
+    expect(fs.existsSync(testFile)).toBeFalsy();
+    expect(fs.existsSync(renamedFile)).toBeTruthy();
+
+    const fileContent = fs.readFileSync(renamedFile, "utf-8");
     expect(fileContent).toContain("Updated Test Post");
   });
 
-  test("should reflect updated title in edit form", async ({ page }) => {
-    await page.goto(`/admin/posts/${testSlug}`);
+  test("should reflect updated title at the new slug", async ({ page }) => {
+    await page.goto(`/admin/posts/${renamedSlug}`);
     await expect(page.locator("#title")).toHaveValue("Updated Test Post");
+  });
+
+  test("should reject renaming to a reserved slug via API", async ({
+    request,
+  }) => {
+    const resp = await request.put(`/admin/posts/${renamedSlug}`, {
+      data: {
+        title: "Admin",
+        description: "Trying reserved slug",
+        tags: "test",
+        category: "testing",
+        author: "Tester",
+        date: "2025-01-01",
+        content: "Reserved slug rename test.",
+      },
+    });
+    expect(resp.status()).toBe(400);
+    const data = await resp.json();
+    expect(data.error).toContain("reserved");
+    // Original file should still exist
+    expect(fs.existsSync(renamedFile)).toBeTruthy();
+  });
+
+  test("should reject renaming to a duplicate slug via API", async ({
+    request,
+  }) => {
+    // Create a second post to collide with
+    await request.post("/admin/posts/new", {
+      data: {
+        title: "Collision Post",
+        description: "Temporary",
+        tags: "test",
+        category: "test",
+        author: "Tester",
+        date: "2025-01-01",
+        content: "Temp.",
+      },
+    });
+
+    const resp = await request.put(`/admin/posts/${renamedSlug}`, {
+      data: {
+        title: "Collision Post",
+        description: "Trying duplicate slug",
+        tags: "test",
+        category: "testing",
+        author: "Tester",
+        date: "2025-01-01",
+        content: "Duplicate slug rename test.",
+      },
+    });
+    expect(resp.status()).toBe(400);
+    const data = await resp.json();
+    expect(data.error).toContain("already exists");
+    // Original file should still exist unchanged
+    expect(fs.existsSync(renamedFile)).toBeTruthy();
+
+    // Clean up collision post
+    const collisionFile = path.join(postsDir, "collision-post.md");
+    if (fs.existsSync(collisionFile)) fs.unlinkSync(collisionFile);
   });
 
   test("should not delete post when clicking Cancel in confirm dialog", async ({
     page,
   }) => {
-    await page.goto(`/admin/posts/${testSlug}`);
+    await page.goto(`/admin/posts/${renamedSlug}`);
     await page.locator("#delete-btn").click();
 
     await expect(page.locator("#confirm-dialog")).toBeVisible();
     await page.locator("#confirm-cancel").click();
 
     await expect(page.locator("#confirm-dialog")).toBeHidden();
-    expect(fs.existsSync(testFile)).toBeTruthy();
+    expect(fs.existsSync(renamedFile)).toBeTruthy();
   });
 
   test("should not delete post when clicking backdrop of confirm dialog", async ({
     page,
   }) => {
-    await page.goto(`/admin/posts/${testSlug}`);
+    await page.goto(`/admin/posts/${renamedSlug}`);
     await page.locator("#delete-btn").click();
 
     await expect(page.locator("#confirm-dialog")).toBeVisible();
@@ -130,13 +192,13 @@ test.describe("Posts CRUD", () => {
       .click({ position: { x: 10, y: 10 } });
 
     await expect(page.locator("#confirm-dialog")).toBeHidden();
-    expect(fs.existsSync(testFile)).toBeTruthy();
+    expect(fs.existsSync(renamedFile)).toBeTruthy();
   });
 
   test("should delete a post via the UI and show a success alert", async ({
     page,
   }) => {
-    await page.goto(`/admin/posts/${testSlug}`);
+    await page.goto(`/admin/posts/${renamedSlug}`);
     await page.locator("#delete-btn").click();
 
     await expect(page.locator("#confirm-dialog")).toBeVisible();
@@ -149,7 +211,7 @@ test.describe("Posts CRUD", () => {
     await expect(page.locator(".alert-success")).toContainText(
       "Post deleted successfully",
     );
-    expect(fs.existsSync(testFile)).toBeFalsy();
+    expect(fs.existsSync(renamedFile)).toBeFalsy();
   });
 
   test("should no longer show the deleted post in the list", async ({
@@ -157,7 +219,7 @@ test.describe("Posts CRUD", () => {
   }) => {
     await page.goto("/admin/posts");
     await expect(
-      page.locator(`a[href="/admin/posts/${testSlug}"]`),
+      page.locator(`a[href="/admin/posts/${renamedSlug}"]`),
     ).toHaveCount(0);
   });
 
