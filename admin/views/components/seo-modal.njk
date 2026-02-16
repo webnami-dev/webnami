@@ -19,18 +19,23 @@
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 scale-100"
     x-transition:leave-end="opacity-0 scale-95"
-    class="relative bg-surface border border-border rounded-lg shadow-xl p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto"
+    class="relative bg-surface border border-border rounded-md shadow-xl p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto"
   >
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-semibold text-content">SEO Analysis</h2>
-      <button @click="$store.seo.close()" class="text-accent hover:text-content transition-colors">
+      <button
+        @click="$store.seo.close()"
+        class="text-accent hover:text-content transition-colors"
+      >
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
     <template x-if="$store.seo.loading">
       <div class="flex items-center justify-center py-8">
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <div
+          class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"
+        ></div>
       </div>
     </template>
 
@@ -38,25 +43,41 @@
       <p class="text-red-500 text-sm" x-text="$store.seo.error"></p>
     </template>
 
-    <template x-if="!$store.seo.loading && !$store.seo.error && $store.seo.result">
+    <template
+      x-if="!$store.seo.loading && !$store.seo.error && $store.seo.result"
+    >
       <div>
         <div class="flex items-center gap-4 mb-4 text-sm">
-          <span class="text-green-600 font-medium" x-text="$store.seo.result.summary.passed + ' passed'"></span>
-          <span class="text-red-600 font-medium" x-text="$store.seo.result.summary.failed + ' failed'"></span>
+          <span
+            class="text-green-600 font-medium"
+            x-text="$store.seo.result.summary.passed + ' passed'"
+          ></span>
+          <span
+            class="text-red-600 font-medium"
+            x-text="$store.seo.result.summary.failed + ' failed'"
+          ></span>
           <template x-if="$store.seo.result.summary.info > 0">
-            <span class="text-blue-500 font-medium" x-text="$store.seo.result.summary.info + ' info'"></span>
+            <span
+              class="text-blue-500 font-medium"
+              x-text="$store.seo.result.summary.info + ' info'"
+            ></span>
           </template>
         </div>
         <ul class="space-y-2">
           <template x-for="check in $store.seo.result.checks" :key="check.name">
-            <li class="flex items-start gap-2 text-sm border-b border-border pb-2 last:border-0">
+            <li
+              class="flex items-start gap-2 text-sm border-b border-border pb-2 last:border-0"
+            >
               <span
                 class="shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold"
                 :class="check.status === 'pass' ? 'bg-green-100 text-green-700' : check.status === 'fail' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'"
                 x-text="check.status === 'pass' ? '\u2713' : check.status === 'fail' ? '\u2717' : 'i'"
               ></span>
               <div>
-                <span class="font-medium text-content" x-text="check.name"></span>
+                <span
+                  class="font-medium text-content"
+                  x-text="check.name"
+                ></span>
                 <p class="text-accent" x-text="check.message"></p>
               </div>
             </li>

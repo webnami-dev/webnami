@@ -21,15 +21,15 @@
           </g>
         </svg>
       </a>
-      <a href="/admin/posts" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+      <a href="/admin/posts" class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
         <i data-lucide="file-text" class="w-4 h-4"></i>
         Posts
       </a>
-      <a href="/admin/pages" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+      <a href="/admin/pages" class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
         <i data-lucide="file" class="w-4 h-4"></i>
         Pages
       </a>
-      <a href="/admin/settings" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+      <a href="/admin/settings" class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
         <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
         Settings
       </a>
@@ -37,14 +37,14 @@
 
     <!-- Right: Preview, Gear, Theme Toggle -->
     <div class="flex items-center gap-1 shrink-0">
-      <a href="/" target="_blank" title="Preview Site" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
+      <a href="/" target="_blank" title="Preview Site" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-accent hover:bg-hover hover:text-content transition-colors">
         <i data-lucide="external-link" class="w-4 h-4"></i>
         Preview
       </a>
       <div x-data>
         <button
           @click="$store.adminTheme.lightTheme()"
-          class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+          class="p-2 rounded-md text-content hover:text-primary-500 transition-colors duration-200"
           aria-label="Switch to light mode"
           x-show="$store.adminTheme.dark"
         >
@@ -52,7 +52,7 @@
         </button>
         <button
           @click="$store.adminTheme.darkTheme()"
-          class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+          class="p-2 rounded-md text-content hover:text-primary-500 transition-colors duration-200"
           aria-label="Switch to dark mode"
           x-show="!$store.adminTheme.dark"
         >

@@ -8,26 +8,26 @@
       <div>
         <label for="title" class="block text-sm font-medium text-content mb-1">Title</label>
         <input type="text" id="title" name="title" required value="{{ page.title }}"
-          class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+          class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
       </div>
       <div>
         <label for="description" class="block text-sm font-medium text-content mb-1">Description</label>
         <input type="text" id="description" name="description" value="{{ page.description }}"
-          class="w-full px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+          class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
       </div>
       <div>
         <label for="content" class="block text-sm font-medium text-content mb-1">Content</label>
         <textarea id="content" name="content">{{ page.content }}</textarea>
       </div>
       <div class="flex items-center gap-3">
-        <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
+        <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
           Save Changes
         </button>
-        <button type="button" id="delete-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-300 text-red-600 text-sm font-medium hover:bg-red-50 transition-colors">
+        <button type="button" id="delete-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-red-300 text-red-600 text-sm font-medium hover:bg-red-50 transition-colors">
           <i data-lucide="trash-2" class="w-4 h-4"></i>
           Delete
         </button>
-        <button type="button" id="seo-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
+        <button type="button" id="seo-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
           <i data-lucide="search" class="w-4 h-4"></i>
           SEO Check
         </button>

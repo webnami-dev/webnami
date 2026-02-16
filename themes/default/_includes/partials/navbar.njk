@@ -25,7 +25,7 @@
           <div x-data>
             <button
               @click="$store.theme.lightTheme()"
-              class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+              class="p-2 rounded-md text-content hover:text-primary-500 transition-colors duration-200"
               aria-label="Switch to light mode"
               x-show="$store.theme.dark"
             >
@@ -33,7 +33,7 @@
             </button>
             <button
               @click="$store.theme.darkTheme()"
-              class="p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+              class="p-2 rounded-md text-content hover:text-primary-500 transition-colors duration-200"
               aria-label="Switch to dark mode"
               x-show="!$store.theme.dark"
             >
@@ -44,7 +44,7 @@
           <!-- Hamburger button (mobile only) -->
           <button
             @click="open = !open"
-            class="lg:hidden p-2 rounded-lg text-content hover:text-primary-500 transition-colors duration-200"
+            class="lg:hidden p-2 rounded-md text-content hover:text-primary-500 transition-colors duration-200"
             aria-label="Toggle menu"
             :aria-expanded="open"
           >

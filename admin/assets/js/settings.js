@@ -8,13 +8,13 @@ function createRow(container, rowClass, fields) {
     const input = document.createElement("input");
     input.type = "text";
     input.placeholder = placeholder;
-    input.className = `flex-1 px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary ${className}`;
+    input.className = `flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary ${className}`;
     row.appendChild(input);
   });
   const removeBtn = document.createElement("button");
   removeBtn.type = "button";
   removeBtn.className =
-    "p-2 rounded-lg border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-row";
+    "p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-row";
   removeBtn.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i>';
   row.appendChild(removeBtn);
   container.appendChild(row);
@@ -55,18 +55,18 @@ document.getElementById("add-social-link").addEventListener("click", () => {
 document.getElementById("add-link-group").addEventListener("click", () => {
   const groups = document.getElementById("link-groups");
   const group = document.createElement("div");
-  group.className = "link-group border border-border rounded-lg p-4";
+  group.className = "link-group border border-border rounded-md p-4";
   group.innerHTML = `
     <div class="flex items-center gap-3 mb-3">
       <input type="text" placeholder="Group Title (optional)"
-        class="flex-1 px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary group-title">
-      <button type="button" class="p-2 rounded-lg border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-group">
+        class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary group-title">
+      <button type="button" class="p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-group">
         <i data-lucide="trash-2" class="w-4 h-4"></i>
       </button>
     </div>
     <div class="flex flex-col gap-3 group-links"></div>
     <button type="button"
-      class="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-border text-content text-sm font-medium hover:bg-hover transition-colors add-group-link">
+      class="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors add-group-link">
       <i data-lucide="plus" class="w-4 h-4"></i>
       Add Link
     </button>

@@ -86,3 +86,58 @@
 .confirm-delete-btn:hover {
   background-color: var(--color-confirm-delete-hover);
 }
+
+/* EasyMDE dark mode overrides */
+:root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror {
+  background-color: var(--color-surface);
+  color: var(--color-content);
+  border-color: var(--color-border);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror-cursor {
+  border-left-color: var(--color-content);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar button {
+  color: var(--color-accent);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar button:hover,
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar button.active {
+  background-color: var(--color-hover);
+  border-color: var(--color-border);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar i.separator {
+  border-left-color: var(--color-border);
+  border-right-color: var(--color-border);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-statusbar {
+  color: var(--color-accent);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview {
+  background-color: var(--color-surface);
+  color: var(--color-content);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview pre {
+  background-color: var(--color-background);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror-selected {
+  background-color: #264f78;
+}
+
+:root[admin-data-theme="dark"]
+  .EasyMDEContainer
+  .CodeMirror-focused
+  .CodeMirror-selected {
+  background-color: #264f78;
+}

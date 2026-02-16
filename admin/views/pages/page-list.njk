@@ -4,18 +4,18 @@
   <div class="max-w-2xl mx-auto">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-semibold text-content">Pages</h1>
-      <a href="/admin/pages/new" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
+      <a href="/admin/pages/new" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
         <i data-lucide="plus" class="w-4 h-4"></i>
         New Page
       </a>
     </div>
     <div class="flex flex-col gap-3">
       {% for page in data %}
-        <div class="flex items-center justify-between px-4 py-3 rounded-lg border border-border bg-surface">
+        <div class="flex items-center justify-between px-4 py-3 border-b border-border">
           <a href="/admin/pages/{{ page.slug }}" class="text-sm font-medium text-content hover:text-primary transition-colors">
             {{ page.title }}
           </a>
-          <a href="{{ page.url }}" target="_blank" title="Preview" class="p-2 rounded-lg text-accent hover:bg-hover hover:text-content transition-colors">
+          <a href="{{ page.url }}" target="_blank" title="Preview" class="p-2 rounded-md text-accent hover:bg-hover hover:text-content transition-colors">
             <i data-lucide="external-link" class="w-4 h-4"></i>
           </a>
         </div>

@@ -2,6 +2,7 @@ const editor = new EasyMDE({
   element: document.getElementById("content"),
   spellChecker: false,
   status: false,
+  insertTexts: { image: ["![](", "/images/)"] },
 });
 
 document.getElementById("page-form").addEventListener("submit", async (e) => {
