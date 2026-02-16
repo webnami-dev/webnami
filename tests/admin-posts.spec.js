@@ -89,4 +89,40 @@ test.describe("Posts CRUD", () => {
     await page.goto("/admin/posts");
     await expect(page.locator(`a[href="/admin/posts/${testSlug}"]`)).toHaveCount(0);
   });
+
+  test("should reject creating a post with reserved slug 'admin'", async ({ request }) => {
+    const resp = await request.post("/admin/posts/new", {
+      data: {
+        title: "Admin",
+        description: "This should be rejected",
+        tags: "test",
+        category: "test",
+        author: "Tester",
+        date: "2025-01-01",
+        content: "Reserved slug test.",
+      },
+    });
+    expect(resp.status()).toBe(400);
+    const data = await resp.json();
+    expect(data.error).toContain("reserved");
+    expect(fs.existsSync(path.join(postsDir, "admin.md"))).toBeFalsy();
+  });
+
+  test("should reject creating a post with reserved slug 'api'", async ({ request }) => {
+    const resp = await request.post("/admin/posts/new", {
+      data: {
+        title: "API",
+        description: "This should be rejected",
+        tags: "test",
+        category: "test",
+        author: "Tester",
+        date: "2025-01-01",
+        content: "Reserved slug test.",
+      },
+    });
+    expect(resp.status()).toBe(400);
+    const data = await resp.json();
+    expect(data.error).toContain("reserved");
+    expect(fs.existsSync(path.join(postsDir, "api.md"))).toBeFalsy();
+  });
 });

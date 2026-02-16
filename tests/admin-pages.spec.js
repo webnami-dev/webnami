@@ -79,4 +79,32 @@ test.describe("Pages CRUD", () => {
     await page.goto("/admin/pages");
     await expect(page.locator(`a[href="/admin/pages/${testSlug}"]`)).toHaveCount(0);
   });
+
+  test("should reject creating a page with reserved slug 'admin'", async ({ request }) => {
+    const resp = await request.post("/admin/pages/new", {
+      data: {
+        title: "Admin",
+        description: "This should be rejected",
+        content: "Reserved slug test.",
+      },
+    });
+    expect(resp.status()).toBe(400);
+    const data = await resp.json();
+    expect(data.error).toContain("reserved");
+    expect(fs.existsSync(path.join(pagesDir, "admin.md"))).toBeFalsy();
+  });
+
+  test("should reject creating a page with reserved slug 'api'", async ({ request }) => {
+    const resp = await request.post("/admin/pages/new", {
+      data: {
+        title: "API",
+        description: "This should be rejected",
+        content: "Reserved slug test.",
+      },
+    });
+    expect(resp.status()).toBe(400);
+    const data = await resp.json();
+    expect(data.error).toContain("reserved");
+    expect(fs.existsSync(path.join(pagesDir, "api.md"))).toBeFalsy();
+  });
 });

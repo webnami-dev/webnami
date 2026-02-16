@@ -25,5 +25,9 @@ document.getElementById("post-form").addEventListener("submit", async (e) => {
     body: JSON.stringify({ title, description, tags, category, author, date, content }),
   });
   const data = await resp.json();
+  if (!resp.ok) {
+    alert(data.error || "Failed to create post.");
+    return;
+  }
   window.location.href = `/admin/posts/${data.slug}`;
 });

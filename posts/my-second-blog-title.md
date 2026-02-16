@@ -1,10 +1,12 @@
 ---
-layout: "post"
-title: "My second blog title"
-description: "second blog description"
-tags: ["Second", "News"]
-category: "Blog"
-author: "WebNami"
+layout: post
+title: My second blog title
+description: second blog description
+tags:
+  - Second
+  - News
+category: Blog
+author: WebNami
 date: 2025-07-24
 ---
 

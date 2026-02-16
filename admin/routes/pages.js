@@ -6,6 +6,7 @@ import { buildSite } from "../eleventy.js";
 
 const router = express.Router();
 const pagesDir = path.resolve("pages");
+const RESERVED_SLUGS = ["admin", "api"];
 
 router.get("/", async (req, res) => {
   const resp = await fetch("http://localhost:3000/api/pages.json");
@@ -28,6 +29,9 @@ router.post("/new", async (req, res) => {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+  if (RESERVED_SLUGS.includes(slug)) {
+    return res.status(400).json({ error: `The slug "${slug}" is reserved and cannot be used.` });
+  }
   const frontmatter = { layout: "page", title, description };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(path.join(pagesDir, `${slug}.md`), fileContent);

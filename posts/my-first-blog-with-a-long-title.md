@@ -1,10 +1,12 @@
 ---
-layout: "post"
-title: "My first blog with a long title"
-description: "first blog description"
-tags: ["First", "News"]
-category: "Journal"
-author: "WebNami"
+layout: post
+title: My first blog with a long title
+description: first blog description
+tags:
+  - First
+  - News
+category: Journal
+author: WebNami
 date: 2025-07-23
 ---
 

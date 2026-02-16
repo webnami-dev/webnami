@@ -16,5 +16,9 @@ document.getElementById("page-form").addEventListener("submit", async (e) => {
     body: JSON.stringify({ title, description, content }),
   });
   const data = await resp.json();
+  if (!resp.ok) {
+    alert(data.error || "Failed to create page.");
+    return;
+  }
   window.location.href = `/admin/pages/${data.slug}`;
 });
