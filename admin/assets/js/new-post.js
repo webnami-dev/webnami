@@ -26,8 +26,9 @@ document.getElementById("post-form").addEventListener("submit", async (e) => {
   });
   const data = await resp.json();
   if (!resp.ok) {
-    alert(data.error || "Failed to create post.");
+    showAlert("error", data.error || "Failed to create post.");
     return;
   }
+  flashAlert("success", "Post created successfully.");
   window.location.href = `/admin/posts/${data.slug}`;
 });

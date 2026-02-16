@@ -12,6 +12,14 @@
   --color-surface: var(--color-surface);
   --color-border: var(--color-border);
   --color-hover: var(--color-hover);
+  --color-alert-success-bg: var(--color-alert-success-bg);
+  --color-alert-success-border: var(--color-alert-success-border);
+  --color-alert-success-text: var(--color-alert-success-text);
+  --color-alert-error-bg: var(--color-alert-error-bg);
+  --color-alert-error-border: var(--color-alert-error-border);
+  --color-alert-error-text: var(--color-alert-error-text);
+  --color-confirm-delete: var(--color-confirm-delete);
+  --color-confirm-delete-hover: var(--color-confirm-delete-hover);
 }
 
 /* Color palette - edit these values */
@@ -25,6 +33,16 @@
   --color-border: #e5e7eb;
   --color-hover: #f3f4f6;
   --color-footer: #f3f4f6;
+
+  /* Alert colors */
+  --color-alert-success-bg: #f0fdf4;
+  --color-alert-success-border: #bbf7d0;
+  --color-alert-success-text: #166534;
+  --color-alert-error-bg: #fef2f2;
+  --color-alert-error-border: #fecaca;
+  --color-alert-error-text: #991b1b;
+  --color-confirm-delete: #dc2626;
+  --color-confirm-delete-hover: #b91c1c;
 }
 
 :root[admin-data-theme="dark"] {
@@ -37,4 +55,34 @@
   --color-border: #1f2937;
   --color-hover: #1f2937;
   --color-footer: #000000;
+
+  /* Alert colors */
+  --color-alert-success-bg: #052e16;
+  --color-alert-success-border: #14532d;
+  --color-alert-success-text: #86efac;
+  --color-alert-error-bg: #450a0a;
+  --color-alert-error-border: #7f1d1d;
+  --color-alert-error-text: #fca5a5;
+  --color-confirm-delete: #dc2626;
+  --color-confirm-delete-hover: #ef4444;
+}
+
+.alert-success {
+  background-color: var(--color-alert-success-bg);
+  border-color: var(--color-alert-success-border);
+  color: var(--color-alert-success-text);
+}
+
+.alert-error {
+  background-color: var(--color-alert-error-bg);
+  border-color: var(--color-alert-error-border);
+  color: var(--color-alert-error-text);
+}
+
+.confirm-delete-btn {
+  background-color: var(--color-confirm-delete);
+}
+
+.confirm-delete-btn:hover {
+  background-color: var(--color-confirm-delete-hover);
 }

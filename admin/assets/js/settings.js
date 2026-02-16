@@ -148,6 +148,9 @@ form.addEventListener("submit", async (e) => {
   });
 
   if (res.ok) {
+    flashAlert("success", "Settings saved successfully.");
     window.location.reload();
+  } else {
+    showAlert("error", "Failed to save settings.");
   }
 });

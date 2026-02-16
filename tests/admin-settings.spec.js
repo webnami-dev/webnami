@@ -49,13 +49,16 @@ test.describe("Settings Page", () => {
     }
   });
 
-  test("should save general settings and persist on reload", async ({ page }) => {
+  test("should save general settings, show a success alert, and persist on reload", async ({ page }) => {
     await page.goto("/admin/settings");
     await page.locator("#siteName").fill("Test Site Name");
     await page.locator("#homepageHeading").fill("Test Heading");
 
     await page.locator('button[type="submit"]').click();
     await page.waitForLoadState("networkidle");
+
+    await expect(page.locator(".alert-success")).toBeVisible();
+    await expect(page.locator(".alert-success")).toContainText("Settings saved successfully");
 
     const config = readConfig();
     expect(config.site.name).toBe("Test Site Name");

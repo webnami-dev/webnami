@@ -13,16 +13,27 @@ form.addEventListener("submit", async (e) => {
   const description = document.getElementById("description").value;
   const content = editor.value();
 
-  await fetch(`/admin/pages/${slug}`, {
+  const res = await fetch(`/admin/pages/${slug}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, description, content }),
   });
+  if (!res.ok) {
+    showAlert("error", "Failed to update page.");
+    return;
+  }
+  flashAlert("success", "Page updated successfully.");
   window.location.href = "/admin/pages";
 });
 
 document.getElementById("delete-btn").addEventListener("click", async () => {
-  if (!confirm("Are you sure you want to delete this page?")) return;
-  await fetch(`/admin/pages/${slug}`, { method: "DELETE" });
+  const confirmed = await showConfirm("Are you sure you want to delete this page?");
+  if (!confirmed) return;
+  const res = await fetch(`/admin/pages/${slug}`, { method: "DELETE" });
+  if (!res.ok) {
+    showAlert("error", "Failed to delete page.");
+    return;
+  }
+  flashAlert("success", "Page deleted successfully.");
   window.location.href = "/admin/pages";
 });

@@ -25,17 +25,14 @@ test.describe("Pages CRUD", () => {
     await expect(page.locator("#title")).toBeVisible();
   });
 
-  test("should create a new page via API", async ({ request }) => {
-    const resp = await request.post("/admin/pages/new", {
-      data: {
-        title: "Playwright Test Page",
-        description: "A test page created by Playwright",
-        content: "This is test page content.",
-      },
-    });
-    expect(resp.ok()).toBeTruthy();
-    const data = await resp.json();
-    expect(data.slug).toBe(testSlug);
+  test("should create a new page via the form and show a success alert", async ({ page }) => {
+    await page.goto("/admin/pages/new");
+    await page.locator("#title").fill("Playwright Test Page");
+    await page.locator("#description").fill("A test page created by Playwright");
+    await page.locator('button[type="submit"]').click();
+
+    await expect(page.locator(".alert-success")).toBeVisible();
+    await expect(page.locator(".alert-success")).toContainText("Page created successfully");
     expect(fs.existsSync(testFile)).toBeTruthy();
   });
 
@@ -50,15 +47,14 @@ test.describe("Pages CRUD", () => {
     await expect(page.locator("#description")).toHaveValue("A test page created by Playwright");
   });
 
-  test("should update a page via API", async ({ request }) => {
-    const resp = await request.put(`/admin/pages/${testSlug}`, {
-      data: {
-        title: "Updated Test Page",
-        description: "Updated description",
-        content: "Updated page content.",
-      },
-    });
-    expect(resp.ok()).toBeTruthy();
+  test("should update a page via the form and show a success alert", async ({ page }) => {
+    await page.goto(`/admin/pages/${testSlug}`);
+    await page.locator("#title").fill("Updated Test Page");
+    await page.locator("#description").fill("Updated description");
+    await page.locator('button[type="submit"]').click();
+
+    await expect(page.locator(".alert-success")).toBeVisible();
+    await expect(page.locator(".alert-success")).toContainText("Page updated successfully");
 
     const fileContent = fs.readFileSync(testFile, "utf-8");
     expect(fileContent).toContain("Updated Test Page");
@@ -69,9 +65,16 @@ test.describe("Pages CRUD", () => {
     await expect(page.locator("#title")).toHaveValue("Updated Test Page");
   });
 
-  test("should delete a page via API", async ({ request }) => {
-    const resp = await request.delete(`/admin/pages/${testSlug}`);
-    expect(resp.ok()).toBeTruthy();
+  test("should delete a page via the UI and show a success alert", async ({ page }) => {
+    await page.goto(`/admin/pages/${testSlug}`);
+    await page.locator("#delete-btn").click();
+
+    await expect(page.locator("#confirm-dialog")).toBeVisible();
+    await expect(page.locator("#confirm-dialog")).toContainText("Are you sure you want to delete this page?");
+    await page.locator("#confirm-accept").click();
+
+    await expect(page.locator(".alert-success")).toBeVisible();
+    await expect(page.locator(".alert-success")).toContainText("Page deleted successfully");
     expect(fs.existsSync(testFile)).toBeFalsy();
   });
 

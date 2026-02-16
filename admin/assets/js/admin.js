@@ -65,6 +65,72 @@ Alpine.store("adminTheme", {
   },
 });
 
+let alertId = 0;
+
+Alpine.data("alertComponent", () => ({
+  alerts: [],
+  init() {
+    const flash = sessionStorage.getItem("flash_alert");
+    if (flash) {
+      sessionStorage.removeItem("flash_alert");
+      const { type, message } = JSON.parse(flash);
+      this.show(type, message);
+    }
+    document.addEventListener("show-alert", (e) => {
+      this.show(e.detail.type, e.detail.message);
+    });
+  },
+  show(type, message) {
+    const id = ++alertId;
+    this.alerts.push({ id, type, message, visible: true });
+    this.$nextTick(() => lucide.createIcons());
+    setTimeout(() => this.dismiss(id), 4000);
+  },
+  dismiss(id) {
+    const alert = this.alerts.find((a) => a.id === id);
+    if (alert) alert.visible = false;
+    setTimeout(() => {
+      this.alerts = this.alerts.filter((a) => a.id !== id);
+    }, 300);
+  },
+}));
+
+let confirmResolve = null;
+
+Alpine.store("confirm", {
+  open: false,
+  message: "",
+  show(message) {
+    this.message = message;
+    this.open = true;
+  },
+  accept() {
+    this.open = false;
+    if (confirmResolve) confirmResolve(true);
+    confirmResolve = null;
+  },
+  cancel() {
+    this.open = false;
+    if (confirmResolve) confirmResolve(false);
+    confirmResolve = null;
+  },
+});
+
+window.flashAlert = function (type, message) {
+  sessionStorage.setItem("flash_alert", JSON.stringify({ type, message }));
+};
+
+window.showAlert = function (type, message) {
+  document.dispatchEvent(new CustomEvent("show-alert", { detail: { type, message } }));
+};
+
+window.showConfirm = function (message) {
+  return new Promise((resolve) => {
+    confirmResolve = resolve;
+    Alpine.store("confirm").show(message);
+  });
+};
+
 window.lucide = { createIcons: () => createIcons({ icons }) };
 window.Alpine = Alpine;
 window.EasyMDE = EasyMDE;

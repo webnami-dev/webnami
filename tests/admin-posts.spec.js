@@ -26,21 +26,19 @@ test.describe("Posts CRUD", () => {
     await expect(page.locator("#date")).toBeVisible();
   });
 
-  test("should create a new post via API", async ({ request }) => {
-    const resp = await request.post("/admin/posts/new", {
-      data: {
-        title: "Playwright Test Post",
-        description: "A test post created by Playwright",
-        tags: "test, playwright",
-        category: "testing",
-        author: "Tester",
-        date: "2025-01-01",
-        content: "This is test content for the Playwright E2E test.",
-      },
-    });
-    expect(resp.ok()).toBeTruthy();
-    const data = await resp.json();
-    expect(data.slug).toBe(testSlug);
+  test("should create a new post via the form and show a success alert", async ({ page }) => {
+    await page.goto("/admin/posts/new");
+    await page.locator("#title").fill("Playwright Test Post");
+    await page.locator("#description").fill("A test post created by Playwright");
+    await page.locator("#tags").fill("test, playwright");
+    await page.locator("#category").fill("testing");
+    await page.locator("#author").fill("Tester");
+    await page.locator("#date").evaluate((el) => { el.removeAttribute("readonly"); });
+    await page.locator("#date").fill("2025-01-01");
+    await page.locator('button[type="submit"]').click();
+
+    await expect(page.locator(".alert-success")).toBeVisible();
+    await expect(page.locator(".alert-success")).toContainText("Post created successfully");
     expect(fs.existsSync(testFile)).toBeTruthy();
   });
 
@@ -56,19 +54,14 @@ test.describe("Posts CRUD", () => {
     await expect(page.locator("#author")).toHaveValue("Tester");
   });
 
-  test("should update a post via API", async ({ request }) => {
-    const resp = await request.put(`/admin/posts/${testSlug}`, {
-      data: {
-        title: "Updated Test Post",
-        description: "Updated description",
-        tags: "test, updated",
-        category: "testing",
-        author: "Tester",
-        date: "2025-01-01",
-        content: "Updated content.",
-      },
-    });
-    expect(resp.ok()).toBeTruthy();
+  test("should update a post via the form and show a success alert", async ({ page }) => {
+    await page.goto(`/admin/posts/${testSlug}`);
+    await page.locator("#title").fill("Updated Test Post");
+    await page.locator("#description").fill("Updated description");
+    await page.locator('button[type="submit"]').click();
+
+    await expect(page.locator(".alert-success")).toBeVisible();
+    await expect(page.locator(".alert-success")).toContainText("Post updated successfully");
 
     const fileContent = fs.readFileSync(testFile, "utf-8");
     expect(fileContent).toContain("Updated Test Post");
@@ -79,9 +72,16 @@ test.describe("Posts CRUD", () => {
     await expect(page.locator("#title")).toHaveValue("Updated Test Post");
   });
 
-  test("should delete a post via API", async ({ request }) => {
-    const resp = await request.delete(`/admin/posts/${testSlug}`);
-    expect(resp.ok()).toBeTruthy();
+  test("should delete a post via the UI and show a success alert", async ({ page }) => {
+    await page.goto(`/admin/posts/${testSlug}`);
+    await page.locator("#delete-btn").click();
+
+    await expect(page.locator("#confirm-dialog")).toBeVisible();
+    await expect(page.locator("#confirm-dialog")).toContainText("Are you sure you want to delete this post?");
+    await page.locator("#confirm-accept").click();
+
+    await expect(page.locator(".alert-success")).toBeVisible();
+    await expect(page.locator(".alert-success")).toContainText("Post deleted successfully");
     expect(fs.existsSync(testFile)).toBeFalsy();
   });
 

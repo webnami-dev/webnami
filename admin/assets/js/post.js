@@ -21,16 +21,27 @@ form.addEventListener("submit", async (e) => {
   const date = document.getElementById("date").value;
   const content = editor.value();
 
-  await fetch(`/admin/posts/${slug}`, {
+  const res = await fetch(`/admin/posts/${slug}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, description, tags, category, author, date, content }),
   });
+  if (!res.ok) {
+    showAlert("error", "Failed to update post.");
+    return;
+  }
+  flashAlert("success", "Post updated successfully.");
   window.location.href = "/admin/posts";
 });
 
 document.getElementById("delete-btn").addEventListener("click", async () => {
-  if (!confirm("Are you sure you want to delete this post?")) return;
-  await fetch(`/admin/posts/${slug}`, { method: "DELETE" });
+  const confirmed = await showConfirm("Are you sure you want to delete this post?");
+  if (!confirmed) return;
+  const res = await fetch(`/admin/posts/${slug}`, { method: "DELETE" });
+  if (!res.ok) {
+    showAlert("error", "Failed to delete post.");
+    return;
+  }
+  flashAlert("success", "Post deleted successfully.");
   window.location.href = "/admin/posts";
 });

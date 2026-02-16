@@ -1,0 +1,70 @@
+<div
+  x-data="alertComponent"
+  x-init="init()"
+  class="fixed top-12 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full pointer-events-none"
+>
+  <template x-for="(alert, index) in alerts" :key="alert.id">
+    <div
+      x-show="alert.visible"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 translate-x-4"
+      x-transition:enter-end="opacity-100 translate-x-0"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 translate-x-0"
+      x-transition:leave-end="opacity-0 translate-x-4"
+      class="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-lg border text-sm"
+      :class="alert.type === 'success' ? 'alert-success' : 'alert-error'"
+    >
+      <span x-text="alert.message" class="flex-1"></span>
+      <button
+        @click="dismiss(alert.id)"
+        class="shrink-0 opacity-60 hover:opacity-100 transition-opacity"
+      >
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </template>
+</div>
+
+<div
+  x-data
+  x-show="$store.confirm.open"
+  x-transition:enter="transition ease-out duration-200"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-150"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  class="fixed inset-0 z-[200] flex items-center justify-center"
+  id="confirm-dialog"
+>
+  <div class="absolute inset-0 bg-black/50" @click="$store.confirm.cancel()"></div>
+  <div
+    x-show="$store.confirm.open"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    class="confirm-dialog relative bg-surface border border-border rounded-lg shadow-xl p-6 max-w-sm w-full mx-4"
+  >
+    <p x-text="$store.confirm.message" class="text-content text-sm mb-6"></p>
+    <div class="flex items-center justify-end gap-3">
+      <button
+        @click="$store.confirm.cancel()"
+        class="px-4 py-2 rounded-lg border border-border text-content text-sm font-medium hover:bg-hover transition-colors"
+        id="confirm-cancel"
+      >
+        Cancel
+      </button>
+      <button
+        @click="$store.confirm.accept()"
+        class="confirm-delete-btn px-4 py-2 rounded-lg text-white text-sm font-medium transition-colors"
+        id="confirm-accept"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

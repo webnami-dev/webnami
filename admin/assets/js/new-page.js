@@ -17,8 +17,9 @@ document.getElementById("page-form").addEventListener("submit", async (e) => {
   });
   const data = await resp.json();
   if (!resp.ok) {
-    alert(data.error || "Failed to create page.");
+    showAlert("error", data.error || "Failed to create page.");
     return;
   }
+  flashAlert("success", "Page created successfully.");
   window.location.href = `/admin/pages/${data.slug}`;
 });
