@@ -34,6 +34,10 @@ form.addEventListener("submit", async (e) => {
   window.location.href = "/admin/posts";
 });
 
+document.getElementById("seo-btn").addEventListener("click", () => {
+  runSEOCheck(`/admin/posts/${slug}/seo`);
+});
+
 document.getElementById("delete-btn").addEventListener("click", async () => {
   const confirmed = await showConfirm("Are you sure you want to delete this post?");
   if (!confirmed) return;

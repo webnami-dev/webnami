@@ -26,6 +26,10 @@ form.addEventListener("submit", async (e) => {
   window.location.href = "/admin/pages";
 });
 
+document.getElementById("seo-btn").addEventListener("click", () => {
+  runSEOCheck(`/admin/pages/${slug}/seo`);
+});
+
 document.getElementById("delete-btn").addEventListener("click", async () => {
   const confirmed = await showConfirm("Are you sure you want to delete this page?");
   if (!confirmed) return;

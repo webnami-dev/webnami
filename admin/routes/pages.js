@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { buildSite } from "../eleventy.js";
+import { SEOAnalyzer } from "../assets/js/seo-analyzer.js";
 
 const router = express.Router();
 const pagesDir = path.resolve("pages");
@@ -64,6 +65,16 @@ router.put("/:slug", async (req, res) => {
   fs.writeFileSync(filePath, fileContent);
   await buildSite();
   res.json({ slug: req.params.slug });
+});
+
+router.get("/:slug/seo", (req, res) => {
+  const htmlPath = path.resolve("_site", req.params.slug, "index.html");
+  if (!fs.existsSync(htmlPath)) {
+    return res.status(404).json({ error: "Built page not found. Save the page first." });
+  }
+  const analyzer = new SEOAnalyzer();
+  const result = analyzer.analyzeFile(htmlPath);
+  res.json(result);
 });
 
 router.delete("/:slug", async (req, res) => {

@@ -2,7 +2,6 @@
 
 import * as cheerio from "cheerio";
 import fs from "fs";
-import { glob } from "glob";
 
 class SEOAnalyzer {
   constructor() {
@@ -246,8 +245,8 @@ class SEOAnalyzer {
           result.status === "pass"
             ? "passed"
             : result.status === "fail"
-            ? "failed"
-            : "info"
+              ? "failed"
+              : "info"
         ]++;
       });
 
@@ -261,86 +260,6 @@ class SEOAnalyzer {
       };
     }
   }
-
-  // Analyze all HTML files in directory
-  async analyzeDirectory(directory = "_site") {
-    try {
-      const htmlFiles = await glob(`${directory}/**/*.html`, {
-        ignore: [
-          `${directory}/index.html`,
-          `${directory}/tags/**`,
-          `${directory}/category/**`,
-          `${directory}/author/**`,
-          `${directory}/sitemap.*`,
-          `${directory}/robots.*`,
-          `${directory}/404.*`,
-        ],
-      });
-
-      if (htmlFiles.length === 0) {
-        console.log(`No HTML files found in ${directory}`);
-        return;
-      }
-
-      const allResults = htmlFiles.map((file) => this.analyzeFile(file));
-      this.displayResults(allResults);
-
-      return allResults;
-    } catch (error) {
-      console.error("Error analyzing directory:", error.message);
-    }
-  }
-
-  // Display results
-  displayResults(results) {
-    console.log("\n🔍 SEO ANALYSIS REPORT");
-    console.log("=".repeat(80));
-
-    let totalPassed = 0;
-    let totalFailed = 0;
-    let totalInfo = 0;
-
-    results.forEach((result) => {
-      if (result.error) {
-        console.log(`\n❌ Error analyzing ${result.file}: ${result.error}`);
-        return;
-      }
-
-      console.log(`\n📄 ${result.file}`);
-      console.log("-".repeat(60));
-
-      result.checks.forEach((check) => {
-        const icon =
-          check.status === "pass"
-            ? "✅"
-            : check.status === "fail"
-            ? "❌"
-            : "ℹ️";
-        console.log(`   ${icon} ${check.name}: ${check.message}`);
-      });
-
-      console.log(
-        `\n   📊 Summary: ${result.summary.passed} passed, ${result.summary.failed} failed, ${result.summary.info} info`
-      );
-
-      totalPassed += result.summary.passed;
-      totalFailed += result.summary.failed;
-      totalInfo += result.summary.info;
-    });
-
-    console.log("\n" + "=".repeat(80));
-    console.log(`\n📈 OVERALL SUMMARY:`);
-    console.log(`   Files analyzed: ${results.filter((r) => !r.error).length}`);
-    console.log(`   Total checks: ${totalPassed + totalFailed + totalInfo}`);
-    console.log(`   ✅ Passed: ${totalPassed}`);
-    console.log(`   ❌ Failed: ${totalFailed}`);
-    console.log(`   ℹ️  Info: ${totalInfo}`);
-  }
 }
 
-// CLI usage
-const args = process.argv.slice(2);
-const directory = args[0] || "_site";
-
-const analyzer = new SEOAnalyzer();
-analyzer.analyzeDirectory(directory);
+export { SEOAnalyzer };

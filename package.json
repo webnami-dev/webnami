@@ -9,8 +9,6 @@
   },
   "scripts": {
     "build": "set NODE_ENV=production && vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
-    "seo": "node src/scripts/seo-analyzer.js",
-    "post": "node src/scripts/new-post.js",
     "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch",
     "test": "npx playwright test",
     "test:e2e": "npx playwright test"

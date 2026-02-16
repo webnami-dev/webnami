@@ -12,6 +12,7 @@ import {
   Menu,
   LayoutTemplate,
   Save,
+  Search,
   X,
 } from "lucide";
 import Alpine from "alpinejs";
@@ -31,6 +32,7 @@ const icons = {
   Menu,
   LayoutTemplate,
   Save,
+  Search,
   X,
 };
 
@@ -115,6 +117,38 @@ Alpine.store("confirm", {
     confirmResolve = null;
   },
 });
+
+Alpine.store("seo", {
+  open: false,
+  loading: false,
+  error: null,
+  result: null,
+  close() {
+    this.open = false;
+  },
+});
+
+window.runSEOCheck = async function (url) {
+  const store = Alpine.store("seo");
+  store.result = null;
+  store.error = null;
+  store.loading = true;
+  store.open = true;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      const data = await res.json();
+      store.error = data.error || "SEO check failed.";
+    } else {
+      store.result = await res.json();
+    }
+  } catch {
+    store.error = "Failed to run SEO check.";
+  } finally {
+    store.loading = false;
+    setTimeout(() => lucide.createIcons(), 50);
+  }
+};
 
 window.flashAlert = function (type, message) {
   sessionStorage.setItem("flash_alert", JSON.stringify({ type, message }));
