@@ -11,7 +11,8 @@
     "build": "set NODE_ENV=production && vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js",
     "dev": "vite --config src/vite.config.js build && eleventy --config=src/.eleventy.js --serve --watch",
     "test": "npx playwright test",
-    "test:e2e": "npx playwright test"
+    "test:e2e": "npx playwright test",
+    "prepare": "husky"
   },
   "files": [
     "bin/",
@@ -64,6 +65,9 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
     "cheerio": "^1.1.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
     "prismjs": "^1.30.0",
     "tailwindcss": "^4.1.11",
     "vite": "^6.3.5"
@@ -79,5 +83,8 @@
     "glob": "^11.0.3",
     "html-minifier-terser": "^7.2.0",
     "lucide": "^0.513.0"
+  },
+  "lint-staged": {
+    "*.{js,json,css,html}": "prettier --write"
   }
 }

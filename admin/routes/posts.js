@@ -32,10 +32,14 @@ router.post("/new", async (req, res) => {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
   if (RESERVED_SLUGS.includes(slug)) {
-    return res.status(400).json({ error: `The slug "${slug}" is reserved and cannot be used.` });
+    return res
+      .status(400)
+      .json({ error: `The slug "${slug}" is reserved and cannot be used.` });
   }
   if (fs.existsSync(path.join(postsDir, `${slug}.md`))) {
-    return res.status(400).json({ error: `A post with the slug "${slug}" already exists.` });
+    return res
+      .status(400)
+      .json({ error: `A post with the slug "${slug}" already exists.` });
   }
   const frontmatter = {
     layout: "post",
@@ -103,7 +107,9 @@ router.put("/:slug", async (req, res) => {
 router.get("/:slug/seo", (req, res) => {
   const htmlPath = path.resolve("_site", req.params.slug, "index.html");
   if (!fs.existsSync(htmlPath)) {
-    return res.status(404).json({ error: "Built page not found. Save the post first." });
+    return res
+      .status(404)
+      .json({ error: "Built page not found. Save the post first." });
   }
   const analyzer = new SEOAnalyzer();
   const result = analyzer.analyzeFile(htmlPath);

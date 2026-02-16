@@ -22,7 +22,15 @@ document.getElementById("post-form").addEventListener("submit", async (e) => {
   const resp = await fetch("/admin/posts/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, description, tags, category, author, date, content }),
+    body: JSON.stringify({
+      title,
+      description,
+      tags,
+      category,
+      author,
+      date,
+      content,
+    }),
   });
   const data = await resp.json();
   if (!resp.ok) {

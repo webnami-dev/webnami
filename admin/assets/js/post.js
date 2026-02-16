@@ -24,7 +24,15 @@ form.addEventListener("submit", async (e) => {
   const res = await fetch(`/admin/posts/${slug}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, description, tags, category, author, date, content }),
+    body: JSON.stringify({
+      title,
+      description,
+      tags,
+      category,
+      author,
+      date,
+      content,
+    }),
   });
   if (!res.ok) {
     showAlert("error", "Failed to update post.");
@@ -39,7 +47,9 @@ document.getElementById("seo-btn").addEventListener("click", () => {
 });
 
 document.getElementById("delete-btn").addEventListener("click", async () => {
-  const confirmed = await showConfirm("Are you sure you want to delete this post?");
+  const confirmed = await showConfirm(
+    "Are you sure you want to delete this post?",
+  );
   if (!confirmed) return;
   const res = await fetch(`/admin/posts/${slug}`, { method: "DELETE" });
   if (!res.ok) {

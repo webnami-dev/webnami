@@ -8,8 +8,7 @@ function createRow(container, rowClass, fields) {
     const input = document.createElement("input");
     input.type = "text";
     input.placeholder = placeholder;
-    input.className =
-      `flex-1 px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary ${className}`;
+    input.className = `flex-1 px-3 py-2 rounded-lg border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary ${className}`;
     row.appendChild(input);
   });
   const removeBtn = document.createElement("button");
@@ -26,9 +25,9 @@ function createRow(container, rowClass, fields) {
 document.addEventListener("click", (e) => {
   const removeRow = e.target.closest(".remove-row");
   if (removeRow) {
-    removeRow.closest(
-      ".navbar-link-row, .social-link-row, .group-link-row"
-    )?.remove();
+    removeRow
+      .closest(".navbar-link-row, .social-link-row, .group-link-row")
+      ?.remove();
   }
   const removeGroup = e.target.closest(".remove-group");
   if (removeGroup) {
@@ -89,13 +88,15 @@ document.addEventListener("click", (e) => {
 
 // ── Collect rows into array of {name, href} ──
 function collectLinks(container, nameClass, hrefClass) {
-  return [...container.querySelectorAll(`.${nameClass}`)].map((nameInput) => {
-    const row = nameInput.closest("div");
-    return {
-      name: nameInput.value.trim(),
-      href: row.querySelector(`.${hrefClass}`).value.trim(),
-    };
-  }).filter((l) => l.name || l.href);
+  return [...container.querySelectorAll(`.${nameClass}`)]
+    .map((nameInput) => {
+      const row = nameInput.closest("div");
+      return {
+        name: nameInput.value.trim(),
+        href: row.querySelector(`.${hrefClass}`).value.trim(),
+      };
+    })
+    .filter((l) => l.name || l.href);
 }
 
 // ── Submit ──
@@ -105,13 +106,13 @@ form.addEventListener("submit", async (e) => {
   const navbarLinks = collectLinks(
     document.getElementById("navbar-links"),
     "navbar-link-name",
-    "navbar-link-href"
+    "navbar-link-href",
   );
 
   const socialLinks = collectLinks(
     document.getElementById("social-links"),
     "social-link-name",
-    "social-link-href"
+    "social-link-href",
   );
 
   const linkGroups = [

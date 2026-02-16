@@ -31,7 +31,9 @@ document.getElementById("seo-btn").addEventListener("click", () => {
 });
 
 document.getElementById("delete-btn").addEventListener("click", async () => {
-  const confirmed = await showConfirm("Are you sure you want to delete this page?");
+  const confirmed = await showConfirm(
+    "Are you sure you want to delete this page?",
+  );
   if (!confirmed) return;
   const res = await fetch(`/admin/pages/${slug}`, { method: "DELETE" });
   if (!res.ok) {

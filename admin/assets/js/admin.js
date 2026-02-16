@@ -159,7 +159,9 @@ window.flashAlert = function (type, message) {
 };
 
 window.showAlert = function (type, message) {
-  document.dispatchEvent(new CustomEvent("show-alert", { detail: { type, message } }));
+  document.dispatchEvent(
+    new CustomEvent("show-alert", { detail: { type, message } }),
+  );
 };
 
 window.showConfirm = function (message) {

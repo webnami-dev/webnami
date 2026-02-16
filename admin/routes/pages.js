@@ -50,7 +50,7 @@ router.post("/new", async (req, res) => {
 router.get("/:slug", (req, res) => {
   const filePath = path.join(pagesDir, `${req.params.slug}.md`);
   if (!fs.existsSync(filePath)) {
-    res.redirect("/");
+    res.redirect("/admin/pages");
   }
   const file = matter(fs.readFileSync(filePath, "utf-8"));
   res.render("pages/page.njk", {

@@ -105,6 +105,34 @@ test.describe("Posts CRUD", () => {
     await expect(page.locator("#title")).toHaveValue("Updated Test Post");
   });
 
+  test("should not delete post when clicking Cancel in confirm dialog", async ({
+    page,
+  }) => {
+    await page.goto(`/admin/posts/${testSlug}`);
+    await page.locator("#delete-btn").click();
+
+    await expect(page.locator("#confirm-dialog")).toBeVisible();
+    await page.locator("#confirm-cancel").click();
+
+    await expect(page.locator("#confirm-dialog")).toBeHidden();
+    expect(fs.existsSync(testFile)).toBeTruthy();
+  });
+
+  test("should not delete post when clicking backdrop of confirm dialog", async ({
+    page,
+  }) => {
+    await page.goto(`/admin/posts/${testSlug}`);
+    await page.locator("#delete-btn").click();
+
+    await expect(page.locator("#confirm-dialog")).toBeVisible();
+    await page
+      .locator("#confirm-dialog .bg-black\\/50")
+      .click({ position: { x: 10, y: 10 } });
+
+    await expect(page.locator("#confirm-dialog")).toBeHidden();
+    expect(fs.existsSync(testFile)).toBeTruthy();
+  });
+
   test("should delete a post via the UI and show a success alert", async ({
     page,
   }) => {
