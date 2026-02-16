@@ -4,6 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import { buildSite } from "../eleventy.js";
 import { SEOAnalyzer } from "../assets/js/seo-analyzer.js";
+import log from "../logger.js";
 
 const router = express.Router();
 const pagesDir = path.resolve("pages");
@@ -31,11 +32,13 @@ router.post("/new", async (req, res) => {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
   if (RESERVED_SLUGS.includes(slug)) {
+    log.warn(`Page creation rejected: reserved slug "${slug}"`);
     return res
       .status(400)
       .json({ error: `The slug "${slug}" is reserved and cannot be used.` });
   }
   if (fs.existsSync(path.join(pagesDir, `${slug}.md`))) {
+    log.warn(`Page creation rejected: duplicate slug "${slug}"`);
     return res
       .status(400)
       .json({ error: `A page with the slug "${slug}" already exists.` });
@@ -44,6 +47,7 @@ router.post("/new", async (req, res) => {
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(path.join(pagesDir, `${slug}.md`), fileContent);
   await buildSite();
+  log.success(`Page created: "${title}" (${slug})`);
   res.json({ slug });
 });
 
@@ -73,13 +77,13 @@ router.put("/:slug", async (req, res) => {
     .replace(/(^-|-$)/g, "");
   if (newSlug !== oldSlug) {
     if (RESERVED_SLUGS.includes(newSlug)) {
-      return res
-        .status(400)
-        .json({
-          error: `The slug "${newSlug}" is reserved and cannot be used.`,
-        });
+      log.warn(`Page update rejected: reserved slug "${newSlug}"`);
+      return res.status(400).json({
+        error: `The slug "${newSlug}" is reserved and cannot be used.`,
+      });
     }
     if (fs.existsSync(path.join(pagesDir, `${newSlug}.md`))) {
+      log.warn(`Page update rejected: duplicate slug "${newSlug}"`);
       return res
         .status(400)
         .json({ error: `A page with the slug "${newSlug}" already exists.` });
@@ -89,9 +93,11 @@ router.put("/:slug", async (req, res) => {
   const fileContent = matter.stringify(content || "", frontmatter);
   if (newSlug !== oldSlug) {
     fs.unlinkSync(path.join(pagesDir, `${oldSlug}.md`));
+    log.info(`Page renamed: "${oldSlug}" -> "${newSlug}"`);
   }
   fs.writeFileSync(path.join(pagesDir, `${newSlug}.md`), fileContent);
   await buildSite();
+  log.success(`Page updated: "${title}" (${newSlug})`);
   res.json({ slug: newSlug });
 });
 
@@ -104,6 +110,7 @@ router.get("/:slug/seo", (req, res) => {
   }
   const analyzer = new SEOAnalyzer();
   const result = analyzer.analyzeFile(htmlPath);
+  log.info(`SEO analysis run for page: ${req.params.slug}`);
   res.json(result);
 });
 
@@ -113,6 +120,7 @@ router.delete("/:slug", async (req, res) => {
     fs.unlinkSync(filePath);
   }
   await buildSite();
+  log.success(`Page deleted: ${req.params.slug}`);
   res.json({ success: true });
 });
 

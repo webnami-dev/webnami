@@ -2,6 +2,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import { buildSite } from "../eleventy.js";
+import log from "../logger.js";
 
 const router = express.Router();
 const configPath = path.resolve("src/_data/config.json");
@@ -54,6 +55,7 @@ router.put("/", async (req, res) => {
 
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
   await buildSite();
+  log.success("Settings updated");
   res.json({ success: true });
 });
 
