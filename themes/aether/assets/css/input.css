@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import "../../theme.css";
+@import "../../../../node_modules/prismjs/themes/prism-tomorrow.min.css";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-system:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --color-primary: var(--color-primary);
+  --color-background: var(--color-background);
+  --color-content: var(--color-content);
+  --color-accent: var(--color-accent);
+  --color-footer: var(--color-footer);
+
+  /* Surfaces */
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f9f9fb;
+  --color-border: #e5e5ea;
+  --color-border-subtle: #f0f0f2;
+
+  /* primary color shades */
+  --color-primary-50: color-mix(in srgb, var(--color-primary) 5%, white);
+  --color-primary-100: color-mix(in srgb, var(--color-primary) 10%, white);
+  --color-primary-200: color-mix(in srgb, var(--color-primary) 20%, white);
+  --color-primary-300: color-mix(in srgb, var(--color-primary) 30%, white);
+  --color-primary-400: color-mix(in srgb, var(--color-primary) 40%, white);
+  --color-primary-500: var(--color-primary);
+  --color-primary-600: color-mix(in srgb, var(--color-primary) 80%, black);
+  --color-primary-700: color-mix(in srgb, var(--color-primary) 70%, black);
+  --color-primary-800: color-mix(in srgb, var(--color-primary) 60%, black);
+  --color-primary-900: color-mix(in srgb, var(--color-primary) 40%, black);
+  --color-primary-950: color-mix(in srgb, var(--color-primary) 20%, black);
+}
+
+html {
+  font-family: var(--font-system);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-system);
+  letter-spacing: -0.022em;
+}
+
+/* Dark mode surface overrides */
+:root[data-theme="dark"] {
+  --color-surface: #2c2c2e;
+  --color-surface-secondary: #242426;
+  --color-border: #38383a;
+  --color-border-subtle: #2c2c2e;
+}
+
+/* Notion-style scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Clean selection color */
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+}

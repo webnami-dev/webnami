@@ -1,0 +1,136 @@
+---
+layout: "base.njk"
+---
+
+{% set meta = content | postMeta %}
+
+<main class="min-h-screen">
+  <!-- Hero image -->
+  <div class="w-full max-w-5xl mx-auto px-5 pt-8 pb-4 chronicle-animate">
+    <div class="aspect-[16/9] overflow-hidden rounded-2xl">
+      <img
+        class="w-full h-full object-cover"
+        src="{{ meta.image }}"
+        alt="{{ title }}"
+      />
+    </div>
+  </div>
+
+  <article class="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 py-8">
+    <!-- Category label -->
+    {% if category %}
+    <div class="mb-5 chronicle-animate chronicle-animate-delay-1">
+      <a
+        href="/category/{{ category | slugify }}"
+        class="chronicle-category-label text-primary-500 hover:text-primary-700 transition-colors duration-200 no-underline"
+      >{{ category }}</a>
+    </div>
+    {% endif %}
+
+    <!-- Title -->
+    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6 chronicle-animate chronicle-animate-delay-1">
+      {{ title }}
+    </h1>
+
+    <!-- Author and date -->
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8 text-sm text-accent chronicle-animate chronicle-animate-delay-2">
+      {% if author %}
+      <a
+        href="/author/{{ author | slugify }}"
+        class="text-content hover:text-primary-500 transition-colors duration-200 no-underline font-medium"
+      >Written by {{ author }}</a>
+      <span class="text-accent/40">|</span>
+      {% endif %}
+      <time class="italic">{{ date | postDate }}</time>
+
+      <!-- Share links -->
+      <span class="text-accent/40 hidden sm:inline">|</span>
+      <div class="flex items-center gap-3">
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u={{ config.site.url }}{{ page.url }}"
+          class="text-accent hover:text-primary-500 transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Facebook"
+        >
+          {% icon "facebook", "w-4 h-4" | safe %}
+        </a>
+        <a
+          href="https://twitter.com/intent/tweet?url={{ config.site.url }}{{ page.url }}"
+          class="text-accent hover:text-primary-500 transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Twitter"
+        >
+          {% icon "twitter", "w-4 h-4" | safe %}
+        </a>
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url={{ config.site.url }}{{ page.url }}"
+          class="text-accent hover:text-primary-500 transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on LinkedIn"
+        >
+          {% icon "linkedin", "w-4 h-4" | safe %}
+        </a>
+      </div>
+    </div>
+
+    <!-- Decorative separator -->
+    <div class="w-16 h-0.5 bg-primary-500 mb-10 chronicle-animate chronicle-animate-delay-2"></div>
+
+    <!-- Post content with drop cap and pull quotes -->
+    <div
+      class="chronicle-dropcap chronicle-prose prose prose-lg prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content prose-a:text-primary-500 prose-a:no-underline hover:prose-a:text-primary-700 prose-headings:font-serif prose-img:rounded-xl chronicle-animate chronicle-animate-delay-3"
+    >
+      {{ meta.contentAnchorLinks | safe }}
+    </div>
+
+    <!-- Tags -->
+    {% if tags.length > 0 %}
+    <div class="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-accent/15">
+      <span class="chronicle-category-label text-accent mr-2">Tags:</span>
+      {% for tag in tags %}
+      <a
+        href="/tags/{{ tag | slugify }}"
+        class="inline-block px-3 py-1 text-xs font-medium rounded-full border border-accent/20 text-accent hover:text-primary-500 hover:border-primary-300 transition-all duration-200 no-underline"
+      >{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Prev/Next navigation -->
+    {%- if collections.posts %}
+    {%- set previousPost = collections.posts | getPreviousCollectionItem %}
+    {%- set nextPost = collections.posts | getNextCollectionItem %}
+    {%- if nextPost or previousPost %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 pt-8 border-t border-accent/15">
+      {%- if previousPost %}
+      <a href="{{ previousPost.url }}" class="group no-underline">
+        <div class="p-5 rounded-xl border border-accent/10 hover:border-primary-300 transition-all duration-300 h-full">
+          <span class="chronicle-category-label text-accent block mb-2">Previous</span>
+          <span class="font-serif text-content group-hover:text-primary-500 transition-colors duration-200 text-lg leading-snug">
+            {{ previousPost.data.title }}
+          </span>
+        </div>
+      </a>
+      {% else %}
+      <div></div>
+      {% endif %}
+      {%- if nextPost %}
+      <a href="{{ nextPost.url }}" class="group no-underline sm:text-right">
+        <div class="p-5 rounded-xl border border-accent/10 hover:border-primary-300 transition-all duration-300 h-full">
+          <span class="chronicle-category-label text-accent block mb-2">Next</span>
+          <span class="font-serif text-content group-hover:text-primary-500 transition-colors duration-200 text-lg leading-snug">
+            {{ nextPost.data.title }}
+          </span>
+        </div>
+      </a>
+      {% else %}
+      <div></div>
+      {% endif %}
+    </div>
+    {%- endif %}
+    {%- endif %}
+  </article>
+</main>

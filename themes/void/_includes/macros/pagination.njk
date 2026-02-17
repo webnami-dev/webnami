@@ -1,0 +1,45 @@
+{# Pagination navigation - terminal style #}
+{% macro pagination(posts, type) %}
+{% if posts.total > config.postsPerPage %}
+<div class="flex justify-between items-center gap-4 my-10 font-mono text-sm">
+  {% set totalPages = (posts.total / config.postsPerPage) | round(0, "ceil") %}
+  {% if posts.page > 1 %}
+  <a
+    href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{
+      type
+    }}{% if type != 'posts' %}/{{
+      posts.name | slugify
+    }}{% endif %}/{% if posts.page > 2 %}{{
+      posts.page - 1
+    }}/{% endif %}{% endif %}"
+    class="text-primary-500 hover:text-primary-300 transition-colors"
+  >&lt;-- prev</a>
+  {% else %}
+  <div></div>
+  {% endif %}
+  <span class="text-accent text-xs">{{ posts.page }}/{{ totalPages }}</span>
+  {% if posts.page < totalPages %}
+  <a
+    href="/{{ type }}{% if type != 'posts' %}/{{
+      posts.name | slugify
+    }}{% endif %}/{{ posts.page + 1 }}/"
+    class="text-primary-500 hover:text-primary-300 transition-colors"
+  >next --&gt;</a>
+  {% else %}
+  <div></div>
+  {% endif %}
+</div>
+{% endif %}
+{% endmacro %}
+
+{# Home page pagination #}
+{% macro paginationHomePage(postsPage) %}
+<div class="flex justify-center my-10">
+  <a
+    href="/posts/{{ postsPage.page + 1 }}"
+    class="font-mono text-sm text-primary-500 hover:text-primary-300 transition-colors border border-primary-500/30 hover:border-primary-500 px-4 py-2"
+  >
+    more --page={{ postsPage.page + 1 }}
+  </a>
+</div>
+{% endmacro %}

@@ -1,0 +1,40 @@
+{# Terminal-style post entry - single line item #}
+{% macro postCard(post, extraClass) %}
+{% set meta = post | postMeta %}
+<div class="post-entry group {{ extraClass }}">
+  <a
+    href="{{ post.url }}"
+    class="block py-3 border-b border-accent/10 hover:border-primary-500/30 transition-colors"
+  >
+    <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+      <time
+        datetime="{{ post.data.date | date('YYYY-MM-DD') }}"
+        class="font-mono text-xs text-accent shrink-0 tabular-nums"
+      >{{ post.data.date | date('YYYY-MM-DD') }}</time>
+      <div class="min-w-0 flex-grow">
+        <div class="flex items-baseline gap-2 min-w-0">
+          {% if post.data.category %}
+          <span class="font-mono text-xs text-primary-500 shrink-0">/{{ post.data.category | lower }}</span>
+          {% endif %}
+          <h2 class="font-mono text-sm font-medium text-content group-hover:text-primary-500 transition-colors truncate">{{ post.data.title }}</h2>
+        </div>
+        <p class="text-xs text-accent mt-1 line-clamp-1 hidden sm:block">{{ meta.excerpt }}</p>
+      </div>
+    </div>
+  </a>
+</div>
+{% endmacro %}
+
+{# Post byline #}
+{% macro postByline(post) %}
+<span class="font-mono text-xs text-accent">
+  {% if post.data.author %}{{ post.data.author }} | {% endif %}{{ post.data.date | postDate }}
+</span>
+{% endmacro %}
+
+{# Category badge - terminal style #}
+{% macro categoryBadge(post) %}
+{% if post.data.category %}
+<span class="font-mono text-xs text-primary-500">/{{ post.data.category | lower }}</span>
+{% endif %}
+{% endmacro %}

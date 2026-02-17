@@ -1,0 +1,122 @@
+---
+layout: "base.njk"
+---
+
+<main class="min-h-screen py-12 sm:py-16">
+  <article
+    class="max-w-[680px] mx-auto px-5 sm:px-6 prose prose-base
+      prose-headings:text-content prose-headings:font-semibold prose-headings:tracking-tight
+      prose-p:text-content prose-p:leading-[1.7]
+      prose-strong:text-content
+      prose-ol:text-content prose-li:text-content prose-ul:text-content
+      prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline
+      prose-img:rounded-lg
+      prose-hr:border-border
+      prose-blockquote:border-l-primary-300 prose-blockquote:text-accent"
+  >
+    {# Post title #}
+    <h1 class="text-3xl sm:text-[2.25rem] font-bold tracking-tight leading-tight mb-3">{{ title }}</h1>
+
+    {# Meta line: date, category, share icons #}
+    <div class="flex flex-wrap items-center justify-between gap-3 not-prose mb-8 pb-6 border-b border-border">
+      <div class="flex items-center gap-3 text-sm text-accent">
+        <time>{{ date | postDate }}</time>
+        {% if category %}
+        <span class="text-border">|</span>
+        <a
+          href="/category/{{ category | slugify }}"
+          class="text-primary-500 hover:underline"
+        >{{ category }}</a>
+        {% endif %}
+        {% if author %}
+        <span class="text-border">|</span>
+        <a
+          href="/author/{{ author | slugify }}"
+          class="hover:underline"
+        >{{ author }}</a>
+        {% endif %}
+      </div>
+      <div class="flex items-center gap-1">
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u={{ config.site.url }}{{ page.url }}"
+          class="p-1.5 rounded-md text-accent hover:text-content hover:bg-surface-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Facebook"
+        >
+          {% icon "facebook", "w-4 h-4" | safe %}
+        </a>
+        <a
+          href="https://twitter.com/intent/tweet?url={{ config.site.url }}{{ page.url }}"
+          class="p-1.5 rounded-md text-accent hover:text-content hover:bg-surface-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Twitter"
+        >
+          {% icon "twitter", "w-4 h-4" | safe %}
+        </a>
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url={{ config.site.url }}{{ page.url }}"
+          class="p-1.5 rounded-md text-accent hover:text-content hover:bg-surface-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on LinkedIn"
+        >
+          {% icon "linkedin", "w-4 h-4" | safe %}
+        </a>
+      </div>
+    </div>
+
+    {# Article content with anchor links #}
+    {% set meta = content | postMeta %}
+    {{ meta.contentAnchorLinks | safe }}
+
+    {# Tags as Notion-style pills #}
+    {% if tags.length > 0 %}
+    <div class="not-prose flex flex-wrap items-center gap-2 mt-10 pt-6 border-t border-border">
+      {% for tag in tags %}
+      <a
+        href="/tags/{{ tag | slugify }}"
+        class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-surface-secondary text-accent hover:text-content border border-border hover:border-accent/30"
+      >{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {# Previous / Next navigation #}
+    {%- if collections.posts %}
+    {%- set previousPost = collections.posts | getPreviousCollectionItem %}
+    {%- set nextPost = collections.posts | getNextCollectionItem %}
+    {%- if nextPost or previousPost %}
+    <nav class="not-prose flex justify-between items-start gap-6 pt-8 mt-8 border-t border-border">
+      {%- if previousPost %}
+      <div class="text-left min-w-0 flex-1">
+        <p class="text-xs text-accent mb-1 uppercase tracking-wide">Previous</p>
+        <a
+          href="{{ previousPost.url }}"
+          class="text-sm font-medium text-primary-500 hover:underline leading-snug line-clamp-2"
+        >
+          {{ previousPost.data.title }}
+        </a>
+      </div>
+      {% else %}
+      <div class="flex-1"></div>
+      {% endif %}
+      {%- if nextPost %}
+      <div class="text-right min-w-0 flex-1">
+        <p class="text-xs text-accent mb-1 uppercase tracking-wide">Next</p>
+        <a
+          href="{{ nextPost.url }}"
+          class="text-sm font-medium text-primary-500 hover:underline leading-snug line-clamp-2"
+        >
+          {{ nextPost.data.title }}
+        </a>
+      </div>
+      {% else %}
+      <div class="flex-1"></div>
+      {% endif %}
+    </nav>
+    {%- endif %}
+    {%- endif %}
+  </article>
+</main>

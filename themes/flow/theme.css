@@ -1,0 +1,16 @@
+/* Flow theme - distraction-free writing */
+:root[data-theme="light"] {
+  --color-primary: #3d3d3d;
+  --color-background: #fffff8;
+  --color-content: #1a1a1a;
+  --color-accent: #8a8a8a;
+  --color-footer: #fdfdf5;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #c8c4ba;
+  --color-background: #1a1a1a;
+  --color-content: #e0ddd5;
+  --color-accent: #807c74;
+  --color-footer: #1a1a1a;
+}

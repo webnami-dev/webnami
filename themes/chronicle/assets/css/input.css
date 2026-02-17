@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "../../theme.css";
+@import "../../../../node_modules/prismjs/themes/prism-tomorrow.min.css";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-serif: "Lora", "Georgia", serif;
+  --font-sans: "DM Sans", "Helvetica Neue", sans-serif;
+  --color-primary: var(--color-primary);
+  --color-background: var(--color-background);
+  --color-content: var(--color-content);
+  --color-accent: var(--color-accent);
+  --color-footer: var(--color-footer);
+
+  /* primary color shades */
+  --color-primary-50: color-mix(in srgb, var(--color-primary) 5%, white);
+  --color-primary-100: color-mix(in srgb, var(--color-primary) 10%, white);
+  --color-primary-200: color-mix(in srgb, var(--color-primary) 20%, white);
+  --color-primary-300: color-mix(in srgb, var(--color-primary) 30%, white);
+  --color-primary-400: color-mix(in srgb, var(--color-primary) 40%, white);
+  --color-primary-500: var(--color-primary);
+  --color-primary-600: color-mix(in srgb, var(--color-primary) 80%, black);
+  --color-primary-700: color-mix(in srgb, var(--color-primary) 70%, black);
+  --color-primary-800: color-mix(in srgb, var(--color-primary) 60%, black);
+  --color-primary-900: color-mix(in srgb, var(--color-primary) 40%, black);
+  --color-primary-950: color-mix(in srgb, var(--color-primary) 20%, black);
+}
+
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+}
+
+/* Drop cap for post first paragraph */
+.chronicle-dropcap > p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.8;
+  padding-right: 0.15em;
+  padding-top: 0.08em;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Editorial blockquote / pull quote */
+.chronicle-prose blockquote {
+  border-left: none !important;
+  border-top: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  padding: 2rem 0 !important;
+  margin: 2.5rem 0 !important;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-content);
+  position: relative;
+}
+
+.chronicle-prose blockquote p {
+  margin: 0 !important;
+}
+
+/* Elegant horizontal rule */
+.chronicle-prose hr {
+  border: none !important;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  margin: 3rem 0 !important;
+}
+
+/* Staggered fade-in animation */
+@keyframes chronicle-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chronicle-animate {
+  animation: chronicle-fade-up 0.6s ease-out both;
+}
+
+.chronicle-animate-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.chronicle-animate-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.chronicle-animate-delay-3 {
+  animation-delay: 0.3s;
+}
+
+/* Image hover zoom */
+.chronicle-img-zoom {
+  overflow: hidden;
+}
+
+.chronicle-img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.chronicle-img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Thin elegant scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 3px;
+}
+
+/* Category label styling */
+.chronicle-category-label {
+  font-family: var(--font-sans);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Subtle grain texture overlay */
+.chronicle-grain::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.025;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Decorative separator */
+.chronicle-separator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chronicle-separator::before,
+.chronicle-separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.3;
+}

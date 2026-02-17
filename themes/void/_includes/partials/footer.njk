@@ -1,0 +1,38 @@
+<footer class="bg-footer border-t border-accent/10">
+  <div class="max-w-2xl mx-auto px-5 py-6">
+    {# Compact terminal-style footer #}
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs text-accent">
+      {# Left: copyright + links #}
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span>&copy; {% currentYear %} {{ config.site.name }}</span>
+        <span class="text-accent/30">|</span>
+        {% for group in config.footer.linkGroups %}
+        {% for link in group.links %}
+        <a
+          href="{{ link.href }}"
+          class="hover:text-primary-500 transition-colors"
+        >{{ link.name | lower }}</a>
+        {% endfor %}
+        {% endfor %}
+      </div>
+
+      {# Right: social links as text #}
+      <div class="flex items-center gap-3">
+        {% for icon in config.footer.socialLinks %}
+        <a
+          href="{{ icon.href }}"
+          class="hover:text-primary-500 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ icon.name | title }}"
+        >{{ icon.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    {# Built with line #}
+    <div class="mt-3 font-mono text-xs text-accent/40">
+      <span class="text-primary-500/40">$</span> built with <a class="hover:text-primary-500 transition-colors text-accent/60" href="https://webnami.in" target="_blank" rel="noopener">webnami</a>
+    </div>
+  </div>
+</footer>

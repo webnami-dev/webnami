@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% set contentMeta = content | postMeta %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="{{ config.site.csp }}"
+    />
+    <meta name="title" content="{{ title }}" />
+    <meta
+      name="description"
+      content="{{ description }}"
+    />
+    {%- if not robots or robots != 'false' -%}
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    {%- endif -%}
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="{{ config.site.url }}{{ page.url }}"
+    />
+    <meta property="twitter:title" content="{{ title }}" />
+    <meta
+      property="twitter:description"
+      content="{{ description }}"
+    />
+    <meta
+      property="twitter:image"
+      content="{{ config.site.url }}{% if layout == 'post' %}{{
+        contentMeta.image | imageFilter
+      }}{% else %}{{ config.homepage.metadata.img | imagePath | imageFilter }}{% endif %}"
+    />
+    <meta property="og:url" content="{{ config.site.url }}{{ page.url }}" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta
+      property="og:description"
+      content="{{ description }}"
+    />
+    <meta
+      property="og:image"
+      content="{{ config.site.url }}{% if layout == 'post' %}{{
+        contentMeta.image | imageFilter
+      }}{% else %}{{ config.homepage.metadata.img | imagePath | imageFilter }}{% endif %}"
+    />
+    <meta property="og:locale" content="en-US" />
+    <meta property="og:site_name" content="{{ config.site.name }}" />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="{{ config.site.url }}{{ page.url }}" />
+    <link rel="icon" href="{{ config.site.favicon | imagePath }}" type="image/svg+xml" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
+    {%- if layout == 'post' -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ title | escape }}",
+        "description": "{{ description | escape }}",
+        "author": {
+          "@type": "Person",
+          "name": "{{ author | escape }}"
+        },
+        "datePublished": "{{ date | date('YYYY-MM-DD') }}",
+        "dateModified": "{{ date | date('YYYY-MM-DD') }}",
+        "image": {
+          "@type": "ImageObject",
+          "url": "{{ config.site.url }}{% if layout == 'post' %}{{
+            contentMeta.image | imageFilter
+          }}{% else %}{{ config.homepage.metadata.img | imagePath | imageFilter }}{% endif %}",
+          "caption": "{{ title | escape }}"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ config.site.url }}{{ page.url | url }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ config.site.name }}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ config.site.url }}{{ config.site.logo }}"
+          }
+        }
+      }
+    </script>
+    {%- endif -%}
+    <script
+      type="module"
+      src="{{ '/assets/js/bundle.js' | assetHash }}"
+      defer
+    ></script>
+  </head>
+  <body class="bg-background text-content min-h-screen flex flex-col">
+    {%- include 'partials/navbar.njk' -%}
+    <div class="flex-grow">
+      {{ content | safe }}
+    </div>
+    {%- include 'partials/footer.njk' -%}
+  </body>
+</html>

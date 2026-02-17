@@ -1,0 +1,89 @@
+<!-- Reusable post card - editorial magazine style -->
+{% macro postCard(post, extraClass) %}
+{% set meta = post | postMeta %}
+<a
+  class="sage-card group flex flex-col bg-card-bg rounded-lg overflow-hidden {{ extraClass }}"
+  href="{{ post.url }}"
+>
+  <div class="sage-img-wrap aspect-[4/3]">
+    <img
+      class="w-full h-full object-cover"
+      src="{{ meta.image }}"
+      alt="{{ post.data.title }}"
+    />
+  </div>
+  <div class="p-5 sm:p-6 flex flex-col flex-grow">
+    {{ categoryBadge(post) }}
+    <h2
+      class="font-playfair text-hero-text text-xl sm:text-2xl font-semibold leading-snug group-hover:text-primary-500 transition-colors mt-2 mb-3"
+    >
+      {{ post.data.title }}
+    </h2>
+    <p class="hidden sm:block text-accent text-sm leading-relaxed mb-4 line-clamp-2">
+      {{ meta.excerpt }}
+    </p>
+    <div class="mt-auto">
+      {{ postByline(post) }}
+    </div>
+  </div>
+</a>
+{% endmacro %}
+
+<!-- Featured post (hero layout) - editorial spread -->
+{% macro featuredCard(post) %}
+{% set meta = post | postMeta %}
+<div class="w-full max-w-6xl mx-auto px-6 sm:px-8 mb-16 sage-fade-up">
+  <a
+    href="{{ post.url }}"
+    class="group grid grid-cols-1 lg:grid-cols-2 gap-0 bg-card-bg rounded-xl overflow-hidden sage-card"
+  >
+    <!-- Image side -->
+    <div class="sage-img-wrap aspect-[16/10] lg:aspect-auto">
+      <img
+        class="w-full h-full object-cover"
+        src="{{ meta.image }}"
+        alt="{{ post.data.title }}"
+      />
+    </div>
+    <!-- Content side -->
+    <div class="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+      <div class="mb-4">
+        {{ categoryBadge(post) }}
+      </div>
+      <h2
+        class="font-playfair text-hero-text text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight group-hover:text-primary-500 transition-colors mb-4"
+      >
+        {{ post.data.title }}
+      </h2>
+      <p class="hidden sm:block text-accent text-base leading-relaxed mb-6 line-clamp-3">
+        {{ meta.excerpt }}
+      </p>
+      {{ postByline(post) }}
+      <div class="mt-6">
+        <span class="inline-flex items-center text-primary-500 text-sm font-dm font-medium group-hover:gap-3 gap-2 transition-all">
+          Read article
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </a>
+</div>
+{% endmacro %}
+
+<!-- Post byline (author + date) -->
+{% macro postByline(post) %}
+<p class="text-muted text-xs font-dm tracking-wide">
+  {% if post.data.author %}{{ post.data.author }} &middot; {% endif %}{{ post.data.date | postDate }}
+</p>
+{% endmacro %}
+
+<!-- Category badge -->
+{% macro categoryBadge(post) %}
+{% if post.data.category %}
+<span class="sage-tag inline-block w-fit">
+  {{ post.data.category }}
+</span>
+{% endif %}
+{% endmacro %}

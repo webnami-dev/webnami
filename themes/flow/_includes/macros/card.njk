@@ -1,0 +1,59 @@
+{# Simple post entry - title, date, optional excerpt #}
+{% macro postCard(post, extraClass) %}
+{% set meta = post | postMeta %}
+<div class="{{ extraClass }} border-b border-accent/10">
+  <a
+    href="{{ post.url }}"
+    class="group block py-5"
+  >
+    <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+      <time
+        datetime="{{ post.data.date | date('YYYY-MM-DD') }}"
+        class="text-sm text-accent shrink-0 tabular-nums"
+      >{{ post.data.date | postDate }}</time>
+      <div class="min-w-0">
+        <h2 class="text-base font-heading font-semibold text-content group-hover:text-accent leading-snug">{{ post.data.title }}</h2>
+        {% if post.data.category %}
+        <span class="text-xs text-accent">{{ post.data.category }}</span>
+        {% endif %}
+        <p class="text-sm text-accent mt-1 line-clamp-2">{{ meta.excerpt }}</p>
+      </div>
+    </div>
+  </a>
+</div>
+{% endmacro %}
+
+{# Featured card - same structure, just shows more excerpt #}
+{% macro featuredCard(post) %}
+{% set meta = post | postMeta %}
+<div class="border-b border-accent/10 mb-2">
+  <a
+    href="{{ post.url }}"
+    class="group block py-5"
+  >
+    <time
+      datetime="{{ post.data.date | date('YYYY-MM-DD') }}"
+      class="text-sm text-accent tabular-nums"
+    >{{ post.data.date | postDate }}</time>
+    <h2 class="text-lg font-heading font-semibold text-content group-hover:text-accent leading-snug mt-1">{{ post.data.title }}</h2>
+    {% if post.data.category %}
+    <span class="text-xs text-accent">{{ post.data.category }}</span>
+    {% endif %}
+    <p class="text-sm text-accent mt-2 line-clamp-2">{{ meta.excerpt }}</p>
+  </a>
+</div>
+{% endmacro %}
+
+{# Post byline #}
+{% macro postByline(post) %}
+<span class="text-sm text-accent">
+  {% if post.data.author %}{{ post.data.author }} / {% endif %}{{ post.data.date | postDate }}
+</span>
+{% endmacro %}
+
+{# Category badge - plain text #}
+{% macro categoryBadge(post) %}
+{% if post.data.category %}
+<span class="text-sm text-accent">{{ post.data.category }}</span>
+{% endif %}
+{% endmacro %}

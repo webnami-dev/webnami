@@ -1,0 +1,45 @@
+{# Pagination navigation - minimal text links #}
+{% macro pagination(posts, type) %}
+{% if posts.total > config.postsPerPage %}
+<div class="flex justify-between items-center gap-4 mt-12 pt-6 border-t border-accent/10 text-sm">
+  {% set totalPages = (posts.total / config.postsPerPage) | round(0, "ceil") %}
+  {% if posts.page > 1 %}
+  <a
+    href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{
+      type
+    }}{% if type != 'posts' %}/{{
+      posts.name | slugify
+    }}{% endif %}/{% if posts.page > 2 %}{{
+      posts.page - 1
+    }}/{% endif %}{% endif %}"
+    class="text-content hover:text-accent"
+  >Previous</a>
+  {% else %}
+  <div></div>
+  {% endif %}
+  <span class="text-accent text-xs">{{ posts.page }} of {{ totalPages }}</span>
+  {% if posts.page < totalPages %}
+  <a
+    href="/{{ type }}{% if type != 'posts' %}/{{
+      posts.name | slugify
+    }}{% endif %}/{{ posts.page + 1 }}/"
+    class="text-content hover:text-accent"
+  >Next</a>
+  {% else %}
+  <div></div>
+  {% endif %}
+</div>
+{% endif %}
+{% endmacro %}
+
+{# Home page pagination #}
+{% macro paginationHomePage(postsPage) %}
+<div class="mt-10 pt-6 border-t border-accent/10">
+  <a
+    href="/posts/{{ postsPage.page + 1 }}"
+    class="text-sm text-accent hover:text-content"
+  >
+    Older posts &rarr;
+  </a>
+</div>
+{% endmacro %}

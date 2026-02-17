@@ -1,0 +1,98 @@
+---
+layout: "base.njk"
+---
+
+<main class="min-h-screen py-12">
+  <article
+    class="max-w-2xl mx-auto px-5 sm:px-6 prose prose-sm prose-invert prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-headings:font-mono prose-p:text-content prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline"
+  >
+    {# Post header - styled like a file comment block #}
+    <header class="not-prose mb-10 border-b border-dashed border-accent/20 pb-8">
+      <div class="font-mono text-xs text-accent mb-4 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <time datetime="{{ date | date('YYYY-MM-DD') }}">{{ date | date('YYYY-MM-DD') }}</time>
+        <span class="text-accent/40">|</span>
+        {% if author %}
+        <a href="/author/{{ author | slugify }}" class="text-accent hover:text-primary-500 transition-colors">{{ author }}</a>
+        <span class="text-accent/40">|</span>
+        {% endif %}
+        {% if category %}
+        <a href="/category/{{ category | slugify }}" class="text-primary-500 hover:text-primary-300 transition-colors">/{{ category | lower }}</a>
+        {% endif %}
+      </div>
+      <h1 class="font-mono text-2xl sm:text-3xl font-bold text-content leading-tight mb-4">{{ title }}</h1>
+      <div class="flex items-center gap-4 text-xs font-mono text-accent">
+        <a
+          href="https://twitter.com/intent/tweet?url={{ config.site.url }}{{ page.url }}"
+          class="hover:text-primary-500 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >share:twitter</a>
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url={{ config.site.url }}{{ page.url }}"
+          class="hover:text-primary-500 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >share:linkedin</a>
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u={{ config.site.url }}{{ page.url }}"
+          class="hover:text-primary-500 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >share:facebook</a>
+      </div>
+    </header>
+
+    {# Post content #}
+    {% set meta = content | postMeta %}
+    {{ meta.contentAnchorLinks | safe }}
+
+    {# Tags as inline code spans #}
+    {% if tags.length > 0 %}
+    <div class="not-prose mt-12 pt-6 border-t border-dashed border-accent/20">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="font-mono text-xs text-accent">tags:</span>
+        {% for tag in tags %}
+        <a
+          href="/tags/{{ tag | slugify }}"
+          class="tag-code text-accent hover:text-primary-500"
+        >--{{ tag | lower }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {# Previous / Next navigation #}
+    {%- if collections.posts %}
+    {%- set previousPost = collections.posts | getPreviousCollectionItem %}
+    {%- set nextPost = collections.posts | getNextCollectionItem %}
+    {%- if nextPost or previousPost %}
+    <nav class="not-prose mt-8 pt-6 border-t border-dashed border-accent/20">
+      <div class="flex justify-between items-start gap-6 font-mono text-sm">
+        {%- if previousPost %}
+        <div class="text-left min-w-0">
+          <span class="text-accent text-xs block mb-1">cd ../prev</span>
+          <a
+            href="{{ previousPost.url }}"
+            class="text-primary-500 hover:text-primary-300 transition-colors truncate block"
+          >{{ previousPost.data.title }}</a>
+        </div>
+        {% else %}
+        <div></div>
+        {% endif %}
+        {%- if nextPost %}
+        <div class="text-right min-w-0">
+          <span class="text-accent text-xs block mb-1">cd ../next</span>
+          <a
+            href="{{ nextPost.url }}"
+            class="text-primary-500 hover:text-primary-300 transition-colors truncate block"
+          >{{ nextPost.data.title }}</a>
+        </div>
+        {% else %}
+        <div></div>
+        {% endif %}
+      </div>
+    </nav>
+    {%- endif %}
+    {%- endif %}
+  </article>
+</main>

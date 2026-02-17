@@ -1,0 +1,20 @@
+{% if collections.categoryList.length > 0 %}
+<div class="max-w-2xl mx-auto px-5 mb-8 overflow-x-auto">
+  <div class="flex items-center gap-1 font-mono text-xs min-w-max">
+    <span class="text-accent/40 mr-1">filter:</span>
+    {# All tab #}
+    <a
+      href="/"
+      class="px-2.5 py-1 whitespace-nowrap transition-colors {% if page.url == '/' or page.url.includes('/posts/') %} text-background bg-primary-500 font-bold {% else %} text-accent hover:text-primary-500 border border-accent/20 hover:border-primary-500/40 {% endif %}"
+    >*</a>
+
+    {# Category tabs #}
+    {% for category in collections.categoryList %}
+    <a
+      href="/category/{{ category | slug }}/"
+      class="px-2.5 py-1 whitespace-nowrap transition-colors {% if page.url == '/category/' + (category | slug) + '/' %} text-background bg-primary-500 font-bold {% else %} text-accent hover:text-primary-500 border border-accent/20 hover:border-primary-500/40 {% endif %}"
+    >/{{ category | lower }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

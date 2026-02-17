@@ -1,0 +1,80 @@
+<footer class="sage-footer bg-footer text-footer-text">
+  <div class="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+
+      <!-- Brand column -->
+      <div class="md:col-span-4">
+        <div class="flex items-center mb-6">
+          {% if config.site.logo %}
+          <img
+            class="h-8 sm:h-10 w-auto brightness-0 invert opacity-80"
+            src="{{ config.site.logo | imagePath }}"
+            alt="{{ config.site.name }}"
+          />
+          {% endif %}
+          <span class="ml-2 text-xl font-playfair font-semibold text-white">
+            {{ config.site.name }}
+          </span>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex space-x-4 mb-6">
+          {% for icon in config.footer.socialLinks %}
+          <a
+            href="{{ icon.href }}"
+            class="text-footer-text hover:text-footer-link transition-colors duration-200 p-1"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="{{ icon.name | title }}"
+          >
+            {% icon icon.name, "w-5 h-5" | safe %}
+          </a>
+          {% endfor %}
+        </div>
+
+        <p class="text-footer-text text-sm opacity-60">
+          All rights reserved &copy; {% currentYear %}.
+        </p>
+      </div>
+
+      <!-- Link Groups -->
+      <div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
+        {% for group in config.footer.linkGroups %}
+        <div>
+          {% if group.title %}
+          <h3 class="text-xs font-dm font-medium tracking-widest uppercase text-footer-link mb-4">
+            {{ group.title }}
+          </h3>
+          {% endif %}
+          <ul class="list-none space-y-3">
+            {% for link in group.links %}
+            <li>
+              <a
+                href="{{ link.href }}"
+                class="text-footer-text hover:text-footer-link text-sm font-dm transition-colors duration-200"
+              >{{ link.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8 py-4 text-center">
+      <p class="text-sm text-footer-text opacity-50 font-dm">
+        Built with
+        <a
+          class="text-footer-link hover:text-white transition-colors"
+          href="https://webnami.in"
+          target="_blank"
+          rel="noopener"
+        >WebNami</a>
+      </p>
+    </div>
+  </div>
+</footer>

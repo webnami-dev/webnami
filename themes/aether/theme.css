@@ -1,0 +1,16 @@
+/* Aether - Apple Notes / Notion inspired color palette */
+:root[data-theme="light"] {
+  --color-primary: #007aff;
+  --color-background: #f5f5f7;
+  --color-content: #1d1d1f;
+  --color-accent: #86868b;
+  --color-footer: #f5f5f7;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #0a84ff;
+  --color-background: #1c1c1e;
+  --color-content: #f5f5f7;
+  --color-accent: #98989d;
+  --color-footer: #1c1c1e;
+}

@@ -1,0 +1,40 @@
+{% import "macros/pagination.njk" as p %}
+{% import "macros/card.njk" as c %}
+
+<!-- Index page: featured post + grid -->
+{% macro homePagePostsGrid(postsPage) %}
+{% set featuredPost = postsPage.items[0] %}
+{% if featuredPost %}
+{{ c.featuredCard(featuredPost) }}
+{% if postsPage.postsPerPage == 1 and postsPage.total > 1 %}
+<div>
+  {{ p.paginationHomePage(postsPage) }}
+</div>
+{% endif %}
+{% endif %}
+
+<div class="w-full max-w-5xl px-5 mx-auto">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% for post in postsPage.items %}
+    {% if not loop.first %}
+    {{ c.postCard(post) }}
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% if postsPage.total > postsPage.postsPerPage %}
+    {{ p.paginationHomePage(postsPage) }}
+  {% endif %}
+</div>
+{% endmacro %}
+
+<!-- Grid of posts for pages (tags, categories, authors) -->
+{% macro postsGrid(posts, type) %}
+<div class="w-full max-w-5xl px-5 mx-auto">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% for post in posts.items %}
+    {{ c.postCard(post) }}
+    {% endfor %}
+  </div>
+  {{ p.pagination(posts, type) }}
+</div>
+{% endmacro %}

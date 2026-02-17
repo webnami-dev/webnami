@@ -1,0 +1,85 @@
+
+{% import "macros/cardslist.njk" as cl %}
+
+{% macro renderCategoryPage(categoryPage) %}
+    <section class="text-content min-h-screen">
+        <div class="max-w-6xl mx-auto px-5 pt-16 pb-6 text-center">
+          <span class="chronicle-category-label text-primary-500 block mb-3">Category</span>
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+              {{ categoryPage.name }}
+          </h1>
+          {% if categoryPage.page > 1 %}
+          <p class="text-accent text-sm italic mt-2">Page {{ categoryPage.page }}</p>
+          {% endif %}
+        </div>
+        <div class="max-w-6xl mx-auto px-5">
+          <div class="w-16 h-0.5 bg-primary-500 mx-auto mb-10"></div>
+        </div>
+        {%- include 'partials/categorynav.njk' -%}
+        {{ cl.postsGrid(categoryPage, "category") }}
+    </section>
+{% endmacro %}
+
+{% macro renderTagPage(tagPage) %}
+    <section class="text-content min-h-screen">
+        <div class="max-w-6xl mx-auto px-5 pt-16 pb-6 text-center">
+          <span class="chronicle-category-label text-primary-500 block mb-3">Tagged</span>
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+              {{ tagPage.name }}
+          </h1>
+          {% if tagPage.page > 1 %}
+          <p class="text-accent text-sm italic mt-2">Page {{ tagPage.page }}</p>
+          {% endif %}
+        </div>
+        <div class="max-w-6xl mx-auto px-5">
+          <div class="w-16 h-0.5 bg-primary-500 mx-auto mb-10"></div>
+        </div>
+        {{ cl.postsGrid(tagPage, "tags") }}
+    </section>
+{% endmacro %}
+
+{% macro renderAuthorPage(authorPage) %}
+    <section class="text-content min-h-screen">
+        <div class="max-w-6xl mx-auto px-5 pt-16 pb-6 text-center">
+          <span class="chronicle-category-label text-accent block mb-3">Stories by</span>
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+              {{ authorPage.name }}
+          </h1>
+          {% if authorPage.page > 1 %}
+          <p class="text-accent text-sm italic mt-2">Page {{ authorPage.page }}</p>
+          {% endif %}
+        </div>
+        <div class="max-w-6xl mx-auto px-5">
+          <div class="w-16 h-0.5 bg-primary-500 mx-auto mb-10"></div>
+        </div>
+        {{ cl.postsGrid(authorPage, "author") }}
+    </section>
+{% endmacro %}
+
+
+{% macro renderHomePage(postsPage) %}
+<section class="text-content min-h-screen">
+  {% if postsPage.page == 1 %}
+  <!-- Page 1: Editorial header + Featured + Grid -->
+  <div class="max-w-4xl mx-auto px-5 pt-16 pb-10 text-center">
+    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
+      {{ config.homepage.heading }}
+    </h1>
+    <div class="w-16 h-0.5 bg-primary-500 mx-auto mt-6 mb-10"></div>
+  </div>
+  {%- include 'partials/categorynav.njk' -%}
+  {{ cl.homePagePostsGrid(postsPage) }}
+  {% else %}
+  <!-- Page 2+: Grid Layout Only -->
+  <div class="max-w-6xl mx-auto px-5 pt-16 pb-6 text-center">
+    <span class="chronicle-category-label text-accent block mb-3">Archive</span>
+    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+      All Posts
+    </h1>
+    <p class="text-accent text-sm italic mt-2">Page {{ postsPage.page }}</p>
+    <div class="w-16 h-0.5 bg-primary-500 mx-auto mt-6 mb-10"></div>
+  </div>
+  {{ cl.postsGrid(postsPage, "posts") }}
+  {% endif %}
+</section>
+{% endmacro %}

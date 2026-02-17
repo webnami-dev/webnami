@@ -1,0 +1,82 @@
+
+<div x-data="{ open: false }">
+  <nav class="border-b border-accent/10">
+    <div class="max-w-2xl mx-auto px-5">
+      <div class="flex justify-between items-center h-12">
+        {# Site name - styled as terminal path #}
+        <a href="/" class="font-mono text-sm font-bold text-content hover:text-primary-500 transition-colors">
+          {% if config.site.logo %}
+          <img
+            class="h-5 w-auto inline-block mr-2 -mt-0.5"
+            src="{{ config.site.logo | imagePath }}"
+            alt="{{ config.site.name }}"
+          />
+          {% endif %}
+          <span class="text-primary-500">~</span>/{{ config.site.name | lower | replace(" ", "-") }}
+        </a>
+
+        <div class="flex items-center gap-1">
+          {# Desktop nav links separated by slashes #}
+          <nav class="hidden md:flex items-center font-mono text-xs">
+            {% for link in config.navbar.links %}
+            {% if not loop.first %}<span class="text-accent/30 mx-1">/</span>{% endif %}
+            <a
+              href="{{ link.href }}"
+              class="text-accent hover:text-primary-500 px-1 py-1 transition-colors"
+            >{{ link.name | lower }}</a>
+            {% endfor %}
+          </nav>
+
+          {# Theme toggle #}
+          <div x-data class="ml-2">
+            <button
+              @click="$store.theme.lightTheme()"
+              class="p-1.5 text-accent hover:text-primary-500 transition-colors font-mono text-xs"
+              aria-label="Switch to light mode"
+              x-show="$store.theme.dark"
+            >
+              {% icon "sun", "w-4 h-4" | safe %}
+            </button>
+            <button
+              @click="$store.theme.darkTheme()"
+              class="p-1.5 text-accent hover:text-primary-500 transition-colors font-mono text-xs"
+              aria-label="Switch to dark mode"
+              x-show="!$store.theme.dark"
+            >
+              {% icon "moon", "w-4 h-4" | safe %}
+            </button>
+          </div>
+
+          {# Mobile hamburger #}
+          <button
+            @click="open = !open"
+            class="md:hidden p-1.5 text-accent hover:text-primary-500 transition-colors"
+            aria-label="Toggle menu"
+            :aria-expanded="open"
+          >
+            <span x-show="!open">{% icon "menu", "w-4 h-4" | safe %}</span>
+            <span x-show="open">{% icon "x", "w-4 h-4" | safe %}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {# Mobile dropdown #}
+  <div
+    x-show="open"
+    x-collapse
+    @keydown.escape.window="open = false"
+    class="md:hidden bg-background border-b border-accent/10 overflow-hidden"
+  >
+    <div class="max-w-2xl mx-auto px-5 py-3 font-mono text-sm">
+      {% for link in config.navbar.links %}
+      <a
+        href="{{ link.href }}"
+        @click="open = false"
+        class="block text-accent hover:text-primary-500 py-1.5 transition-colors"
+      >./{{ link.name | lower }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

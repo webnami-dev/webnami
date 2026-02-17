@@ -1,0 +1,101 @@
+---
+layout: "base.njk"
+---
+
+<main class="py-12 sm:py-16">
+  <article
+    class="max-w-[42rem] mx-auto px-5 sm:px-6 prose prose-lg prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content"
+  >
+    <header class="not-prose mb-10">
+      <h1 class="font-heading text-3xl sm:text-4xl font-bold text-content leading-tight mb-4">{{ title }}</h1>
+      <div class="flex flex-wrap items-center gap-x-2 text-sm text-accent">
+        <time datetime="{{ date | date('YYYY-MM-DD') }}">{{ date | postDate }}</time>
+        {% if author %}
+        <span class="text-accent/30">/</span>
+        <a href="/author/{{ author | slugify }}" class="text-accent hover:text-content">{{ author }}</a>
+        {% endif %}
+        {% if category %}
+        <span class="text-accent/30">/</span>
+        <a href="/category/{{ category | slugify }}" class="text-accent hover:text-content">{{ category }}</a>
+        {% endif %}
+      </div>
+    </header>
+
+    {% set meta = content | postMeta %}
+    {{ meta.contentAnchorLinks | safe }}
+
+    {% if tags.length > 0 %}
+    <div class="not-prose mt-12 pt-6 border-t border-accent/10">
+      <p class="text-sm text-accent">
+        {% for tag in tags %}
+        <a
+          href="/tags/{{ tag | slugify }}"
+          class="text-accent hover:text-content underline decoration-accent/20 underline-offset-2"
+        >{{ tag }}</a>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    </div>
+    {% endif %}
+
+    <div class="not-prose mt-8 pt-4 border-t border-accent/10">
+      <div class="flex flex-wrap items-center gap-x-4 text-sm text-accent">
+        <span>Share:</span>
+        <a
+          href="https://twitter.com/intent/tweet?url={{ config.site.url }}{{ page.url }}"
+          class="text-accent hover:text-content"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Twitter</a>
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url={{ config.site.url }}{{ page.url }}"
+          class="text-accent hover:text-content"
+          target="_blank"
+          rel="noopener noreferrer"
+        >LinkedIn</a>
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u={{ config.site.url }}{{ page.url }}"
+          class="text-accent hover:text-content"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Facebook</a>
+      </div>
+    </div>
+
+    {%- if collections.posts %}
+    {%- set previousPost = collections.posts | getPreviousCollectionItem %}
+    {%- set nextPost = collections.posts | getNextCollectionItem %}
+    {%- if nextPost or previousPost %}
+    <nav class="not-prose mt-10 pt-6 border-t border-accent/10">
+      <div class="flex justify-between items-start gap-8">
+        {%- if previousPost %}
+        <div class="text-left min-w-0 flex-1">
+          <a
+            href="{{ previousPost.url }}"
+            class="group block"
+          >
+            <span class="text-xs text-accent block mb-1">Previous</span>
+            <span class="text-sm text-content group-hover:text-accent">{{ previousPost.data.title }}</span>
+          </a>
+        </div>
+        {% else %}
+        <div class="flex-1"></div>
+        {% endif %}
+        {%- if nextPost %}
+        <div class="text-right min-w-0 flex-1">
+          <a
+            href="{{ nextPost.url }}"
+            class="group block"
+          >
+            <span class="text-xs text-accent block mb-1">Next</span>
+            <span class="text-sm text-content group-hover:text-accent">{{ nextPost.data.title }}</span>
+          </a>
+        </div>
+        {% else %}
+        <div class="flex-1"></div>
+        {% endif %}
+      </div>
+    </nav>
+    {%- endif %}
+    {%- endif %}
+  </article>
+</main>

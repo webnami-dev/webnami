@@ -1,0 +1,258 @@
+/* Google Fonts: Playfair Display (serif headings) + DM Sans (body) */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap");
+
+@import "tailwindcss";
+@import "../../theme.css";
+@import "../../../../node_modules/prismjs/themes/prism-tomorrow.min.css";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-playfair: "Playfair Display", "Georgia", serif;
+  --font-dm: "DM Sans", "Helvetica Neue", sans-serif;
+  --color-primary: var(--color-primary);
+  --color-background: var(--color-background);
+  --color-content: var(--color-content);
+  --color-accent: var(--color-accent);
+  --color-footer: var(--color-footer);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-highlight: var(--color-highlight);
+  --color-hero-text: var(--color-hero-text);
+  --color-muted: var(--color-muted);
+  --color-card-bg: var(--color-card-bg);
+  --color-tag-bg: var(--color-tag-bg);
+  --color-tag-text: var(--color-tag-text);
+  --color-nav-bg: var(--color-nav-bg);
+  --color-footer-text: var(--color-footer-text);
+  --color-footer-link: var(--color-footer-link);
+
+  /* primary color variables */
+  --color-primary-50: color-mix(in srgb, var(--color-primary) 5%, white);
+  --color-primary-100: color-mix(in srgb, var(--color-primary) 10%, white);
+  --color-primary-200: color-mix(in srgb, var(--color-primary) 20%, white);
+  --color-primary-300: color-mix(in srgb, var(--color-primary) 30%, white);
+  --color-primary-400: color-mix(in srgb, var(--color-primary) 40%, white);
+  --color-primary-500: var(--color-primary);
+  --color-primary-600: color-mix(in srgb, var(--color-primary) 80%, black);
+  --color-primary-700: color-mix(in srgb, var(--color-primary) 70%, black);
+  --color-primary-800: color-mix(in srgb, var(--color-primary) 60%, black);
+  --color-primary-900: color-mix(in srgb, var(--color-primary) 40%, black);
+  --color-primary-950: color-mix(in srgb, var(--color-primary) 20%, black);
+}
+
+/* Base styles */
+html {
+  font-family: var(--font-dm);
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-playfair);
+  letter-spacing: -0.01em;
+}
+
+/* Decorative line used throughout */
+.sage-line {
+  width: 3rem;
+  height: 2px;
+  background: var(--color-primary);
+  display: block;
+}
+
+.sage-line-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Botanical leaf divider (CSS-only) */
+.sage-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--color-muted);
+}
+
+.sage-divider::before,
+.sage-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--color-border);
+}
+
+.sage-divider-icon {
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+/* Card hover effect */
+.sage-card {
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sage-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px -12px rgba(92, 122, 90, 0.15);
+}
+
+/* Image hover zoom */
+.sage-img-wrap {
+  overflow: hidden;
+}
+
+.sage-img-wrap img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sage-img-wrap:hover img {
+  transform: scale(1.05);
+}
+
+/* Fade-in animation for page elements */
+@keyframes sageFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sage-fade-up {
+  animation: sageFadeUp 0.6s ease-out forwards;
+}
+
+.sage-fade-up-delay-1 {
+  animation: sageFadeUp 0.6s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.sage-fade-up-delay-2 {
+  animation: sageFadeUp 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.sage-fade-up-delay-3 {
+  animation: sageFadeUp 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* Navbar glass effect */
+.sage-nav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: var(--color-nav-bg);
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.3s ease;
+}
+
+/* Tag/badge styles */
+.sage-tag {
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  font-family: var(--font-dm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.sage-tag:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Prose overrides for article content */
+.sage-prose {
+  --tw-prose-headings: var(--color-hero-text);
+  --tw-prose-body: var(--color-content);
+  --tw-prose-links: var(--color-primary);
+  --tw-prose-bold: var(--color-content);
+  --tw-prose-quotes: var(--color-accent);
+  --tw-prose-code: var(--color-primary);
+}
+
+.sage-prose h1,
+.sage-prose h2,
+.sage-prose h3 {
+  font-family: var(--font-playfair);
+}
+
+/* Blockquote custom styling */
+.sage-prose blockquote {
+  border-left-color: var(--color-primary);
+  font-style: italic;
+  font-family: var(--font-playfair);
+}
+
+/* Scroll progress bar */
+.sage-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-primary);
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* Footer organic shape */
+.sage-footer {
+  position: relative;
+}
+
+.sage-footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-primary) 20%,
+    var(--color-primary) 80%,
+    transparent 100%
+  );
+  opacity: 0.4;
+}
+
+/* Selection color */
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  color: var(--color-hero-text);
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+a,
+button,
+img {
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}

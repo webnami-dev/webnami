@@ -1,0 +1,25 @@
+{% if collections.categoryList.length > 0 %}
+<div class="overflow-x-auto mb-8">
+  <div
+    class="flex gap-2 max-w-5xl px-5 min-w-max mx-auto"
+  >
+    {# All tab #}
+    <a
+      href="/"
+      class="text-[13px] flex-shrink-0 px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap border {% if page.url == '/' or page.url.includes('/posts/') %} text-primary-500 bg-primary-50 border-primary-200 {% else %} text-accent bg-surface border-border hover:border-accent/30 hover:text-content {% endif %}"
+    >
+      All
+    </a>
+
+    {# Category tabs #}
+    {% for category in collections.categoryList %}
+    <a
+      href="/category/{{ category | slug }}/"
+      class="text-[13px] flex-shrink-0 px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap border {% if page.url == '/category/' + (category | slug) + '/' %} text-primary-500 bg-primary-50 border-primary-200 {% else %} text-accent bg-surface border-border hover:border-accent/30 hover:text-content {% endif %}"
+    >
+      {{ category }}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

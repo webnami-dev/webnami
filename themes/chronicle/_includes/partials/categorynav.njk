@@ -1,0 +1,25 @@
+{% if collections.categoryList.length > 0 %}
+<div class="overflow-x-auto mb-14">
+  <div
+    class="flex items-center gap-3 max-w-6xl px-5 min-w-max mx-auto justify-center"
+  >
+    <!-- All Tab -->
+    <a
+      href="/"
+      class="chronicle-category-label flex-shrink-0 px-5 py-2 rounded-full whitespace-nowrap transition-all duration-200 {% if page.url == '/' or page.url.includes('/posts/') %} text-white bg-primary-500 {% else %} text-accent border border-accent/20 hover:border-primary-400 hover:text-primary-500 {% endif %}"
+    >
+      All
+    </a>
+
+    <!-- Category Tabs -->
+    {% for category in collections.categoryList %}
+    <a
+      href="/category/{{ category | slug }}/"
+      class="chronicle-category-label flex-shrink-0 px-5 py-2 rounded-full whitespace-nowrap transition-all duration-200 {% if page.url == '/category/' + (category | slug) + '/' %} text-white bg-primary-500 {% else %} text-accent border border-accent/20 hover:border-primary-400 hover:text-primary-500 {% endif %}"
+    >
+      {{ category }}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

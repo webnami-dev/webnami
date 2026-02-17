@@ -1,0 +1,60 @@
+
+{% import "macros/cardslist.njk" as cl %}
+
+{% macro renderCategoryPage(categoryPage) %}
+<section class="text-content py-12 sm:py-16">
+  <div class="max-w-[42rem] mx-auto px-5 mb-10">
+    <h1 class="font-heading text-2xl font-bold text-content">
+      {{ categoryPage.name }}{% if categoryPage.page > 1 %}
+      <span class="text-accent font-normal text-base ml-2">Page {{ categoryPage.page }}</span>{% endif %}
+    </h1>
+  </div>
+  {%- include 'partials/categorynav.njk' -%}
+  {{ cl.postsGrid(categoryPage, "category") }}
+</section>
+{% endmacro %}
+
+{% macro renderTagPage(tagPage) %}
+<section class="text-content py-12 sm:py-16">
+  <div class="max-w-[42rem] mx-auto px-5 mb-10">
+    <h1 class="font-heading text-2xl font-bold text-content">
+      Tagged: {{ tagPage.name }}{% if tagPage.page > 1 %}
+      <span class="text-accent font-normal text-base ml-2">Page {{ tagPage.page }}</span>{% endif %}
+    </h1>
+  </div>
+  {{ cl.postsGrid(tagPage, "tags") }}
+</section>
+{% endmacro %}
+
+{% macro renderAuthorPage(authorPage) %}
+<section class="text-content py-12 sm:py-16">
+  <div class="max-w-[42rem] mx-auto px-5 mb-10">
+    <h1 class="font-heading text-2xl font-bold text-content">
+      {{ authorPage.name }}{% if authorPage.page > 1 %}
+      <span class="text-accent font-normal text-base ml-2">Page {{ authorPage.page }}</span>{% endif %}
+    </h1>
+  </div>
+  {{ cl.postsGrid(authorPage, "author") }}
+</section>
+{% endmacro %}
+
+
+{% macro renderHomePage(postsPage) %}
+<section class="text-content py-12 sm:py-16">
+  {% if postsPage.page == 1 %}
+  <div class="max-w-[42rem] mx-auto px-5 mb-12">
+    <h1 class="font-heading text-2xl sm:text-3xl font-bold text-content leading-snug">{{ config.homepage.heading }}</h1>
+  </div>
+  {%- include 'partials/categorynav.njk' -%}
+  {{ cl.homePagePostsGrid(postsPage) }}
+  {% else %}
+  <div class="max-w-[42rem] mx-auto px-5 mb-10">
+    <h1 class="font-heading text-2xl font-bold text-content">
+      All Posts
+      <span class="text-accent font-normal text-base ml-2">Page {{ postsPage.page }}</span>
+    </h1>
+  </div>
+  {{ cl.postsGrid(postsPage, "posts") }}
+  {% endif %}
+</section>
+{% endmacro %}

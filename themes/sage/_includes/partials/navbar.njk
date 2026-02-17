@@ -1,0 +1,99 @@
+
+<div x-data="{ open: false }">
+  <nav class="sage-nav fixed w-full top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+      <div class="flex justify-between items-center h-16 sm:h-20">
+        <!-- Logo -->
+        <div class="flex items-center">
+          {% if config.site.logo %}
+          <a href="/" class="flex items-center">
+            <img
+              class="h-7 sm:h-9 w-auto"
+              src="{{ config.site.logo | imagePath }}"
+              alt="{{ config.site.name }}"
+            />
+          </a>
+          {% endif %}
+          <a href="/" class="flex items-center group">
+            <span class="ml-2 text-hero-text text-lg font-playfair font-semibold tracking-tight group-hover:text-primary-500 transition-colors">
+              {{ config.site.name }}
+            </span>
+          </a>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <!-- Desktop nav links -->
+          <nav class="hidden lg:flex items-center mr-2">
+            {% for link in config.navbar.links %}
+            <a
+              href="{{ link.href }}"
+              class="relative text-accent hover:text-hero-text px-4 py-2 text-sm font-dm font-medium tracking-wide transition-colors duration-200 after:absolute after:bottom-1 after:left-4 after:right-4 after:h-px after:bg-primary-500 after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+            >
+              {{ link.name }}
+            </a>
+            {% endfor %}
+          </nav>
+
+          <!-- Vertical divider -->
+          <div class="hidden lg:block w-px h-5 bg-border mr-2"></div>
+
+          <!-- Theme toggle -->
+          <div x-data>
+            <button
+              @click="$store.theme.lightTheme()"
+              class="p-2 rounded-full text-accent hover:text-hero-text hover:bg-surface transition-all duration-200"
+              aria-label="Switch to light mode"
+              x-show="$store.theme.dark"
+            >
+              {% icon "sun", "w-4 h-4" | safe %}
+            </button>
+            <button
+              @click="$store.theme.darkTheme()"
+              class="p-2 rounded-full text-accent hover:text-hero-text hover:bg-surface transition-all duration-200"
+              aria-label="Switch to dark mode"
+              x-show="!$store.theme.dark"
+            >
+              {% icon "moon", "w-4 h-4" | safe %}
+            </button>
+          </div>
+
+          <!-- Hamburger (mobile) -->
+          <button
+            @click="open = !open"
+            class="lg:hidden p-2 rounded-full text-accent hover:text-hero-text hover:bg-surface transition-all duration-200"
+            aria-label="Toggle menu"
+            :aria-expanded="open"
+          >
+            <span x-show="!open">{% icon "menu", "w-5 h-5" | safe %}</span>
+            <span x-show="open">{% icon "x", "w-5 h-5" | safe %}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spacer for fixed nav -->
+  <div class="h-16 sm:h-20"></div>
+
+  <!-- Mobile dropdown -->
+  <div
+    x-show="open"
+    x-collapse
+    @keydown.escape.window="open = false"
+    class="lg:hidden fixed top-16 sm:top-20 inset-x-0 z-40 bg-background border-b border-border shadow-lg"
+  >
+    <ul class="flex flex-col py-4 px-6 list-none max-w-6xl mx-auto">
+      {% for link in config.navbar.links %}
+      <li>
+        <a
+          href="{{ link.href }}"
+          @click="open = false"
+          class="block text-accent hover:text-hero-text py-3 text-sm font-dm font-medium tracking-wide transition-colors duration-200 border-b border-border/50 last:border-0"
+        >
+          {{ link.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

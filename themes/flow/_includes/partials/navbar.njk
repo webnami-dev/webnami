@@ -1,0 +1,73 @@
+
+<div x-data="{ open: false }">
+  <nav class="border-b border-accent/8">
+    <div class="max-w-[42rem] mx-auto px-5">
+      <div class="flex justify-between items-center h-14">
+        <a href="/" class="text-content hover:text-accent text-sm font-heading font-semibold">
+          {{ config.site.name }}
+        </a>
+
+        <div class="flex items-center">
+          {# Desktop nav links #}
+          <nav class="hidden md:flex items-center gap-6 mr-4">
+            {% for link in config.navbar.links %}
+            <a
+              href="{{ link.href }}"
+              class="text-accent hover:text-content text-sm"
+            >{{ link.name }}</a>
+            {% endfor %}
+          </nav>
+
+          {# Theme toggle #}
+          <div x-data>
+            <button
+              @click="$store.theme.lightTheme()"
+              class="p-1.5 text-accent hover:text-content"
+              aria-label="Switch to light mode"
+              x-show="$store.theme.dark"
+            >
+              {% icon "sun", "w-4 h-4" | safe %}
+            </button>
+            <button
+              @click="$store.theme.darkTheme()"
+              class="p-1.5 text-accent hover:text-content"
+              aria-label="Switch to dark mode"
+              x-show="!$store.theme.dark"
+            >
+              {% icon "moon", "w-4 h-4" | safe %}
+            </button>
+          </div>
+
+          {# Mobile hamburger #}
+          <button
+            @click="open = !open"
+            class="md:hidden p-1.5 text-accent hover:text-content ml-1"
+            aria-label="Toggle menu"
+            :aria-expanded="open"
+          >
+            <span x-show="!open">{% icon "menu", "w-4 h-4" | safe %}</span>
+            <span x-show="open">{% icon "x", "w-4 h-4" | safe %}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {# Mobile dropdown #}
+  <div
+    x-show="open"
+    x-collapse
+    @keydown.escape.window="open = false"
+    class="md:hidden bg-background border-b border-accent/8 overflow-hidden"
+  >
+    <div class="max-w-[42rem] mx-auto px-5 py-3">
+      {% for link in config.navbar.links %}
+      <a
+        href="{{ link.href }}"
+        @click="open = false"
+        class="block text-accent hover:text-content py-2 text-sm"
+      >{{ link.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

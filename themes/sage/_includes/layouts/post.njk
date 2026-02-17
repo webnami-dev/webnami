@@ -1,0 +1,130 @@
+---
+layout: "base.njk"
+---
+
+<main class="min-h-screen" x-data="scrollProgress">
+  <!-- Reading progress bar -->
+  <div class="sage-progress" :style="'width:' + progress + '%'"></div>
+
+  <article class="sage-fade-up">
+    <!-- Post header -->
+    <header class="max-w-3xl mx-auto px-6 sm:px-8 pt-12 sm:pt-20 pb-8">
+      <!-- Category + Date row -->
+      <div class="flex items-center gap-3 mb-6 sage-fade-up-delay-1">
+        {% if category %}
+        <a
+          href="/category/{{ category | slugify }}"
+          class="sage-tag no-underline"
+        >{{ category }}</a>
+        {% endif %}
+        <span class="text-muted text-sm font-dm">{{ date | postDate }}</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-playfair text-hero-text text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-6 sage-fade-up-delay-2">
+        {{ title }}
+      </h1>
+
+      <!-- Author + Share row -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-8 border-b border-border sage-fade-up-delay-3">
+        {% if author %}
+        <a
+          href="/author/{{ author | slugify }}"
+          class="text-accent text-sm font-dm font-medium no-underline hover:text-primary-500 transition-colors"
+        >
+          <span class="text-muted">Written by</span> {{ author }}
+        </a>
+        {% endif %}
+
+        <div class="flex items-center space-x-4">
+          <span class="text-muted text-xs uppercase tracking-widest font-dm">Share</span>
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u={{ config.site.url }}{{ page.url }}"
+            class="text-accent hover:text-primary-500 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on Facebook"
+          >
+            {% icon "facebook", "w-4 h-4" | safe %}
+          </a>
+          <a
+            href="https://twitter.com/intent/tweet?url={{ config.site.url }}{{ page.url }}"
+            class="text-accent hover:text-primary-500 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on Twitter"
+          >
+            {% icon "twitter", "w-4 h-4" | safe %}
+          </a>
+          <a
+            href="https://www.linkedin.com/shareArticle?mini=true&url={{ config.site.url }}{{ page.url }}"
+            class="text-accent hover:text-primary-500 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on LinkedIn"
+          >
+            {% icon "linkedin", "w-4 h-4" | safe %}
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post content -->
+    <div
+      class="max-w-3xl mx-auto px-6 sm:px-8 sage-prose prose prose-lg prose-headings:text-hero-text prose-headings:font-playfair prose-p:text-content prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-a:text-primary-500 prose-a:no-underline prose-a:border-b prose-a:border-primary-500/30 hover:prose-a:border-primary-500 prose-blockquote:border-primary-500 prose-blockquote:text-accent prose-blockquote:font-playfair prose-blockquote:italic"
+    >
+      {% set meta = content | postMeta %}
+      {{ meta.contentAnchorLinks | safe }}
+    </div>
+
+    <!-- Tags -->
+    {% if tags.length > 0 %}
+    <div class="max-w-3xl mx-auto px-6 sm:px-8 mt-12 pt-8 border-t border-border">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-muted text-xs uppercase tracking-widest font-dm mr-1">Tags</span>
+        {% for tag in tags %}
+        <a
+          href="/tags/{{ tag | slugify }}"
+          class="sage-tag no-underline"
+        >{{ tag }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Previous / Next navigation -->
+    {%- if collections.posts %}
+    {%- set previousPost = collections.posts | getPreviousCollectionItem %}
+    {%- set nextPost = collections.posts | getNextCollectionItem %}
+    {%- if nextPost or previousPost %}
+    <nav class="max-w-3xl mx-auto px-6 sm:px-8 mt-12 pt-8 border-t border-border">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {%- if previousPost %}
+        <a href="{{ previousPost.url }}" class="group block p-5 rounded-lg bg-surface hover:bg-highlight transition-colors no-underline">
+          <span class="text-muted text-xs uppercase tracking-widest font-dm block mb-2">Previous</span>
+          <span class="text-content group-hover:text-primary-500 font-playfair text-lg font-medium transition-colors">
+            {{ previousPost.data.title }}
+          </span>
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+        {%- if nextPost %}
+        <a href="{{ nextPost.url }}" class="group block p-5 rounded-lg bg-surface hover:bg-highlight transition-colors no-underline sm:text-right">
+          <span class="text-muted text-xs uppercase tracking-widest font-dm block mb-2">Next</span>
+          <span class="text-content group-hover:text-primary-500 font-playfair text-lg font-medium transition-colors">
+            {{ nextPost.data.title }}
+          </span>
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+      </div>
+    </nav>
+    {%- endif %}
+    {%- endif %}
+
+    <!-- Bottom spacing -->
+    <div class="pb-16 sm:pb-24"></div>
+  </article>
+</main>

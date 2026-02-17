@@ -1,0 +1,18 @@
+/* Chronicle Theme - Warm Editorial Lifestyle Palette */
+:root[data-theme="light"] {
+  /* Light theme - warm cream editorial */
+  --color-primary: #c2703e;
+  --color-background: #faf9f6;
+  --color-content: #2d2319;
+  --color-accent: #8b7355;
+  --color-footer: #2d2319;
+}
+
+:root[data-theme="dark"] {
+  /* Dark theme - warm dark editorial */
+  --color-primary: #d4874e;
+  --color-background: #1a1814;
+  --color-content: #e8e2d9;
+  --color-accent: #a89b8a;
+  --color-footer: #0f0d0a;
+}

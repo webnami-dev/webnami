@@ -1,0 +1,40 @@
+/* Sage Theme - Organic, Botanical, Editorial */
+/* Color palette - earthy greens, warm creams, rich darks */
+
+:root[data-theme="light"] {
+  --color-primary: #5c7a5a;
+  --color-background: #faf8f3;
+  --color-content: #2d2a26;
+  --color-accent: #8a7e6b;
+  --color-footer: #2d3a2c;
+  --color-surface: #f0ebe2;
+  --color-border: #d4cdbf;
+  --color-highlight: #e8dcc8;
+  --color-hero-text: #1a1a17;
+  --color-muted: #a69e8e;
+  --color-card-bg: #ffffff;
+  --color-tag-bg: #e8e2d6;
+  --color-tag-text: #5c7a5a;
+  --color-nav-bg: rgba(250, 248, 243, 0.85);
+  --color-footer-text: #d4cdbf;
+  --color-footer-link: #a8c4a6;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #8fb88d;
+  --color-background: #1a1d1a;
+  --color-content: #e2ddd4;
+  --color-accent: #9e978a;
+  --color-footer: #111311;
+  --color-surface: #242824;
+  --color-border: #3a3e3a;
+  --color-highlight: #2e332e;
+  --color-hero-text: #f0ebe2;
+  --color-muted: #6b6760;
+  --color-card-bg: #1e221e;
+  --color-tag-bg: #2e332e;
+  --color-tag-text: #8fb88d;
+  --color-nav-bg: rgba(26, 29, 26, 0.9);
+  --color-footer-text: #6b6760;
+  --color-footer-link: #8fb88d;
+}

@@ -1,0 +1,72 @@
+
+{% import "macros/cardslist.njk" as cl %}
+
+{% macro renderCategoryPage(categoryPage) %}
+    <section class="text-content min-h-screen">
+        <div class="max-w-5xl mx-auto px-5 pt-12 pb-6">
+          <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">
+            {{ categoryPage.name }}
+            {% if categoryPage.page > 1 %}
+            <span class="text-accent font-normal text-lg ml-2">Page {{ categoryPage.page }}</span>
+            {% endif %}
+          </h1>
+          <p class="text-sm text-accent mt-1">Posts in this category</p>
+        </div>
+        {%- include 'partials/categorynav.njk' -%}
+        {{ cl.postsGrid(categoryPage, "category") }}
+    </section>
+{% endmacro %}
+
+{% macro renderTagPage(tagPage) %}
+    <section class="text-content min-h-screen">
+        <div class="max-w-5xl mx-auto px-5 pt-12 pb-6">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-surface-secondary text-accent border border-border">#{{ tagPage.name }}</span>
+            {% if tagPage.page > 1 %}
+            <span class="text-accent text-sm">Page {{ tagPage.page }}</span>
+            {% endif %}
+          </div>
+        </div>
+        {{ cl.postsGrid(tagPage, "tags") }}
+    </section>
+{% endmacro %}
+
+{% macro renderAuthorPage(authorPage) %}
+    <section class="text-content min-h-screen">
+        <div class="max-w-5xl mx-auto px-5 pt-12 pb-6">
+          <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">
+            {{ authorPage.name }}
+            {% if authorPage.page > 1 %}
+            <span class="text-accent font-normal text-lg ml-2">Page {{ authorPage.page }}</span>
+            {% endif %}
+          </h1>
+          <p class="text-sm text-accent mt-1">All posts by this author</p>
+        </div>
+        {{ cl.postsGrid(authorPage, "author") }}
+    </section>
+{% endmacro %}
+
+
+{% macro renderHomePage(postsPage) %}
+<section class="text-content min-h-screen">
+  {% if postsPage.page == 1 %}
+  <!-- Page 1: Header + Featured + Grid Layout -->
+  <div class="max-w-5xl mx-auto px-5 pt-12 pb-6">
+    <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">
+      {{ config.homepage.heading }}
+    </h1>
+  </div>
+  {%- include 'partials/categorynav.njk' -%}
+  {{ cl.homePagePostsGrid(postsPage) }}
+  {% else %}
+  <!-- Page 2+: Grid Layout Only -->
+  <div class="max-w-5xl mx-auto px-5 pt-12 pb-6">
+    <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">
+      All Posts
+      <span class="text-accent font-normal text-lg ml-2">Page {{ postsPage.page }}</span>
+    </h1>
+  </div>
+  {{ cl.postsGrid(postsPage, "posts") }}
+  {% endif %}
+</section>
+{% endmacro %}

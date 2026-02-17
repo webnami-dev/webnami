@@ -1,0 +1,56 @@
+<!-- Pagination navigation -->
+{% macro pagination(posts, type) %}
+{% if posts.total > config.postsPerPage %}
+<div class="flex justify-between items-center gap-4 my-12 pt-8 border-t border-accent/15">
+  {% set totalPages = (posts.total / config.postsPerPage) | round(0, "ceil") %}
+  {% if posts.page > 1 %}
+  <div class="text-left">
+    <a
+      href="{% if type == 'posts' and posts.page <= 2 %}/{% else %}/{{
+        type
+      }}{% if type != 'posts' %}/{{
+        posts.name | slugify
+      }}{% endif %}/{% if posts.page > 2 %}{{
+        posts.page - 1
+      }}/{% endif %}{% endif %}"
+      class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-content border border-accent/20 rounded-full hover:border-primary-500 hover:text-primary-500 transition-all duration-300"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
+      Previous
+    </a>
+  </div>
+  {% else %}
+  <div></div>
+  {% endif %}
+  <span class="text-sm text-accent italic">Page {{ posts.page }} of {{ totalPages }}</span>
+  {% if posts.page < totalPages %}
+  <div class="text-right">
+    <a
+      href="/{{ type }}{% if type != 'posts' %}/{{
+        posts.name | slugify
+      }}{% endif %}/{{ posts.page + 1 }}/"
+      class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-content border border-accent/20 rounded-full hover:border-primary-500 hover:text-primary-500 transition-all duration-300"
+    >
+      Next
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  {% else %}
+  <div></div>
+  {% endif %}
+</div>
+{% endif %}
+{% endmacro %}
+
+<!-- Pagination navigation for home page-->
+{% macro paginationHomePage(postsPage) %}
+<div class="flex justify-center my-14">
+  <a
+    href="/posts/{{ postsPage.page + 1 }}"
+    class="group inline-flex items-center gap-3 px-8 py-3 text-sm font-medium text-content border border-accent/20 rounded-full hover:border-primary-500 hover:text-primary-500 transition-all duration-300"
+  >
+    <span>View Older Stories</span>
+    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+  </a>
+</div>
+{% endmacro %}
