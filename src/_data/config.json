@@ -1,5 +1,5 @@
 {
-  "theme": "default",
+  "theme": "chronicle",
   "site": {
     "name": "WebNami",
     "url": "http://example.com",
@@ -19,28 +19,55 @@
   },
   "navbar": {
     "links": [
-      { "name": "About", "href": "/about" },
-      { "name": "Contact", "href": "#" }
+      {
+        "name": "About",
+        "href": "/about"
+      },
+      {
+        "name": "Contact",
+        "href": "#"
+      }
     ]
   },
   "footer": {
     "socialLinks": [
-      { "name": "facebook", "href": "#" },
-      { "name": "twitter", "href": "#" },
-      { "name": "instagram", "href": "#" }
+      {
+        "name": "facebook",
+        "href": "#"
+      },
+      {
+        "name": "twitter",
+        "href": "#"
+      },
+      {
+        "name": "instagram",
+        "href": "#"
+      }
     ],
     "linkGroups": [
       {
-        "title": "CATEGORY 1",
         "links": [
-          { "name": "About", "href": "/about" },
-          { "name": "Home", "href": "/" }
-        ]
+          {
+            "name": "About",
+            "href": "/about"
+          },
+          {
+            "name": "Home",
+            "href": "/"
+          }
+        ],
+        "title": "CATEGORY 1"
       },
       {
         "links": [
-          { "name": "RSS", "href": "/rss.xml" },
-          { "name": "Sitemap", "href": "/sitemap.xml" }
+          {
+            "name": "RSS",
+            "href": "/rss.xml"
+          },
+          {
+            "name": "Sitemap",
+            "href": "/sitemap.xml"
+          }
         ]
       }
     ]

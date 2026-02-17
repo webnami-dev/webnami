@@ -6,16 +6,16 @@ import { icons } from "lucide";
 import { DateTime } from "luxon";
 import htmlmin from "html-minifier-terser";
 
-const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
 import postManagement from "./_plugins/post-management.js";
 import contentFilters from "./_plugins/content-filters.js";
 
 export default function (eleventyConfig) {
+  const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
   const isProd = process.env.NODE_ENV === "production";
-  //eleventyConfig.addWatchTarget("config.js");
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.ignores.add("admin/**");
+  eleventyConfig.ignores.add("themes/**");
   if (isProd) {
     eleventyConfig.ignores.add("api/**");
   }

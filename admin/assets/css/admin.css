@@ -32,6 +32,9 @@
   --color-alert-error-bg: var(--color-alert-error-bg);
   --color-alert-error-border: var(--color-alert-error-border);
   --color-alert-error-text: var(--color-alert-error-text);
+  --color-alert-warning-bg: var(--color-alert-warning-bg);
+  --color-alert-warning-border: var(--color-alert-warning-border);
+  --color-alert-warning-text: var(--color-alert-warning-text);
   --color-confirm-delete: var(--color-confirm-delete);
   --color-confirm-delete-hover: var(--color-confirm-delete-hover);
 }
@@ -59,6 +62,9 @@ html {
   --color-alert-error-bg: #fef2f2;
   --color-alert-error-border: #fecaca;
   --color-alert-error-text: #991b1b;
+  --color-alert-warning-bg: #fffbeb;
+  --color-alert-warning-border: #fde68a;
+  --color-alert-warning-text: #92400e;
   --color-confirm-delete: #dc2626;
   --color-confirm-delete-hover: #b91c1c;
 }
@@ -81,6 +87,9 @@ html {
   --color-alert-error-bg: #450a0a;
   --color-alert-error-border: #7f1d1d;
   --color-alert-error-text: #fca5a5;
+  --color-alert-warning-bg: #451a03;
+  --color-alert-warning-border: #78350f;
+  --color-alert-warning-text: #fcd34d;
   --color-confirm-delete: #dc2626;
   --color-confirm-delete-hover: #ef4444;
 }
@@ -95,6 +104,12 @@ html {
   background-color: var(--color-alert-error-bg);
   border-color: var(--color-alert-error-border);
   color: var(--color-alert-error-text);
+}
+
+.alert-warning {
+  background-color: var(--color-alert-warning-bg);
+  border-color: var(--color-alert-warning-border);
+  color: var(--color-alert-warning-text);
 }
 
 .confirm-delete-btn {

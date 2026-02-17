@@ -90,7 +90,9 @@ Alpine.data("alertComponent", () => ({
     const id = ++alertId;
     this.alerts.push({ id, type, message, visible: true });
     this.$nextTick(() => lucide.createIcons());
-    setTimeout(() => this.dismiss(id), 4000);
+    if (type !== "warning") {
+      setTimeout(() => this.dismiss(id), 4000);
+    }
   },
   dismiss(id) {
     const alert = this.alerts.find((a) => a.id === id);

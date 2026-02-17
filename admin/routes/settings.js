@@ -30,6 +30,8 @@ router.get("/", (req, res) => {
 
 router.put("/", async (req, res) => {
   const data = req.body;
+  const oldConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  const themeChanged = oldConfig.theme !== (data.theme || "default");
 
   const config = {
     theme: data.theme || "default",
@@ -60,9 +62,21 @@ router.put("/", async (req, res) => {
   };
 
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-  await buildSite();
-  log.success("Settings updated");
-  res.json({ success: true });
+
+  if (themeChanged) {
+    log.warn(
+      `Theme changed from "${oldConfig.theme}" to "${config.theme}". Please restart the server for the new theme to take effect.`,
+    );
+    res.json({
+      success: true,
+      restartRequired: true,
+      message: `Theme changed to "${config.theme}". Please restart the server for changes to take effect.`,
+    });
+  } else {
+    await buildSite();
+    log.success("Settings updated");
+    res.json({ success: true });
+  }
 });
 
 export default router;

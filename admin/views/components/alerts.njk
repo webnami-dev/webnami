@@ -13,7 +13,7 @@
       x-transition:leave-start="opacity-100 translate-x-0"
       x-transition:leave-end="opacity-0 translate-x-4"
       class="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-md border text-sm"
-      :class="alert.type === 'success' ? 'alert-success' : 'alert-error'"
+      :class="alert.type === 'success' ? 'alert-success' : alert.type === 'warning' ? 'alert-warning' : 'alert-error'"
     >
       <span x-text="alert.message" class="flex-1"></span>
       <button

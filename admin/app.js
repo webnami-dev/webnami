@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 import nunjucks from "nunjucks";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -23,6 +24,11 @@ nunjucks.configure(path.join(__dirname, "views"), {
 
 app.set("view engine", "njk");
 app.use(express.json());
+
+const siteConfig = JSON.parse(
+  fs.readFileSync("src/_data/config.json", "utf-8"),
+);
+log.info(`Loading theme: "${siteConfig.theme}"`);
 
 log.info("Building Vite assets ...");
 await viteBuild({ configFile: "src/vite.config.js", logLevel: "silent" });
