@@ -5,6 +5,7 @@
 {% macro homePagePostsGrid(postsPage) %}
 {% set featuredPost = postsPage.items[0] %}
 {% if featuredPost %}
+
 {{ c.featuredCard(featuredPost) }}
 {% if postsPage.postsPerPage == 1 and postsPage.total > 1 %}
 <div>
@@ -13,8 +14,13 @@
 {% endif %}
 {% endif %}
 
-<div class="w-full max-w-6xl px-5 mx-auto">
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+<!-- Section label: LATEST ARTICLES -->
+<div class="max-w-5xl mx-auto px-5 mt-8 mb-2">
+  <div class="border-t border-accent/20 mt-4"></div>
+</div>
+
+<div class="w-full max-w-5xl px-5 mx-auto pt-8">
+  <div class="grid sm:grid-cols-2 gap-x-10 gap-y-12">
     {% for post in postsPage.items %}
     {% if not loop.first %}
     {{ c.postCard(post) }}
@@ -29,10 +35,10 @@
 
 <!-- Grid of posts for pages (tags, categories, authors) -->
 {% macro postsGrid(posts, type) %}
-<div class="w-full max-w-6xl px-5 mx-auto">
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+<div class="w-full max-w-5xl px-5 mx-auto">
+  <div class="grid sm:grid-cols-2 gap-x-10 gap-y-12">
     {% for post in posts.items %}
-    {{ c.postCard(post, "rounded-xl") }}
+    {{ c.postCard(post) }}
     {% endfor %}
   </div>
   {{ p.pagination(posts, type) }}

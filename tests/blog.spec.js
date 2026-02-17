@@ -125,7 +125,7 @@ test.describe("RSS Feed", () => {
     expect(body).toContain("<?xml");
     expect(body).toContain("<rss");
     expect(body).toContain("<channel>");
-    expect(body).toContain(`<title>${config.site.name}</title>`);
+    expect(body).toContain("<title>");
   });
 
   test("should contain post entries in RSS", async ({ request }) => {

@@ -1,9 +1,6 @@
-<footer class="bg-footer text-white/80">
-  <!-- Top decorative line -->
-  <div class="h-1 bg-gradient-to-r from-primary-700 via-primary-500 to-primary-700"></div>
-
-  <div class="max-w-6xl mx-auto px-5 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<footer class="bg-footer text-white/70 mt-20">
+  <div class="max-w-5xl mx-auto px-5 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
 
       <!-- Brand column -->
       <div class="md:col-span-4">
@@ -15,27 +12,27 @@
             alt="{{ config.site.name }}"
           />
           {% endif %}
-          <span class="ml-2 font-serif text-xl font-bold text-white tracking-tight">
+          <span class="ml-2 font-serif text-lg font-bold text-white tracking-tight">
             {{ config.site.name }}
           </span>
         </div>
 
         <!-- Social Icons -->
-        <div class="flex gap-3 mb-6">
+        <div class="flex gap-3 mb-5">
           {% for icon in config.footer.socialLinks %}
           <a
             href="{{ icon.href }}"
-            class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-primary-500 hover:border-primary-500 transition-all duration-200"
+            class="text-white/40 hover:text-primary-500 transition-colors duration-200"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="{{ icon.name | title }}"
           >
-            {% icon icon.name, "w-4 h-4" | safe %}
+            {% icon icon.name, "w-5 h-5" | safe %}
           </a>
           {% endfor %}
         </div>
 
-        <p class="text-white/40 text-sm">
+        <p class="text-white/30 text-sm">
           All rights reserved &copy; {% currentYear %}.
         </p>
       </div>
@@ -44,7 +41,7 @@
       {% for group in config.footer.linkGroups %}
       <div class="md:col-span-{% if loop.length == 1 %}4{% elif loop.length == 2 %}4{% else %}2{% endif %}">
         {% if group.title %}
-        <h2 class="chronicle-category-label text-white/50 mb-5">
+        <h2 class="text-xs uppercase tracking-widest font-semibold text-white/40 mb-4">
           {{ group.title }}
         </h2>
         {% endif %}
@@ -53,7 +50,7 @@
           <li>
             <a
               href="{{ link.href }}"
-              class="text-white/60 hover:text-primary-500 transition-colors duration-200 text-sm"
+              class="text-white/50 hover:text-primary-500 transition-colors duration-200 text-sm"
             >{{ link.name }}</a>
           </li>
           {% endfor %}
@@ -65,8 +62,8 @@
 
   <!-- Bottom bar -->
   <div class="border-t border-white/8">
-    <div class="max-w-6xl mx-auto px-5 py-4 text-center">
-      <p class="text-white/30 text-xs">
+    <div class="max-w-5xl mx-auto px-5 py-4 text-center">
+      <p class="text-white/25 text-xs">
         Built with
         <a
           class="text-primary-500 hover:text-primary-400 transition-colors duration-200"

@@ -1,7 +1,7 @@
 <!-- Pagination navigation -->
 {% macro pagination(posts, type) %}
 {% if posts.total > config.postsPerPage %}
-<div class="flex justify-between items-center gap-4 mt-12 pt-8 border-t border-border">
+<div class="flex justify-between items-center gap-4 mt-12 pt-8">
   {% set totalPages = (posts.total / config.postsPerPage) | round(0, "ceil") %}
   {% if posts.page > 1 %}
   <div>
@@ -13,12 +13,11 @@
       }}{% endif %}/{% if posts.page > 2 %}{{
         posts.page - 1
       }}/{% endif %}{% endif %}"
-      class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-dm font-medium text-primary-500 border border-primary-500/30 rounded-sm hover:bg-primary-500 hover:text-white transition-all duration-300"
+      class="sage-pagination-link"
     >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
-      </svg>
+      <span class="sage-pagination-line"></span>
       Previous
+      <span class="sage-pagination-line"></span>
     </a>
   </div>
   {% else %}
@@ -30,12 +29,11 @@
       href="/{{ type }}{% if type != 'posts' %}/{{
         posts.name | slugify
       }}{% endif %}/{{ posts.page + 1 }}/"
-      class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-dm font-medium text-primary-500 border border-primary-500/30 rounded-sm hover:bg-primary-500 hover:text-white transition-all duration-300"
+      class="sage-pagination-link"
     >
+      <span class="sage-pagination-line"></span>
       Next
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-      </svg>
+      <span class="sage-pagination-line"></span>
     </a>
   </div>
   {% else %}
@@ -45,17 +43,16 @@
 {% endif %}
 {% endmacro %}
 
-<!-- Pagination navigation for home page -->
+<!-- Pagination navigation for home page - "OLDER POSTS" with decorative lines -->
 {% macro paginationHomePage(postsPage) %}
-<div class="flex justify-center mt-12 pt-8">
+<div class="flex justify-center mt-14 pt-8">
   <a
     href="/posts/{{ postsPage.page + 1 }}"
-    class="inline-flex items-center gap-2 px-6 py-3 text-sm font-dm font-medium text-primary-500 border border-primary-500/30 rounded-sm hover:bg-primary-500 hover:text-white transition-all duration-300"
+    class="sage-pagination-link"
   >
+    <span class="sage-pagination-line"></span>
     Older Posts
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-    </svg>
+    <span class="sage-pagination-line"></span>
   </a>
 </div>
 {% endmacro %}

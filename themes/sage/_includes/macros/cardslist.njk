@@ -1,7 +1,7 @@
 {% import "macros/pagination.njk" as p %}
 {% import "macros/card.njk" as c %}
 
-<!-- Index page: featured post + grid -->
+<!-- Index page: featured post + stacked single-column list -->
 {% macro homePagePostsGrid(postsPage) %}
 {% set featuredPost = postsPage.items[0] %}
 {% if featuredPost %}
@@ -13,32 +13,29 @@
 {% endif %}
 {% endif %}
 
-<div class="w-full max-w-6xl mx-auto px-6 sm:px-8" x-data="fadeObserver">
-  <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
-    {% for post in postsPage.items %}
-    {% if not loop.first %}
-    <div data-sage-animate>
-      {{ c.postCard(post) }}
-    </div>
-    {% endif %}
-    {% endfor %}
+<!-- Regular posts stacked vertically -->
+<div x-data="fadeObserver">
+  {% for post in postsPage.items %}
+  {% if not loop.first %}
+  <div class="border-t border-border" data-sage-animate>
+    {{ c.postCard(post) }}
   </div>
+  {% endif %}
+  {% endfor %}
   {% if postsPage.total > postsPage.postsPerPage %}
     {{ p.paginationHomePage(postsPage) }}
   {% endif %}
 </div>
 {% endmacro %}
 
-<!-- Grid of posts for pages (tags, categories, authors) -->
+<!-- List of posts for pages (tags, categories, authors) - single column -->
 {% macro postsGrid(posts, type) %}
-<div class="w-full max-w-6xl mx-auto px-6 sm:px-8" x-data="fadeObserver">
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    {% for post in posts.items %}
-    <div data-sage-animate>
-      {{ c.postCard(post) }}
-    </div>
-    {% endfor %}
+<div x-data="fadeObserver">
+  {% for post in posts.items %}
+  <div class="border-t border-border" data-sage-animate>
+    {{ c.postCard(post) }}
   </div>
+  {% endfor %}
   {{ p.pagination(posts, type) }}
 </div>
 {% endmacro %}

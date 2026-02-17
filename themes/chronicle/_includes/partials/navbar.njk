@@ -1,7 +1,7 @@
 
 <div x-data="{ open: false }">
-  <nav class="border-b border-accent/10">
-    <div class="max-w-6xl mx-auto px-5">
+  <nav>
+    <div class="max-w-5xl mx-auto px-5">
       <div class="flex justify-between items-center h-20">
         <!-- Logo / Site name -->
         <div class="flex items-center">
@@ -15,7 +15,7 @@
           </a>
           {% endif %}
           <a href="/" class="flex items-center group">
-            <span class="ml-2 text-content font-serif text-2xl font-bold tracking-tight group-hover:text-primary-500 transition-colors duration-200">
+            <span class="ml-2 text-content font-serif text-xl font-bold tracking-tight group-hover:text-primary-500 transition-colors duration-200">
               {{ config.site.name }}
             </span>
           </a>
@@ -29,7 +29,7 @@
               <li>
                 <a
                   href="{{ link.href }}"
-                  class="text-content/70 hover:text-primary-500 px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-200"
+                  class="text-accent hover:text-content px-4 py-2 text-sm font-medium transition-colors duration-200"
                 >
                   {{ link.name }}
                 </a>
@@ -42,7 +42,7 @@
           <div x-data class="flex items-center">
             <button
               @click="$store.theme.lightTheme()"
-              class="p-2.5 rounded-full text-content/60 hover:text-primary-500 hover:bg-primary-50 transition-all duration-200"
+              class="p-2 text-accent hover:text-primary-500 transition-colors duration-200"
               aria-label="Switch to light mode"
               x-show="$store.theme.dark"
             >
@@ -50,7 +50,7 @@
             </button>
             <button
               @click="$store.theme.darkTheme()"
-              class="p-2.5 rounded-full text-content/60 hover:text-primary-500 hover:bg-primary-50 transition-all duration-200"
+              class="p-2 text-accent hover:text-primary-500 transition-colors duration-200"
               aria-label="Switch to dark mode"
               x-show="!$store.theme.dark"
             >
@@ -61,7 +61,7 @@
           <!-- Hamburger button (mobile only) -->
           <button
             @click="open = !open"
-            class="lg:hidden p-2.5 rounded-full text-content/60 hover:text-primary-500 hover:bg-primary-50 transition-all duration-200"
+            class="lg:hidden p-2 text-accent hover:text-primary-500 transition-colors duration-200"
             aria-label="Toggle menu"
             :aria-expanded="open"
           >
@@ -86,7 +86,7 @@
         <a
           href="{{ link.href }}"
           @click="open = false"
-          class="block text-content/70 hover:text-primary-500 py-3 text-sm font-medium tracking-wide border-b border-accent/5 last:border-b-0 transition-colors duration-200"
+          class="block text-accent hover:text-content py-3 text-sm font-medium border-b border-accent/10 last:border-b-0 transition-colors duration-200"
         >
           {{ link.name }}
         </a>

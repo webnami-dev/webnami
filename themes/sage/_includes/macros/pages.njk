@@ -4,9 +4,9 @@
 {% macro renderCategoryPage(categoryPage) %}
 <section class="text-content min-h-screen">
   <!-- Page header -->
-  <div class="max-w-6xl mx-auto px-6 sm:px-8 pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
-    <span class="sage-tag inline-block mb-4">Category</span>
-    <h1 class="font-playfair text-hero-text text-3xl sm:text-5xl font-semibold mb-3">
+  <div class="sage-column pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
+    <span class="text-muted text-[0.65rem] font-dm font-medium tracking-[0.25em] uppercase">Category</span>
+    <h1 class="font-playfair text-hero-text text-3xl sm:text-4xl font-semibold mt-3 mb-3">
       {{ categoryPage.name }}
     </h1>
     {% if categoryPage.page > 1 %}
@@ -15,16 +15,18 @@
     <div class="sage-line sage-line-center mt-6"></div>
   </div>
   {%- include 'partials/categorynav.njk' -%}
-  {{ cl.postsGrid(categoryPage, "category") }}
+  <div class="sage-column">
+    {{ cl.postsGrid(categoryPage, "category") }}
+  </div>
   <div class="pb-16"></div>
 </section>
 {% endmacro %}
 
 {% macro renderTagPage(tagPage) %}
 <section class="text-content min-h-screen">
-  <div class="max-w-6xl mx-auto px-6 sm:px-8 pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
-    <span class="sage-tag inline-block mb-4">Tag</span>
-    <h1 class="font-playfair text-hero-text text-3xl sm:text-5xl font-semibold mb-3">
+  <div class="sage-column pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
+    <span class="text-muted text-[0.65rem] font-dm font-medium tracking-[0.25em] uppercase">Tag</span>
+    <h1 class="font-playfair text-hero-text text-3xl sm:text-4xl font-semibold mt-3 mb-3">
       {{ tagPage.name }}
     </h1>
     {% if tagPage.page > 1 %}
@@ -32,16 +34,18 @@
     {% endif %}
     <div class="sage-line sage-line-center mt-6"></div>
   </div>
-  {{ cl.postsGrid(tagPage, "tags") }}
+  <div class="sage-column">
+    {{ cl.postsGrid(tagPage, "tags") }}
+  </div>
   <div class="pb-16"></div>
 </section>
 {% endmacro %}
 
 {% macro renderAuthorPage(authorPage) %}
 <section class="text-content min-h-screen">
-  <div class="max-w-6xl mx-auto px-6 sm:px-8 pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
-    <span class="sage-tag inline-block mb-4">Author</span>
-    <h1 class="font-playfair text-hero-text text-3xl sm:text-5xl font-semibold mb-3">
+  <div class="sage-column pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
+    <span class="text-muted text-[0.65rem] font-dm font-medium tracking-[0.25em] uppercase">Author</span>
+    <h1 class="font-playfair text-hero-text text-3xl sm:text-4xl font-semibold mt-3 mb-3">
       {{ authorPage.name }}
     </h1>
     {% if authorPage.page > 1 %}
@@ -49,7 +53,9 @@
     {% endif %}
     <div class="sage-line sage-line-center mt-6"></div>
   </div>
-  {{ cl.postsGrid(authorPage, "author") }}
+  <div class="sage-column">
+    {{ cl.postsGrid(authorPage, "author") }}
+  </div>
   <div class="pb-16"></div>
 </section>
 {% endmacro %}
@@ -58,26 +64,30 @@
 {% macro renderHomePage(postsPage) %}
 <section class="text-content">
   {% if postsPage.page == 1 %}
-  <!-- Page 1: Hero heading + Featured + Grid -->
-  <div class="max-w-6xl mx-auto px-6 sm:px-8 pt-16 sm:pt-24 pb-12 text-center">
-    <h1 class="font-playfair text-hero-text text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-6 sage-fade-up">
+  <!-- Page 1: Hero heading + Featured + Stacked posts -->
+  <div class="sage-column pt-16 sm:pt-24 pb-8 text-center">
+    <h1 class="font-playfair text-hero-text text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-6 sage-fade-up">
       {{ config.homepage.heading }}
     </h1>
     <div class="sage-line sage-line-center sage-fade-up-delay-1"></div>
   </div>
   {%- include 'partials/categorynav.njk' -%}
-  {{ cl.homePagePostsGrid(postsPage) }}
+  <div class="sage-column">
+    {{ cl.homePagePostsGrid(postsPage) }}
+  </div>
   {% else %}
-  <!-- Page 2+: Grid Layout Only -->
-  <div class="max-w-6xl mx-auto px-6 sm:px-8 pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
-    <span class="sage-tag inline-block mb-4">Archive</span>
-    <h1 class="font-playfair text-hero-text text-3xl sm:text-5xl font-semibold mb-3">
+  <!-- Page 2+: Stacked posts -->
+  <div class="sage-column pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
+    <span class="text-muted text-[0.65rem] font-dm font-medium tracking-[0.25em] uppercase">Archive</span>
+    <h1 class="font-playfair text-hero-text text-3xl sm:text-4xl font-semibold mt-3 mb-3">
       All Posts
     </h1>
     <p class="text-muted text-sm font-dm">Page {{ postsPage.page }}</p>
     <div class="sage-line sage-line-center mt-6"></div>
   </div>
-  {{ cl.postsGrid(postsPage, "posts") }}
+  <div class="sage-column">
+    {{ cl.postsGrid(postsPage, "posts") }}
+  </div>
   {% endif %}
   <div class="pb-16 sm:pb-24"></div>
 </section>

@@ -13,7 +13,7 @@
       }}{% endif %}/{% if posts.page > 2 %}{{
         posts.page - 1
       }}/{% endif %}{% endif %}"
-      class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-content border border-accent/20 rounded-full hover:border-primary-500 hover:text-primary-500 transition-all duration-300"
+      class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-content border border-accent/20 hover:border-primary-500 hover:text-primary-500 transition-all duration-200"
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
       Previous
@@ -22,14 +22,14 @@
   {% else %}
   <div></div>
   {% endif %}
-  <span class="text-sm text-accent italic">Page {{ posts.page }} of {{ totalPages }}</span>
+  <span class="text-sm text-accent">Page {{ posts.page }} of {{ totalPages }}</span>
   {% if posts.page < totalPages %}
   <div class="text-right">
     <a
       href="/{{ type }}{% if type != 'posts' %}/{{
         posts.name | slugify
       }}{% endif %}/{{ posts.page + 1 }}/"
-      class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-content border border-accent/20 rounded-full hover:border-primary-500 hover:text-primary-500 transition-all duration-300"
+      class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-content border border-accent/20 hover:border-primary-500 hover:text-primary-500 transition-all duration-200"
     >
       Next
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
@@ -47,10 +47,10 @@
 <div class="flex justify-center my-14">
   <a
     href="/posts/{{ postsPage.page + 1 }}"
-    class="group inline-flex items-center gap-3 px-8 py-3 text-sm font-medium text-content border border-accent/20 rounded-full hover:border-primary-500 hover:text-primary-500 transition-all duration-300"
+    class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-content border border-accent/20 hover:border-primary-500 hover:text-primary-500 transition-all duration-200"
   >
-    <span>View Older Stories</span>
-    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    <span>View Older Posts</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
   </a>
 </div>
 {% endmacro %}

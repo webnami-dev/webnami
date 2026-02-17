@@ -5,67 +5,58 @@
   class="group flex flex-col h-full focus:outline-none {{ extraClass }}"
   href="{{ post.url }}"
 >
-  <!-- Portrait image with hover zoom -->
-  <div class="chronicle-img-zoom flex-shrink-0 aspect-[4/5] w-full rounded-xl overflow-hidden">
+  <!-- Landscape image, no rounded corners -->
+  <div class="flex-shrink-0 aspect-[3/2] w-full overflow-hidden">
     <img
-      class="w-full h-full object-cover"
+      class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
       src="{{ meta.image }}"
       alt="{{ post.data.title }}"
     />
   </div>
   <div class="pt-5 pb-4 flex-grow flex flex-col">
-    {{ categoryBadge(post) }}
+    <!-- Date in uppercase coral -->
+    <span class="post-date mb-3">{{ post.data.date | postDate }}</span>
+    <!-- Title in serif -->
     <h2
-      class="font-serif text-xl sm:text-2xl font-semibold leading-snug group-hover:text-primary-500 transition-colors duration-300 mb-3"
+      class="font-serif text-xl sm:text-2xl font-semibold leading-snug group-hover:text-primary-500 transition-colors duration-200 mb-3"
     >
       {{ post.data.title }}
     </h2>
-    <p class="hidden sm:block text-accent text-sm leading-relaxed mb-4 line-clamp-2">
+    <!-- Excerpt -->
+    <p class="hidden sm:block text-accent text-sm leading-relaxed line-clamp-3">
       {{ meta.excerpt }}
     </p>
-    <div class="mt-auto">
-      {{ postByline(post) }}
-    </div>
   </div>
 </a>
 {% endmacro %}
 
-<!-- Featured post (hero layout) -->
+<!-- Featured post (hero layout): image on top, then two-column title/excerpt below -->
 {% macro featuredCard(post) %}
 {% set meta = post | postMeta %}
-<div class="w-full max-w-6xl mx-auto px-5 mb-16 chronicle-animate">
+<div class="w-full max-w-5xl mx-auto px-5 mb-16">
   <a
     href="{{ post.url }}"
-    class="group relative block overflow-hidden rounded-2xl"
+    class="group block"
   >
-    <!-- Large hero image -->
-    <div class="aspect-[16/9] sm:aspect-[21/9] overflow-hidden">
+    <!-- Full-width landscape image -->
+    <div class="aspect-[16/9] overflow-hidden mb-8">
       <img
-        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
         src="{{ meta.image }}"
         alt="{{ post.data.title }}"
       />
     </div>
-    <!-- Gradient overlay with text -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-    <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14">
-      {% if post.data.category %}
-      <span class="chronicle-category-label inline-block text-white/80 mb-3 border border-white/30 px-3 py-1 rounded-full">
-        {{ post.data.category }}
-      </span>
-      {% endif %}
-      <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 max-w-3xl">
-        {{ post.data.title }}
-      </h2>
-      <p class="hidden sm:block text-white/75 text-base md:text-lg max-w-2xl leading-relaxed mb-4">
-        {{ meta.excerpt }}
-      </p>
-      <div class="flex items-center gap-3 text-sm text-white/60">
-        {% if post.data.author %}
-        <span class="font-medium text-white/80">{{ post.data.author }}</span>
-        <span class="text-white/30">|</span>
-        {% endif %}
-        <time class="italic">{{ post.data.date | postDate }}</time>
+    <!-- Two-column: title left, excerpt right -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+      <div>
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight group-hover:text-primary-500 transition-colors duration-200">
+          {{ post.data.title }}
+        </h2>
+      </div>
+      <div class="flex flex-col justify-center">
+        <p class="text-accent text-base leading-relaxed">
+          {{ meta.excerpt }}
+        </p>
       </div>
     </div>
   </a>
@@ -75,7 +66,7 @@
 <!-- Post byline (author + date) -->
 {% macro postByline(post) %}
 <p class="text-accent text-sm">
-  {% if post.data.author %}<span class="font-medium text-content/70">{{ post.data.author }}</span> <span class="text-accent/40 mx-1">/</span> {% endif %}<time class="italic">{{ post.data.date | postDate }}</time>
+  {% if post.data.author %}<span class="font-medium text-content/70">{{ post.data.author }}</span> <span class="text-accent/40 mx-1">/</span> {% endif %}<span class="post-date">{{ post.data.date | postDate }}</span>
 </p>
 {% endmacro %}
 
@@ -83,7 +74,7 @@
 {% macro categoryBadge(post) %}
 {% if post.data.category %}
 <div class="mb-2">
-  <span class="chronicle-category-label text-primary-500">
+  <span class="post-date">
     {{ post.data.category }}
   </span>
 </div>
