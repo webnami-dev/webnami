@@ -38,10 +38,8 @@ router.put("/", async (req, res) => {
     site: {
       name: data.siteName,
       url: data.siteUrl,
-      language: data.siteLanguage,
       logo: data.siteLogo,
       favicon: data.siteFavicon,
-      csp: data.siteCsp,
     },
     postsPerPage: parseInt(data.postsPerPage, 10) || 20,
     homepage: {

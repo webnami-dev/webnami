@@ -2,11 +2,9 @@
   "theme": "aether",
   "site": {
     "name": "WebNami",
-    "url": "http://example.com",
-    "language": "en",
+    "url": "http://localhost:3000",
     "logo": "logo.png",
-    "favicon": "favicon.ico",
-    "csp": "object-src 'none'; base-uri 'self'; upgrade-insecure-requests;"
+    "favicon": "favicon.ico"
   },
   "postsPerPage": 20,
   "homepage": {

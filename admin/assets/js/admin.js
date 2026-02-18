@@ -48,6 +48,29 @@ function isDark() {
   );
 }
 
+Alpine.data("postFilter", () => ({
+  posts: [],
+  activeCategory: "",
+  activeTag: "",
+  get filtered() {
+    return this.posts.filter((post) => {
+      const catOk =
+        this.activeCategory === "" || post.category === this.activeCategory;
+      const tagOk =
+        this.activeTag === "" ||
+        (Array.isArray(post.tags) && post.tags.includes(this.activeTag));
+      return catOk && tagOk;
+    });
+  },
+  init() {
+    this.posts = JSON.parse(this.$el.dataset.posts || "[]");
+    this.$watch("filtered", () => {
+      this.$nextTick(() => window.lucide.createIcons());
+    });
+    this.$nextTick(() => window.lucide.createIcons());
+  },
+}));
+
 Alpine.store("adminTheme", {
   init() {
     document.documentElement.setAttribute(

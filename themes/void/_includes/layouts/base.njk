@@ -7,7 +7,7 @@
     <title>{{ title }}</title>
     <meta
       http-equiv="Content-Security-Policy"
-      content="{{ config.site.csp }}"
+      content="object-src 'none'; base-uri 'self'; upgrade-insecure-requests;"
     />
     <meta name="title" content="{{ title }}" />
     <meta

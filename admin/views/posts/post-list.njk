@@ -1,11 +1,11 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <div>
+  <div x-data="postFilter" data-posts="{{ data | dump }}">
+
     <!-- Header -->
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center justify-between mb-5">
       <div>
-        <p class="text-[11px] font-medium mb-0.5" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Content</p>
         <h1 class="text-[22px] font-semibold tracking-tight" style="color: var(--color-content); line-height: 1.2;">Posts</h1>
       </div>
       <a href="/admin/posts/new"
@@ -19,37 +19,111 @@
       </a>
     </div>
 
-    <!-- List -->
-    <div>
-      {% if data | length == 0 %}
-        <div class="py-16 text-center">
-          <i data-lucide="file-text" style="width:32px;height:32px;color:var(--color-accent);margin:0 auto 12px;opacity:0.5;"></i>
-          <p class="text-[13.5px]" style="color: var(--color-accent);">No posts yet. Create your first post.</p>
+    {% if data | length > 0 %}
+      <!-- Filters -->
+      <div class="mb-4 flex flex-col gap-2.5">
+
+        <!-- Filters row -->
+        <div class="flex items-center gap-3 flex-wrap">
+          {% if allCategories | length > 0 %}
+            <div class="flex items-center gap-2">
+              <label class="text-[11px] font-medium shrink-0" style="color: var(--color-accent); letter-spacing: 0.05em; text-transform: uppercase;">Category</label>
+              <select
+                x-model="activeCategory"
+                class="admin-input text-[12px] py-1.5 pr-7 pl-2.5 rounded"
+                style="min-width: 140px; cursor: pointer;"
+                >
+                <option value="">All categories</option>
+                {% for cat in allCategories %}
+                  <option value="{{ cat }}">{{ cat }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endif %}
+
+          {% if allTags | length > 0 %}
+            <div class="flex items-center gap-2">
+              <label class="text-[11px] font-medium shrink-0" style="color: var(--color-accent); letter-spacing: 0.05em; text-transform: uppercase;">Tag</label>
+              <select
+                x-model="activeTag"
+                class="admin-input text-[12.5px] py-1.5 pr-7 pl-2.5 rounded"
+                style="min-width: 140px; cursor: pointer;"
+                >
+                <option value="">All tags</option>
+                {% for tag in allTags %}
+                  <option value="{{ tag }}">{{ tag }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endif %}
         </div>
-      {% else %}
-        <div class="flex flex-col">
-          {% for post in data %}
-            <div class="content-row group" style="border-bottom: 1px solid var(--color-border-subtle);">
-              <a href="/admin/posts/{{ post.slug }}"
-                class="flex-1 text-[13.5px] font-medium truncate pr-4 transition-colors duration-100"
+
+        <!-- Active filter summary + clear -->
+        <div class="flex items-center justify-between" x-show="activeCategory !== '' || activeTag !== ''">
+          <p class="text-[12px]" style="color: var(--color-accent);">
+            Showing <span class="font-semibold" style="color: var(--color-content);" x-text="filtered.length"></span> of {{ data | length }} posts
+          </p>
+          <button
+            @click="activeCategory = ''; activeTag = '';"
+            class="text-[12px] font-medium transition-colors duration-100"
+            style="color: var(--color-primary);"
+            >Clear filters</button>
+        </div>
+      </div>
+
+      <!-- Post list -->
+      <div class="flex flex-col">
+        <template x-for="post in filtered" :key="post.slug">
+          <div class="content-row group" style="border-bottom: 1px solid var(--color-border-subtle);">
+            <div class="flex-1 min-w-0 flex flex-col gap-2 pr-4">
+              <a :href="'/admin/posts/' + post.slug"
+                class="text-[13.5px] font-medium truncate transition-colors duration-100"
                 style="color: var(--color-content);"
                 onmouseover="this.style.color='var(--color-primary)';"
                 onmouseout="this.style.color='var(--color-content)';"
-                >
-                {{ post.title }}
-              </a>
-              <a href="{{ post.url }}" target="_blank" title="Preview post"
-                class="shrink-0 p-1.5 rounded transition-colors duration-100"
-                style="color: var(--color-accent);"
-                onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
-                onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
-                >
-                <i data-lucide="external-link" style="width:14px;height:14px;"></i>
-              </a>
+                x-text="post.title"
+                ></a>
+              <!-- Tags + category badges -->
+              <div class="flex items-center gap-1.5 flex-wrap" x-show="(post.tags && post.tags.length > 0) || post.category">
+                <span
+                  x-show="post.category"
+                  x-text="post.category"
+                  class="text-[11px] font-medium px-1.5 py-0.5 rounded"
+                  style="background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-border);"
+                ></span>
+                <template x-for="tag in (post.tags || [])" :key="tag">
+                  <span
+                    x-text="tag"
+                    class="text-[11px] px-1.5 py-0.5 rounded"
+                    style="background-color: var(--color-surface); color: var(--color-accent); border: 1px solid var(--color-border-subtle);"
+                  ></span>
+                </template>
+              </div>
             </div>
-          {% endfor %}
+            <a :href="post.url" target="_blank" title="Preview post"
+              class="shrink-0 p-1.5 rounded transition-colors duration-100"
+              style="color: var(--color-accent);"
+              onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
+              onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
+              >
+              <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+            </a>
+          </div>
+        </template>
+
+        <!-- No results for active filter -->
+        <div x-show="filtered.length === 0" class="py-12 text-center">
+          <p class="text-[13.5px]" style="color: var(--color-accent);">No posts match the selected filters.</p>
         </div>
-      {% endif %}
-    </div>
+      </div>
+
+    {% else %}
+      <div class="py-16 text-center">
+        <i data-lucide="file-text" style="width:32px;height:32px;color:var(--color-accent);margin:0 auto 12px;opacity:0.5;"></i>
+        <p class="text-[13.5px]" style="color: var(--color-accent);">No posts yet. Create your first post.</p>
+      </div>
+    {% endif %}
+
   </div>
+
 {% endblock %}

@@ -25,19 +25,30 @@ test.describe("Settings Page", () => {
     await expect(page.locator("h2", { hasText: "Footer" })).toBeVisible();
   });
 
-  test("should populate general fields with current config values", async ({ page }) => {
+  test("should populate general fields with current config values", async ({
+    page,
+  }) => {
     await page.goto("/admin/settings");
     const config = readConfig();
     await expect(page.locator("#siteName")).toHaveValue(config.site.name);
     await expect(page.locator("#siteUrl")).toHaveValue(config.site.url);
-    await expect(page.locator("#siteLanguage")).toHaveValue(config.site.language);
-    await expect(page.locator("#postsPerPage")).toHaveValue(String(config.postsPerPage));
-    await expect(page.locator("#homepageHeading")).toHaveValue(config.homepage.heading);
-    await expect(page.locator("#homepageTitle")).toHaveValue(config.homepage.metadata.title);
-    await expect(page.locator("#homepageDescription")).toHaveValue(config.homepage.metadata.description);
+    await expect(page.locator("#postsPerPage")).toHaveValue(
+      String(config.postsPerPage),
+    );
+    await expect(page.locator("#homepageHeading")).toHaveValue(
+      config.homepage.heading,
+    );
+    await expect(page.locator("#homepageTitle")).toHaveValue(
+      config.homepage.metadata.title,
+    );
+    await expect(page.locator("#homepageDescription")).toHaveValue(
+      config.homepage.metadata.description,
+    );
   });
 
-  test("should show image dropdowns for logo, favicon, and OG image", async ({ page }) => {
+  test("should show image dropdowns for logo, favicon, and OG image", async ({
+    page,
+  }) => {
     await page.goto("/admin/settings");
     for (const id of ["#siteLogo", "#siteFavicon", "#homepageImg"]) {
       const select = page.locator(id);
@@ -49,7 +60,9 @@ test.describe("Settings Page", () => {
     }
   });
 
-  test("should save general settings, show a success alert, and persist on reload", async ({ page }) => {
+  test("should save general settings, show a success alert, and persist on reload", async ({
+    page,
+  }) => {
     await page.goto("/admin/settings");
     await page.locator("#siteName").fill("Test Site Name");
     await page.locator("#homepageHeading").fill("Test Heading");
@@ -58,7 +71,9 @@ test.describe("Settings Page", () => {
     await page.waitForLoadState("networkidle");
 
     await expect(page.locator(".alert-success")).toBeVisible();
-    await expect(page.locator(".alert-success")).toContainText("Settings saved successfully");
+    await expect(page.locator(".alert-success")).toContainText(
+      "Settings saved successfully",
+    );
 
     const config = readConfig();
     expect(config.site.name).toBe("Test Site Name");
@@ -82,7 +97,9 @@ test.describe("Settings Page", () => {
     const initialCount = await page.locator(".navbar-link-row").count();
 
     await page.locator("#add-navbar-link").click();
-    await expect(page.locator(".navbar-link-row")).toHaveCount(initialCount + 1);
+    await expect(page.locator(".navbar-link-row")).toHaveCount(
+      initialCount + 1,
+    );
 
     const newRow = page.locator(".navbar-link-row").last();
     await newRow.locator(".navbar-link-name").fill("Blog");
@@ -102,8 +119,14 @@ test.describe("Settings Page", () => {
     const initialCount = await page.locator(".navbar-link-row").count();
     expect(initialCount).toBeGreaterThan(0);
 
-    await page.locator(".navbar-link-row").first().locator(".remove-row").click();
-    await expect(page.locator(".navbar-link-row")).toHaveCount(initialCount - 1);
+    await page
+      .locator(".navbar-link-row")
+      .first()
+      .locator(".remove-row")
+      .click();
+    await expect(page.locator(".navbar-link-row")).toHaveCount(
+      initialCount - 1,
+    );
 
     await page.locator('button[type="submit"]').click();
     await page.waitForLoadState("networkidle");
@@ -144,7 +167,9 @@ test.describe("Settings Page", () => {
     await expect(groups).toHaveCount(config.footer.linkGroups.length);
   });
 
-  test("should add a link group with links, save, and persist", async ({ page }) => {
+  test("should add a link group with links, save, and persist", async ({
+    page,
+  }) => {
     await page.goto("/admin/settings");
     const initialCount = await page.locator(".link-group").count();
 
@@ -164,7 +189,9 @@ test.describe("Settings Page", () => {
 
     const config = readConfig();
     expect(config.footer.linkGroups.length).toBe(initialCount + 1);
-    const resourcesGroup = config.footer.linkGroups.find((g) => g.title === "Resources");
+    const resourcesGroup = config.footer.linkGroups.find(
+      (g) => g.title === "Resources",
+    );
     expect(resourcesGroup).toBeTruthy();
     expect(resourcesGroup.links[0].name).toBe("Docs");
   });

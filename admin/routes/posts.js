@@ -13,9 +13,17 @@ const RESERVED_SLUGS = ["admin", "api"];
 router.get("/", async (req, res) => {
   const resp = await fetch("http://localhost:3000/api/posts.json");
   const data = await resp.json();
+  const allTags = [
+    ...new Set(data.flatMap((p) => (Array.isArray(p.tags) ? p.tags : []))),
+  ].sort();
+  const allCategories = [
+    ...new Set(data.map((p) => p.category).filter(Boolean)),
+  ].sort();
   res.render("posts/post-list.njk", {
     title: "Posts",
     data,
+    allTags,
+    allCategories,
   });
 });
 

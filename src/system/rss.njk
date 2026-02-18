@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
     <link>{{ config.site.url | addPathPrefixToFullUrl }}</link>
     <atom:link href="{{ permalink | htmlBaseUrl(config.site.url) }}" rel="self" type="application/rss+xml" />
     <description>The latest posts from {{ config.site.name }}, delivered via RSS</description>
-    <language>{{ config.site.language }}</language>
+    <language>en</language>
     <image>
         <title>{{ config.site.name }}</title>
         <url>{{ config.site.url }}{{ config.homepage.metadata.img }}</url>

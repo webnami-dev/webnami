@@ -143,10 +143,8 @@ form.addEventListener("submit", async (e) => {
   const body = {
     siteName: document.getElementById("siteName").value,
     siteUrl: document.getElementById("siteUrl").value,
-    siteLanguage: document.getElementById("siteLanguage").value,
     siteLogo: document.getElementById("siteLogo").value,
     siteFavicon: document.getElementById("siteFavicon").value,
-    siteCsp: document.getElementById("siteCsp").value,
     postsPerPage: document.getElementById("postsPerPage").value,
     theme: document.getElementById("theme").value,
     homepageHeading: document.getElementById("homepageHeading").value,
