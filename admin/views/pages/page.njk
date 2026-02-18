@@ -1,37 +1,83 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-2xl font-semibold text-content mb-6">Edit Page</h1>
-
-    <form id="page-form" data-slug="{{ page.slug }}" class="flex flex-col gap-4">
-      <div>
-        <label for="title" class="block text-sm font-medium text-content mb-1">Title</label>
-        <input type="text" id="title" name="title" required value="{{ page.title }}"
-          class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+  <div>
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-7">
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="/admin/pages"
+          class="shrink-0 p-1.5 rounded transition-colors duration-100"
+          style="color: var(--color-accent);"
+          onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
+          onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
+          aria-label="Back to pages"
+          >
+          <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+        </a>
+        <div>
+          <p class="text-[11px] font-medium" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Edit Page</p>
+        </div>
       </div>
-      <div>
-        <label for="description" class="block text-sm font-medium text-content mb-1">Description</label>
-        <input type="text" id="description" name="description" value="{{ page.description }}"
-          class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-      </div>
-      <div>
-        <label for="content" class="block text-sm font-medium text-content mb-1">Content</label>
-        <textarea id="content" name="content">{{ page.content }}</textarea>
-      </div>
-      <div class="flex items-center gap-3">
-        <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
-          Save Changes
-        </button>
-        <button type="button" id="delete-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-red-300 text-red-600 text-sm font-medium hover:bg-red-50 transition-colors">
-          <i data-lucide="trash-2" class="w-4 h-4"></i>
-          Delete
-        </button>
-        <button type="button" id="seo-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
-          <i data-lucide="search" class="w-4 h-4"></i>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" id="seo-btn"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
+          style="color: var(--color-accent); border: 1px solid var(--color-border); background-color: var(--color-surface);"
+          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
+          onmouseout="this.style.backgroundColor='var(--color-surface)'; this.style.color='var(--color-accent)';"
+          >
+          <i data-lucide="search" style="width:13px;height:13px;"></i>
           SEO Check
         </button>
+        <button type="button" id="delete-btn"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
+          style="color: #e03131; border: 1px solid color-mix(in srgb, #e03131 25%, transparent); background-color: var(--color-surface);"
+          onmouseover="this.style.backgroundColor='color-mix(in srgb, #e03131 8%, transparent)';"
+          onmouseout="this.style.backgroundColor='var(--color-surface)';"
+          >
+          <i data-lucide="trash-2" style="width:13px;height:13px;"></i>
+          Delete
+        </button>
       </div>
+    </div>
+
+    <!-- Form -->
+    <form id="page-form" data-slug="{{ page.slug }}" class="flex flex-col gap-5">
+
+      <!-- Title -->
+      <div>
+        <label for="title" class="admin-label">Title</label>
+        <input type="text" id="title" name="title" required value="{{ page.title }}"
+          class="admin-input text-[15px] font-medium"
+          placeholder="Page title">
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label for="description" class="admin-label">Description</label>
+        <input type="text" id="description" name="description" value="{{ page.description }}"
+          class="admin-input"
+          placeholder="Short description for SEO">
+      </div>
+
+      <!-- Content -->
+      <div>
+        <label for="content" class="admin-label">Content</label>
+        <textarea id="content" name="content">{{ page.content }}</textarea>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 pt-1">
+        <button type="submit"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+          style="background-color: var(--color-primary);"
+          onmouseover="this.style.opacity='0.88';"
+          onmouseout="this.style.opacity='1';"
+          >
+          <i data-lucide="save" style="width:14px;height:14px;"></i>
+          Save Changes
+        </button>
+      </div>
+
     </form>
   </div>
 

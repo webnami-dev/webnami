@@ -17,15 +17,20 @@
 @source "../../views";
 
 @theme {
-  --font-inter: "Inter", sans-serif;
+  --font-inter: "Inter", system-ui, sans-serif;
   --color-primary: var(--color-primary);
   --color-background: var(--color-background);
   --color-content: var(--color-content);
   --color-accent: var(--color-accent);
   --color-footer: var(--color-footer);
   --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
   --color-border: var(--color-border);
+  --color-border-subtle: var(--color-border-subtle);
   --color-hover: var(--color-hover);
+  --color-sidebar: var(--color-sidebar);
+  --color-sidebar-hover: var(--color-sidebar-hover);
+  --color-sidebar-active: var(--color-sidebar-active);
   --color-alert-success-bg: var(--color-alert-success-bg);
   --color-alert-success-border: var(--color-alert-success-border);
   --color-alert-success-text: var(--color-alert-success-text);
@@ -41,59 +46,71 @@
 
 html {
   font-family: var(--font-inter);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Color palette - edit these values */
+/* ── Color palette ── */
 :root[admin-data-theme="light"] {
-  /* Light theme colors */
-  --color-primary: #155dfc;
-  --color-background: #f9fafb;
-  --color-surface: #ffffff;
-  --color-content: #364153;
-  --color-accent: #6a7282;
-  --color-border: #e5e7eb;
-  --color-hover: #f3f4f6;
-  --color-footer: #f3f4f6;
+  --color-primary: #3b5bdb;
+  --color-background: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-surface-raised: #ffffff;
+  --color-content: #1a1a1a;
+  --color-accent: #868e96;
+  --color-border: #e9ecef;
+  --color-border-subtle: #f1f3f5;
+  --color-hover: #f1f3f5;
+  --color-sidebar: #fafafa;
+  --color-sidebar-hover: #f1f3f5;
+  --color-sidebar-active: #edf2ff;
+  --color-footer: #f8f9fa;
 
   /* Alert colors */
   --color-alert-success-bg: #f0fdf4;
   --color-alert-success-border: #bbf7d0;
-  --color-alert-success-text: #166534;
-  --color-alert-error-bg: #fef2f2;
-  --color-alert-error-border: #fecaca;
-  --color-alert-error-text: #991b1b;
-  --color-alert-warning-bg: #fffbeb;
-  --color-alert-warning-border: #fde68a;
-  --color-alert-warning-text: #92400e;
-  --color-confirm-delete: #dc2626;
-  --color-confirm-delete-hover: #b91c1c;
+  --color-alert-success-text: #15803d;
+  --color-alert-error-bg: #fff5f5;
+  --color-alert-error-border: #ffc9c9;
+  --color-alert-error-text: #c92a2a;
+  --color-alert-warning-bg: #fff9db;
+  --color-alert-warning-border: #ffec99;
+  --color-alert-warning-text: #e67700;
+  --color-confirm-delete: #e03131;
+  --color-confirm-delete-hover: #c92a2a;
 }
 
 :root[admin-data-theme="dark"] {
-  /* Dark theme colors */
-  --color-primary: #155dfc;
-  --color-background: #0a0a0a;
-  --color-surface: #111827;
-  --color-content: #f0f0f0;
-  --color-accent: #99a1af;
-  --color-border: #1f2937;
-  --color-hover: #1f2937;
-  --color-footer: #000000;
+  --color-primary: #4c6ef5;
+  --color-background: #0f0f0f;
+  --color-surface: #191919;
+  --color-surface-raised: #1f1f1f;
+  --color-content: #e8e8e8;
+  --color-accent: #737373;
+  --color-border: #2a2a2a;
+  --color-border-subtle: #222222;
+  --color-hover: #262626;
+  --color-sidebar: #141414;
+  --color-sidebar-hover: #242424;
+  --color-sidebar-active: #1e2a4a;
+  --color-footer: #141414;
 
   /* Alert colors */
-  --color-alert-success-bg: #052e16;
-  --color-alert-success-border: #14532d;
-  --color-alert-success-text: #86efac;
-  --color-alert-error-bg: #450a0a;
-  --color-alert-error-border: #7f1d1d;
-  --color-alert-error-text: #fca5a5;
-  --color-alert-warning-bg: #451a03;
-  --color-alert-warning-border: #78350f;
-  --color-alert-warning-text: #fcd34d;
-  --color-confirm-delete: #dc2626;
-  --color-confirm-delete-hover: #ef4444;
+  --color-alert-success-bg: #0d1f17;
+  --color-alert-success-border: #1a4731;
+  --color-alert-success-text: #69db7c;
+  --color-alert-error-bg: #1f0d0d;
+  --color-alert-error-border: #4a1a1a;
+  --color-alert-error-text: #ff8787;
+  --color-alert-warning-bg: #1f1800;
+  --color-alert-warning-border: #4a3800;
+  --color-alert-warning-text: #ffd43b;
+  --color-confirm-delete: #e03131;
+  --color-confirm-delete-hover: #fa5252;
 }
 
+/* ── Alert classes ── */
 .alert-success {
   background-color: var(--color-alert-success-bg);
   border-color: var(--color-alert-success-border);
@@ -120,7 +137,105 @@ html {
   background-color: var(--color-confirm-delete-hover);
 }
 
-/* EasyMDE dark mode overrides */
+/* ── Flatpickr dark mode ── */
+:root[admin-data-theme="dark"] .flatpickr-calendar {
+  background: var(--color-surface-raised);
+  border-color: var(--color-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+:root[admin-data-theme="dark"] .flatpickr-month,
+:root[admin-data-theme="dark"] .flatpickr-weekdays,
+:root[admin-data-theme="dark"] .flatpickr-current-month {
+  background: var(--color-surface-raised);
+  color: var(--color-content);
+  fill: var(--color-content);
+}
+
+:root[admin-data-theme="dark"] .flatpickr-day {
+  color: var(--color-content);
+}
+
+:root[admin-data-theme="dark"] .flatpickr-day:hover {
+  background: var(--color-hover);
+  border-color: var(--color-hover);
+}
+
+:root[admin-data-theme="dark"] .flatpickr-day.selected,
+:root[admin-data-theme="dark"] .flatpickr-day.selected:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+:root[admin-data-theme="dark"] .flatpickr-day.flatpickr-disabled,
+:root[admin-data-theme="dark"] .flatpickr-day.flatpickr-disabled:hover {
+  color: var(--color-accent);
+}
+
+:root[admin-data-theme="dark"] .flatpickr-months .flatpickr-prev-month,
+:root[admin-data-theme="dark"] .flatpickr-months .flatpickr-next-month {
+  color: var(--color-content);
+  fill: var(--color-content);
+}
+
+:root[admin-data-theme="dark"] span.flatpickr-weekday {
+  background: var(--color-surface-raised);
+  color: var(--color-accent);
+}
+
+:root[admin-data-theme="dark"] .flatpickr-time {
+  background: var(--color-surface-raised);
+  border-color: var(--color-border);
+}
+
+/* ── EasyMDE overrides (both themes) ── */
+.EasyMDEContainer .CodeMirror {
+  font-family: var(--font-inter);
+  font-size: 14px;
+  line-height: 1.65;
+  border-radius: 0 0 4px 4px;
+}
+
+.EasyMDEContainer .editor-toolbar {
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  opacity: 1;
+}
+
+.EasyMDEContainer .editor-toolbar button {
+  transition:
+    background-color 100ms ease,
+    color 100ms ease;
+}
+
+/* Light mode EasyMDE */
+:root[admin-data-theme="light"] .EasyMDEContainer .CodeMirror {
+  background-color: #ffffff;
+  color: var(--color-content);
+  border-color: var(--color-border);
+}
+
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-toolbar {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-toolbar button {
+  color: var(--color-accent);
+}
+
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-toolbar button:hover,
+:root[admin-data-theme="light"]
+  .EasyMDEContainer
+  .editor-toolbar
+  button.active {
+  background-color: var(--color-hover);
+  border-color: var(--color-border);
+  color: var(--color-content);
+}
+
+/* Dark mode EasyMDE */
 :root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror {
   background-color: var(--color-surface);
   color: var(--color-content);
@@ -132,7 +247,7 @@ html {
 }
 
 :root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar {
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-raised);
   border-color: var(--color-border);
 }
 
@@ -144,6 +259,7 @@ html {
 :root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar button.active {
   background-color: var(--color-hover);
   border-color: var(--color-border);
+  color: var(--color-content);
 }
 
 :root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar i.separator {
@@ -165,12 +281,130 @@ html {
 }
 
 :root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror-selected {
-  background-color: #264f78;
+  background-color: rgba(76, 110, 245, 0.25);
 }
 
 :root[admin-data-theme="dark"]
   .EasyMDEContainer
   .CodeMirror-focused
   .CodeMirror-selected {
-  background-color: #264f78;
+  background-color: rgba(76, 110, 245, 0.3);
+}
+
+/* ── Custom scrollbar ── */
+:root[admin-data-theme="dark"] ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+:root[admin-data-theme="dark"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:root[admin-data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 3px;
+}
+
+:root[admin-data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* ── Focus ring utility ── */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Sidebar nav active indicator ── */
+.sidebar-nav-item.active {
+  background-color: var(--color-sidebar-active);
+  color: var(--color-primary);
+}
+
+:root[admin-data-theme="light"] .sidebar-nav-item.active {
+  color: var(--color-primary);
+}
+
+/* ── Input base style ── */
+.admin-input {
+  width: 100%;
+  padding: 7px 12px;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  color: var(--color-content);
+  font-size: 13.5px;
+  font-family: var(--font-inter);
+  transition:
+    border-color 100ms ease,
+    box-shadow 100ms ease;
+  appearance: none;
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.admin-input::placeholder {
+  color: var(--color-accent);
+  opacity: 0.7;
+}
+
+/* select admin-input arrow */
+select.admin-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23868e96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+/* ── Label base ── */
+.admin-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-accent);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Section divider ── */
+.settings-section {
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.settings-section:last-of-type {
+  border-bottom: none;
+}
+
+/* ── Post/page list row ── */
+.content-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 5px;
+  transition: background-color 100ms ease;
+  cursor: default;
+}
+
+.content-row:hover {
+  background-color: var(--color-hover);
+}
+
+/* ── Link group panel ── */
+.link-group {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 16px;
 }

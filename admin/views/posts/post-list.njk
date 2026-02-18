@@ -1,25 +1,55 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <div class="max-w-2xl mx-auto">
+  <div>
+    <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-semibold text-content">Posts</h1>
-        <a href="/admin/posts/new" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
-          <i data-lucide="plus" class="w-4 h-4"></i>
-          New Post
-        </a>
+      <div>
+        <p class="text-[11px] font-medium mb-0.5" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Content</p>
+        <h1 class="text-[22px] font-semibold tracking-tight" style="color: var(--color-content); line-height: 1.2;">Posts</h1>
       </div>
-    <div class="flex flex-col gap-3">
-      {% for post in data %}
-        <div class="flex items-center justify-between px-4 py-3 border-b border-border">
-          <a href="/admin/posts/{{ post.slug }}" class="text-sm font-medium text-content hover:text-primary transition-colors">
-            {{ post.title }}
-          </a>
-          <a href="{{ post.url }}" target="_blank" title="Preview" class="p-2 rounded-md text-accent hover:bg-hover hover:text-content transition-colors">
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-          </a>
+      <a href="/admin/posts/new"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+        style="background-color: var(--color-primary);"
+        onmouseover="this.style.opacity='0.88';"
+        onmouseout="this.style.opacity='1';"
+        >
+        <i data-lucide="plus" style="width:14px;height:14px;"></i>
+        New Post
+      </a>
+    </div>
+
+    <!-- List -->
+    <div>
+      {% if data | length == 0 %}
+        <div class="py-16 text-center">
+          <i data-lucide="file-text" style="width:32px;height:32px;color:var(--color-accent);margin:0 auto 12px;opacity:0.5;"></i>
+          <p class="text-[13.5px]" style="color: var(--color-accent);">No posts yet. Create your first post.</p>
         </div>
-      {% endfor %}
+      {% else %}
+        <div class="flex flex-col">
+          {% for post in data %}
+            <div class="content-row group" style="border-bottom: 1px solid var(--color-border-subtle);">
+              <a href="/admin/posts/{{ post.slug }}"
+                class="flex-1 text-[13.5px] font-medium truncate pr-4 transition-colors duration-100"
+                style="color: var(--color-content);"
+                onmouseover="this.style.color='var(--color-primary)';"
+                onmouseout="this.style.color='var(--color-content)';"
+                >
+                {{ post.title }}
+              </a>
+              <a href="{{ post.url }}" target="_blank" title="Preview post"
+                class="shrink-0 p-1.5 rounded transition-colors duration-100"
+                style="color: var(--color-accent);"
+                onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
+                onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
+                >
+                <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

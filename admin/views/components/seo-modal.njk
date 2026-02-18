@@ -1,89 +1,108 @@
 <div
   x-data
   x-show="$store.seo.open"
-  x-transition:enter="transition ease-out duration-200"
+  x-transition:enter="transition ease-out duration-150"
   x-transition:enter-start="opacity-0"
   x-transition:enter-end="opacity-100"
-  x-transition:leave="transition ease-in duration-150"
+  x-transition:leave="transition ease-in duration-100"
   x-transition:leave-start="opacity-100"
   x-transition:leave-end="opacity-0"
   class="fixed inset-0 z-[200] flex items-center justify-center"
   id="seo-modal"
 >
-  <div class="absolute inset-0 bg-black/50" @click="$store.seo.close()"></div>
+  <div
+    class="absolute inset-0"
+    style="background-color: rgba(0,0,0,0.4); backdrop-filter: blur(2px);"
+    @click="$store.seo.close()"
+  ></div>
   <div
     x-show="$store.seo.open"
-    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter="transition ease-out duration-150"
     x-transition:enter-start="opacity-0 scale-95"
     x-transition:enter-end="opacity-100 scale-100"
-    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave="transition ease-in duration-100"
     x-transition:leave-start="opacity-100 scale-100"
     x-transition:leave-end="opacity-0 scale-95"
-    class="relative bg-surface border border-border rounded-md shadow-xl p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto"
+    class="relative rounded max-w-lg w-full mx-4 max-h-[78vh] overflow-y-auto"
+    style="background-color: var(--color-surface-raised); border: 1px solid var(--color-border); box-shadow: 0 8px 40px rgba(0,0,0,0.2);"
   >
-    <div class="flex items-center justify-between mb-4">
-      <h2 class="text-lg font-semibold text-content">SEO Analysis</h2>
+    <!-- Modal header -->
+    <div class="flex items-center justify-between px-5 py-4" style="border-bottom: 1px solid var(--color-border-subtle);">
+      <h2 class="text-[14px] font-semibold" style="color: var(--color-content);">SEO Analysis</h2>
       <button
         @click="$store.seo.close()"
-        class="text-accent hover:text-content transition-colors"
+        class="p-1 rounded transition-colors duration-100"
+        style="color: var(--color-accent);"
+        onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
+        onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
+        aria-label="Close"
       >
-        <i data-lucide="x" class="w-5 h-5"></i>
+        <i data-lucide="x" style="width:15px;height:15px;"></i>
       </button>
     </div>
 
-    <template x-if="$store.seo.loading">
-      <div class="flex items-center justify-center py-8">
-        <div
-          class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"
-        ></div>
-      </div>
-    </template>
-
-    <template x-if="$store.seo.error">
-      <p class="text-red-500 text-sm" x-text="$store.seo.error"></p>
-    </template>
-
-    <template
-      x-if="!$store.seo.loading && !$store.seo.error && $store.seo.result"
-    >
-      <div>
-        <div class="flex items-center gap-4 mb-4 text-sm">
-          <span
-            class="text-green-600 font-medium"
-            x-text="$store.seo.result.summary.passed + ' passed'"
-          ></span>
-          <span
-            class="text-red-600 font-medium"
-            x-text="$store.seo.result.summary.failed + ' failed'"
-          ></span>
-          <template x-if="$store.seo.result.summary.info > 0">
-            <span
-              class="text-blue-500 font-medium"
-              x-text="$store.seo.result.summary.info + ' info'"
-            ></span>
-          </template>
+    <!-- Modal body -->
+    <div class="px-5 py-4">
+      <template x-if="$store.seo.loading">
+        <div class="flex items-center justify-center py-10">
+          <div
+            class="animate-spin rounded-full h-6 w-6"
+            style="border: 2px solid var(--color-border); border-top-color: var(--color-primary);"
+          ></div>
         </div>
-        <ul class="space-y-2">
-          <template x-for="check in $store.seo.result.checks" :key="check.name">
-            <li
-              class="flex items-start gap-2 text-sm border-b border-border pb-2 last:border-0"
-            >
+      </template>
+
+      <template x-if="$store.seo.error">
+        <p class="text-[13px] py-4" style="color: var(--color-alert-error-text);" x-text="$store.seo.error"></p>
+      </template>
+
+      <template x-if="!$store.seo.loading && !$store.seo.error && $store.seo.result">
+        <div>
+          <!-- Summary badges -->
+          <div class="flex items-center gap-3 mb-4">
+            <span
+              class="inline-flex items-center gap-1 text-[12px] font-medium px-2 py-0.5 rounded"
+              style="background-color: var(--color-alert-success-bg); color: var(--color-alert-success-text);"
+              x-text="$store.seo.result.summary.passed + ' passed'"
+            ></span>
+            <span
+              class="inline-flex items-center gap-1 text-[12px] font-medium px-2 py-0.5 rounded"
+              style="background-color: var(--color-alert-error-bg); color: var(--color-alert-error-text);"
+              x-text="$store.seo.result.summary.failed + ' failed'"
+            ></span>
+            <template x-if="$store.seo.result.summary.info > 0">
               <span
-                class="shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold"
-                :class="check.status === 'pass' ? 'bg-green-100 text-green-700' : check.status === 'fail' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'"
-                x-text="check.status === 'pass' ? '\u2713' : check.status === 'fail' ? '\u2717' : 'i'"
+                class="inline-flex items-center gap-1 text-[12px] font-medium px-2 py-0.5 rounded"
+                style="background-color: color-mix(in srgb, var(--color-primary) 12%, transparent); color: var(--color-primary);"
+                x-text="$store.seo.result.summary.info + ' info'"
               ></span>
-              <div>
+            </template>
+          </div>
+          <!-- Checks list -->
+          <ul class="flex flex-col gap-0">
+            <template x-for="check in $store.seo.result.checks" :key="check.name">
+              <li
+                class="flex items-start gap-3 py-3 text-[13px]"
+                style="border-bottom: 1px solid var(--color-border-subtle);"
+              >
                 <span
-                  class="font-medium text-content"
-                  x-text="check.name"
+                  class="shrink-0 mt-0.5 w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold"
+                  :style="check.status === 'pass'
+                    ? 'background-color: var(--color-alert-success-bg); color: var(--color-alert-success-text);'
+                    : check.status === 'fail'
+                    ? 'background-color: var(--color-alert-error-bg); color: var(--color-alert-error-text);'
+                    : 'background-color: color-mix(in srgb, var(--color-primary) 12%, transparent); color: var(--color-primary);'"
+                  x-text="check.status === 'pass' ? '\u2713' : check.status === 'fail' ? '\u2717' : 'i'"
                 ></span>
-                <p class="text-accent" x-text="check.message"></p>
-              </div>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </template>
+                <div class="min-w-0">
+                  <p class="font-medium mb-0.5" style="color: var(--color-content);" x-text="check.name"></p>
+                  <p class="text-[12px]" style="color: var(--color-accent);" x-text="check.message"></p>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </template>
+    </div>
   </div>
 </div>

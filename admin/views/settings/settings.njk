@@ -2,9 +2,8 @@
 
 {% macro imageSelect(id, name, label, currentValue, images) %}
   <div>
-    <label for="{{ id }}" class="block text-sm font-medium text-content mb-1">{{ label }}</label>
-    <select id="{{ id }}" name="{{ name }}"
-      class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+    <label for="{{ id }}" class="admin-label">{{ label }}</label>
+    <select id="{{ id }}" name="{{ name }}" class="admin-input">
       {% for img in images %}
         <option value="{{ img }}" {% if img == currentValue %}selected{% endif %}>{{ img }}</option>
       {% endfor %}
@@ -13,45 +12,44 @@
 {% endmacro %}
 
 {% block content %}
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-2xl font-semibold text-content mb-6">Settings</h1>
+  <div>
+    <!-- Header -->
+    <div class="mb-8">
+      <p class="text-[11px] font-medium mb-0.5" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Configuration</p>
+      <h1 class="text-[22px] font-semibold tracking-tight" style="color: var(--color-content); line-height: 1.2;">Settings</h1>
+    </div>
 
-    <form id="settings-form" class="flex flex-col gap-8">
+    <form id="settings-form" class="flex flex-col gap-0">
 
       {# ── General ── #}
-      <section>
-        <h2 class="text-lg font-semibold text-content mb-4 flex items-center gap-2">
-          <i data-lucide="settings" class="w-5 h-5"></i>
+      <section class="settings-section">
+        <h2 class="text-[13px] font-semibold mb-5 flex items-center gap-2" style="color: var(--color-content);">
+          <i data-lucide="settings" style="width:14px;height:14px;color:var(--color-accent);"></i>
           General
         </h2>
         <div class="flex flex-col gap-4">
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label for="siteName" class="block text-sm font-medium text-content mb-1">Site Name</label>
-              <input type="text" id="siteName" name="siteName" value="{{ config.site.name }}"
-                class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label for="siteName" class="admin-label">Site Name</label>
+              <input type="text" id="siteName" name="siteName" value="{{ config.site.name }}" class="admin-input">
             </div>
             <div>
-              <label for="siteUrl" class="block text-sm font-medium text-content mb-1">Site URL</label>
-              <input type="url" id="siteUrl" name="siteUrl" value="{{ config.site.url }}"
-                class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label for="siteUrl" class="admin-label">Site URL</label>
+              <input type="url" id="siteUrl" name="siteUrl" value="{{ config.site.url }}" class="admin-input">
             </div>
           </div>
           <div class="grid grid-cols-3 gap-4">
             <div>
-              <label for="siteLanguage" class="block text-sm font-medium text-content mb-1">Language</label>
-              <input type="text" id="siteLanguage" name="siteLanguage" value="{{ config.site.language }}"
-                class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label for="siteLanguage" class="admin-label">Language</label>
+              <input type="text" id="siteLanguage" name="siteLanguage" value="{{ config.site.language }}" class="admin-input" placeholder="en">
             </div>
             <div>
-              <label for="postsPerPage" class="block text-sm font-medium text-content mb-1">Posts Per Page</label>
-              <input type="number" id="postsPerPage" name="postsPerPage" value="{{ config.postsPerPage }}" min="1"
-                class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label for="postsPerPage" class="admin-label">Posts Per Page</label>
+              <input type="number" id="postsPerPage" name="postsPerPage" value="{{ config.postsPerPage }}" min="1" class="admin-input">
             </div>
             <div>
-              <label for="theme" class="block text-sm font-medium text-content mb-1">Theme</label>
-              <select id="theme" name="theme"
-                class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label for="theme" class="admin-label">Theme</label>
+              <select id="theme" name="theme" class="admin-input">
                 {% for t in themes %}
                   <option value="{{ t }}" {% if t == config.theme %}selected{% endif %}>{{ t }}</option>
                 {% endfor %}
@@ -63,129 +61,168 @@
             {{ imageSelect("siteFavicon", "siteFavicon", "Favicon", config.site.favicon, images) }}
           </div>
           <div>
-            <label for="homepageHeading" class="block text-sm font-medium text-content mb-1">Homepage Heading</label>
-            <input type="text" id="homepageHeading" name="homepageHeading" value="{{ config.homepage.heading }}"
-              class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            <label for="homepageHeading" class="admin-label">Homepage Heading</label>
+            <input type="text" id="homepageHeading" name="homepageHeading" value="{{ config.homepage.heading }}" class="admin-input">
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label for="homepageTitle" class="block text-sm font-medium text-content mb-1">Homepage Meta Title</label>
-              <input type="text" id="homepageTitle" name="homepageTitle" value="{{ config.homepage.metadata.title }}"
-                class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label for="homepageTitle" class="admin-label">Homepage Meta Title</label>
+              <input type="text" id="homepageTitle" name="homepageTitle" value="{{ config.homepage.metadata.title }}" class="admin-input">
             </div>
             {{ imageSelect("homepageImg", "homepageImg", "Homepage OG Image", config.homepage.metadata.img, images) }}
           </div>
           <div>
-            <label for="homepageDescription" class="block text-sm font-medium text-content mb-1">Homepage Meta Description</label>
-            <input type="text" id="homepageDescription" name="homepageDescription" value="{{ config.homepage.metadata.description }}"
-              class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            <label for="homepageDescription" class="admin-label">Homepage Meta Description</label>
+            <input type="text" id="homepageDescription" name="homepageDescription" value="{{ config.homepage.metadata.description }}" class="admin-input">
           </div>
           <div>
-            <label for="siteCsp" class="block text-sm font-medium text-content mb-1">Content Security Policy</label>
-            <input type="text" id="siteCsp" name="siteCsp" value="{{ config.site.csp }}"
-              class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            <label for="siteCsp" class="admin-label">Content Security Policy</label>
+            <input type="text" id="siteCsp" name="siteCsp" value="{{ config.site.csp }}" class="admin-input" placeholder="default-src 'self'">
           </div>
         </div>
       </section>
 
       {# ── Navbar ── #}
-      <section class="mt-8">
-        <h2 class="text-lg font-semibold text-content mb-4 flex items-center gap-2">
-          <i data-lucide="menu" class="w-5 h-5"></i>
+      <section class="settings-section">
+        <h2 class="text-[13px] font-semibold mb-5 flex items-center gap-2" style="color: var(--color-content);">
+          <i data-lucide="menu" style="width:14px;height:14px;color:var(--color-accent);"></i>
           Navbar
         </h2>
-        <div class="flex flex-col gap-3" id="navbar-links">
+        <div class="flex flex-col gap-2" id="navbar-links">
           {% for link in config.navbar.links %}
-            <div class="flex items-center gap-3 navbar-link-row">
+            <div class="flex items-center gap-2 navbar-link-row">
               <input type="text" placeholder="Label" value="{{ link.name }}"
-                class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary navbar-link-name">
+                class="admin-input navbar-link-name">
               <input type="text" placeholder="/path" value="{{ link.href }}"
-                class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary navbar-link-href">
-              <button type="button" class="p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-row">
-                <i data-lucide="x" class="w-4 h-4"></i>
+                class="admin-input navbar-link-href">
+              <button type="button"
+                class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-row"
+                style="color: var(--color-accent); border: 1px solid var(--color-border);"
+                onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
+                onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
+                aria-label="Remove">
+                <i data-lucide="x" style="width:14px;height:14px;"></i>
               </button>
             </div>
           {% endfor %}
         </div>
         <button type="button" id="add-navbar-link"
-          class="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
-          <i data-lucide="plus" class="w-4 h-4"></i>
+          class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
+          style="color: var(--color-accent); border: 1px solid var(--color-border);"
+          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
+          onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';"
+          >
+          <i data-lucide="plus" style="width:13px;height:13px;"></i>
           Add Link
         </button>
       </section>
 
       {# ── Footer ── #}
-      <section class="mt-8">
-        <h2 class="text-lg font-semibold text-content mb-4 flex items-center gap-2">
-          <i data-lucide="layout-template" class="w-5 h-5"></i>
+      <section class="settings-section">
+        <h2 class="text-[13px] font-semibold mb-5 flex items-center gap-2" style="color: var(--color-content);">
+          <i data-lucide="layout-template" style="width:14px;height:14px;color:var(--color-accent);"></i>
           Footer
         </h2>
 
-        <h3 class="text-sm font-semibold text-accent mb-3">Social Links</h3>
-        <div class="flex flex-col gap-3" id="social-links">
+        <p class="text-[11px] font-semibold mb-3" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Social Links</p>
+        <div class="flex flex-col gap-2" id="social-links">
           {% for link in config.footer.socialLinks %}
-            <div class="flex items-center gap-3 social-link-row">
+            <div class="flex items-center gap-2 social-link-row">
               <input type="text" placeholder="Platform (e.g. facebook)" value="{{ link.name }}"
-                class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary social-link-name">
+                class="admin-input social-link-name">
               <input type="text" placeholder="URL" value="{{ link.href }}"
-                class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary social-link-href">
-              <button type="button" class="p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-row">
-                <i data-lucide="x" class="w-4 h-4"></i>
+                class="admin-input social-link-href">
+              <button type="button"
+                class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-row"
+                style="color: var(--color-accent); border: 1px solid var(--color-border);"
+                onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
+                onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
+                aria-label="Remove">
+                <i data-lucide="x" style="width:14px;height:14px;"></i>
               </button>
             </div>
           {% endfor %}
         </div>
         <button type="button" id="add-social-link"
-          class="mt-3 mb-6 inline-flex items-center gap-2 px-3 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
-          <i data-lucide="plus" class="w-4 h-4"></i>
+          class="mt-3 mb-7 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
+          style="color: var(--color-accent); border: 1px solid var(--color-border);"
+          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
+          onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';"
+          >
+          <i data-lucide="plus" style="width:13px;height:13px;"></i>
           Add Social Link
         </button>
 
-        <h3 class="text-sm font-semibold text-accent mb-3">Link Groups</h3>
-        <div class="flex flex-col gap-6" id="link-groups">
+        <p class="text-[11px] font-semibold mb-3" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Link Groups</p>
+        <div class="flex flex-col gap-4" id="link-groups">
           {% for group in config.footer.linkGroups %}
-            <div class="link-group border border-border rounded-md p-4">
-              <div class="flex items-center gap-3 mb-3">
+            <div class="link-group">
+              <div class="flex items-center gap-2 mb-3">
                 <input type="text" placeholder="Group Title (optional)" value="{{ group.title }}"
-                  class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary group-title">
-                <button type="button" class="p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-group">
-                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                  class="admin-input group-title">
+                <button type="button"
+                  class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-group"
+                  style="color: var(--color-accent); border: 1px solid var(--color-border);"
+                  onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
+                  onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
+                  aria-label="Remove group">
+                  <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
                 </button>
               </div>
-              <div class="flex flex-col gap-3 group-links">
+              <div class="flex flex-col gap-2 group-links">
                 {% for link in group.links %}
-                  <div class="flex items-center gap-3 group-link-row">
+                  <div class="flex items-center gap-2 group-link-row">
                     <input type="text" placeholder="Label" value="{{ link.name }}"
-                      class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary group-link-name">
+                      class="admin-input group-link-name">
                     <input type="text" placeholder="/path" value="{{ link.href }}"
-                      class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary group-link-href">
-                    <button type="button" class="p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-row">
-                      <i data-lucide="x" class="w-4 h-4"></i>
+                      class="admin-input group-link-href">
+                    <button type="button"
+                      class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-row"
+                      style="color: var(--color-accent); border: 1px solid var(--color-border);"
+                      onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
+                      onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
+                      aria-label="Remove">
+                      <i data-lucide="x" style="width:14px;height:14px;"></i>
                     </button>
                   </div>
                 {% endfor %}
               </div>
               <button type="button"
-                class="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors add-group-link">
-                <i data-lucide="plus" class="w-4 h-4"></i>
+                class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100 add-group-link"
+                style="color: var(--color-accent); border: 1px solid var(--color-border);"
+                onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
+                onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';"
+                >
+                <i data-lucide="plus" style="width:13px;height:13px;"></i>
                 Add Link
               </button>
             </div>
           {% endfor %}
         </div>
         <button type="button" id="add-link-group"
-          class="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
-          <i data-lucide="plus" class="w-4 h-4"></i>
+          class="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
+          style="color: var(--color-accent); border: 1px solid var(--color-border);"
+          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
+          onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';"
+          >
+          <i data-lucide="plus" style="width:13px;height:13px;"></i>
           Add Link Group
         </button>
       </section>
 
-      <div>
-        <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
-          <i data-lucide="save" class="w-4 h-4"></i>
+      <!-- Save -->
+      <div class="pt-2 pb-8">
+        <button type="submit"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+          style="background-color: var(--color-primary);"
+          onmouseover="this.style.opacity='0.88';"
+          onmouseout="this.style.opacity='1';"
+          >
+          <i data-lucide="save" style="width:14px;height:14px;"></i>
           Save Settings
         </button>
       </div>
+
     </form>
   </div>
 

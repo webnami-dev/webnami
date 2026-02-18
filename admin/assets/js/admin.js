@@ -14,6 +14,7 @@ import {
   Save,
   Search,
   X,
+  ArrowLeft,
 } from "lucide";
 import Alpine from "alpinejs";
 import EasyMDE from "easymde";
@@ -34,6 +35,7 @@ const icons = {
   Save,
   Search,
   X,
+  ArrowLeft,
 };
 
 createIcons({ icons });

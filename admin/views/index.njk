@@ -1,18 +1,32 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-3.5rem-3rem)]">
-    <h1 class="text-5xl font-semibold text-content mb-6">{{ greeting }}</h1>
+  <div class="flex flex-col justify-center min-h-[calc(100vh-4rem)]">
+    <div class="max-w-sm">
+      <p class="text-[13px] font-medium mb-1" style="color: var(--color-accent); letter-spacing: 0.04em; text-transform: uppercase;">Dashboard</p>
+      <h1 class="text-[28px] font-semibold tracking-tight mb-1" style="color: var(--color-content); line-height: 1.2;">{{ greeting }}</h1>
+      <p class="text-[13.5px] mb-8" style="color: var(--color-accent);">What would you like to work on today?</p>
 
-    <div class="flex gap-3">
-      <a href="/admin/posts/new" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
-        <i data-lucide="plus" class="w-4 h-4"></i>
-        New Post
-      </a>
-      <a href="/admin/pages/new" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors">
-        <i data-lucide="plus" class="w-4 h-4"></i>
-        New Page
-      </a>
+      <div class="flex items-center gap-2.5">
+        <a href="/admin/posts/new"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded text-[13px] font-medium text-white transition-colors duration-100"
+          style="background-color: var(--color-primary);"
+          onmouseover="this.style.opacity='0.88';"
+          onmouseout="this.style.opacity='1';"
+          >
+          <i data-lucide="plus" style="width:14px;height:14px;"></i>
+          New Post
+        </a>
+        <a href="/admin/pages/new"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded text-[13px] font-medium transition-colors duration-100"
+          style="color: var(--color-content); border: 1px solid var(--color-border); background-color: var(--color-surface);"
+          onmouseover="this.style.backgroundColor='var(--color-hover)';"
+          onmouseout="this.style.backgroundColor='var(--color-surface)';"
+          >
+          <i data-lucide="plus" style="width:14px;height:14px;"></i>
+          New Page
+        </a>
+      </div>
     </div>
   </div>
 {% endblock %}

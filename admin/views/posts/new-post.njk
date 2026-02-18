@@ -1,53 +1,89 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-2xl font-semibold text-content mb-6">New Post</h1>
+  <div>
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-7">
+      <a href="/admin/posts"
+        class="shrink-0 p-1.5 rounded transition-colors duration-100"
+        style="color: var(--color-accent);"
+        onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
+        onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
+        aria-label="Back to posts"
+        >
+        <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+      </a>
+      <div>
+        <p class="text-[11px] font-medium" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">New Post</p>
+      </div>
+    </div>
 
-    <form id="post-form" class="flex flex-col gap-4">
+    <!-- Form -->
+    <form id="post-form" class="flex flex-col gap-5">
+
+      <!-- Title -->
       <div>
-        <label for="title" class="block text-sm font-medium text-content mb-1">Title</label>
+        <label for="title" class="admin-label">Title</label>
         <input type="text" id="title" name="title" required
-          class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+          class="admin-input text-[15px] font-medium"
+          placeholder="Post title">
       </div>
+
+      <!-- Description -->
       <div>
-        <label for="description" class="block text-sm font-medium text-content mb-1">Description</label>
+        <label for="description" class="admin-label">Description</label>
         <input type="text" id="description" name="description"
-          class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+          class="admin-input"
+          placeholder="Short description for SEO and previews">
       </div>
+
+      <!-- Metadata row -->
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label for="tags" class="block text-sm font-medium text-content mb-1">Tags (comma separated)</label>
-          <input type="text" id="tags" name="tags" placeholder="News, Updates"
-            class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-        </div>
-        <div>
-          <label for="category" class="block text-sm font-medium text-content mb-1">Category</label>
-          <input type="text" id="category" name="category"
-            class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <label for="author" class="block text-sm font-medium text-content mb-1">Author</label>
+          <label for="author" class="admin-label">Author</label>
           <input type="text" id="author" name="author"
-            class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            class="admin-input" placeholder="Author name">
         </div>
         <div>
-          <label for="date" class="block text-sm font-medium text-content mb-1">Date</label>
+          <label for="date" class="admin-label">Date</label>
           <input type="text" id="date" name="date" required
-            class="w-full px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            class="admin-input" placeholder="YYYY-MM-DD">
         </div>
       </div>
+
+      <!-- Taxonomy row -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="tags" class="admin-label">Tags</label>
+          <input type="text" id="tags" name="tags" placeholder="news, updates, tech"
+            class="admin-input">
+        </div>
+        <div>
+          <label for="category" class="admin-label">Category</label>
+          <input type="text" id="category" name="category"
+            class="admin-input" placeholder="Category">
+        </div>
+      </div>
+
+      <!-- Content -->
       <div>
-        <label for="content" class="block text-sm font-medium text-content mb-1">Content</label>
+        <label for="content" class="admin-label">Content</label>
         <textarea id="content" name="content"></textarea>
       </div>
-      <div>
-        <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/80 transition-colors">
+
+      <!-- Actions -->
+      <div class="pt-1">
+        <button type="submit"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+          style="background-color: var(--color-primary);"
+          onmouseover="this.style.opacity='0.88';"
+          onmouseout="this.style.opacity='1';"
+          >
+          <i data-lucide="plus" style="width:14px;height:14px;"></i>
           Create Post
         </button>
       </div>
+
     </form>
   </div>
 

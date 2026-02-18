@@ -1,22 +1,29 @@
 const form = document.getElementById("settings-form");
 
+// ── Helper: remove button HTML ──
+function removeButtonHTML() {
+  return `<button type="button"
+    class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-row"
+    style="color: var(--color-accent); border: 1px solid var(--color-border);"
+    onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
+    onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
+    aria-label="Remove">
+    <i data-lucide="x" style="width:14px;height:14px;"></i>
+  </button>`;
+}
+
 // ── Helper: create a row of inputs with a remove button ──
 function createRow(container, rowClass, fields) {
   const row = document.createElement("div");
-  row.className = `flex items-center gap-3 ${rowClass}`;
+  row.className = `flex items-center gap-2 ${rowClass}`;
   fields.forEach(({ placeholder, className }) => {
     const input = document.createElement("input");
     input.type = "text";
     input.placeholder = placeholder;
-    input.className = `flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary ${className}`;
+    input.className = `admin-input ${className}`;
     row.appendChild(input);
   });
-  const removeBtn = document.createElement("button");
-  removeBtn.type = "button";
-  removeBtn.className =
-    "p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-row";
-  removeBtn.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i>';
-  row.appendChild(removeBtn);
+  row.insertAdjacentHTML("beforeend", removeButtonHTML());
   container.appendChild(row);
   lucide.createIcons();
 }
@@ -55,19 +62,27 @@ document.getElementById("add-social-link").addEventListener("click", () => {
 document.getElementById("add-link-group").addEventListener("click", () => {
   const groups = document.getElementById("link-groups");
   const group = document.createElement("div");
-  group.className = "link-group border border-border rounded-md p-4";
+  group.className = "link-group";
   group.innerHTML = `
-    <div class="flex items-center gap-3 mb-3">
+    <div class="flex items-center gap-2 mb-3">
       <input type="text" placeholder="Group Title (optional)"
-        class="flex-1 px-3 py-2 rounded-md border border-border bg-surface text-content text-sm focus:outline-none focus:ring-2 focus:ring-primary group-title">
-      <button type="button" class="p-2 rounded-md border border-red-300 text-red-600 hover:bg-red-50 transition-colors remove-group">
-        <i data-lucide="trash-2" class="w-4 h-4"></i>
+        class="admin-input group-title">
+      <button type="button"
+        class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-group"
+        style="color: var(--color-accent); border: 1px solid var(--color-border);"
+        onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
+        onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
+        aria-label="Remove group">
+        <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
       </button>
     </div>
-    <div class="flex flex-col gap-3 group-links"></div>
+    <div class="flex flex-col gap-2 group-links"></div>
     <button type="button"
-      class="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-md border border-border text-content text-sm font-medium hover:bg-hover transition-colors add-group-link">
-      <i data-lucide="plus" class="w-4 h-4"></i>
+      class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100 add-group-link"
+      style="color: var(--color-accent); border: 1px solid var(--color-border);"
+      onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
+      onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';">
+      <i data-lucide="plus" style="width:13px;height:13px;"></i>
       Add Link
     </button>
   `;
