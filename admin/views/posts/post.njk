@@ -45,7 +45,6 @@
 
       <!-- Title (prominent) -->
       <div>
-        <label for="title" class="admin-label">Title</label>
         <input type="text" id="title" name="title" required value="{{ post.title }}"
           class="admin-input text-[15px] font-medium"
           placeholder="Post title">
@@ -53,21 +52,18 @@
 
       <!-- Description -->
       <div>
-        <label for="description" class="admin-label">Description</label>
         <input type="text" id="description" name="description" value="{{ post.description }}"
           class="admin-input"
-          placeholder="Short description for SEO and previews">
+          placeholder="Short description of the post">
       </div>
 
       <!-- Metadata row -->
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label for="author" class="admin-label">Author</label>
           <input type="text" id="author" name="author" value="{{ post.author }}"
             class="admin-input" placeholder="Author name">
         </div>
         <div>
-          <label for="date" class="admin-label">Date</label>
           <input type="text" id="date" name="date" required value="{{ post.date }}"
             class="admin-input" placeholder="YYYY-MM-DD">
         </div>
@@ -76,12 +72,10 @@
       <!-- Taxonomy row -->
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label for="tags" class="admin-label">Tags</label>
           <input type="text" id="tags" name="tags" value="{{ post.tags }}"
-            class="admin-input" placeholder="news, updates, tech">
+            class="admin-input" placeholder="Tags">
         </div>
         <div>
-          <label for="category" class="admin-label">Category</label>
           <input type="text" id="category" name="category" value="{{ post.category }}"
             class="admin-input" placeholder="Category">
         </div>
@@ -89,7 +83,6 @@
 
       <!-- Content -->
       <div>
-        <label for="content" class="admin-label">Content</label>
         <textarea id="content" name="content">{{ post.content }}</textarea>
       </div>
 
