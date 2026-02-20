@@ -66,10 +66,10 @@
 </article>
 {% endmacro %}
 
-<!-- Post byline (author + date) - uppercase, letter-spaced -->
+<!-- Post byline (date) - uppercase, letter-spaced -->
 {% macro postByline(post) %}
 <p class="text-muted text-xs font-dm tracking-[0.2em] uppercase">
-  {% if post.data.author %}By {{ post.data.author }} | {% endif %}{{ post.data.date | postDate }}
+  {{ post.data.date | postDate }}
 </p>
 {% endmacro %}
 

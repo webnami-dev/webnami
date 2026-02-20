@@ -47,7 +47,7 @@
 {# Post byline #}
 {% macro postByline(post) %}
 <span class="text-sm text-accent">
-  {% if post.data.author %}{{ post.data.author }} / {% endif %}{{ post.data.date | postDate }}
+  {{ post.data.date | postDate }}
 </span>
 {% endmacro %}
 

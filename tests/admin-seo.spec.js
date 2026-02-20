@@ -33,8 +33,9 @@ test.describe("SEO Check - Posts", () => {
     await page.locator("#description").fill("A test post for SEO analysis");
     await page.locator("#tags").fill("seo, test");
     await page.locator("#category").fill("testing");
-    await page.locator("#author").fill("Tester");
-    await page.locator("#date").evaluate((el) => { el.removeAttribute("readonly"); });
+    await page.locator("#date").evaluate((el) => {
+      el.removeAttribute("readonly");
+    });
     await page.locator("#date").fill("2025-06-01");
     await page.locator('button[type="submit"]').click();
 
@@ -42,22 +43,30 @@ test.describe("SEO Check - Posts", () => {
     expect(fs.existsSync(testPostFile)).toBeTruthy();
   });
 
-  test("should show the SEO Check button on the edit post page", async ({ page }) => {
+  test("should show the SEO Check button on the edit post page", async ({
+    page,
+  }) => {
     await page.goto(`/admin/posts/${testPostSlug}`);
     await expect(page.locator("#seo-btn")).toBeVisible();
     await expect(page.locator("#seo-btn")).toContainText("SEO Check");
   });
 
-  test("should open the SEO modal when clicking SEO Check", async ({ page }) => {
+  test("should open the SEO modal when clicking SEO Check", async ({
+    page,
+  }) => {
     await page.goto(`/admin/posts/${testPostSlug}`);
     await page.locator("#seo-btn").click();
 
     const modal = page.locator("#seo-modal");
     await expect(modal).toBeVisible();
-    await expect(modal.locator("h2", { hasText: "SEO Analysis" })).toBeVisible();
+    await expect(
+      modal.locator("h2", { hasText: "SEO Analysis" }),
+    ).toBeVisible();
   });
 
-  test("should display all SEO check results in the modal", async ({ page }) => {
+  test("should display all SEO check results in the modal", async ({
+    page,
+  }) => {
     await page.goto(`/admin/posts/${testPostSlug}`);
     await page.locator("#seo-btn").click();
 
@@ -69,7 +78,9 @@ test.describe("SEO Check - Posts", () => {
 
     // Verify all 9 check names appear (target the .font-medium span specifically)
     for (const name of seoCheckNames) {
-      await expect(modal.locator(".font-medium", { hasText: name })).toBeVisible();
+      await expect(
+        modal.locator(".font-medium", { hasText: name }),
+      ).toBeVisible();
     }
   });
 
@@ -85,7 +96,9 @@ test.describe("SEO Check - Posts", () => {
     await expect(modal.locator("text=/\\d+ failed/")).toBeVisible();
   });
 
-  test("should close the SEO modal when clicking the close button", async ({ page }) => {
+  test("should close the SEO modal when clicking the close button", async ({
+    page,
+  }) => {
     await page.goto(`/admin/posts/${testPostSlug}`);
     await page.locator("#seo-btn").click();
 
@@ -98,7 +111,9 @@ test.describe("SEO Check - Posts", () => {
     await expect(modal).toBeHidden();
   });
 
-  test("should close the SEO modal when clicking the backdrop", async ({ page }) => {
+  test("should close the SEO modal when clicking the backdrop", async ({
+    page,
+  }) => {
     await page.goto(`/admin/posts/${testPostSlug}`);
     await page.locator("#seo-btn").click();
 
@@ -111,7 +126,9 @@ test.describe("SEO Check - Posts", () => {
     await expect(modal).toBeHidden();
   });
 
-  test("should return correct data from the SEO API endpoint", async ({ request }) => {
+  test("should return correct data from the SEO API endpoint", async ({
+    request,
+  }) => {
     const resp = await request.get(`/admin/posts/${testPostSlug}/seo`);
     expect(resp.status()).toBe(200);
 
@@ -120,7 +137,9 @@ test.describe("SEO Check - Posts", () => {
     expect(data.summary).toHaveProperty("passed");
     expect(data.summary).toHaveProperty("failed");
     expect(data.summary).toHaveProperty("info");
-    expect(data.summary.passed + data.summary.failed + data.summary.info).toBe(9);
+    expect(data.summary.passed + data.summary.failed + data.summary.info).toBe(
+      9,
+    );
 
     for (const check of data.checks) {
       expect(check).toHaveProperty("name");
@@ -130,7 +149,9 @@ test.describe("SEO Check - Posts", () => {
     }
   });
 
-  test("should return 404 for SEO check on non-existent post", async ({ request }) => {
+  test("should return 404 for SEO check on non-existent post", async ({
+    request,
+  }) => {
     const resp = await request.get("/admin/posts/this-post-does-not-exist/seo");
     expect(resp.status()).toBe(404);
     const data = await resp.json();
@@ -157,13 +178,17 @@ test.describe("SEO Check - Pages", () => {
     expect(fs.existsSync(testPageFile)).toBeTruthy();
   });
 
-  test("should show the SEO Check button on the edit page", async ({ page }) => {
+  test("should show the SEO Check button on the edit page", async ({
+    page,
+  }) => {
     await page.goto(`/admin/pages/${testPageSlug}`);
     await expect(page.locator("#seo-btn")).toBeVisible();
     await expect(page.locator("#seo-btn")).toContainText("SEO Check");
   });
 
-  test("should open the SEO modal and display results for a page", async ({ page }) => {
+  test("should open the SEO modal and display results for a page", async ({
+    page,
+  }) => {
     await page.goto(`/admin/pages/${testPageSlug}`);
     await page.locator("#seo-btn").click();
 
@@ -173,7 +198,9 @@ test.describe("SEO Check - Pages", () => {
 
     // All check names should be present
     for (const name of seoCheckNames) {
-      await expect(modal.locator(".font-medium", { hasText: name })).toBeVisible();
+      await expect(
+        modal.locator(".font-medium", { hasText: name }),
+      ).toBeVisible();
     }
 
     // Summary should be visible
@@ -181,16 +208,22 @@ test.describe("SEO Check - Pages", () => {
     await expect(modal.locator("text=/\\d+ failed/")).toBeVisible();
   });
 
-  test("should return correct data from the pages SEO API endpoint", async ({ request }) => {
+  test("should return correct data from the pages SEO API endpoint", async ({
+    request,
+  }) => {
     const resp = await request.get(`/admin/pages/${testPageSlug}/seo`);
     expect(resp.status()).toBe(200);
 
     const data = await resp.json();
     expect(data.checks).toHaveLength(9);
-    expect(data.summary.passed + data.summary.failed + data.summary.info).toBe(9);
+    expect(data.summary.passed + data.summary.failed + data.summary.info).toBe(
+      9,
+    );
   });
 
-  test("should return 404 for SEO check on non-existent page", async ({ request }) => {
+  test("should return 404 for SEO check on non-existent page", async ({
+    request,
+  }) => {
     const resp = await request.get("/admin/pages/this-page-does-not-exist/seo");
     expect(resp.status()).toBe(404);
     const data = await resp.json();

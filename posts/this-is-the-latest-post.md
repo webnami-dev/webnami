@@ -6,7 +6,6 @@ tags:
   - Latest
   - Tech
 category: Blog
-author: WebNami
 date: 2025-07-25
 ---
 

@@ -24,17 +24,6 @@
 </section>
 {% endmacro %}
 
-{% macro renderAuthorPage(authorPage) %}
-<section class="text-content min-h-screen py-12">
-  <div class="max-w-2xl mx-auto px-5 mb-8">
-    <h1 class="font-mono text-lg font-bold">
-      <span class="text-primary-500">git log</span> --author="{{ authorPage.name }}"{% if authorPage.page > 1 %} <span class="text-accent font-normal text-sm">--page={{ authorPage.page }}</span>{% endif %}
-    </h1>
-  </div>
-  {{ cl.postsGrid(authorPage, "author") }}
-</section>
-{% endmacro %}
-
 
 {% macro renderHomePage(postsPage) %}
 <section class="text-content min-h-screen py-12">

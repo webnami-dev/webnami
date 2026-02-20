@@ -57,13 +57,6 @@ layout: "base.njk"
         </a>
       </div>
     </div>
-    {% if author %}
-    <a
-      href="/author/{{ author | slugify }}"
-      class="text-sm font-medium no-underline"
-      >By {{ author }}</a
-    >
-    {% endif %}
     {% set meta = content | postMeta %}
     {{ meta.contentAnchorLinks | safe }}
     {% if tags.length > 0 %}

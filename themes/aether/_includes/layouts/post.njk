@@ -28,13 +28,6 @@ layout: "base.njk"
           class="text-primary-500 hover:underline"
         >{{ category }}</a>
         {% endif %}
-        {% if author %}
-        <span class="text-border">|</span>
-        <a
-          href="/author/{{ author | slugify }}"
-          class="hover:underline"
-        >{{ author }}</a>
-        {% endif %}
       </div>
       <div class="flex items-center gap-1">
         <a

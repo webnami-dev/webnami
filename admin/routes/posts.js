@@ -34,8 +34,7 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  const { title, description, tags, category, author, date, content } =
-    req.body;
+  const { title, description, tags, category, date, content } = req.body;
   const slug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -61,7 +60,6 @@ router.post("/new", async (req, res) => {
       .map((t) => t.trim())
       .filter(Boolean),
     category,
-    author,
     date: new Date(date),
   };
   const fileContent = matter.stringify(content || "", frontmatter);
@@ -84,7 +82,6 @@ router.get("/:slug", (req, res) => {
       description: file.data.description || "",
       tags: (file.data.tags || []).join(", "),
       category: file.data.category || "",
-      author: file.data.author || "",
       date: file.data.date
         ? new Date(file.data.date).toISOString().split("T")[0]
         : "",
@@ -95,8 +92,7 @@ router.get("/:slug", (req, res) => {
 });
 
 router.put("/:slug", async (req, res) => {
-  const { title, description, tags, category, author, date, content } =
-    req.body;
+  const { title, description, tags, category, date, content } = req.body;
   const oldSlug = req.params.slug;
   const newSlug = title
     .toLowerCase()
@@ -125,7 +121,6 @@ router.put("/:slug", async (req, res) => {
       .map((t) => t.trim())
       .filter(Boolean),
     category,
-    author,
     date: new Date(date),
   };
   const fileContent = matter.stringify(content || "", frontmatter);

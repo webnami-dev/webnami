@@ -200,7 +200,6 @@ export default function (eleventyConfig) {
     const posts = [];
     const pages = [];
     const tagPosts = new Map();
-    const authorPosts = new Map();
     const categoryPosts = new Map();
     const categorySet = new Set();
 
@@ -222,16 +221,6 @@ export default function (eleventyConfig) {
           if (tag === "all" || tag === "nav" || tag === "post") continue;
           if (!tagPosts.has(tag)) tagPosts.set(tag, []);
           tagPosts.get(tag).push(item);
-        }
-      }
-
-      // Collect authors
-      if ("author" in item.data) {
-        let itemAuthors = item.data.author;
-        if (typeof itemAuthors === "string") itemAuthors = [itemAuthors];
-        for (const author of itemAuthors) {
-          if (!authorPosts.has(author)) authorPosts.set(author, []);
-          authorPosts.get(author).push(item);
         }
       }
 
@@ -298,12 +287,6 @@ export default function (eleventyConfig) {
       tagPages.push(...paginate(items, tagName));
     }
 
-    // Build author pages
-    const authorPages = [];
-    for (const [authorName, items] of authorPosts) {
-      authorPages.push(...paginate(items, authorName));
-    }
-
     // Build category pages
     const categoryPages = [];
     for (const [categoryName, items] of categoryPosts) {
@@ -315,7 +298,6 @@ export default function (eleventyConfig) {
       pages,
       paginatedPosts,
       tagPages,
-      authorPages,
       categoryList: [...categorySet],
       categoryPages,
     };
@@ -326,10 +308,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection(
     "tagPages",
     (api) => buildCollections(api).tagPages,
-  );
-  eleventyConfig.addCollection(
-    "authorPages",
-    (api) => buildCollections(api).authorPages,
   );
   eleventyConfig.addCollection(
     "categoryList",

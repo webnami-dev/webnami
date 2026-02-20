@@ -10,10 +10,6 @@ layout: "base.njk"
       <h1 class="font-heading text-3xl sm:text-4xl font-bold text-content leading-tight mb-4">{{ title }}</h1>
       <div class="flex flex-wrap items-center gap-x-2 text-sm text-accent">
         <time datetime="{{ date | date('YYYY-MM-DD') }}">{{ date | postDate }}</time>
-        {% if author %}
-        <span class="text-accent/30">/</span>
-        <a href="/author/{{ author | slugify }}" class="text-accent hover:text-content">{{ author }}</a>
-        {% endif %}
         {% if category %}
         <span class="text-accent/30">/</span>
         <a href="/category/{{ category | slugify }}" class="text-accent hover:text-content">{{ category }}</a>

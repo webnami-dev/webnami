@@ -6,7 +6,6 @@ tags:
   - First
   - News
 category: Journal
-author: WebNami
 date: 2025-07-23
 ---
 

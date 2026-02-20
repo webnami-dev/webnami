@@ -31,21 +31,6 @@
     </section>
 {% endmacro %}
 
-{% macro renderAuthorPage(authorPage) %}
-    <section class="text-content min-h-screen">
-        <div class="max-w-5xl mx-auto px-5 pt-12 pb-6">
-          <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">
-            {{ authorPage.name }}
-            {% if authorPage.page > 1 %}
-            <span class="text-accent font-normal text-lg ml-2">Page {{ authorPage.page }}</span>
-            {% endif %}
-          </h1>
-          <p class="text-sm text-accent mt-1">All posts by this author</p>
-        </div>
-        {{ cl.postsGrid(authorPage, "author") }}
-    </section>
-{% endmacro %}
-
 
 {% macro renderHomePage(postsPage) %}
 <section class="text-content min-h-screen">

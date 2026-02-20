@@ -37,7 +37,6 @@ test.describe("Posts CRUD", () => {
       .fill("A test post created by Playwright");
     await page.locator("#tags").fill("test, playwright");
     await page.locator("#category").fill("testing");
-    await page.locator("#author").fill("Tester");
     await page.locator("#date").evaluate((el) => {
       el.removeAttribute("readonly");
     });
@@ -66,7 +65,6 @@ test.describe("Posts CRUD", () => {
     await page.locator("#description").fill("Duplicate post attempt");
     await page.locator("#tags").fill("test");
     await page.locator("#category").fill("testing");
-    await page.locator("#author").fill("Tester");
     await page.locator("#date").evaluate((el) => {
       el.removeAttribute("readonly");
     });
@@ -81,7 +79,6 @@ test.describe("Posts CRUD", () => {
     await page.goto(`/admin/posts/${testSlug}`);
     await expect(page.locator("#title")).toHaveValue("Playwright Test Post");
     await expect(page.locator("#category")).toHaveValue("testing");
-    await expect(page.locator("#author")).toHaveValue("Tester");
   });
 
   test("should rename file when title is updated", async ({ page }) => {
@@ -117,7 +114,6 @@ test.describe("Posts CRUD", () => {
         description: "Trying reserved slug",
         tags: "test",
         category: "testing",
-        author: "Tester",
         date: "2025-01-01",
         content: "Reserved slug rename test.",
       },
@@ -139,7 +135,6 @@ test.describe("Posts CRUD", () => {
         description: "Temporary",
         tags: "test",
         category: "test",
-        author: "Tester",
         date: "2025-01-01",
         content: "Temp.",
       },
@@ -151,7 +146,6 @@ test.describe("Posts CRUD", () => {
         description: "Trying duplicate slug",
         tags: "test",
         category: "testing",
-        author: "Tester",
         date: "2025-01-01",
         content: "Duplicate slug rename test.",
       },
@@ -232,7 +226,6 @@ test.describe("Posts CRUD", () => {
         description: "This should be rejected",
         tags: "test",
         category: "test",
-        author: "Tester",
         date: "2025-01-01",
         content: "Reserved slug test.",
       },
@@ -252,7 +245,6 @@ test.describe("Posts CRUD", () => {
         description: "This should be rejected",
         tags: "test",
         category: "test",
-        author: "Tester",
         date: "2025-01-01",
         content: "Reserved slug test.",
       },

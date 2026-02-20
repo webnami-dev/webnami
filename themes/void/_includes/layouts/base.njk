@@ -66,7 +66,7 @@
         "description": "{{ description | escape }}",
         "author": {
           "@type": "Person",
-          "name": "{{ author | escape }}"
+          "name": "{{ config.site.name | escape }}"
         },
         "datePublished": "{{ date | date('YYYY-MM-DD') }}",
         "dateModified": "{{ date | date('YYYY-MM-DD') }}",

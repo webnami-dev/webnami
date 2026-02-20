@@ -36,12 +36,4 @@ eleventyExcludeFromCollections: true
     <priority>0.9</priority>
   </url>
   {% endfor %}
-  {% for item in collections.authorPages %}
-  <url>
-    <loc>{{ config.site.url }}/author/{{ item.name | slugify }}/{% if item.page > 1 %}{{ item.page }}/{% endif %}</loc>
-    <lastmod>{{ "" | date('iso') }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  {% endfor %}
 </urlset>

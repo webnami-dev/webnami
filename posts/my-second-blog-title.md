@@ -6,7 +6,6 @@ tags:
   - Second
   - News
 category: Blog
-author: WebNami
 date: 2025-07-24
 ---
 

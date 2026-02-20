@@ -21,15 +21,8 @@ layout: "base.njk"
       {{ title }}
     </h1>
 
-    <!-- Author and date -->
+    <!--  date -->
     <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8 text-sm">
-      {% if author %}
-      <a
-        href="/author/{{ author | slugify }}"
-        class="text-content hover:text-primary-500 transition-colors duration-200 no-underline font-medium"
-      >By {{ author }}</a>
-      <span class="text-accent/40">|</span>
-      {% endif %}
       <span class="post-date">{{ date | postDate }}</span>
 
       <!-- Share links -->

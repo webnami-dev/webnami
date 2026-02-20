@@ -104,7 +104,6 @@ test.describe("Post Page", () => {
     const structured = JSON.parse(jsonLd);
     expect(structured["@type"]).toBe("BlogPosting");
     expect(structured.headline).toContain("This is the latest post");
-    expect(structured.author.name).toBe("WebNami");
   });
 
   test("should have canonical URL", async ({ page }) => {

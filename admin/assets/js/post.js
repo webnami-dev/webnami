@@ -18,7 +18,6 @@ form.addEventListener("submit", async (e) => {
   const description = document.getElementById("description").value;
   const tags = document.getElementById("tags").value;
   const category = document.getElementById("category").value;
-  const author = document.getElementById("author").value;
   const date = document.getElementById("date").value;
   const content = editor.value();
 
@@ -30,7 +29,6 @@ form.addEventListener("submit", async (e) => {
       description,
       tags,
       category,
-      author,
       date,
       content,
     }),

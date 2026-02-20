@@ -25,17 +25,8 @@ layout: "base.njk"
         {{ title }}
       </h1>
 
-      <!-- Author + Share row -->
+      <!-- Share row -->
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-8 border-b border-border sage-fade-up-delay-3">
-        {% if author %}
-        <a
-          href="/author/{{ author | slugify }}"
-          class="text-accent text-sm font-dm font-medium no-underline hover:text-primary-500 transition-colors"
-        >
-          <span class="text-muted">Written by</span> {{ author }}
-        </a>
-        {% endif %}
-
         <div class="flex items-center space-x-4">
           <span class="text-muted text-xs uppercase tracking-widest font-dm">Share</span>
           <a

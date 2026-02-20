@@ -41,25 +41,6 @@
 </section>
 {% endmacro %}
 
-{% macro renderAuthorPage(authorPage) %}
-<section class="text-content min-h-screen">
-  <div class="sage-column pt-12 sm:pt-20 pb-10 text-center sage-fade-up">
-    <span class="text-muted text-[0.65rem] font-dm font-medium tracking-[0.25em] uppercase">Author</span>
-    <h1 class="font-playfair text-hero-text text-3xl sm:text-4xl font-semibold mt-3 mb-3">
-      {{ authorPage.name }}
-    </h1>
-    {% if authorPage.page > 1 %}
-    <p class="text-muted text-sm font-dm">Page {{ authorPage.page }}</p>
-    {% endif %}
-    <div class="sage-line sage-line-center mt-6"></div>
-  </div>
-  <div class="sage-column">
-    {{ cl.postsGrid(authorPage, "author") }}
-  </div>
-  <div class="pb-16"></div>
-</section>
-{% endmacro %}
-
 
 {% macro renderHomePage(postsPage) %}
 <section class="text-content">

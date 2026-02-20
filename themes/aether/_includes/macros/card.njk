@@ -60,10 +60,10 @@
 </div>
 {% endmacro %}
 
-<!-- Post byline (author + date) -->
+<!-- Post byline (date) -->
 {% macro postByline(post) %}
 <p class="text-xs text-accent mb-2">
-  {% if post.data.author %}{{ post.data.author }} &middot; {% endif %}{{ post.data.date | postDate }}
+  {{ post.data.date | postDate }}
 </p>
 {% endmacro %}
 

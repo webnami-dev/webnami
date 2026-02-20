@@ -23,7 +23,6 @@ eleventyExcludeFromCollections: true
       <link>{{ absolutePostUrl }}</link>
       <description>{{ post.content | renderTransforms(post.data.page, config.site.url) }}</description>
       <pubDate>{{ post.date | dateToRfc822 }}</pubDate>
-      <dc:creator>{{ post.data.author }}</dc:creator>
       <guid>{{ absolutePostUrl }}</guid>
     </item>
     {%- endfor %}
