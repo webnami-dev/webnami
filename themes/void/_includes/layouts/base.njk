@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   {% set contentMeta = content | postMeta %}
+  {% if layout == "post" %}
+    {% set resolvedDescription = description or contentMeta.excerpt %}
+  {% elif layout == "page" %}
+    {% set resolvedDescription = description or ("Thoughts, notes, and writing from " + config.site.name) %}
+  {% else %}
+    {% set resolvedDescription = description %}
+  {% endif %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +19,7 @@
     <meta name="title" content="{{ title }}" />
     <meta
       name="description"
-      content="{{ description }}"
+      content="{{ resolvedDescription }}"
     />
     {%- if not robots or robots != 'false' -%}
     <meta
@@ -28,7 +35,7 @@
     <meta property="twitter:title" content="{{ title }}" />
     <meta
       property="twitter:description"
-      content="{{ description }}"
+      content="{{ resolvedDescription }}"
     />
     <meta
       property="twitter:image"
@@ -40,7 +47,7 @@
     <meta property="og:title" content="{{ title }}" />
     <meta
       property="og:description"
-      content="{{ description }}"
+      content="{{ resolvedDescription }}"
     />
     <meta
       property="og:image"
@@ -63,7 +70,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "{{ title | escape }}",
-        "description": "{{ description | escape }}",
+        "description": "{{ resolvedDescription | escape }}",
         "author": {
           "@type": "Person",
           "name": "{{ config.site.name | escape }}"

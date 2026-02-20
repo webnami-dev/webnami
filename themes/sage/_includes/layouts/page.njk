@@ -4,11 +4,18 @@ layout: "base.njk"
 
 <main class="min-h-screen">
   <!-- Decorative top accent -->
-  <div class="w-full h-px bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-30"></div>
-
+  <div
+    class="w-full h-px bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-30"
+  ></div>
   <article
     class="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24 sage-prose prose prose-lg prose-headings:text-hero-text prose-headings:font-playfair prose-p:text-content prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-a:text-primary-500 prose-a:no-underline prose-a:border-b prose-a:border-primary-500/30 hover:prose-a:border-primary-500 prose-blockquote:border-primary-500 prose-blockquote:text-accent prose-blockquote:font-playfair prose-blockquote:italic"
   >
+    <!-- Title -->
+    <h1
+      class="font-playfair text-hero-text text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-6 sage-fade-up-delay-2"
+    >
+      {{ title }}
+    </h1>
     {{ content | safe }}
   </article>
 </main>

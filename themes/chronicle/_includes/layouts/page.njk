@@ -6,6 +6,12 @@ layout: "base.njk"
   <article
     class="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 chronicle-prose prose prose-lg prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-p:text-content prose-a:text-primary-500 prose-a:no-underline hover:prose-a:text-primary-700 prose-headings:font-serif"
   >
+    <!-- Title -->
+    <h1
+      class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5"
+    >
+      {{ title }}
+    </h1>
     {{ content | safe }}
   </article>
 </main>

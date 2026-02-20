@@ -4,15 +4,13 @@ layout: "base.njk"
 
 <main class="min-h-screen py-12 sm:py-16">
   <article
-    class="max-w-[680px] mx-auto px-5 sm:px-6 prose prose-base
-      prose-headings:text-content prose-headings:font-semibold prose-headings:tracking-tight
-      prose-p:text-content prose-p:leading-relaxed
-      prose-strong:text-content
-      prose-ol:text-content prose-li:text-content prose-ul:text-content
-      prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline
-      prose-img:rounded-lg
-      prose-hr:border-border"
+    class="max-w-[680px] mx-auto px-5 sm:px-6 prose prose-base prose-headings:text-content prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-content prose-p:leading-relaxed prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-hr:border-border"
   >
+    <h1
+      class="text-3xl sm:text-[2.25rem] font-bold tracking-tight leading-tight mb-3"
+    >
+      {{ title }}
+    </h1>
     {{ content | safe }}
   </article>
 </main>
