@@ -53,7 +53,7 @@ router.put("/", async (req, res) => {
     },
     footer: {
       socialLinks: JSON.parse(data.socialLinks || "[]"),
-      linkGroups: JSON.parse(data.linkGroups || "[]"),
+      links: JSON.parse(data.footerLinks || "[]"),
     },
   };
 

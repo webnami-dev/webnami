@@ -1,39 +1,23 @@
 <footer class="bg-footer text-content border-t border-border">
+  {% if config.footer %}
   <div class="max-w-5xl mx-auto px-5 py-12">
-    <div class="flex flex-col md:flex-row md:justify-between gap-10">
+    <div class="flex flex-col md:flex-row md:justify-between gap-6 sm:gap-10">
 
-      {# Link Groups #}
-      <div class="flex flex-wrap gap-x-16 gap-y-8 order-first">
-        {% for group in config.footer.linkGroups %}
-        <div>
-          <ul class="list-none space-y-2">
-            {% for link in group.links %}
-            <li>
-              <a
-                href="{{ link.href }}"
-                class="text-sm text-content hover:text-primary-500"
-              >{{ link.name }}</a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
+      {# Links #}
+      {% if config.footer.links %}
+      <div class="flex flex-wrap gap-x-8 gap-y-8 order-first">
+        {% for link in config.footer.links %}
+          <a
+          href="{{ link.href }}"
+          class="text-sm text-content hover:text-primary-500"
+        >{{ link.name }}</a>
         {% endfor %}
       </div>
+      {% endif %}
 
-      {# Logo, social, copyright #}
+      {# social #}
+      {% if config.footer.socialLinks %}
       <div class="flex flex-col items-start md:items-end gap-4 md:text-right shrink-0">
-        <div class="flex items-center gap-2">
-          {% if config.site.logo %}
-          <img
-            class="h-5 w-auto"
-            src="{{ config.site.logo | imagePath }}"
-            alt="{{ config.site.name }}"
-          />
-          {% endif %}
-          <span class="text-sm font-semibold">{{ config.site.name }}</span>
-        </div>
-
-        {# Social Icons #}
         <div class="flex gap-2">
           {% for icon in config.footer.socialLinks %}
           <a
@@ -47,13 +31,11 @@
           </a>
           {% endfor %}
         </div>
-
-        <p class="text-xs text-accent">
-          &copy; {% currentYear %} {{ config.site.name }}. All rights reserved.
-        </p>
       </div>
+      {% endif %}
     </div>
   </div>
+  {% endif %}
 
   <div class="border-t border-border">
     <div class="max-w-5xl mx-auto px-5 py-3 text-center">

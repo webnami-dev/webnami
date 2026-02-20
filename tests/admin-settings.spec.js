@@ -154,39 +154,33 @@ test.describe("Settings Page", () => {
     expect(ghLink).toBeTruthy();
   });
 
-  test("should render existing link groups", async ({ page }) => {
+  test("should render existing footer links", async ({ page }) => {
     await page.goto("/admin/settings");
     const config = readConfig();
-    const groups = page.locator(".link-group");
-    await expect(groups).toHaveCount(config.footer.linkGroups.length);
+    const rows = page.locator(".footer-link-row");
+    await expect(rows).toHaveCount(config.footer.links.length);
   });
 
-  test("should add a link group with links, save, and persist", async ({
-    page,
-  }) => {
+  test("should add a footer link, save, and persist", async ({ page }) => {
     await page.goto("/admin/settings");
-    const initialCount = await page.locator(".link-group").count();
+    const initialCount = await page.locator(".footer-link-row").count();
 
-    await page.locator("#add-link-group").click();
-    await expect(page.locator(".link-group")).toHaveCount(initialCount + 1);
+    await page.locator("#add-footer-link").click();
+    await expect(page.locator(".footer-link-row")).toHaveCount(
+      initialCount + 1,
+    );
 
-    const newGroup = page.locator(".link-group").last();
-    await newGroup.locator(".group-title").fill("Resources");
-    await newGroup.locator(".add-group-link").click();
-
-    const newLink = newGroup.locator(".group-link-row").last();
-    await newLink.locator(".group-link-name").fill("Docs");
-    await newLink.locator(".group-link-href").fill("/docs");
+    const newRow = page.locator(".footer-link-row").last();
+    await newRow.locator(".footer-link-name").fill("Docs");
+    await newRow.locator(".footer-link-href").fill("/docs");
 
     await page.locator('button[type="submit"]').click();
     await page.waitForLoadState("networkidle");
 
     const config = readConfig();
-    expect(config.footer.linkGroups.length).toBe(initialCount + 1);
-    const resourcesGroup = config.footer.linkGroups.find(
-      (g) => g.title === "Resources",
-    );
-    expect(resourcesGroup).toBeTruthy();
-    expect(resourcesGroup.links[0].name).toBe("Docs");
+    expect(config.footer.links.length).toBe(initialCount + 1);
+    const docsLink = config.footer.links.find((l) => l.name === "Docs");
+    expect(docsLink).toBeTruthy();
+    expect(docsLink.href).toBe("/docs");
   });
 });

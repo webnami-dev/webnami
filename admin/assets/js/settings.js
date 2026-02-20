@@ -33,12 +33,8 @@ document.addEventListener("click", (e) => {
   const removeRow = e.target.closest(".remove-row");
   if (removeRow) {
     removeRow
-      .closest(".navbar-link-row, .social-link-row, .group-link-row")
+      .closest(".navbar-link-row, .social-link-row, .footer-link-row")
       ?.remove();
-  }
-  const removeGroup = e.target.closest(".remove-group");
-  if (removeGroup) {
-    removeGroup.closest(".link-group")?.remove();
   }
 });
 
@@ -58,46 +54,11 @@ document.getElementById("add-social-link").addEventListener("click", () => {
   ]);
 });
 
-// ── Add link group ──
-document.getElementById("add-link-group").addEventListener("click", () => {
-  const groups = document.getElementById("link-groups");
-  const group = document.createElement("div");
-  group.className = "link-group";
-  group.innerHTML = `
-    <div class="flex items-center gap-2 mb-3">
-      <input type="text" placeholder="Group Title (optional)"
-        class="admin-input group-title">
-      <button type="button"
-        class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-group"
-        style="color: var(--color-accent); border: 1px solid var(--color-border);"
-        onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
-        onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
-        aria-label="Remove group">
-        <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
-      </button>
-    </div>
-    <div class="flex flex-col gap-2 group-links"></div>
-    <button type="button"
-      class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100 add-group-link"
-      style="color: var(--color-accent); border: 1px solid var(--color-border);"
-      onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
-      onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';">
-      <i data-lucide="plus" style="width:13px;height:13px;"></i>
-      Add Link
-    </button>
-  `;
-  groups.appendChild(group);
-  lucide.createIcons();
-});
-
-// ── Add link inside a group (delegated) ──
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".add-group-link");
-  if (!btn) return;
-  const container = btn.previousElementSibling;
-  createRow(container, "group-link-row", [
-    { placeholder: "Label", className: "group-link-name" },
-    { placeholder: "/path", className: "group-link-href" },
+// ── Add footer link ──
+document.getElementById("add-footer-link").addEventListener("click", () => {
+  createRow(document.getElementById("footer-links"), "footer-link-row", [
+    { placeholder: "Label", className: "footer-link-name" },
+    { placeholder: "/path", className: "footer-link-href" },
   ]);
 });
 
@@ -130,15 +91,11 @@ form.addEventListener("submit", async (e) => {
     "social-link-href",
   );
 
-  const linkGroups = [
-    ...document.getElementById("link-groups").querySelectorAll(".link-group"),
-  ].map((group) => {
-    const title = group.querySelector(".group-title")?.value.trim() || "";
-    const links = collectLinks(group, "group-link-name", "group-link-href");
-    const obj = { links };
-    if (title) obj.title = title;
-    return obj;
-  });
+  const footerLinks = collectLinks(
+    document.getElementById("footer-links"),
+    "footer-link-name",
+    "footer-link-href",
+  );
 
   const body = {
     blogName: document.getElementById("blogName").value,
@@ -151,7 +108,7 @@ form.addEventListener("submit", async (e) => {
     homepageImg: document.getElementById("homepageImg").value,
     navbarLinks: JSON.stringify(navbarLinks),
     socialLinks: JSON.stringify(socialLinks),
-    linkGroups: JSON.stringify(linkGroups),
+    footerLinks: JSON.stringify(footerLinks),
   };
 
   const res = await fetch("/admin/settings", {

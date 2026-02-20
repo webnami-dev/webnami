@@ -1,59 +1,36 @@
 <footer class="bg-footer text-white/70 mt-20">
-  <div class="max-w-5xl mx-auto px-5 py-14">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
-
-      <!-- Brand column -->
-      <div class="md:col-span-4">
-        <div class="flex items-center mb-5">
-          {% if config.site.logo %}
-          <img
-            class="h-8 sm:h-10 w-auto brightness-200"
-            src="{{ config.site.logo | imagePath }}"
-            alt="{{ config.site.name }}"
-          />
-          {% endif %}
-          <span class="ml-2 font-serif text-lg font-bold text-white tracking-tight">
-            {{ config.site.name }}
-          </span>
-        </div>
-
-        <!-- Social Icons -->
-        <div class="flex gap-3 mb-5">
-          {% for icon in config.footer.socialLinks %}
-          <a
-            href="{{ icon.href }}"
-            class="text-white/40 hover:text-primary-500 transition-colors duration-200"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="{{ icon.name | title }}"
-          >
-            {% icon icon.name, "w-5 h-5" | safe %}
-          </a>
-          {% endfor %}
-        </div>
-
-        <p class="text-white/30 text-sm">
-          All rights reserved &copy; {% currentYear %}.
-        </p>
+  {% if config.footer %}
+  <div class="max-w-5xl mx-auto px-5 py-10">
+      <!-- Links -->
+      {% if config.footer.links %}
+      <div class="flex space-x-4 justify-center mb-6">
+        {% for link in config.footer.links %}
+        <a
+        href="{{ link.href }}"
+        class="text-white/50 hover:text-primary-500 transition-colors duration-200 text-sm"
+      >{{ link.name }}</a>
+        {% endfor %}
       </div>
-
-      <!-- Link Groups -->
-      {% for group in config.footer.linkGroups %}
-      <div class="md:col-span-{% if loop.length == 1 %}4{% elif loop.length == 2 %}4{% else %}2{% endif %}">
-        <ul class="list-none space-y-3">
-          {% for link in group.links %}
-          <li>
-            <a
-              href="{{ link.href }}"
-              class="text-white/50 hover:text-primary-500 transition-colors duration-200 text-sm"
-            >{{ link.name }}</a>
-          </li>
-          {% endfor %}
-        </ul>
+      {% endif %}
+  
+      <!-- Social Icons -->
+      {% if config.footer.socialLinks %}
+      <div class="flex space-x-4 justify-center">
+        {% for icon in config.footer.socialLinks %}
+        <a
+          href="{{ icon.href }}"
+          class="text-white/40 hover:text-primary-500 transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ icon.name | title }}"
+        >
+          {% icon icon.name, "w-5 h-5" | safe %}
+        </a>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
+      {% endif %}
   </div>
+  {% endif %}
 
   <!-- Bottom bar -->
   <div class="border-t border-white/8">
