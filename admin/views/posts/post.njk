@@ -41,58 +41,63 @@
     </div>
 
     <!-- Form -->
-    <form id="post-form" data-slug="{{ post.slug }}" class="flex flex-col gap-5">
+    <form id="post-form" data-slug="{{ post.slug }}" class="flex gap-6 items-start">
 
-      <!-- Title (prominent) -->
-      <div>
-        <input type="text" id="title" name="title" required value="{{ post.title }}"
-          class="admin-input text-[15px] font-medium"
-          placeholder="Post title">
+      <!-- Left: main content -->
+      <div class="flex flex-col gap-5 flex-1 min-w-0">
+
+        <!-- Title -->
+        <div>
+          <input type="text" id="title" name="title" required value="{{ post.title }}"
+            class="admin-input text-[15px] font-medium"
+            placeholder="Post title">
+        </div>
+
+        <!-- Description -->
+        <div>
+          <input type="text" id="description" name="description" value="{{ post.description }}"
+            class="admin-input"
+            placeholder="Short description of the post">
+        </div>
+
+        <!-- Content -->
+        <div>
+          <textarea id="content" name="content">{{ post.content }}</textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-2 pt-1">
+          <button type="submit"
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+            style="background-color: var(--color-primary);"
+            onmouseover="this.style.opacity='0.88';"
+            onmouseout="this.style.opacity='1';"
+            >
+            <i data-lucide="save" style="width:14px;height:14px;"></i>
+            Save Changes
+          </button>
+        </div>
+
       </div>
 
-      <!-- Description -->
-      <div>
-        <input type="text" id="description" name="description" value="{{ post.description }}"
-          class="admin-input"
-          placeholder="Short description of the post">
-      </div>
+      <!-- Right: metadata sidebar -->
+      <div class="flex flex-col gap-4 w-56 shrink-0">
 
-      <!-- Metadata row -->
-      <div class="grid grid-cols-2 gap-4">
         <div>
           <input type="text" id="date" name="date" required value="{{ post.date }}"
             class="admin-input" placeholder="YYYY-MM-DD">
         </div>
-      </div>
 
-      <!-- Taxonomy row -->
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <input type="text" id="tags" name="tags" value="{{ post.tags }}"
-            class="admin-input" placeholder="Tags">
-        </div>
         <div>
           <input type="text" id="category" name="category" value="{{ post.category }}"
-            class="admin-input" placeholder="Category">
+            class="admin-input" placeholder="Category (One)">
         </div>
-      </div>
 
-      <!-- Content -->
-      <div>
-        <textarea id="content" name="content">{{ post.content }}</textarea>
-      </div>
+        <div>
+          <textarea id="tags" name="tags" rows="3"
+            class="admin-input resize-none" placeholder="Tags (comma-separated)">{{ post.tags }}</textarea>
+        </div>
 
-      <!-- Actions -->
-      <div class="flex items-center gap-2 pt-1">
-        <button type="submit"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
-          style="background-color: var(--color-primary);"
-          onmouseover="this.style.opacity='0.88';"
-          onmouseout="this.style.opacity='1';"
-          >
-          <i data-lucide="save" style="width:14px;height:14px;"></i>
-          Save Changes
-        </button>
       </div>
 
     </form>
