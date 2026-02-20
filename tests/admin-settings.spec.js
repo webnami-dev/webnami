@@ -38,12 +38,6 @@ test.describe("Settings Page", () => {
     await expect(page.locator("#homepageHeading")).toHaveValue(
       config.homepage.heading,
     );
-    await expect(page.locator("#homepageTitle")).toHaveValue(
-      config.homepage.metadata.title,
-    );
-    await expect(page.locator("#homepageDescription")).toHaveValue(
-      config.homepage.metadata.description,
-    );
   });
 
   test("should show image dropdowns for logo, favicon, and OG image", async ({

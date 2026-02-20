@@ -42,9 +42,11 @@
 {% macro renderHomePage(postsPage) %}
 <section class="text-content py-12 sm:py-16">
   {% if postsPage.page == 1 %}
+  {% if config.homepage.heading %}
   <div class="max-w-[42rem] mx-auto px-5 mb-12">
     <h1 class="font-heading text-2xl sm:text-3xl font-bold text-content leading-snug">{{ config.homepage.heading }}</h1>
   </div>
+  {% endif %}
   {%- include 'partials/categorynav.njk' -%}
   {{ cl.homePagePostsGrid(postsPage) }}
   {% else %}

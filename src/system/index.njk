@@ -6,8 +6,8 @@ pagination:
   alias: postsPage
 permalink: "{% if postsPage.page == 1 %}/{% else %}/posts/{{ postsPage.page }}/{% endif %}"
 eleventyComputed:
-  title: "{% if postsPage.page == 1 %}{{ config.homepage.metadata.title }}{% else %}Posts - Page {{ postsPage.page }}{% endif %}"
-  description: "{% if postsPage.page == 1 %}{{ config.homepage.metadata.description }}{% else %}Posts page {{ postsPage.page }}{% endif %}"
+  title: "{% if postsPage.page == 1 %}{{ config.site.name }}{% else %}{{ config.site.name }} - Page {{ postsPage.page }}{% endif %}"
+  description: "{{ (config.homepage.heading or ('Thoughts, notes, and writing from ' + config.site.name)) | singleLine }}"
   img: "{{ config.homepage.metadata.img | imagePath }}"
 ---
 

@@ -10,8 +10,6 @@
   "homepage": {
     "heading": "WebNami - a simple and lightweight blogging tool",
     "metadata": {
-      "title": "Home",
-      "description": "This is a description of our website",
       "img": "logo.png"
     }
   },
@@ -53,8 +51,7 @@
             "name": "Home",
             "href": "/"
           }
-        ],
-        "title": "CATEGORY 1"
+        ]
       },
       {
         "links": [

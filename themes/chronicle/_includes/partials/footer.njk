@@ -40,11 +40,6 @@
       <!-- Link Groups -->
       {% for group in config.footer.linkGroups %}
       <div class="md:col-span-{% if loop.length == 1 %}4{% elif loop.length == 2 %}4{% else %}2{% endif %}">
-        {% if group.title %}
-        <h2 class="text-xs uppercase tracking-widest font-semibold text-white/40 mb-4">
-          {{ group.title }}
-        </h2>
-        {% endif %}
         <ul class="list-none space-y-3">
           {% for link in group.links %}
           <li>

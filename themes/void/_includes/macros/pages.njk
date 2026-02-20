@@ -40,12 +40,14 @@
 <section class="text-content min-h-screen py-12">
   {% if postsPage.page == 1 %}
   {# Page 1: heading + category nav + post list #}
+  {% if config.homepage.heading %}
   <div class="max-w-2xl mx-auto px-5 mb-8">
     <div class="mb-6">
       <p class="font-mono text-sm text-accent mb-2">~/{{ config.site.name | lower | replace(" ", "-") }}</p>
       <h1 class="font-mono text-xl sm:text-2xl font-bold text-content cursor-blink">{{ config.homepage.heading }}</h1>
     </div>
   </div>
+  {% endif %}
   {%- include 'partials/categorynav.njk' -%}
   {{ cl.homePagePostsGrid(postsPage) }}
   {% else %}

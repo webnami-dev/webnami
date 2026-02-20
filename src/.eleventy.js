@@ -66,6 +66,15 @@ export default function (eleventyConfig) {
     return `/images/${filename}`;
   });
 
+  eleventyConfig.addFilter("singleLine", (str, maxLength = 160) => {
+    if (!str) return str;
+    const cleaned = str
+      .replace(/[\r\n]+/g, " ")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+    return cleaned.length > maxLength ? cleaned.slice(0, maxLength) : cleaned;
+  });
+
   eleventyConfig.addTransform("htmlmin", (content, outputPath) => {
     if (outputPath && outputPath.endsWith(".html")) {
       return htmlmin.minify(content, {

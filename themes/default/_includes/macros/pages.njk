@@ -43,11 +43,13 @@
 <section class="text-content body-font">
   {% if postsPage.page == 1 %}
   <!-- Page 1: Header + Featured + Grid Layout -->
+  {% if config.homepage.heading %}
   <div class="w-full md:w-4/5 px-5 mx-auto my-10 text-center">
     <h1 class="sm:text-4xl text-3xl font-medium title-font mb-4 text-header">
       {{ config.homepage.heading }}
     </h1>
   </div>
+  {% endif %}
   {%- include 'partials/categorynav.njk' -%}
   {{ cl.homePagePostsGrid(postsPage) }}
   {% else %}

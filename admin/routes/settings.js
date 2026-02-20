@@ -45,8 +45,6 @@ router.put("/", async (req, res) => {
     homepage: {
       heading: data.homepageHeading,
       metadata: {
-        title: data.homepageTitle,
-        description: data.homepageDescription,
         img: data.homepageImg,
       },
     },

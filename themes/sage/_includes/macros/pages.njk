@@ -65,12 +65,14 @@
 <section class="text-content">
   {% if postsPage.page == 1 %}
   <!-- Page 1: Hero heading + Featured + Stacked posts -->
+  {% if config.homepage.heading %}
   <div class="sage-column pt-16 sm:pt-24 pb-8 text-center">
     <h1 class="font-playfair text-hero-text text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-6 sage-fade-up">
       {{ config.homepage.heading }}
     </h1>
     <div class="sage-line sage-line-center sage-fade-up-delay-1"></div>
   </div>
+  {% endif %}
   {%- include 'partials/categorynav.njk' -%}
   <div class="sage-column">
     {{ cl.homePagePostsGrid(postsPage) }}

@@ -61,15 +61,7 @@
             <input type="text" id="homepageHeading" name="homepageHeading" value="{{ config.homepage.heading }}" class="admin-input">
           </div>
           <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="homepageTitle" class="admin-label">Homepage Meta Title</label>
-              <input type="text" id="homepageTitle" name="homepageTitle" value="{{ config.homepage.metadata.title }}" class="admin-input">
-            </div>
             {{ imageSelect("homepageImg", "homepageImg", "Homepage OG Image", config.homepage.metadata.img, images) }}
-          </div>
-          <div>
-            <label for="homepageDescription" class="admin-label">Homepage Meta Description</label>
-            <input type="text" id="homepageDescription" name="homepageDescription" value="{{ config.homepage.metadata.description }}" class="admin-input">
           </div>
         </div>
       </section>
@@ -150,8 +142,6 @@
           {% for group in config.footer.linkGroups %}
             <div class="link-group">
               <div class="flex items-center gap-2 mb-3">
-                <input type="text" placeholder="Group Title (optional)" value="{{ group.title }}"
-                  class="admin-input group-title">
                 <button type="button"
                   class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-group"
                   style="color: var(--color-accent); border: 1px solid var(--color-border);"

@@ -148,8 +148,6 @@ form.addEventListener("submit", async (e) => {
     postsPerPage: document.getElementById("postsPerPage").value,
     theme: document.getElementById("theme").value,
     homepageHeading: document.getElementById("homepageHeading").value,
-    homepageTitle: document.getElementById("homepageTitle").value,
-    homepageDescription: document.getElementById("homepageDescription").value,
     homepageImg: document.getElementById("homepageImg").value,
     navbarLinks: JSON.stringify(navbarLinks),
     socialLinks: JSON.stringify(socialLinks),

@@ -31,7 +31,7 @@ test.describe("Homepage", () => {
   test("should have correct meta title", async ({ page }) => {
     await page.goto("/");
     const title = await page.title();
-    expect(title).toContain(config.homepage.metadata.title);
+    expect(title).toContain(config.site.name);
   });
 
   test("should have meta description", async ({ page }) => {

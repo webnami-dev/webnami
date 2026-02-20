@@ -55,11 +55,13 @@
 <section class="text-content min-h-screen">
   {% if postsPage.page == 1 %}
   <!-- Page 1: Hero heading + Featured + Latest grid -->
+  {% if config.homepage.heading %}
   <div class="max-w-3xl mx-auto px-5 pt-20 pb-16 text-center">
     <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
       {{ config.homepage.heading }}
     </h1>
   </div>
+  {% endif %}
   {%- include 'partials/categorynav.njk' -%}
   {{ cl.homePagePostsGrid(postsPage) }}
   {% else %}
