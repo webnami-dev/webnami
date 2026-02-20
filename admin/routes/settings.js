@@ -36,8 +36,8 @@ router.put("/", async (req, res) => {
   const config = {
     theme: data.theme || "default",
     site: {
-      name: data.siteName,
-      url: data.siteUrl,
+      name: data.blogName,
+      url: data.blogUrl,
       logo: data.siteLogo,
       favicon: data.siteFavicon,
     },

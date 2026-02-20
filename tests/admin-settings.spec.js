@@ -30,8 +30,8 @@ test.describe("Settings Page", () => {
   }) => {
     await page.goto("/admin/settings");
     const config = readConfig();
-    await expect(page.locator("#siteName")).toHaveValue(config.site.name);
-    await expect(page.locator("#siteUrl")).toHaveValue(config.site.url);
+    await expect(page.locator("#blogName")).toHaveValue(config.site.name);
+    await expect(page.locator("#blogUrl")).toHaveValue(config.site.url);
     await expect(page.locator("#postsPerPage")).toHaveValue(
       String(config.postsPerPage),
     );
@@ -58,7 +58,7 @@ test.describe("Settings Page", () => {
     page,
   }) => {
     await page.goto("/admin/settings");
-    await page.locator("#siteName").fill("Test Site Name");
+    await page.locator("#blogName").fill("Test Blog Name");
     await page.locator("#homepageHeading").fill("Test Heading");
 
     await page.locator('button[type="submit"]').click();
@@ -70,12 +70,12 @@ test.describe("Settings Page", () => {
     );
 
     const config = readConfig();
-    expect(config.site.name).toBe("Test Site Name");
+    expect(config.site.name).toBe("Test Blog Name");
     expect(config.homepage.heading).toBe("Test Heading");
 
     // Verify values persist on reload
     await page.goto("/admin/settings");
-    await expect(page.locator("#siteName")).toHaveValue("Test Site Name");
+    await expect(page.locator("#blogName")).toHaveValue("Test Blog Name");
     await expect(page.locator("#homepageHeading")).toHaveValue("Test Heading");
   });
 

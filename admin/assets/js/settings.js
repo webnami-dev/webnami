@@ -141,8 +141,8 @@ form.addEventListener("submit", async (e) => {
   });
 
   const body = {
-    siteName: document.getElementById("siteName").value,
-    siteUrl: document.getElementById("siteUrl").value,
+    blogName: document.getElementById("blogName").value,
+    blogUrl: document.getElementById("blogUrl").value,
     siteLogo: document.getElementById("siteLogo").value,
     siteFavicon: document.getElementById("siteFavicon").value,
     postsPerPage: document.getElementById("postsPerPage").value,
