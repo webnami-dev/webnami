@@ -12,6 +12,7 @@ import contentFilters from "./_plugins/content-filters.js";
 export default function (eleventyConfig) {
   const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
   const isProd = process.env.NODE_ENV === "production";
+  eleventyConfig.setUseTemplateCache(false);
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.ignores.add("admin/**");

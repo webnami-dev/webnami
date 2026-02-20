@@ -39,7 +39,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
   flashAlert("success", "Post updated successfully.");
-  window.location.href = "/admin/posts";
+  window.location.href = `/admin/posts/${data.slug}`;
 });
 
 document.getElementById("seo-btn").addEventListener("click", () => {

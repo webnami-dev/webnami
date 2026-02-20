@@ -2,7 +2,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { buildSite } from "../eleventy.js";
+import { buildSite, buildSiteWithVite } from "../eleventy.js";
 import { SEOAnalyzer } from "../assets/js/seo-analyzer.js";
 import log from "../logger.js";
 
@@ -127,9 +127,12 @@ router.put("/:slug", async (req, res) => {
   if (newSlug !== oldSlug) {
     fs.unlinkSync(path.join(postsDir, `${oldSlug}.md`));
     log.info(`Post renamed: "${oldSlug}" -> "${newSlug}"`);
+    fs.writeFileSync(path.join(postsDir, `${newSlug}.md`), fileContent);
+    await buildSiteWithVite();
+  } else {
+    fs.writeFileSync(path.join(postsDir, `${newSlug}.md`), fileContent);
+    await buildSite();
   }
-  fs.writeFileSync(path.join(postsDir, `${newSlug}.md`), fileContent);
-  await buildSite();
   log.success(`Post updated: "${title}" (${newSlug})`);
   res.json({ slug: newSlug });
 });
@@ -152,7 +155,7 @@ router.delete("/:slug", async (req, res) => {
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath);
   }
-  await buildSite();
+  await buildSiteWithVite();
   log.success(`Post deleted: ${req.params.slug}`);
   res.json({ success: true });
 });

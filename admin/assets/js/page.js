@@ -25,7 +25,8 @@ form.addEventListener("submit", async (e) => {
     return;
   }
   flashAlert("success", "Page updated successfully.");
-  window.location.href = "/admin/pages";
+  //window.location.href = `/admin/pages/${data.slug}`;
+  window.location.href = "/admin/pages/";
 });
 
 document.getElementById("seo-btn").addEventListener("click", () => {

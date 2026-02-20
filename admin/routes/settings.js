@@ -1,7 +1,7 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
-import { buildSite } from "../eleventy.js";
+import { buildSite, buildSiteWithVite } from "../eleventy.js";
 import log from "../logger.js";
 
 const router = express.Router();
@@ -60,19 +60,15 @@ router.put("/", async (req, res) => {
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
   if (themeChanged) {
-    log.warn(
-      `Theme changed from "${oldConfig.theme}" to "${config.theme}". Please restart the server for the new theme to take effect.`,
+    await buildSiteWithVite();
+    log.success(
+      `Theme changed from "${oldConfig.theme}" to "${config.theme}".`,
     );
-    res.json({
-      success: true,
-      restartRequired: true,
-      message: `Theme changed to "${config.theme}". Please restart the server for changes to take effect.`,
-    });
   } else {
     await buildSite();
-    log.success("Settings updated");
-    res.json({ success: true });
   }
+  log.success("Settings updated");
+  res.json({ success: true });
 });
 
 export default router;

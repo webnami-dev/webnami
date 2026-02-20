@@ -2,7 +2,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { buildSite } from "../eleventy.js";
+import { buildSite, buildSiteWithVite } from "../eleventy.js";
 import { SEOAnalyzer } from "../assets/js/seo-analyzer.js";
 import log from "../logger.js";
 
@@ -94,9 +94,12 @@ router.put("/:slug", async (req, res) => {
   if (newSlug !== oldSlug) {
     fs.unlinkSync(path.join(pagesDir, `${oldSlug}.md`));
     log.info(`Page renamed: "${oldSlug}" -> "${newSlug}"`);
+    fs.writeFileSync(path.join(pagesDir, `${newSlug}.md`), fileContent);
+    await buildSiteWithVite();
+  } else {
+    fs.writeFileSync(path.join(pagesDir, `${newSlug}.md`), fileContent);
+    await buildSite();
   }
-  fs.writeFileSync(path.join(pagesDir, `${newSlug}.md`), fileContent);
-  await buildSite();
   log.success(`Page updated: "${title}" (${newSlug})`);
   res.json({ slug: newSlug });
 });
@@ -119,7 +122,7 @@ router.delete("/:slug", async (req, res) => {
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath);
   }
-  await buildSite();
+  await buildSiteWithVite();
   log.success(`Page deleted: ${req.params.slug}`);
   res.json({ success: true });
 });
