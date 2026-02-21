@@ -10,11 +10,11 @@
         <div class="flex items-center">
           {# Desktop nav links #}
           <nav class="hidden md:flex items-center gap-6 mr-4">
-            {% for link in config.navbar.links %}
+            {% for p in collections.pages | headerPages %}
             <a
-              href="{{ link.href }}"
+              href="{{ p.url }}"
               class="text-accent hover:text-content text-sm"
-            >{{ link.name }}</a>
+            >{{ p.data.title }}</a>
             {% endfor %}
           </nav>
 
@@ -38,6 +38,7 @@
             </button>
           </div>
 
+          {% if (collections.pages | headerPages).length %}
           {# Mobile hamburger #}
           <button
             @click="open = !open"
@@ -48,11 +49,13 @@
             <span x-show="!open">{% icon "menu", "w-4 h-4" | safe %}</span>
             <span x-show="open">{% icon "x", "w-4 h-4" | safe %}</span>
           </button>
+          {% endif %}
         </div>
       </div>
     </div>
   </nav>
 
+  {% if (collections.pages | headerPages).length %}
   {# Mobile dropdown #}
   <div
     x-show="open"
@@ -61,13 +64,14 @@
     class="md:hidden bg-background border-b border-accent/8 overflow-hidden"
   >
     <div class="max-w-[42rem] mx-auto px-5 py-3">
-      {% for link in config.navbar.links %}
+      {% for p in collections.pages | headerPages %}
       <a
-        href="{{ link.href }}"
+        href="{{ p.url }}"
         @click="open = false"
         class="block text-accent hover:text-content py-2 text-sm"
-      >{{ link.name }}</a>
+      >{{ p.data.title }}</a>
       {% endfor %}
     </div>
   </div>
+  {% endif %}
 </div>

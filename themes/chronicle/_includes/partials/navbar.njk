@@ -25,13 +25,13 @@
           <!-- Desktop nav links -->
           <nav class="hidden lg:block mr-2">
             <ul class="flex flex-row items-center gap-1 list-none">
-              {% for link in config.navbar.links %}
+              {% for p in collections.pages | headerPages %}
               <li>
                 <a
-                  href="{{ link.href }}"
+                  href="{{ p.url }}"
                   class="text-accent hover:text-content px-4 py-2 text-sm font-medium transition-colors duration-200"
                 >
-                  {{ link.name }}
+                  {{ p.data.title }}
                 </a>
               </li>
               {% endfor %}
@@ -58,6 +58,7 @@
             </button>
           </div>
 
+          {% if (collections.pages | headerPages).length %}
           <!-- Hamburger button (mobile only) -->
           <button
             @click="open = !open"
@@ -68,11 +69,13 @@
             <span x-show="!open">{% icon "menu", "w-5 h-5" | safe %}</span>
             <span x-show="open">{% icon "x", "w-5 h-5" | safe %}</span>
           </button>
+          {% endif %}
         </div>
       </div>
     </div>
   </nav>
 
+  {% if (collections.pages | headerPages).length %}
   <!-- Mobile collapse dropdown -->
   <div
     x-show="open"
@@ -81,17 +84,18 @@
     class="lg:hidden bg-background border-b border-accent/10 overflow-hidden"
   >
     <ul class="flex flex-col px-6 py-4 list-none">
-      {% for link in config.navbar.links %}
+      {% for p in collections.pages | headerPages %}
       <li>
         <a
-          href="{{ link.href }}"
+          href="{{ p.url }}"
           @click="open = false"
           class="block text-accent hover:text-content py-3 text-sm font-medium border-b border-accent/10 last:border-b-0 transition-colors duration-200"
         >
-          {{ link.name }}
+          {{ p.data.title }}
         </a>
       </li>
       {% endfor %}
     </ul>
   </div>
+  {% endif %}
 </div>

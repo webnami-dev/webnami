@@ -4,22 +4,25 @@
     <div class="flex flex-col md:flex-row md:justify-between gap-6 sm:gap-10">
 
       {# Links #}
-      {% if config.footer.links %}
       <div class="flex flex-wrap gap-x-8 gap-y-8 order-first">
-        {% for link in config.footer.links %}
+        <a
+        href="/rss.xml"
+        class="text-sm text-content hover:text-primary-500"
+      >RSS</a>
+        {% for p in collections.pages | footerPages %}
           <a
-          href="{{ link.href }}"
+          href="{{ p.url }}"
           class="text-sm text-content hover:text-primary-500"
-        >{{ link.name }}</a>
+        >{{ p.data.title }}</a>
         {% endfor %}
       </div>
-      {% endif %}
+
 
       {# social #}
-      {% if config.footer.socialLinks %}
       <div class="flex flex-col items-start md:items-end gap-4 md:text-right shrink-0">
         <div class="flex gap-2">
           {% for icon in config.footer.socialLinks %}
+          {% if icon.href %}
           <a
             href="{{ icon.href }}"
             class="p-1.5 rounded-md text-accent hover:text-content hover:bg-surface-secondary"
@@ -29,10 +32,10 @@
           >
             {% icon icon.name, "w-4 h-4" | safe %}
           </a>
+          {% endif %}
           {% endfor %}
         </div>
       </div>
-      {% endif %}
     </div>
   </div>
   {% endif %}

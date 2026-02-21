@@ -24,12 +24,12 @@
         <div class="flex items-center gap-1">
           {# Desktop nav links #}
           <nav class="hidden lg:flex items-center">
-            {% for link in config.navbar.links %}
+            {% for p in collections.pages | headerPages %}
             <a
-              href="{{ link.href }}"
+              href="{{ p.url }}"
               class="text-accent hover:text-content px-3 py-1.5 text-[13px] font-medium rounded-md hover:bg-surface-secondary"
             >
-              {{ link.name }}
+              {{ p.data.title }}
             </a>
             {% endfor %}
           </nav>
@@ -57,6 +57,7 @@
             </button>
           </div>
 
+          {% if (collections.pages | headerPages).length %}
           {# Mobile hamburger #}
           <button
             @click="open = !open"
@@ -67,11 +68,13 @@
             <span x-show="!open">{% icon "menu", "w-4 h-4" | safe %}</span>
             <span x-show="open">{% icon "x", "w-4 h-4" | safe %}</span>
           </button>
+          {% endif %}
         </div>
       </div>
     </div>
   </nav>
 
+  {% if (collections.pages | headerPages).length %}
   {# Mobile dropdown #}
   <div
     x-show="open"
@@ -80,17 +83,18 @@
     class="lg:hidden border-b border-border bg-background overflow-hidden"
   >
     <ul class="flex flex-col px-5 py-3 list-none">
-      {% for link in config.navbar.links %}
+      {% for p in collections.pages | headerPages %}
       <li>
         <a
-          href="{{ link.href }}"
+          href="{{ p.url }}"
           @click="open = false"
           class="block text-accent hover:text-content py-2 text-[13px] font-medium"
         >
-          {{ link.name }}
+          {{ p.data.title }}
         </a>
       </li>
       {% endfor %}
     </ul>
   </div>
+  {% endif %}
 </div>

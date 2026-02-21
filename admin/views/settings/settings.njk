@@ -65,41 +65,6 @@
         </div>
       </section>
 
-      {# ── Navbar ── #}
-      <section class="settings-section">
-        <h2 class="text-[13px] font-semibold mb-5 flex items-center gap-2" style="color: var(--color-content);">
-          <i data-lucide="menu" style="width:14px;height:14px;color:var(--color-accent);"></i>
-          Navbar
-        </h2>
-        <div class="flex flex-col gap-2" id="navbar-links">
-          {% for link in config.navbar.links %}
-            <div class="flex items-center gap-2 navbar-link-row">
-              <input type="text" placeholder="Label" value="{{ link.name }}"
-                class="admin-input navbar-link-name">
-              <input type="text" placeholder="/path" value="{{ link.href }}"
-                class="admin-input navbar-link-href">
-              <button type="button"
-                class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-row"
-                style="color: var(--color-accent); border: 1px solid var(--color-border);"
-                onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
-                onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
-                aria-label="Remove">
-                <i data-lucide="x" style="width:14px;height:14px;"></i>
-              </button>
-            </div>
-          {% endfor %}
-        </div>
-        <button type="button" id="add-navbar-link"
-          class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
-          style="color: var(--color-accent); border: 1px solid var(--color-border);"
-          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
-          onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';"
-          >
-          <i data-lucide="plus" style="width:13px;height:13px;"></i>
-          Add Link
-        </button>
-      </section>
-
       {# ── Footer ── #}
       <section class="settings-section">
         <h2 class="text-[13px] font-semibold mb-5 flex items-center gap-2" style="color: var(--color-content);">
@@ -111,59 +76,12 @@
         <div class="flex flex-col gap-2" id="social-links">
           {% for link in config.footer.socialLinks %}
             <div class="flex items-center gap-2 social-link-row">
-              <input type="text" placeholder="Platform (e.g. facebook)" value="{{ link.name }}"
-                class="admin-input social-link-name">
-              <input type="text" placeholder="URL" value="{{ link.href }}"
+              <span class="w-28 shrink-0 text-[13px] capitalize" style="color: var(--color-content);">{{ link.name }}</span>
+              <input type="text" placeholder="{{ link.placeholder }}" value="{{ link.href }}"
                 class="admin-input social-link-href">
-              <button type="button"
-                class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-row"
-                style="color: var(--color-accent); border: 1px solid var(--color-border);"
-                onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
-                onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
-                aria-label="Remove">
-                <i data-lucide="x" style="width:14px;height:14px;"></i>
-              </button>
             </div>
           {% endfor %}
         </div>
-        <button type="button" id="add-social-link"
-          class="mt-3 mb-7 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
-          style="color: var(--color-accent); border: 1px solid var(--color-border);"
-          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
-          onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';"
-          >
-          <i data-lucide="plus" style="width:13px;height:13px;"></i>
-          Add Social Link
-        </button>
-
-        <p class="text-[11px] font-semibold mb-3" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Footer Links</p>
-        <div class="flex flex-col gap-2" id="footer-links">
-          {% for link in config.footer.links %}
-            <div class="flex items-center gap-2 footer-link-row">
-              <input type="text" placeholder="Label" value="{{ link.name }}"
-                class="admin-input footer-link-name">
-              <input type="text" placeholder="/path" value="{{ link.href }}"
-                class="admin-input footer-link-href">
-              <button type="button"
-                class="shrink-0 p-1.5 rounded transition-colors duration-100 remove-row"
-                style="color: var(--color-accent); border: 1px solid var(--color-border);"
-                onmouseover="this.style.color='#e03131'; this.style.borderColor='color-mix(in srgb, #e03131 35%, transparent)';"
-                onmouseout="this.style.color='var(--color-accent)'; this.style.borderColor='var(--color-border)';"
-                aria-label="Remove">
-                <i data-lucide="x" style="width:14px;height:14px;"></i>
-              </button>
-            </div>
-          {% endfor %}
-        </div>
-        <button type="button" id="add-footer-link"
-          class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
-          style="color: var(--color-accent); border: 1px solid var(--color-border);"
-          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
-          onmouseout="this.style.backgroundColor=''; this.style.color='var(--color-accent)';"
-          >
-          <i data-lucide="plus" style="width:13px;height:13px;"></i>
-          Add Footer Link
-        </button>
       </section>
 
       <!-- Save -->

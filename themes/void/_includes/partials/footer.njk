@@ -4,22 +4,24 @@
     {# Compact terminal-style footer #}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs text-accent">
       {# Left: links #}
-      {% if config.footer.links %}
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
         <span class="text-accent/30">|</span>
-        {% for link in config.footer.links %}
         <a
-          href="{{ link.href }}"
+        href="/rss.xml"
+        class="hover:text-primary-500 transition-colors"
+      >rss</a>
+        {% for p in collections.pages | footerPages %}
+        <a
+          href="{{ p.url }}"
           class="hover:text-primary-500 transition-colors"
-        >{{ link.name | lower }}</a>
+        >{{ p.data.title | lower }}</a>
         {% endfor %}
       </div>
-      {% endif %}
 
       {# Right: social links as text #}
-      {% if config.footer.socialLinks %}
       <div class="flex items-center gap-3">
         {% for icon in config.footer.socialLinks %}
+        {% if icon.href %}
         <a
           href="{{ icon.href }}"
           class="hover:text-primary-500 transition-colors"
@@ -27,9 +29,9 @@
           rel="noopener noreferrer"
           aria-label="{{ icon.name | title }}"
         >{{ icon.name }}</a>
+        {% endif %}
         {% endfor %}
       </div>
-      {% endif %}
     </div>
     {% endif %}
 

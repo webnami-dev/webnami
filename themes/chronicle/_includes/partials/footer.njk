@@ -2,21 +2,23 @@
   {% if config.footer %}
   <div class="max-w-5xl mx-auto px-5 py-10">
       <!-- Links -->
-      {% if config.footer.links %}
       <div class="flex space-x-4 justify-center mb-6">
-        {% for link in config.footer.links %}
         <a
-        href="{{ link.href }}"
+        href="/rss.xml"
         class="text-white/50 hover:text-primary-500 transition-colors duration-200 text-sm"
-      >{{ link.name }}</a>
+      >RSS</a>
+        {% for p in collections.pages | footerPages %}
+        <a
+        href="{{ p.url }}"
+        class="text-white/50 hover:text-primary-500 transition-colors duration-200 text-sm"
+      >{{ p.data.title }}</a>
         {% endfor %}
       </div>
-      {% endif %}
   
       <!-- Social Icons -->
-      {% if config.footer.socialLinks %}
       <div class="flex space-x-4 justify-center">
         {% for icon in config.footer.socialLinks %}
+        {% if icon.href %}
         <a
           href="{{ icon.href }}"
           class="text-white/40 hover:text-primary-500 transition-colors duration-200"
@@ -26,9 +28,9 @@
         >
           {% icon icon.name, "w-5 h-5" | safe %}
         </a>
+        {% endif %}
         {% endfor %}
       </div>
-      {% endif %}
   </div>
   {% endif %}
 

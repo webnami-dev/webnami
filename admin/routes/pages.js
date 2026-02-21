@@ -26,7 +26,7 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  const { title, description, content } = req.body;
+  const { title, description, content, showInHeader } = req.body;
   const slug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -43,7 +43,12 @@ router.post("/new", async (req, res) => {
       .status(400)
       .json({ error: `A page with the slug "${slug}" already exists.` });
   }
-  const frontmatter = { layout: "page", title, description };
+  const frontmatter = {
+    layout: "page",
+    title,
+    description,
+    showInHeader: showInHeader !== false && showInHeader !== "false",
+  };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(path.join(pagesDir, `${slug}.md`), fileContent);
   await buildSite();
@@ -62,6 +67,7 @@ router.get("/:slug", (req, res) => {
     page: {
       title: file.data.title,
       description: file.data.description || "",
+      showInHeader: file.data.showInHeader !== false,
       content: file.content,
       slug: req.params.slug,
     },
@@ -69,7 +75,7 @@ router.get("/:slug", (req, res) => {
 });
 
 router.put("/:slug", async (req, res) => {
-  const { title, description, content } = req.body;
+  const { title, description, content, showInHeader } = req.body;
   const oldSlug = req.params.slug;
   const newSlug = title
     .toLowerCase()
@@ -89,7 +95,12 @@ router.put("/:slug", async (req, res) => {
         .json({ error: `A page with the slug "${newSlug}" already exists.` });
     }
   }
-  const frontmatter = { layout: "page", title, description };
+  const frontmatter = {
+    layout: "page",
+    title,
+    description,
+    showInHeader: showInHeader !== false && showInHeader !== "false",
+  };
   const fileContent = matter.stringify(content || "", frontmatter);
   if (newSlug !== oldSlug) {
     fs.unlinkSync(path.join(pagesDir, `${oldSlug}.md`));

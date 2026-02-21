@@ -1,7 +1,7 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <div x-data="{ panelOpen: false }">
+  <div x-data="{ panelOpen: false, showInHeader: true }">
     <!-- Header -->
     <div class="flex items-center justify-between mb-7">
       <div class="flex items-center gap-3 min-w-0">
@@ -93,6 +93,25 @@
             <textarea id="description" name="description" rows="4"
               class="admin-input resize-none"
               placeholder="Short description of the page"></textarea>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-[11px] font-medium" style="color: var(--color-accent);">Show in Header</label>
+              <button type="button"
+                @click="showInHeader = !showInHeader"
+                role="switch"
+                :aria-checked="showInHeader.toString()"
+                class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full transition-colors duration-200"
+                :style="showInHeader ? 'background-color: var(--color-primary);' : 'background-color: var(--color-border);'"
+                >
+                <span
+                  class="pointer-events-none absolute top-0.5 inline-block h-4 w-4 rounded-full bg-white shadow transition-transform duration-200"
+                  :style="showInHeader ? 'transform: translateX(18px);' : 'transform: translateX(2px);'"
+                ></span>
+              </button>
+            </div>
+            <p class="text-[11px] leading-relaxed" style="color: var(--color-accent);">When enabled, this page appears in the header navigation. When disabled, it appears in the footer.</p>
+            <input type="hidden" id="showInHeader" name="showInHeader" :value="showInHeader">
           </div>
         </div>
       </div>

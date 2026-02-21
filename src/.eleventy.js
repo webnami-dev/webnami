@@ -63,6 +63,14 @@ export default function (eleventyConfig) {
     return array.slice(start, end);
   });
 
+  eleventyConfig.addFilter("headerPages", (pages) => {
+    return (pages || []).filter((p) => p.data.showInHeader !== false);
+  });
+
+  eleventyConfig.addFilter("footerPages", (pages) => {
+    return (pages || []).filter((p) => p.data.showInHeader === false);
+  });
+
   eleventyConfig.addFilter("imagePath", (filename) => {
     return `/images/${filename}`;
   });

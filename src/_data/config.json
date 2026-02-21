@@ -1,5 +1,5 @@
 {
-  "theme": "flow",
+  "theme": "sage",
   "site": {
     "name": "WebNami",
     "url": "http://localhost:3000",
@@ -13,45 +13,37 @@
       "img": "logo.png"
     }
   },
-  "navbar": {
-    "links": [
-      {
-        "name": "About",
-        "href": "/about"
-      },
-      {
-        "name": "Contact",
-        "href": "#"
-      }
-    ]
-  },
   "footer": {
     "socialLinks": [
       {
-        "name": "facebook",
-        "href": "#"
+        "name": "github",
+        "placeholder": "https://github.com/username",
+        "href": ""
       },
       {
         "name": "twitter",
-        "href": "#"
+        "placeholder": "https://x.com/username",
+        "href": ""
+      },
+      {
+        "name": "linkedin",
+        "placeholder": "https://linkedin.com/in/username",
+        "href": ""
+      },
+      {
+        "name": "youtube",
+        "placeholder": "https://youtube.com/@channel",
+        "href": ""
       },
       {
         "name": "instagram",
-        "href": "#"
-      }
-    ],
-    "links": [
-      {
-        "name": "About",
-        "href": "/about"
+        "placeholder": "https://instagram.com/username",
+        "href": ""
       },
       {
-        "name": "RSS",
-        "href": "/rss.xml"
-      },
-      {
-        "name": "Sitemap",
-        "href": "/sitemap.xml"
+        "name": "mail",
+        "placeholder": "mailto:hello@mail.com",
+        "href": ""
       }
     ]
   }

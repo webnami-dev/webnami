@@ -18,12 +18,12 @@
         <div class="flex items-center gap-1">
           {# Desktop nav links separated by slashes #}
           <nav class="hidden md:flex items-center font-mono text-xs">
-            {% for link in config.navbar.links %}
+            {% for p in collections.pages | headerPages %}
             {% if not loop.first %}<span class="text-accent/30 mx-1">/</span>{% endif %}
             <a
-              href="{{ link.href }}"
+              href="{{ p.url }}"
               class="text-accent hover:text-primary-500 px-1 py-1 transition-colors"
-            >{{ link.name | lower }}</a>
+            >{{ p.data.title | lower }}</a>
             {% endfor %}
           </nav>
 
@@ -47,6 +47,7 @@
             </button>
           </div>
 
+          {% if (collections.pages | headerPages).length %}
           {# Mobile hamburger #}
           <button
             @click="open = !open"
@@ -57,11 +58,13 @@
             <span x-show="!open">{% icon "menu", "w-4 h-4" | safe %}</span>
             <span x-show="open">{% icon "x", "w-4 h-4" | safe %}</span>
           </button>
+          {% endif %}
         </div>
       </div>
     </div>
   </nav>
 
+  {% if (collections.pages | headerPages).length %}
   {# Mobile dropdown #}
   <div
     x-show="open"
@@ -70,13 +73,14 @@
     class="md:hidden bg-background border-b border-accent/10 overflow-hidden"
   >
     <div class="max-w-2xl mx-auto px-5 py-3 font-mono text-sm">
-      {% for link in config.navbar.links %}
+      {% for p in collections.pages | headerPages %}
       <a
-        href="{{ link.href }}"
+        href="{{ p.url }}"
         @click="open = false"
         class="block text-accent hover:text-primary-500 py-1.5 transition-colors"
-      >./{{ link.name | lower }}</a>
+      >./{{ p.data.title | lower }}</a>
       {% endfor %}
     </div>
   </div>
+  {% endif %}
 </div>

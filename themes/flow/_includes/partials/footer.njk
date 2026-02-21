@@ -2,20 +2,22 @@
   <div class="max-w-[42rem] mx-auto px-5 py-8">
     {% if config.footer %}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm text-accent">
-      {% if config.footer.links %}
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
-        {% for link in config.footer.links %}
         <a
-          href="{{ link.href }}"
+        href="/rss.xml"
+        class="hover:text-content"
+      >RSS</a>
+        {% for p in collections.pages | footerPages %}
+        <a
+          href="{{ p.url }}"
           class="hover:text-content"
-        >{{ link.name }}</a>
+        >{{ p.data.title }}</a>
         {% endfor %}
       </div>
-      {% endif %}
 
-      {% if config.footer.socialLinks %}
       <div class="flex items-center gap-4">
         {% for icon in config.footer.socialLinks %}
+        {% if icon.href %}
         <a
           href="{{ icon.href }}"
           class="hover:text-content capitalize"
@@ -23,9 +25,9 @@
           rel="noopener noreferrer"
           aria-label="{{ icon.name | title }}"
         >{{ icon.name }}</a>
+        {% endif %}
         {% endfor %}
       </div>
-      {% endif %}
     </div>
     {% endif %}
 

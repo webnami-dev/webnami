@@ -2,6 +2,7 @@
 layout: page
 title: About Us
 description: About Us - Learn More about Webnami
+showInHeader: false
 ---
 
 # About Us
