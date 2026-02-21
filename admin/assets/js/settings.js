@@ -17,22 +17,10 @@ function collectLinks(container, nameClass, hrefClass) {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const navbarLinks = collectLinks(
-    document.getElementById("navbar-links"),
-    "navbar-link-name",
-    "navbar-link-href",
-  );
-
   const socialLinks = collectLinks(
     document.getElementById("social-links"),
     "social-link-name",
     "social-link-href",
-  );
-
-  const footerLinks = collectLinks(
-    document.getElementById("footer-links"),
-    "footer-link-name",
-    "footer-link-href",
   );
 
   const body = {
@@ -44,9 +32,7 @@ form.addEventListener("submit", async (e) => {
     theme: document.getElementById("theme").value,
     homepageHeading: document.getElementById("homepageHeading").value,
     homepageImg: document.getElementById("homepageImg").value,
-    navbarLinks: JSON.stringify(navbarLinks),
     socialLinks: JSON.stringify(socialLinks),
-    footerLinks: JSON.stringify(footerLinks),
   };
 
   const res = await fetch("/admin/settings", {
