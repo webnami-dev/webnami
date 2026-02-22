@@ -26,10 +26,17 @@ const seoCheckNames = [
   "Canonical URL",
 ];
 
+/** Open the Details side panel on post/page new/edit forms */
+async function openDetailsPanel(page) {
+  await page.getByRole("button", { name: "Details" }).click();
+  await page.locator("#description").waitFor({ state: "visible" });
+}
+
 test.describe("SEO Check - Posts", () => {
   test("should create a test post", async ({ page }) => {
     await page.goto("/admin/posts/new");
     await page.locator("#title").fill("SEO Test Post");
+    await openDetailsPanel(page);
     await page.locator("#description").fill("A test post for SEO analysis");
     await page.locator("#tags").fill("seo, test");
     await page.locator("#category").fill("testing");
@@ -171,6 +178,7 @@ test.describe("SEO Check - Pages", () => {
   test("should create a test page", async ({ page }) => {
     await page.goto("/admin/pages/new");
     await page.locator("#title").fill("SEO Test Page");
+    await openDetailsPanel(page);
     await page.locator("#description").fill("A test page for SEO analysis");
     await page.locator('button[type="submit"]').click();
 

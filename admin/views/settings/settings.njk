@@ -1,16 +1,5 @@
 {% extends "base.njk" %}
 
-{% macro imageSelect(id, name, label, currentValue, images) %}
-  <div>
-    <label for="{{ id }}" class="admin-label">{{ label }}</label>
-    <select id="{{ id }}" name="{{ name }}" class="admin-input">
-      {% for img in images %}
-        <option value="{{ img }}" {% if img == currentValue %}selected{% endif %}>{{ img }}</option>
-      {% endfor %}
-    </select>
-  </div>
-{% endmacro %}
-
 {% block content %}
   <div>
     <!-- Header -->
@@ -28,25 +17,13 @@
             <input type="text" id="blogName" name="blogName" value="{{ config.site.name }}" class="admin-input">
           </div>
           <div class="flex items-center gap-2">
-            <span class="w-28 shrink-0 text-[13px]" style="color: var(--color-content);">Posts Per Page</span>
-            <input type="number" id="postsPerPage" name="postsPerPage" value="{{ config.postsPerPage }}" min="1" class="admin-input">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-28 shrink-0 text-[13px]" style="color: var(--color-content);">Theme</span>
-            <select id="theme" name="theme" class="admin-input">
-              {% for t in themes %}
-                <option value="{{ t }}" {% if t == config.theme %}selected{% endif %}>{{ t }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="flex items-center gap-2">
             <span class="w-28 shrink-0 text-[13px]" style="color: var(--color-content);">Homepage Heading</span>
             <input type="text" id="homepageHeading" name="homepageHeading" value="{{ config.homepage.heading }}" class="admin-input">
           </div>
         </div>
       </section>
 
-      {# ── Site Assets (collapsed) ── #}
+      {# ── Site Settings (collapsed) ── #}
       <section class="settings-section">
         <div x-data="{ open: false }">
           <button type="button" @click="open = !open"
@@ -105,7 +82,33 @@
         </div>
       </section>
 
-      {# ── Footer ── #}
+      {# ── Themes (collapsed) ── #}
+      <section class="settings-section">
+        <div x-data="{ open: false }">
+          <button type="button" @click="open = !open"
+            class="flex items-center gap-2 text-[12px] font-medium transition-colors duration-100 cursor-pointer"
+            style="color: var(--color-accent);"
+            onmouseover="this.style.color='var(--color-content)';"
+            onmouseout="this.style.color='var(--color-accent)';"
+            >
+            <i data-lucide="chevron-right" style="width:13px;height:13px;transition:transform 0.15s;" :style="open ? 'transform:rotate(90deg);' : ''"></i>
+            <label class="admin-label cursor-pointer">Themes</label>
+          </button>
+          <div x-show="open" x-collapse class="mt-3">
+            <div class="flex items-center gap-2">
+              <span class="w-28 shrink-0 text-[13px]" style="color: var(--color-content);">Typography</span>
+              <select id="typography" name="typography" class="admin-input">
+                <option value="default" {% if typographyPreset == "default" %}selected{% endif %}>Default — Geist / Inter</option>
+                <option value="editorial" {% if typographyPreset == "editorial" %}selected{% endif %}>Editorial — Lora / Inter</option>
+                <option value="minimal" {% if typographyPreset == "minimal" %}selected{% endif %}>Minimal — Geist / Source Sans 3</option>
+                <option value="developer" {% if typographyPreset == "developer" %}selected{% endif %}>Developer — JetBrains Mono / Inter</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {# ── Social Links (collapsed) ── #}
       <section class="settings-section">
         <div x-data="{ open: false }">
           <button type="button" @click="open = !open"
@@ -121,6 +124,8 @@
             <div class="flex flex-col gap-2" id="social-links">
               {% for link in config.footer.socialLinks %}
                 <div class="flex items-center gap-2 social-link-row">
+                  <input type="hidden" class="social-link-name" value="{{ link.name }}">
+                  <input type="hidden" class="social-link-placeholder" value="{{ link.placeholder }}">
                   <span class="w-28 shrink-0 text-[13px] capitalize" style="color: var(--color-content);">{{ link.name }}</span>
                   <input type="text" placeholder="{{ link.placeholder }}" value="{{ link.href }}"
                     class="admin-input social-link-href">

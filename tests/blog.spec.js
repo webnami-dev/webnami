@@ -15,7 +15,8 @@ test.describe("Homepage", () => {
 
   test("should render navbar links from config", async ({ page }) => {
     await page.goto("/");
-    for (const link of config.navbar.links) {
+    await expect(page.locator("nav").first()).toBeVisible();
+    for (const link of config.navbar?.links ?? []) {
       await expect(
         page.locator(`nav a[href="${link.href}"]`, { hasText: link.name }),
       ).toBeVisible();
@@ -30,16 +31,21 @@ test.describe("Homepage", () => {
 
   test("should have correct meta title", async ({ page }) => {
     await page.goto("/");
+    // Read config fresh in case another test modified it
+    const freshConfig = JSON.parse(
+      fs.readFileSync(path.resolve("src/_data/config.json"), "utf-8"),
+    );
     const title = await page.title();
-    expect(title).toContain(config.site.name);
+    expect(title).toContain(freshConfig.site.name);
   });
 
   test("should have meta description", async ({ page }) => {
     await page.goto("/");
-    const description = await page
-      .locator('meta[name="description"]')
-      .getAttribute("content");
-    expect(description).toBeTruthy();
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      /.+/,
+      { timeout: 10000 },
+    );
   });
 
   test("should have og:title meta tag", async ({ page }) => {

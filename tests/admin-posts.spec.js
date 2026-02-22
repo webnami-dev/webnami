@@ -14,6 +14,12 @@ test.afterAll(() => {
   if (fs.existsSync(renamedFile)) fs.unlinkSync(renamedFile);
 });
 
+/** Open the Details side panel on post new/edit forms */
+async function openDetailsPanel(page) {
+  await page.getByRole("button", { name: "Details" }).click();
+  await page.locator("#description").waitFor({ state: "visible" });
+}
+
 test.describe("Posts CRUD", () => {
   test("should show the posts list page", async ({ page }) => {
     await page.goto("/admin/posts");
@@ -24,6 +30,7 @@ test.describe("Posts CRUD", () => {
     await page.goto("/admin/posts/new");
     await expect(page.locator("h1", { hasText: "New Post" })).toBeVisible();
     await expect(page.locator("#title")).toBeVisible();
+    await openDetailsPanel(page);
     await expect(page.locator("#date")).toBeVisible();
   });
 
@@ -32,6 +39,7 @@ test.describe("Posts CRUD", () => {
   }) => {
     await page.goto("/admin/posts/new");
     await page.locator("#title").fill("Playwright Test Post");
+    await openDetailsPanel(page);
     await page
       .locator("#description")
       .fill("A test post created by Playwright");
@@ -62,6 +70,7 @@ test.describe("Posts CRUD", () => {
   }) => {
     await page.goto("/admin/posts/new");
     await page.locator("#title").fill("Playwright Test Post");
+    await openDetailsPanel(page);
     await page.locator("#description").fill("Duplicate post attempt");
     await page.locator("#tags").fill("test");
     await page.locator("#category").fill("testing");
@@ -78,12 +87,14 @@ test.describe("Posts CRUD", () => {
   test("should show the edit form with post data", async ({ page }) => {
     await page.goto(`/admin/posts/${testSlug}`);
     await expect(page.locator("#title")).toHaveValue("Playwright Test Post");
+    await openDetailsPanel(page);
     await expect(page.locator("#category")).toHaveValue("testing");
   });
 
   test("should rename file when title is updated", async ({ page }) => {
     await page.goto(`/admin/posts/${testSlug}`);
     await page.locator("#title").fill("Updated Test Post");
+    await openDetailsPanel(page);
     await page.locator("#description").fill("Updated description");
     await page.locator('button[type="submit"]').click();
 

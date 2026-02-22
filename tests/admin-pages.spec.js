@@ -14,6 +14,12 @@ test.afterAll(() => {
   if (fs.existsSync(renamedFile)) fs.unlinkSync(renamedFile);
 });
 
+/** Open the Details side panel on page new/edit forms */
+async function openDetailsPanel(page) {
+  await page.getByRole("button", { name: "Details" }).click();
+  await page.locator("#description").waitFor({ state: "visible" });
+}
+
 test.describe("Pages CRUD", () => {
   test("should show the pages list page", async ({ page }) => {
     await page.goto("/admin/pages");
@@ -31,6 +37,7 @@ test.describe("Pages CRUD", () => {
   }) => {
     await page.goto("/admin/pages/new");
     await page.locator("#title").fill("Playwright Test Page");
+    await openDetailsPanel(page);
     await page
       .locator("#description")
       .fill("A test page created by Playwright");
@@ -55,6 +62,7 @@ test.describe("Pages CRUD", () => {
   }) => {
     await page.goto("/admin/pages/new");
     await page.locator("#title").fill("Playwright Test Page");
+    await openDetailsPanel(page);
     await page.locator("#description").fill("Duplicate page attempt");
     await page.locator('button[type="submit"]').click();
 
@@ -65,6 +73,7 @@ test.describe("Pages CRUD", () => {
   test("should show the edit form with page data", async ({ page }) => {
     await page.goto(`/admin/pages/${testSlug}`);
     await expect(page.locator("#title")).toHaveValue("Playwright Test Page");
+    await openDetailsPanel(page);
     await expect(page.locator("#description")).toHaveValue(
       "A test page created by Playwright",
     );
@@ -73,6 +82,7 @@ test.describe("Pages CRUD", () => {
   test("should rename file when title is updated", async ({ page }) => {
     await page.goto(`/admin/pages/${testSlug}`);
     await page.locator("#title").fill("Updated Test Page");
+    await openDetailsPanel(page);
     await page.locator("#description").fill("Updated description");
     await page.locator('button[type="submit"]').click();
 

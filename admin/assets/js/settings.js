@@ -1,12 +1,21 @@
 const form = document.getElementById("settings-form");
 
-// ── Collect rows into array of {name, href} ──
+const typographyPresets = {
+  default: { headerFont: "Geist", bodyFont: "Inter" },
+  editorial: { headerFont: "Lora", bodyFont: "Inter" },
+  minimal: { headerFont: "Geist", bodyFont: "Source Sans 3" },
+  developer: { headerFont: "JetBrains Mono", bodyFont: "Inter" },
+};
+
+// ── Collect rows into array of {name, placeholder, href} ──
 function collectLinks(container, nameClass, hrefClass) {
   return [...container.querySelectorAll(`.${nameClass}`)]
     .map((nameInput) => {
       const row = nameInput.closest("div");
+      const placeholderInput = row.querySelector(".social-link-placeholder");
       return {
         name: nameInput.value.trim(),
+        placeholder: placeholderInput ? placeholderInput.value.trim() : "",
         href: row.querySelector(`.${hrefClass}`).value.trim(),
       };
     })
@@ -23,15 +32,20 @@ form.addEventListener("submit", async (e) => {
     "social-link-href",
   );
 
+  const typographyValue = document.getElementById("typography").value;
+  const { headerFont, bodyFont } =
+    typographyPresets[typographyValue] || typographyPresets.default;
+
   const body = {
     blogName: document.getElementById("blogName").value,
     blogUrl: document.getElementById("blogUrl").value,
     siteLogo: document.getElementById("siteLogo").value,
     siteFavicon: document.getElementById("siteFavicon").value,
-    postsPerPage: document.getElementById("postsPerPage").value,
-    theme: document.getElementById("theme").value,
     homepageHeading: document.getElementById("homepageHeading").value,
     homepageImg: document.getElementById("homepageImg").value,
+    typography: typographyValue,
+    headerFont,
+    bodyFont,
     socialLinks: JSON.stringify(socialLinks),
   };
 

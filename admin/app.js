@@ -43,12 +43,7 @@ app.use("/admin", express.static(path.join(__dirname, "dist")));
 log.info("Static file middleware mounted");
 
 app.get("/admin", (req, res) => {
-  const greetings = ["Hello", "Howdy", "Hey there", "Welcome back", "Hi there"];
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-  res.render("index.njk", {
-    title: "WebNami Dashboard",
-    greeting,
-  });
+  res.redirect("/admin/posts");
 });
 
 app.use("/admin/pages", pagesRouter);

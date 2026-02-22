@@ -1,13 +1,28 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
-import { buildSite, buildSiteWithVite } from "../eleventy.js";
+import { buildSite } from "../eleventy.js";
 import log from "../logger.js";
 
 const router = express.Router();
 const configPath = path.resolve("src/_data/config.json");
 const imagesDir = path.resolve("images");
 const themesDir = path.resolve("themes");
+
+const typographyPresets = {
+  default: { headerFont: "Geist", bodyFont: "Inter" },
+  editorial: { headerFont: "Lora", bodyFont: "Inter" },
+  minimal: { headerFont: "Geist", bodyFont: "Source Sans 3" },
+  developer: { headerFont: "JetBrains Mono", bodyFont: "Inter" },
+};
+
+function getTypographyPreset(themeSettings = {}) {
+  const { headerFont, bodyFont } = themeSettings;
+  const match = Object.entries(typographyPresets).find(
+    ([, v]) => v.headerFont === headerFont && v.bodyFont === bodyFont,
+  );
+  return match ? match[0] : "default";
+}
 
 router.get("/", (req, res) => {
   const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
@@ -20,53 +35,47 @@ router.get("/", (req, res) => {
     .filter((d) => d.isDirectory())
     .map((d) => d.name);
 
+  const typographyPreset = getTypographyPreset(config.themeSettings);
+
   res.render("settings/settings.njk", {
     title: "Settings",
     config,
     images,
     themes,
+    typographyPreset,
   });
 });
 
 router.put("/", async (req, res) => {
   const data = req.body;
   const oldConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
-  const themeChanged = oldConfig.theme !== (data.theme || "default");
+
+  const themeSettings =
+    typographyPresets[data.typography] || typographyPresets.default;
 
   const config = {
-    theme: data.theme || "default",
+    theme: oldConfig.theme,
+    themeSettings,
+    postsPerPage: oldConfig.postsPerPage,
     site: {
       name: data.blogName,
       url: data.blogUrl,
       logo: data.siteLogo,
       favicon: data.siteFavicon,
     },
-    postsPerPage: parseInt(data.postsPerPage, 10) || 20,
     homepage: {
       heading: data.homepageHeading,
       metadata: {
         img: data.homepageImg,
       },
     },
-    navbar: {
-      links: JSON.parse(data.navbarLinks || "[]"),
-    },
     footer: {
       socialLinks: JSON.parse(data.socialLinks || "[]"),
-      links: JSON.parse(data.footerLinks || "[]"),
     },
   };
 
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-
-  if (themeChanged) {
-    await buildSiteWithVite();
-    log.success(
-      `Theme changed from "${oldConfig.theme}" to "${config.theme}".`,
-    );
-  } else {
-    await buildSite();
-  }
+  await buildSite();
   log.success("Settings updated");
   res.json({ success: true });
 });
