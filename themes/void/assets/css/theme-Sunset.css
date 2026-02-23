@@ -1,0 +1,16 @@
+/* Sunset theme - warm oranges and pinks, golden hour feel */
+:root[data-theme="light"] {
+  --color-primary: #c2410c;
+  --color-background: #fffbf5;
+  --color-content: #1c1008;
+  --color-accent: #a8784a;
+  --color-footer: #fdf5ea;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #fb923c;
+  --color-background: #150f08;
+  --color-content: #f5e8d8;
+  --color-accent: #a07850;
+  --color-footer: #1c1208;
+}

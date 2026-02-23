@@ -1,9 +1,10 @@
 {
-  "theme": "flow",
+  "theme": "void",
   "themeSettings": {
     "headerFont": "Geist",
     "bodyFont": "Inter"
   },
+  "showImages": true,
   "postsPerPage": 20,
   "site": {
     "name": "WebNami",

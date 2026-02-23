@@ -1,0 +1,43 @@
+<footer class="bg-footer border-t border-accent/10">
+  <div class="max-w-2xl mx-auto px-5 py-6">
+    {% if config.footer %}
+    {# Compact terminal-style footer #}
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs text-accent">
+      {# Left: links #}
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="text-accent/30">|</span>
+        <a
+        href="/rss.xml"
+        class="hover:text-primary-500 transition-colors"
+      >RSS</a>
+        {% for p in collections.pages | footerPages %}
+        <a
+          href="{{ p.url }}"
+          class="hover:text-primary-500 transition-colors"
+        >{{ p.data.title }}</a>
+        {% endfor %}
+      </div>
+
+      {# Right: social links as text #}
+      <div class="flex items-center gap-3">
+        {% for icon in config.footer.socialLinks %}
+        {% if icon.href %}
+        <a
+          href="{{ icon.href }}"
+          class="hover:text-primary-500 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ icon.name | title }}"
+        >{{ icon.name }}</a>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {# Built with line #}
+    <div class="mt-3 font-mono text-xs text-accent/40">
+      <span class="text-primary-500/40"></span> Built with <a class="hover:text-primary-500 transition-colors text-accent/60" href="https://webnami.in" target="_blank" rel="noopener">webnami</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,16 @@
+/* Plum theme - rich purples and dusty mauves, sophisticated and moody */
+:root[data-theme="light"] {
+  --color-primary: #7e22ce;
+  --color-background: #faf8fd;
+  --color-content: #150d1e;
+  --color-accent: #9070a8;
+  --color-footer: #f3eef9;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #c084fc;
+  --color-background: #100c18;
+  --color-content: #ede0f8;
+  --color-accent: #8060a0;
+  --color-footer: #160f20;
+}

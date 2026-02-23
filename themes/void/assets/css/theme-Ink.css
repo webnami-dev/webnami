@@ -1,0 +1,16 @@
+/* Ink theme - high-contrast editorial */
+:root[data-theme="light"] {
+  --color-primary: #0a0a0a;
+  --color-background: #ffffff;
+  --color-content: #111111;
+  --color-accent: #666666;
+  --color-footer: #f5f5f5;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #f0f0f0;
+  --color-background: #0d0d0d;
+  --color-content: #e8e8e8;
+  --color-accent: #888888;
+  --color-footer: #0a0a0a;
+}

@@ -1,0 +1,56 @@
+{# Terminal-style post entry - single line item #}
+{% macro postCard(post, extraClass) %}
+{% set meta = post | postMeta %}
+<div class="post-entry group {{ extraClass }}">
+  <a
+    href="{{ post.url }}"
+    class="block py-3 border-b border-accent/10 hover:border-primary-500/30 transition-colors"
+  >
+    <div class="flex gap-3 items-center">
+      <div class="min-w-0 flex-grow">
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <time
+            datetime="{{ post.data.date | date('YYYY-MM-DD') }}"
+            class="font-mono text-sm text-accent shrink-0 tabular-nums"
+          >{{ post.data.date | date('YYYY-MM-DD') }}</time>
+          <div class="min-w-0 flex-grow">
+            <div class="flex items-baseline gap-2 min-w-0">
+              <h2 class="font-mono text-md font-medium text-content group-hover:text-primary-500 transition-colors">{{ post.data.title }}</h2>
+            </div>
+            <p class="text-sm text-accent mt-1 line-clamp-2">{{ meta.excerpt }}</p>
+            {% if post.data.category %}
+            <span class="font-mono text-sm text-primary-500 shrink-0">{{ post.data.category }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% if config.showImages %}
+      <div class="w-24 h-24 md:w-32 md:h-32 shrink-0">
+        {% if meta.image %}
+        <img
+          src="{{ meta.image }}"
+          alt="{{ post.data.title }}"
+          class="w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-opacity"
+          loading="lazy"
+        />
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </a>
+</div>
+{% endmacro %}
+
+{# Post byline #}
+{% macro postByline(post) %}
+<span class="font-mono text-xs text-accent">
+  {{ post.data.date | postDate }}
+</span>
+{% endmacro %}
+
+{# Category badge - terminal style #}
+{% macro categoryBadge(post) %}
+{% if post.data.category %}
+<span class="font-mono text-xs text-primary-500">/{{ post.data.category | lower }}</span>
+{% endif %}
+{% endmacro %}

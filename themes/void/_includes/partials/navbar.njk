@@ -1,28 +1,37 @@
 
 <div x-data="{ open: false }">
-  <nav class="border-b border-accent/8">
-    <div class="max-w-[42rem] mx-auto px-5">
-      <div class="flex justify-between items-center h-14">
-        <a href="/" class="text-content hover:text-accent text-sm font-heading font-semibold">
+  <nav class="border-b border-accent/10">
+    <div class="max-w-2xl mx-auto px-5">
+      <div class="flex justify-between items-center h-12">
+        {# Blog name - styled as terminal path #}
+        <a href="/" class="font-mono text-sm font-bold text-content hover:text-primary-500 transition-colors">
+          {% if config.site.logo %}
+          <img
+            class="h-5 w-auto inline-block mr-2 -mt-0.5"
+            src="{{ config.site.logo | imagePath }}"
+            alt="{{ config.site.name }}"
+          />
+          {% endif %}
           {{ config.site.name }}
         </a>
 
-        <div class="flex items-center">
-          {# Desktop nav links #}
-          <nav class="hidden md:flex items-center gap-6 mr-4">
+        <div class="flex items-center gap-1">
+          {# Desktop nav links separated by slashes #}
+          <nav class="hidden md:flex items-center font-mono text-xs">
             {% for p in collections.pages | headerPages %}
+            {% if not loop.first %}<span class="text-accent/30 mx-1">/</span>{% endif %}
             <a
               href="{{ p.url }}"
-              class="text-accent hover:text-content text-sm"
-            >{{ p.data.title }}</a>
+              class="text-accent hover:text-primary-500 px-1 py-1 transition-colors"
+            >{{ p.data.title | lower }}</a>
             {% endfor %}
           </nav>
 
           {# Theme toggle #}
-          <div x-data>
+          <div x-data class="ml-2">
             <button
               @click="$store.theme.lightTheme()"
-              class="p-1.5 text-accent hover:text-content"
+              class="p-1.5 text-accent hover:text-primary-500 transition-colors font-mono text-xs"
               aria-label="Switch to light mode"
               x-show="$store.theme.dark"
             >
@@ -30,7 +39,7 @@
             </button>
             <button
               @click="$store.theme.darkTheme()"
-              class="p-1.5 text-accent hover:text-content"
+              class="p-1.5 text-accent hover:text-primary-500 transition-colors font-mono text-xs"
               aria-label="Switch to dark mode"
               x-show="!$store.theme.dark"
             >
@@ -42,7 +51,7 @@
           {# Mobile hamburger #}
           <button
             @click="open = !open"
-            class="md:hidden p-1.5 text-accent hover:text-content ml-1"
+            class="md:hidden p-1.5 text-accent hover:text-primary-500 transition-colors"
             aria-label="Toggle menu"
             :aria-expanded="open"
           >
@@ -61,15 +70,15 @@
     x-show="open"
     x-collapse
     @keydown.escape.window="open = false"
-    class="md:hidden bg-background border-b border-accent/8 overflow-hidden"
+    class="md:hidden bg-background border-b border-accent/10 overflow-hidden"
   >
-    <div class="max-w-[42rem] mx-auto px-5 py-3">
+    <div class="max-w-2xl mx-auto px-5 py-3 font-mono text-sm">
       {% for p in collections.pages | headerPages %}
       <a
         href="{{ p.url }}"
         @click="open = false"
-        class="block text-accent hover:text-content py-2 text-sm"
-      >{{ p.data.title }}</a>
+        class="block text-accent hover:text-primary-500 py-1.5 transition-colors"
+      >./{{ p.data.title | lower }}</a>
       {% endfor %}
     </div>
   </div>

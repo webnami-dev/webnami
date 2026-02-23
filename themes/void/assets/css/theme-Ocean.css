@@ -1,0 +1,16 @@
+/* Ocean theme - cool blue-teal focused */
+:root[data-theme="light"] {
+  --color-primary: #0e7490;
+  --color-background: #f0f9fc;
+  --color-content: #0c2a35;
+  --color-accent: #5f9aaa;
+  --color-footer: #e4f4f8;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #22d3ee;
+  --color-background: #071820;
+  --color-content: #cce9f0;
+  --color-accent: #4a8a9a;
+  --color-footer: #04111a;
+}

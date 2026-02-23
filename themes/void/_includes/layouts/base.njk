@@ -60,6 +60,9 @@
     <meta property="og:type" content="website" />
     <link rel="canonical" href="{{ config.site.url }}{{ page.url }}" />
     <link rel="icon" href="{{ config.site.favicon | imagePath }}" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
     {%- if layout == 'post' -%}
     <script type="application/ld+json">
