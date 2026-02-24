@@ -2,7 +2,7 @@
 permalink: /api/posts.json
 ---
 [
-{%- for post in collections.meta.paginatedPosts %}
+{%- for post in collections.meta.posts %}
   {
     "title": {{ post.data.title | dump | safe }},    
     "slug": "{{ post.fileSlug }}",

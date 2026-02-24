@@ -2,7 +2,34 @@ const editor = new EasyMDE({
   element: document.getElementById("content"),
   spellChecker: false,
   status: false,
-  insertTexts: { image: ["![](", "/images/)"] },
+  toolbar: [
+    "bold",
+    "italic",
+    "heading",
+    "|",
+    "quote",
+    "unordered-list",
+    "ordered-list",
+    "|",
+    "link",
+    "upload-image",
+    "|",
+    "preview",
+    "side-by-side",
+    "fullscreen",
+    "|",
+    "guide",
+  ],
+  imageUploadFunction(file, onSuccess, onError) {
+    const body = new FormData();
+    body.append("image", file);
+    fetch("/admin/upload", { method: "POST", body })
+      .then((r) => r.json())
+      .then((d) =>
+        d.url ? onSuccess(d.url) : onError(d.error ?? "Upload failed."),
+      )
+      .catch(() => onError("Upload failed."));
+  },
 });
 
 document.getElementById("page-form").addEventListener("submit", async (e) => {

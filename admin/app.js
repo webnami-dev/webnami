@@ -7,6 +7,7 @@ import { build as viteBuild } from "vite";
 import pagesRouter from "./routes/pages.js";
 import postsRouter from "./routes/posts.js";
 import settingsRouter from "./routes/settings.js";
+import uploadRouter from "./routes/upload.js";
 import { buildSite } from "./eleventy.js";
 import log from "./logger.js";
 
@@ -49,6 +50,7 @@ app.get("/admin", (req, res) => {
 app.use("/admin/pages", pagesRouter);
 app.use("/admin/posts", postsRouter);
 app.use("/admin/settings", settingsRouter);
+app.use("/admin/upload", uploadRouter);
 
 app.listen(3000, () => {
   log.server("✅ Admin dashboard running on http://localhost:3000/admin");
