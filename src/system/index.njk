@@ -1,7 +1,7 @@
 ---
 layout: "base.njk"
 pagination:
-  data: collections.paginatedPosts
+  data: collections.meta.paginatedPosts
   size: 1
   alias: postsPage
 permalink: "{% if postsPage.page == 1 %}/{% else %}/posts/{{ postsPage.page }}/{% endif %}"

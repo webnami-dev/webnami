@@ -18,7 +18,7 @@
         <div class="flex items-center gap-1">
           {# Desktop nav links separated by slashes #}
           <nav class="hidden md:flex items-center font-mono text-xs">
-            {% for p in collections.pages | headerPages %}
+            {% for p in collections.meta.pages | headerPages %}
             {% if not loop.first %}<span class="text-accent/30 mx-1">/</span>{% endif %}
             <a
               href="{{ p.url }}"
@@ -47,7 +47,7 @@
             </button>
           </div>
 
-          {% if (collections.pages | headerPages).length %}
+          {% if (collections.meta.pages | headerPages).length %}
           {# Mobile hamburger #}
           <button
             @click="open = !open"
@@ -64,7 +64,7 @@
     </div>
   </nav>
 
-  {% if (collections.pages | headerPages).length %}
+  {% if (collections.meta.pages | headerPages).length %}
   {# Mobile dropdown #}
   <div
     x-show="open"
@@ -73,7 +73,7 @@
     class="md:hidden bg-background border-b border-accent/10 overflow-hidden"
   >
     <div class="max-w-2xl mx-auto px-5 py-3 font-mono text-sm">
-      {% for p in collections.pages | headerPages %}
+      {% for p in collections.meta.pages | headerPages %}
       <a
         href="{{ p.url }}"
         @click="open = false"

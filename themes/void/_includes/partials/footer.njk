@@ -10,7 +10,7 @@
         href="/rss.xml"
         class="hover:text-primary-500 transition-colors"
       >RSS</a>
-        {% for p in collections.pages | footerPages %}
+        {% for p in collections.meta.pages | footerPages %}
         <a
           href="{{ p.url }}"
           class="hover:text-primary-500 transition-colors"

@@ -197,12 +197,7 @@ export default function (eleventyConfig) {
     return `<svg class="${className}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${svgElements}</svg>`;
   });
 
-  // Build all collections in a single pass over collectionsApi.getAll()
-  let collectionsCache = null;
-
-  function buildCollections(collectionsApi) {
-    //if (collectionsCache) return collectionsCache;
-
+  eleventyConfig.addCollection("meta", (collectionsApi) => {
     const allItems = collectionsApi.getAllSorted().reverse();
     const { postsPerPage } = config;
 
@@ -227,7 +222,6 @@ export default function (eleventyConfig) {
         let itemTags = item.data.tags;
         if (typeof itemTags === "string") itemTags = [itemTags];
         for (const tag of itemTags) {
-          if (tag === "all" || tag === "nav" || tag === "post") continue;
           if (!tagPosts.has(tag)) tagPosts.set(tag, []);
           tagPosts.get(tag).push(item);
         }
@@ -236,25 +230,6 @@ export default function (eleventyConfig) {
       // Collect and validate categories
       if ("category" in item.data && item.data.category) {
         const { category } = item.data;
-
-        if (typeof category !== "string") {
-          throw new Error(
-            `Invalid category format in "${item.inputPath}": category must be a string. Found: ${typeof category}. Expected format: category: "CategoryName"`,
-          );
-        }
-
-        if (category.trim() === "") {
-          throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be empty. Expected format: category: "CategoryName"`,
-          );
-        }
-
-        if (Array.isArray(category)) {
-          throw new Error(
-            `Invalid category format in "${item.inputPath}": category cannot be an array. Use tags for multiple values. Expected format: category: "CategoryName"`,
-          );
-        }
-
         categorySet.add(category);
         if (!categoryPosts.has(category)) categoryPosts.set(category, []);
         categoryPosts.get(category).push(item);
@@ -302,7 +277,7 @@ export default function (eleventyConfig) {
       categoryPages.push(...paginate(items, categoryName));
     }
 
-    collectionsCache = {
+    const collectionsCache = {
       posts,
       pages,
       paginatedPosts,
@@ -312,26 +287,7 @@ export default function (eleventyConfig) {
     };
 
     return collectionsCache;
-  }
-
-  eleventyConfig.addCollection(
-    "tagPages",
-    (api) => buildCollections(api).tagPages,
-  );
-  eleventyConfig.addCollection(
-    "categoryList",
-    (api) => buildCollections(api).categoryList,
-  );
-  eleventyConfig.addCollection(
-    "categoryPages",
-    (api) => buildCollections(api).categoryPages,
-  );
-  eleventyConfig.addCollection("posts", (api) => buildCollections(api).posts);
-  eleventyConfig.addCollection("pages", (api) => buildCollections(api).pages);
-  eleventyConfig.addCollection(
-    "paginatedPosts",
-    (api) => buildCollections(api).paginatedPosts,
-  );
+  });
 
   return {
     templateFormats: ["md", "njk"],

@@ -58,9 +58,9 @@ layout: "base.njk"
     {% endif %}
 
     {# Previous / Next navigation #}
-    {%- if collections.posts %}
-    {%- set previousPost = collections.posts | getPreviousCollectionItem %}
-    {%- set nextPost = collections.posts | getNextCollectionItem %}
+    {%- if collections.meta.paginatedPosts %}
+    {%- set previousPost = collections.meta.paginatedPosts | getPreviousCollectionItem %}
+    {%- set nextPost = collections.meta.paginatedPosts | getNextCollectionItem %}
     {%- if nextPost or previousPost %}
     <nav class="not-prose mt-8 pt-6 border-t border-dashed border-accent/20">
       <div class="flex justify-between items-start gap-6 font-mono text-sm">

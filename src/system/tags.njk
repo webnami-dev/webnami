@@ -1,7 +1,7 @@
 ---
 layout: "base.njk"
 pagination:
-  data: collections.tagPages
+  data: collections.meta.tagPages
   size: 1
   alias: tagPage
 permalink: "/tags/{{ tagPage.name | slugify }}/{% if tagPage.page > 1 %}{{ tagPage.page }}/{% endif %}"

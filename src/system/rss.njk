@@ -15,7 +15,7 @@ eleventyExcludeFromCollections: true
         <url>{{ config.site.url }}{{ config.homepage.metadata.img }}</url>
         <link>{{ config.site.url | addPathPrefixToFullUrl }}</link>
     </image>
-    {%- set posts = collections.posts | slice(0, 10) -%}
+    {%- set posts = collections.meta.posts | slice(0, 10) -%}
     {%- for post in posts %}
     {%- set absolutePostUrl = post.url | htmlBaseUrl(config.site.url) %}
     <item>

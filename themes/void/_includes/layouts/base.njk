@@ -2,9 +2,9 @@
 <html lang="en">
   {% set contentMeta = content | postMeta %}
   {% if layout == "post" %}
-    {% set resolvedDescription = description or contentMeta.excerpt %}
+    {% set resolvedDescription = contentMeta.excerpt %}
   {% elif layout == "page" %}
-    {% set resolvedDescription = description or ("Thoughts, notes, and writing from " + config.site.name) %}
+    {% set resolvedDescription = title + " - " + config.site.name %}
   {% else %}
     {% set resolvedDescription = description %}
   {% endif %}

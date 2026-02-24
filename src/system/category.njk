@@ -1,7 +1,7 @@
 ---
 layout: "base.njk"
 pagination:
-  data: collections.categoryPages
+  data: collections.meta.categoryPages
   size: 1
   alias: categoryPage
 permalink: "/category/{{ categoryPage.name | slugify }}/{% if categoryPage.page > 1 %}{{ categoryPage.page }}/{% endif %}"
