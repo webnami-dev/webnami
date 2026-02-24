@@ -8,7 +8,6 @@ permalink: "{% if postsPage.page == 1 %}/{% else %}/posts/{{ postsPage.page }}/{
 eleventyComputed:
   title: "{% if postsPage.page == 1 %}{{ config.site.name }}{% else %}{{ config.site.name }} - Page {{ postsPage.page }}{% endif %}"
   description: "{{ (config.homepage.heading or ('Thoughts, notes, and writing from ' + config.site.name)) | singleLine }}"
-  img: "{{ config.homepage.metadata.img | imagePath }}"
 ---
 
 {% import "macros/pages.njk" as page with context %}

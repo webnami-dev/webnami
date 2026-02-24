@@ -5,13 +5,6 @@
       <div class="flex justify-between items-center h-12">
         {# Blog name - styled as terminal path #}
         <a href="/" class="font-mono text-sm font-bold text-content hover:text-primary-500 transition-colors">
-          {% if config.site.logo %}
-          <img
-            class="h-5 w-auto inline-block mr-2 -mt-0.5"
-            src="{{ config.site.logo | imagePath }}"
-            alt="{{ config.site.name }}"
-          />
-          {% endif %}
           {{ config.site.name }}
         </a>
 

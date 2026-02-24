@@ -24,18 +24,6 @@
           </div>
         </div>
       </div>
-      {% if config.showImages %}
-      <div class="w-24 h-24 md:w-32 md:h-32 shrink-0">
-        {% if meta.image %}
-        <img
-          src="{{ meta.image }}"
-          alt="{{ post.data.title }}"
-          class="w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-opacity"
-          loading="lazy"
-        />
-        {% endif %}
-      </div>
-      {% endif %}
     </div>
   </a>
 </div>

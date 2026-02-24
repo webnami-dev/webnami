@@ -12,7 +12,7 @@ eleventyExcludeFromCollections: true
     <language>en</language>
     <image>
         <title>{{ config.site.name }}</title>
-        <url>{{ config.site.url }}{{ config.homepage.metadata.img }}</url>
+        <url>{{ config.site.url }}/images/og-image.png</url>
         <link>{{ config.site.url | addPathPrefixToFullUrl }}</link>
     </image>
     {%- set posts = collections.meta.posts | slice(0, 10) -%}

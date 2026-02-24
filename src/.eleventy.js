@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync, existsSync, writeFileSync } from "fs";
 import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
@@ -26,6 +26,31 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addPlugin(postManagement);
   eleventyConfig.addPlugin(contentFilters);
+
+  eleventyConfig.on("eleventy.before", async () => {
+    const { default: sharp } = await import("sharp");
+    const siteName = config.site.name;
+    const bgColor = config.ogImage?.bgColor ?? "#0f0f0f";
+    const textColor = config.ogImage?.textColor ?? "#ffffff";
+
+    if (!existsSync("images/og-image.png")) {
+      const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="${bgColor}" />
+  <text x="600" y="315" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="80" font-weight="bold" fill="${textColor}">${siteName}</text>
+</svg>`;
+      await sharp(Buffer.from(svg)).png().toFile("images/og-image.png");
+    }
+
+    if (!existsSync("images/favicon.svg")) {
+      const initials = siteName.slice(0, 2).toUpperCase();
+      const svg = `<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" fill="${bgColor}" rx="4" />
+  <text x="16" y="16" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="${textColor}">${initials}</text>
+</svg>`;
+      writeFileSync("images/favicon.svg", svg);
+    }
+  });
+
   eleventyConfig.addGlobalData("config", config);
   eleventyConfig.addPassthroughCopy({ "./images": "images" });
   eleventyConfig.addPassthroughCopy({
@@ -69,10 +94,6 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter("footerPages", (pages) => {
     return (pages || []).filter((p) => p.data.showInHeader === false);
-  });
-
-  eleventyConfig.addFilter("imagePath", (filename) => {
-    return `/images/${filename}`;
   });
 
   eleventyConfig.addFilter("singleLine", (str, maxLength = 160) => {

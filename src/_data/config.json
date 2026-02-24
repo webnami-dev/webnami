@@ -8,15 +8,10 @@
   "postsPerPage": 20,
   "site": {
     "name": "WebNami",
-    "url": "http://localhost:3000",
-    "logo": "logo.png",
-    "favicon": "favicon.ico"
+    "url": "http://localhost:3000"
   },
   "homepage": {
-    "heading": "WebNami - a simple and lightweight blogging tool",
-    "metadata": {
-      "img": "logo.png"
-    }
+    "heading": "WebNami - a simple and lightweight blogging tool"
   },
   "footer": {
     "socialLinks": [
