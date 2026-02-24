@@ -1,8 +1,5 @@
 import * as cheerio from "cheerio";
 import slugify from "slugify";
-import { readFileSync } from "fs";
-
-const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
 
 export default function (eleventyConfig) {
   // Single filter that parses content once and returns both excerpt and preview image.
@@ -11,14 +8,13 @@ export default function (eleventyConfig) {
   //   {{ meta.excerpt }}
   //   {{ meta.image }}
   eleventyConfig.addFilter("postMeta", (content) => {
-    const logo = config.site?.logo || "";
     const htmlContent = content?.templateContent || content || "";
-    if (!htmlContent) return { excerpt: "", image: `/images/${logo}` };
+    if (!htmlContent) return { excerpt: "", image: "" };
 
     const $ = cheerio.load(htmlContent);
 
     // Extract preview image
-    const image = $("img").first().attr("src") || `/images/${logo}`;
+    const image = $("img").first().attr("src") || "/images/og-image.png";
 
     // Extract excerpt
     const maxLength = 150;
