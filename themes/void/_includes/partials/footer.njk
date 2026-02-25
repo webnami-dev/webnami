@@ -28,7 +28,7 @@
           target="_blank"
           rel="noopener noreferrer"
           aria-label="{{ icon.name | title }}"
-        >{{ icon.name }}</a>
+        >{% icon icon.name, "w-5 h-5" | safe %}</a>
         {% endif %}
         {% endfor %}
       </div>

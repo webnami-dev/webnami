@@ -1,7 +1,6 @@
 ---
 layout: post
 title: This is the latest post
-description: latest blog description
 tags:
   - Latest
   - Tech

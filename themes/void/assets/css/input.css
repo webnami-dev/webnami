@@ -3,33 +3,6 @@
 @import "../../../../node_modules/prismjs/themes/prism-tomorrow.min.css";
 @plugin "@tailwindcss/typography";
 
-@theme {
-  --font-mono: "Inter", system-ui, -apple-system, sans-serif;
-  --font-sans:
-    ui-sans-serif, -apple-system, BlinkMacSystemFont,
-    "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji",
-    "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  --color-primary: var(--color-primary);
-  --color-background: var(--color-background);
-  --color-content: var(--color-content);
-  --color-accent: var(--color-accent);
-  --color-footer: var(--color-footer);
-
-  /* primary color variables */
-  --color-primary-50: color-mix(in srgb, var(--color-primary) 5%, white);
-  --color-primary-100: color-mix(in srgb, var(--color-primary) 10%, white);
-  --color-primary-200: color-mix(in srgb, var(--color-primary) 20%, white);
-  --color-primary-300: color-mix(in srgb, var(--color-primary) 30%, white);
-  --color-primary-400: color-mix(in srgb, var(--color-primary) 40%, white);
-  --color-primary-500: var(--color-primary);
-  --color-primary-600: color-mix(in srgb, var(--color-primary) 80%, black);
-  --color-primary-700: color-mix(in srgb, var(--color-primary) 70%, black);
-  --color-primary-800: color-mix(in srgb, var(--color-primary) 60%, black);
-  --color-primary-900: color-mix(in srgb, var(--color-primary) 40%, black);
-  --color-primary-950: color-mix(in srgb, var(--color-primary) 20%, black);
-}
-
 html {
   font-family: var(--font-sans);
 }

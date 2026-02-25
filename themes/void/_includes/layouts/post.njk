@@ -22,19 +22,19 @@ layout: "base.njk"
           class="hover:text-primary-500 transition-colors"
           target="_blank"
           rel="noopener noreferrer"
-        >share:twitter</a>
+        >{% icon "twitter", "w-4 h-4" | safe %}</a>
         <a
           href="https://www.linkedin.com/shareArticle?mini=true&url={{ config.site.url }}{{ page.url }}"
           class="hover:text-primary-500 transition-colors"
           target="_blank"
           rel="noopener noreferrer"
-        >share:linkedin</a>
+        >{% icon "linkedin", "w-4 h-4" | safe %}</a>
         <a
           href="https://www.facebook.com/sharer/sharer.php?u={{ config.site.url }}{{ page.url }}"
           class="hover:text-primary-500 transition-colors"
           target="_blank"
           rel="noopener noreferrer"
-        >share:facebook</a>
+        >{% icon "facebook", "w-4 h-4" | safe %}</a>
       </div>
     </header>
 

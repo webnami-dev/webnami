@@ -1,7 +1,6 @@
 ---
 layout: post
 title: My first blog with a long title
-description: first blog description
 tags:
   - First
   - News
