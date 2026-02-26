@@ -21,7 +21,7 @@
   <div class="flex min-h-screen">
 
     <!-- Sidebar -->
-    <aside class="fixed top-0 left-0 h-screen w-[220px] flex flex-col z-40" style="background-color: var(--color-sidebar); border-right: 1px solid var(--color-border-subtle);">
+    <aside class="fixed top-0 left-0 h-screen w-36 flex flex-col z-40" style="background-color: var(--color-sidebar); border-right: 1px solid var(--color-border-subtle);">
 
       <!-- Logo / Brand -->
       <div class="flex items-center gap-2.5 px-4 h-[52px] shrink-0" style="border-bottom: 1px solid var(--color-border-subtle);">
@@ -109,12 +109,12 @@
     </aside>
 
     <!-- Main content -->
-    <div class="flex-1 ml-[220px] flex flex-col min-h-screen">
+    <div class="flex-1 ml-36 flex flex-col min-h-screen">
 
       {% include "components/alerts.njk" %}
       {% include "components/seo-modal.njk" %}
 
-      <main class="flex-1 px-10 py-8 max-w-9/10">
+      <main class="flex-1 px-10 py-8 w-9/10 m-auto">
         {% block content %}{% endblock %}
       </main>
 

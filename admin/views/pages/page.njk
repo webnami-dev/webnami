@@ -1,7 +1,7 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  <div x-data="{ panelOpen: false, showInHeader: {{ 'true' if page.showInHeader else 'false' }} }">
+  <div>
     <!-- Header -->
     <div class="flex items-center justify-between mb-7">
       <div class="flex items-center gap-3 min-w-0">
@@ -17,27 +17,6 @@
         <div>
           <p class="text-[11px] font-medium" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Edit Page</p>
         </div>
-      </div>
-      <div class="flex items-center gap-2 shrink-0">
-        <button type="button" id="seo-btn"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
-          style="color: var(--color-accent); border: 1px solid var(--color-border); background-color: var(--color-surface);"
-          onmouseover="this.style.backgroundColor='var(--color-hover)'; this.style.color='var(--color-content)';"
-          onmouseout="this.style.backgroundColor='var(--color-surface)'; this.style.color='var(--color-accent)';"
-          >
-          <i data-lucide="search" style="width:13px;height:13px;"></i>
-          SEO Check
-        </button>
-        <button type="button"
-          @click="panelOpen = !panelOpen"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
-          :style="panelOpen
-            ? 'color: var(--color-content); border: 1px solid var(--color-border); background-color: var(--color-hover);'
-            : 'color: var(--color-accent); border: 1px solid var(--color-border); background-color: var(--color-surface);'"
-          >
-          <i data-lucide="sliders-horizontal" style="width:13px;height:13px;"></i>
-          Details
-        </button>
       </div>
     </div>
 
@@ -76,62 +55,6 @@
           <i data-lucide="trash-2" style="width:13px;height:13px;"></i>
           Delete
         </button>
-      </div>
-
-      <!-- Details panel -->
-      <div
-        x-show="panelOpen"
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 translate-x-4"
-        x-transition:enter-end="opacity-100 translate-x-0"
-        x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100 translate-x-0"
-        x-transition:leave-end="opacity-0 translate-x-4"
-        class="fixed top-0 right-0 h-full z-40 flex flex-col"
-        style="width: 30%; background-color: var(--color-surface); border-left: 1px solid var(--color-border); box-shadow: -6px 0 20px rgba(0,0,0,0.07);"
-      >
-        <!-- Panel header -->
-        <div class="flex items-center justify-between px-5 py-4" style="border-bottom: 1px solid var(--color-border);">
-          <span class="text-[11px] font-semibold" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Page Details</span>
-          <button type="button" @click="panelOpen = false"
-            class="p-1 rounded transition-colors duration-100"
-            style="color: var(--color-accent);"
-            onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
-            onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
-            aria-label="Close"
-            >
-            <i data-lucide="x" style="width:14px;height:14px;"></i>
-          </button>
-        </div>
-
-        <!-- Panel fields -->
-        <div class="flex flex-col gap-5 p-5 overflow-y-auto flex-1">
-          <div>
-            <label class="block text-[11px] font-medium mb-1.5" style="color: var(--color-accent);">Description</label>
-            <textarea id="description" name="description" rows="4"
-              class="admin-input resize-none"
-              placeholder="Short description of the page">{{ page.description }}</textarea>
-          </div>
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <label class="text-[11px] font-medium" style="color: var(--color-accent);">Show in Header</label>
-              <button type="button"
-                @click="showInHeader = !showInHeader"
-                role="switch"
-                :aria-checked="showInHeader.toString()"
-                class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full transition-colors duration-200"
-                :style="showInHeader ? 'background-color: var(--color-primary);' : 'background-color: var(--color-border);'"
-                >
-                <span
-                  class="pointer-events-none absolute top-0.5 inline-block h-4 w-4 rounded-full bg-white shadow transition-transform duration-200"
-                  :style="showInHeader ? 'transform: translateX(18px);' : 'transform: translateX(2px);'"
-                ></span>
-              </button>
-            </div>
-            <p class="text-[11px] leading-relaxed" style="color: var(--color-accent);">When enabled, this page appears in the header navigation. When disabled, it appears in the footer.</p>
-            <input type="hidden" id="showInHeader" name="showInHeader" :value="showInHeader">
-          </div>
-        </div>
       </div>
 
     </form>

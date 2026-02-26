@@ -4,8 +4,7 @@
     "headerFont": "Geist",
     "bodyFont": "Inter"
   },
-  "showImages": true,
-  "postsPerPage": 20,
+  "postsPerPage": 30,
   "site": {
     "name": "WebNami",
     "url": "http://localhost:3000"

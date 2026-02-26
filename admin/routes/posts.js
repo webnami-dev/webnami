@@ -34,7 +34,7 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  const { title, description, tags, category, date, content } = req.body;
+  const { title, tags, category, content } = req.body;
   const slug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -54,13 +54,12 @@ router.post("/new", async (req, res) => {
   const frontmatter = {
     layout: "post",
     title,
-    description,
     tags: tags
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean),
     category,
-    date: new Date(date),
+    date: new Date(),
   };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(path.join(postsDir, `${slug}.md`), fileContent);
@@ -79,12 +78,8 @@ router.get("/:slug", (req, res) => {
     title: `${file.data.title}`,
     post: {
       title: file.data.title,
-      description: file.data.description || "",
       tags: (file.data.tags || []).join(", "),
       category: file.data.category || "",
-      date: file.data.date
-        ? new Date(file.data.date).toISOString().split("T")[0]
-        : "",
       content: file.content,
       slug: req.params.slug,
     },
@@ -92,7 +87,7 @@ router.get("/:slug", (req, res) => {
 });
 
 router.put("/:slug", async (req, res) => {
-  const { title, description, tags, category, date, content } = req.body;
+  const { title, tags, category, content } = req.body;
   const oldSlug = req.params.slug;
   const newSlug = title
     .toLowerCase()
@@ -112,16 +107,18 @@ router.put("/:slug", async (req, res) => {
         .json({ error: `A post with the slug "${newSlug}" already exists.` });
     }
   }
+  const existingFile = matter(
+    fs.readFileSync(path.join(postsDir, `${oldSlug}.md`), "utf-8"),
+  );
   const frontmatter = {
     layout: "post",
     title,
-    description,
     tags: tags
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean),
     category,
-    date: new Date(date),
+    date: existingFile.data.date || new Date(),
   };
   const fileContent = matter.stringify(content || "", frontmatter);
   if (newSlug !== oldSlug) {

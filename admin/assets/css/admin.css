@@ -192,28 +192,102 @@ html {
 /* ── EasyMDE overrides (both themes) ── */
 .EasyMDEContainer .CodeMirror {
   font-family: var(--font-inter);
-  font-size: 14px;
-  line-height: 1.65;
-  border-radius: 0 0 4px 4px;
+  font-size: 16px;
+  line-height: 1.85;
+  letter-spacing: -0.011em;
+  border-radius: 6px;
+  border: none;
+  min-height: 480px;
+  padding: 0px;
 }
 
 .EasyMDEContainer .editor-toolbar {
-  border-radius: 4px 4px 0 0;
+  border-radius: 6px 6px 0 0;
   border-bottom: none;
   opacity: 1;
+  padding: 4px 14px;
 }
 
 .EasyMDEContainer .editor-toolbar button {
+  border-radius: 4px;
+  width: 30px;
+  height: 28px;
   transition:
-    background-color 100ms ease,
-    color 100ms ease;
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.EasyMDEContainer .editor-statusbar {
+  padding: 4px 16px 6px;
+  font-family: var(--font-inter);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.EasyMDEContainer .editor-preview,
+.EasyMDEContainer .editor-preview-side {
+  font-family: var(--font-inter);
+  font-size: 16px;
+  line-height: 1.85;
+  padding: 28px 48px;
+}
+
+.EasyMDEContainer .editor-preview h1,
+.EasyMDEContainer .editor-preview-side h1 {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.75em;
+}
+
+.EasyMDEContainer .editor-preview h2,
+.EasyMDEContainer .editor-preview-side h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 1.5em 0 0.5em;
+}
+
+.EasyMDEContainer .editor-preview h3,
+.EasyMDEContainer .editor-preview-side h3 {
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 1.25em 0 0.4em;
+}
+
+.EasyMDEContainer .editor-preview p,
+.EasyMDEContainer .editor-preview-side p {
+  margin-bottom: 1.25em;
+}
+
+.EasyMDEContainer .editor-preview a,
+.EasyMDEContainer .editor-preview-side a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.EasyMDEContainer .editor-preview blockquote,
+.EasyMDEContainer .editor-preview-side blockquote {
+  border-left: 2px solid var(--color-border);
+  padding-left: 20px;
+  margin-left: 0;
+  font-style: italic;
+}
+
+.EasyMDEContainer .editor-preview code,
+.EasyMDEContainer .editor-preview-side code {
+  font-size: 0.875em;
+  border-radius: 3px;
+  padding: 2px 6px;
 }
 
 /* Light mode EasyMDE */
 :root[admin-data-theme="light"] .EasyMDEContainer .CodeMirror {
   background-color: #ffffff;
   color: var(--color-content);
-  border-color: var(--color-border);
 }
 
 :root[admin-data-theme="light"] .EasyMDEContainer .editor-toolbar {
@@ -235,11 +309,25 @@ html {
   color: var(--color-content);
 }
 
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-statusbar {
+  color: var(--color-accent);
+}
+
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-preview,
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-preview-side {
+  background-color: #ffffff;
+  color: var(--color-content);
+}
+
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-preview code,
+:root[admin-data-theme="light"] .EasyMDEContainer .editor-preview-side code {
+  background-color: var(--color-surface);
+}
+
 /* Dark mode EasyMDE */
 :root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror {
   background-color: var(--color-surface);
   color: var(--color-content);
-  border-color: var(--color-border);
 }
 
 :root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror-cursor {
@@ -271,13 +359,20 @@ html {
   color: var(--color-accent);
 }
 
-:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview {
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview,
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview-side {
   background-color: var(--color-surface);
   color: var(--color-content);
 }
 
-:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview pre {
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview pre,
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview-side pre {
   background-color: var(--color-background);
+}
+
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview code,
+:root[admin-data-theme="dark"] .EasyMDEContainer .editor-preview-side code {
+  background-color: var(--color-surface-raised);
 }
 
 :root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror-selected {
@@ -329,12 +424,9 @@ html {
 /* ── Input base style ── */
 .admin-input {
   width: 100%;
-  padding: 7px 12px;
+  padding: 7px 0px;
   background-color: var(--color-surface-raised);
-  border: 1px solid var(--color-border);
-  border-radius: 5px;
   color: var(--color-content);
-  font-size: 13.5px;
   font-family: var(--font-inter);
   transition:
     border-color 100ms ease,
@@ -370,7 +462,6 @@ select.admin-input {
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--color-accent);
-  margin-bottom: 5px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -407,4 +498,70 @@ select.admin-input {
   border: 1px solid var(--color-border);
   border-radius: 5px;
   padding: 16px;
+}
+
+/* ── Slash command menu ── */
+.slash-menu {
+  position: fixed;
+  z-index: 9999;
+  min-width: 230px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-raised);
+  padding: 4px;
+  font-family: var(--font-inter);
+}
+
+:root[admin-data-theme="light"] .slash-menu {
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+:root[admin-data-theme="dark"] .slash-menu {
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.slash-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 80ms ease;
+}
+
+.slash-menu-item.selected,
+.slash-menu-item:hover {
+  background-color: var(--color-hover);
+}
+
+.slash-menu-item-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-content);
+}
+
+.slash-menu-item-label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-content);
+}
+
+.slash-menu-item-hint {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--color-accent);
 }

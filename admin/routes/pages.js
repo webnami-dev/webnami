@@ -3,7 +3,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { buildSite, buildSiteWithVite } from "../eleventy.js";
-import { SEOAnalyzer } from "../assets/js/seo-analyzer.js";
 import log from "../logger.js";
 
 const router = express.Router();
@@ -26,7 +25,7 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  const { title, description, content, showInHeader } = req.body;
+  const { title, content } = req.body;
   const slug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -46,8 +45,6 @@ router.post("/new", async (req, res) => {
   const frontmatter = {
     layout: "page",
     title,
-    description,
-    showInHeader: showInHeader !== false && showInHeader !== "false",
   };
   const fileContent = matter.stringify(content || "", frontmatter);
   fs.writeFileSync(path.join(pagesDir, `${slug}.md`), fileContent);
@@ -66,8 +63,6 @@ router.get("/:slug", (req, res) => {
     title: `${file.data.title}`,
     page: {
       title: file.data.title,
-      description: file.data.description || "",
-      showInHeader: file.data.showInHeader !== false,
       content: file.content,
       slug: req.params.slug,
     },
@@ -75,7 +70,7 @@ router.get("/:slug", (req, res) => {
 });
 
 router.put("/:slug", async (req, res) => {
-  const { title, description, content, showInHeader } = req.body;
+  const { title, content } = req.body;
   const oldSlug = req.params.slug;
   const newSlug = title
     .toLowerCase()
@@ -98,8 +93,6 @@ router.put("/:slug", async (req, res) => {
   const frontmatter = {
     layout: "page",
     title,
-    description,
-    showInHeader: showInHeader !== false && showInHeader !== "false",
   };
   const fileContent = matter.stringify(content || "", frontmatter);
   if (newSlug !== oldSlug) {
@@ -113,19 +106,6 @@ router.put("/:slug", async (req, res) => {
   }
   log.success(`Page updated: "${title}" (${newSlug})`);
   res.json({ slug: newSlug });
-});
-
-router.get("/:slug/seo", (req, res) => {
-  const htmlPath = path.resolve("_site", req.params.slug, "index.html");
-  if (!fs.existsSync(htmlPath)) {
-    return res
-      .status(404)
-      .json({ error: "Built page not found. Save the page first." });
-  }
-  const analyzer = new SEOAnalyzer();
-  const result = analyzer.analyzeFile(htmlPath);
-  log.info(`SEO analysis run for page: ${req.params.slug}`);
-  res.json(result);
 });
 
 router.delete("/:slug", async (req, res) => {
