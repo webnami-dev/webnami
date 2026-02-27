@@ -6,6 +6,13 @@ const COMMANDS = [
     keywords: ["image", "img", "photo", "picture", "upload"],
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`,
   },
+  {
+    id: "insert-link",
+    label: "Link",
+    hint: "Insert a hyperlink",
+    keywords: ["link", "url", "href", "anchor"],
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+  },
 ];
 
 export function initSlashCommands(editor) {
@@ -109,6 +116,7 @@ export function initSlashCommands(editor) {
     const pos = slashPos; // capture before hideMenu nulls it
     hideMenu();
     if (cmd.id === "upload-image") uploadImage(editor, pos);
+    if (cmd.id === "insert-link") insertLink(editor, pos);
   }
 
   // ── CodeMirror listeners ───────────────────────────────────────
@@ -149,6 +157,85 @@ export function initSlashCommands(editor) {
     passive: true,
   });
   window.addEventListener("resize", hideMenu, { passive: true });
+}
+
+// ── Link dialog ────────────────────────────────────────────────
+function showLinkDialog() {
+  return new Promise((resolve) => {
+    const overlay = document.createElement("div");
+    overlay.className = "link-dialog-overlay";
+
+    const dialog = document.createElement("div");
+    dialog.className = "link-dialog";
+    dialog.innerHTML = `
+      <div class="link-dialog-title">Insert Link</div>
+      <div class="link-dialog-body">
+        <div class="link-dialog-field">
+          <label class="admin-label" for="link-dialog-url">URL</label>
+          <input class="link-dialog-input" id="link-dialog-url" type="url" placeholder="https://" autocomplete="off" />
+        </div>
+        <div class="link-dialog-field">
+          <label class="admin-label" for="link-dialog-text">Link text</label>
+          <input class="link-dialog-input" id="link-dialog-text" type="text" placeholder="Optional — defaults to URL" autocomplete="off" />
+        </div>
+      </div>
+      <div class="link-dialog-footer">
+        <button class="link-dialog-btn link-dialog-btn-cancel">Cancel</button>
+        <button class="link-dialog-btn link-dialog-btn-insert">Insert</button>
+      </div>
+    `;
+
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+
+    const urlInput = dialog.querySelector("#link-dialog-url");
+    const textInput = dialog.querySelector("#link-dialog-text");
+    const cancelBtn = dialog.querySelector(".link-dialog-btn-cancel");
+    const insertBtn = dialog.querySelector(".link-dialog-btn-insert");
+
+    function close(result) {
+      overlay.remove();
+      resolve(result);
+    }
+
+    cancelBtn.addEventListener("click", () => close(null));
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close(null);
+    });
+
+    insertBtn.addEventListener("click", () => {
+      const url = urlInput.value.trim();
+      if (!url) {
+        urlInput.focus();
+        return;
+      }
+      close({ url, text: textInput.value.trim() || url });
+    });
+
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") insertBtn.click();
+      if (e.key === "Escape") close(null);
+    });
+
+    setTimeout(() => urlInput.focus(), 0);
+  });
+}
+
+// ── Link insert ────────────────────────────────────────────────
+async function insertLink(editor, slashPos) {
+  const cm = editor.codemirror;
+
+  const cur = cm.getCursor();
+  cm.replaceRange("", slashPos, cur);
+  const insertPos = { line: slashPos.line, ch: slashPos.ch };
+
+  const result = await showLinkDialog();
+  if (!result) {
+    cm.focus();
+    return;
+  }
+  cm.replaceRange(`[${result.text}](${result.url})`, insertPos);
+  cm.focus();
 }
 
 // ── Image upload ───────────────────────────────────────────────
