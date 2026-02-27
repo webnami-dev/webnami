@@ -3,23 +3,15 @@
     {% if config.footer %}
     {# Compact terminal-style footer #}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-sm text-accent">
-      {# Left: links #}
-      <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <span class="text-accent/30">|</span>
+      {# Right: social links as text #}
+      <div class="flex items-center gap-3">
         <a
         href="/rss.xml"
         class="hover:text-primary-500 transition-colors"
-      >RSS</a>
-        {% for p in collections.meta.pages | footerPages %}
-        <a
-          href="{{ p.url }}"
-          class="hover:text-primary-500 transition-colors"
-        >{{ p.data.title }}</a>
-        {% endfor %}
-      </div>
-
-      {# Right: social links as text #}
-      <div class="flex items-center gap-3">
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="RSS"
+      >{% icon "rss", "w-5 h-5" | safe %}</a>
         {% for icon in config.footer.socialLinks %}
         {% if icon.href %}
         <a

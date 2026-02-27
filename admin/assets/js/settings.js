@@ -37,7 +37,7 @@ form.addEventListener("submit", async (e) => {
     typographyPresets[typographyValue] || typographyPresets.default;
 
   const colorThemeInput = document.querySelector(
-    'input[name="colorTheme"]:checked',
+    'input[name="colorPalette"]:checked',
   );
 
   const body = {
@@ -50,7 +50,7 @@ form.addEventListener("submit", async (e) => {
     typography: typographyValue,
     headerFont,
     bodyFont,
-    colorTheme: colorThemeInput ? colorThemeInput.value : "Default",
+    colorPalette: colorThemeInput ? colorThemeInput.value : "Default",
     socialLinks: JSON.stringify(socialLinks),
   };
 

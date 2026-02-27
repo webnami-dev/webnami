@@ -23,6 +23,48 @@
         </div>
       </section>
 
+      {# ── Themes (collapsed) ── #}
+      <section class="settings-section">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-start gap-2" x-data="{ selected: '{{ colorPalette }}' }">
+            <span class="w-28 shrink-0 text-sm pt-1" style="color: var(--color-accent);">Palette</span>
+            <div class="flex flex-wrap gap-2">
+              {% for palette in colorPalettes %}
+                <label class="cursor-pointer" @click="selected = '{{ palette.name }}'">
+                  <input type="radio" name="colorPalette" value="{{ palette.name }}"
+                    {% if palette.name == colorPalette %}checked{% endif %}
+                    class="sr-only">
+                  <div class="flex flex-col items-center gap-1 px-2 py-1.5 rounded border transition-all duration-100"
+                    :style="selected === '{{ palette.name }}' ? 'border-color: var(--color-content);' : 'border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);'">
+                    <div class="flex gap-0.5">
+                      <div class="w-3 h-3 rounded-full border border-black/10" style="background: {{ palette.bg }};"></div>
+                      <div class="w-3 h-3 rounded-full" style="background: {{ palette.primary }};"></div>
+                      <div class="w-3 h-3 rounded-full" style="background: {{ palette.accent }};"></div>
+                    </div>
+                    <span class="text-[10px] leading-none" style="color: var(--color-accent);">{{ palette.name }}</span>
+                  </div>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {# ── Social Links (collapsed) ── #}
+      <section class="settings-section">
+        <div class="flex flex-col gap-2" id="social-links">
+          {% for link in config.footer.socialLinks %}
+            <div class="flex items-center gap-2 social-link-row">
+              <input type="hidden" class="social-link-name" value="{{ link.name }}">
+              <input type="hidden" class="social-link-placeholder" value="{{ link.placeholder }}">
+              <span class="w-28 shrink-0 text-sm capitalize" style="color: var(--color-accent);">{{ link.name }}</span>
+              <input type="text" placeholder="{{ link.placeholder }}" value="{{ link.href }}"
+                class="admin-input social-link-href text-sm">
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
       {# ── Site Settings (collapsed) ── #}
       <section class="settings-section">
         <div x-data="{ open: false }">
@@ -33,7 +75,7 @@
             onmouseout="this.style.color='var(--color-accent)';"
             >
             <i data-lucide="chevron-right" style="width:13px;height:13px;transition:transform 0.15s;" :style="open ? 'transform:rotate(90deg);' : ''"></i>
-            <label class="admin-label cursor-pointer">Site Settings</label>
+            <label class="admin-label cursor-pointer">Advanced Settings</label>
           </button>
           <div x-show="open" x-collapse class="mt-3">
             <div class="flex flex-col gap-3">
@@ -44,74 +86,6 @@
                   <p class="text-[11px] mt-1" style="color: var(--color-accent);">Public URL of your site. Used for SEO metadata and RSS feed links.</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {# ── Themes (collapsed) ── #}
-      <section class="settings-section">
-        <div x-data="{ open: false }">
-          <button type="button" @click="open = !open"
-            class="flex items-center gap-2 text-[12px] font-medium transition-colors duration-100 cursor-pointer"
-            style="color: var(--color-accent);"
-            onmouseover="this.style.color='var(--color-content)';"
-            onmouseout="this.style.color='var(--color-accent)';"
-            >
-            <i data-lucide="chevron-right" style="width:13px;height:13px;transition:transform 0.15s;" :style="open ? 'transform:rotate(90deg);' : ''"></i>
-            <label class="admin-label cursor-pointer">Themes</label>
-          </button>
-          <div x-show="open" x-collapse class="mt-3">
-            <div class="flex flex-col gap-4">
-              <div class="flex items-start gap-2" x-data="{ selected: '{{ colorTheme }}' }">
-                <span class="w-28 shrink-0 text-sm pt-1" style="color: var(--color-accent);">Color</span>
-                <div class="flex flex-wrap gap-2">
-                  {% for palette in colorPalettes %}
-                    <label class="cursor-pointer" @click="selected = '{{ palette.name }}'">
-                      <input type="radio" name="colorTheme" value="{{ palette.name }}"
-                        {% if palette.name == colorTheme %}checked{% endif %}
-                        class="sr-only">
-                      <div class="flex flex-col items-center gap-1 px-2 py-1.5 rounded border transition-all duration-100"
-                        :style="selected === '{{ palette.name }}' ? 'border-color: var(--color-content);' : 'border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);'">
-                        <div class="flex gap-0.5">
-                          <div class="w-3 h-3 rounded-full border border-black/10" style="background: {{ palette.bg }};"></div>
-                          <div class="w-3 h-3 rounded-full" style="background: {{ palette.primary }};"></div>
-                          <div class="w-3 h-3 rounded-full" style="background: {{ palette.accent }};"></div>
-                        </div>
-                        <span class="text-[10px] leading-none" style="color: var(--color-accent);">{{ palette.name }}</span>
-                      </div>
-                    </label>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {# ── Social Links (collapsed) ── #}
-      <section class="settings-section">
-        <div x-data="{ open: false }">
-          <button type="button" @click="open = !open"
-            class="flex items-center gap-2 text-[12px] font-medium transition-colors duration-100 cursor-pointer"
-            style="color: var(--color-accent);"
-            onmouseover="this.style.color='var(--color-content)';"
-            onmouseout="this.style.color='var(--color-accent)';"
-            >
-            <i data-lucide="chevron-right" style="width:13px;height:13px;transition:transform 0.15s;" :style="open ? 'transform:rotate(90deg);' : ''"></i>
-            <label class="admin-label cursor-pointer">Social Links</label>
-          </button>
-          <div x-show="open" x-collapse class="mt-3">
-            <div class="flex flex-col gap-2" id="social-links">
-              {% for link in config.footer.socialLinks %}
-                <div class="flex items-center gap-2 social-link-row">
-                  <input type="hidden" class="social-link-name" value="{{ link.name }}">
-                  <input type="hidden" class="social-link-placeholder" value="{{ link.placeholder }}">
-                  <span class="w-28 shrink-0 text-sm capitalize" style="color: var(--color-accent);">{{ link.name }}</span>
-                  <input type="text" placeholder="{{ link.placeholder }}" value="{{ link.href }}"
-                    class="admin-input social-link-href text-sm">
-                </div>
-              {% endfor %}
             </div>
           </div>
         </div>
