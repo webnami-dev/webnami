@@ -3,7 +3,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { buildSite, buildSiteWithVite } from "../eleventy.js";
-import { SEOAnalyzer } from "../assets/js/seo-analyzer.js";
 import log from "../logger.js";
 
 const router = express.Router();
@@ -132,19 +131,6 @@ router.put("/:slug", async (req, res) => {
   }
   log.success(`Post updated: "${title}" (${newSlug})`);
   res.json({ slug: newSlug });
-});
-
-router.get("/:slug/seo", (req, res) => {
-  const htmlPath = path.resolve("_site", req.params.slug, "index.html");
-  if (!fs.existsSync(htmlPath)) {
-    return res
-      .status(404)
-      .json({ error: "Built page not found. Save the post first." });
-  }
-  const analyzer = new SEOAnalyzer();
-  const result = analyzer.analyzeFile(htmlPath);
-  log.info(`SEO analysis run for post: ${req.params.slug}`);
-  res.json(result);
 });
 
 router.delete("/:slug", async (req, res) => {

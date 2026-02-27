@@ -201,6 +201,31 @@ html {
   padding: 0px;
 }
 
+.EasyMDEContainer .CodeMirror .cm-header-1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+.EasyMDEContainer .CodeMirror .cm-header-2 {
+  font-size: 26px;
+  font-weight: 600;
+}
+.EasyMDEContainer .CodeMirror .cm-header-3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.EasyMDEContainer .CodeMirror .cm-header-4 {
+  font-size: 22px;
+  font-weight: 600;
+}
+.EasyMDEContainer .CodeMirror .cm-header-5 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.EasyMDEContainer .CodeMirror .cm-header-6 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .EasyMDEContainer .editor-toolbar {
   border-radius: 6px 6px 0 0;
   border-bottom: none;
@@ -326,7 +351,7 @@ html {
 
 /* Dark mode EasyMDE */
 :root[admin-data-theme="dark"] .EasyMDEContainer .CodeMirror {
-  background-color: var(--color-surface);
+  background-color: var(--color-background);
   color: var(--color-content);
 }
 
@@ -335,7 +360,6 @@ html {
 }
 
 :root[admin-data-theme="dark"] .EasyMDEContainer .editor-toolbar {
-  background-color: var(--color-surface-raised);
   border-color: var(--color-border);
 }
 
@@ -425,7 +449,6 @@ html {
 .admin-input {
   width: 100%;
   padding: 7px 0px;
-  background-color: var(--color-surface-raised);
   color: var(--color-content);
   font-family: var(--font-inter);
   transition:

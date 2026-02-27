@@ -9,12 +9,12 @@
         <h1 class="text-[22px] font-semibold tracking-tight" style="color: var(--color-content); line-height: 1.2;">Posts</h1>
       </div>
       <a href="/admin/posts/new"
-        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+        class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium text-white transition-opacity duration-100"
         style="background-color: var(--color-primary);"
         onmouseover="this.style.opacity='0.88';"
         onmouseout="this.style.opacity='1';"
         >
-        <i data-lucide="plus" style="width:14px;height:14px;"></i>
+        <i data-lucide="plus" style="width:12px;height:12px;"></i>
         New Post
       </a>
     </div>
@@ -27,10 +27,9 @@
         <div class="flex items-center gap-3 flex-wrap">
           {% if allCategories | length > 0 %}
             <div class="flex items-center gap-2">
-              <label class="text-[11px] font-medium shrink-0" style="color: var(--color-accent); letter-spacing: 0.05em; text-transform: uppercase;">Category</label>
               <select
                 x-model="activeCategory"
-                class="admin-input text-[12px] py-1.5 pr-7 pl-2.5 rounded"
+                class="text-[12px] p-1 rounded border border-border-subtle text-accent"
                 style="min-width: 140px; cursor: pointer;"
                 >
                 <option value="">All categories</option>
@@ -43,10 +42,9 @@
 
           {% if allTags | length > 0 %}
             <div class="flex items-center gap-2">
-              <label class="text-[11px] font-medium shrink-0" style="color: var(--color-accent); letter-spacing: 0.05em; text-transform: uppercase;">Tag</label>
               <select
                 x-model="activeTag"
-                class="admin-input text-[12.5px] py-1.5 pr-7 pl-2.5 rounded"
+                class="text-[12px] p-1 rounded border border-border-subtle text-accent"
                 style="min-width: 140px; cursor: pointer;"
                 >
                 <option value="">All tags</option>

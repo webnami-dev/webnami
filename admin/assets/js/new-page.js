@@ -12,14 +12,12 @@ initSlashCommands(editor);
 document.getElementById("page-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
-  const showInHeader = document.getElementById("showInHeader").value;
   const content = editor.value();
 
   const resp = await fetch("/admin/pages/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, description, showInHeader, content }),
+    body: JSON.stringify({ title, content }),
   });
   const data = await resp.json();
   if (!resp.ok) {

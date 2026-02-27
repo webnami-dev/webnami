@@ -13,12 +13,12 @@
       <section class="settings-section">
         <div class="flex flex-col gap-2">
           <div class="flex items-center gap-2">
-            <span class="w-28 shrink-0 text-[13px]" style="color: var(--color-content);">Blog Name</span>
-            <input type="text" id="blogName" name="blogName" value="{{ config.site.name }}" class="admin-input">
+            <span class="w-28 shrink-0 text-sm" style="color: var(--color-accent);">Blog Name</span>
+            <input type="text" id="blogName" name="blogName" value="{{ config.site.name }}" class="admin-input text-sm">
           </div>
           <div class="flex items-center gap-2">
-            <span class="w-28 shrink-0 text-[13px]" style="color: var(--color-content);">Homepage Heading</span>
-            <input type="text" id="homepageHeading" name="homepageHeading" value="{{ config.homepage.heading }}" class="admin-input">
+            <span class="w-28 shrink-0 text-sm" style="color: var(--color-accent);">Description</span>
+            <input type="text" id="homepageHeading" name="homepageHeading" value="{{ config.homepage.heading }}" class="admin-input text-sm">
           </div>
         </div>
       </section>
@@ -38,9 +38,9 @@
           <div x-show="open" x-collapse class="mt-3">
             <div class="flex flex-col gap-3">
               <div class="flex items-start gap-2">
-                <span class="w-28 shrink-0 text-[13px] pt-1.5" style="color: var(--color-content);">Blog URL</span>
+                <span class="w-28 shrink-0 text-sm pt-1.5" style="color: var(--color-accent);">Site URL</span>
                 <div class="flex-1">
-                  <input type="url" id="blogUrl" name="blogUrl" value="{{ config.site.url }}" class="admin-input">
+                  <input type="url" id="blogUrl" name="blogUrl" value="{{ config.site.url }}" class="admin-input text-sm">
                   <p class="text-[11px] mt-1" style="color: var(--color-accent);">Public URL of your site. Used for SEO metadata and RSS feed links.</p>
                 </div>
               </div>
@@ -64,7 +64,7 @@
           <div x-show="open" x-collapse class="mt-3">
             <div class="flex flex-col gap-4">
               <div class="flex items-start gap-2" x-data="{ selected: '{{ colorTheme }}' }">
-                <span class="w-28 shrink-0 text-[13px] pt-1" style="color: var(--color-content);">Color</span>
+                <span class="w-28 shrink-0 text-sm pt-1" style="color: var(--color-accent);">Color</span>
                 <div class="flex flex-wrap gap-2">
                   {% for palette in colorPalettes %}
                     <label class="cursor-pointer" @click="selected = '{{ palette.name }}'">
@@ -107,9 +107,9 @@
                 <div class="flex items-center gap-2 social-link-row">
                   <input type="hidden" class="social-link-name" value="{{ link.name }}">
                   <input type="hidden" class="social-link-placeholder" value="{{ link.placeholder }}">
-                  <span class="w-28 shrink-0 text-[13px] capitalize" style="color: var(--color-content);">{{ link.name }}</span>
+                  <span class="w-28 shrink-0 text-sm capitalize" style="color: var(--color-accent);">{{ link.name }}</span>
                   <input type="text" placeholder="{{ link.placeholder }}" value="{{ link.href }}"
-                    class="admin-input social-link-href">
+                    class="admin-input social-link-href text-sm">
                 </div>
               {% endfor %}
             </div>
@@ -120,12 +120,12 @@
       <!-- Save -->
       <div class="pt-2 pb-8">
         <button type="submit"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+          class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium text-white transition-opacity duration-100"
           style="background-color: var(--color-primary);"
           onmouseover="this.style.opacity='0.88';"
           onmouseout="this.style.opacity='1';"
           >
-          <i data-lucide="save" style="width:14px;height:14px;"></i>
+          <i data-lucide="save" style="width:12px;height:12px;"></i>
           Save Settings
         </button>
       </div>

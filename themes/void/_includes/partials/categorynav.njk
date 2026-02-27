@@ -4,14 +4,14 @@
     {# All tab #}
     <a
       href="/"
-      class="px-2.5 py-1 whitespace-nowrap transition-colors {% if page.url == '/' or page.url.includes('/posts/') %} text-background bg-primary-500 font-bold {% else %} text-accent hover:text-primary-500 border border-accent/20 hover:border-primary-500/40 {% endif %}"
+      class="px-2.5 py-1 whitespace-nowrap transition-colors {% if page.url == '/' or page.url.includes('/posts/') %} text-background bg-primary-500 font-medium {% else %} text-accent hover:text-primary-500 border border-accent/20 hover:border-primary-500/40 {% endif %}"
     >All</a>
 
     {# Category tabs #}
     {% for category in collections.meta.categoryList %}
     <a
       href="/category/{{ category | slug }}/"
-      class="px-2.5 py-1 whitespace-nowrap transition-colors {% if page.url == '/category/' + (category | slug) + '/' %} text-background bg-primary-500 font-bold {% else %} text-accent hover:text-primary-500 border border-accent/20 hover:border-primary-500/40 {% endif %}"
+      class="px-2.5 py-1 whitespace-nowrap transition-colors {% if page.url == '/category/' + (category | slug) + '/' %} text-background bg-primary-500 font-medium {% else %} text-accent hover:text-primary-500 border border-accent/20 hover:border-primary-500/40 {% endif %}"
     >{{ category }}</a>
     {% endfor %}
   </div>

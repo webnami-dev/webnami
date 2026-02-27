@@ -15,14 +15,12 @@ initSlashCommands(editor);
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
-  const showInHeader = document.getElementById("showInHeader").value;
   const content = editor.value();
 
   const res = await fetch(`/admin/pages/${slug}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, description, showInHeader, content }),
+    body: JSON.stringify({ title, content }),
   });
   const data = await res.json();
   if (!res.ok) {
@@ -31,10 +29,6 @@ form.addEventListener("submit", async (e) => {
   }
   flashAlert("success", "Page updated successfully.");
   window.location.href = `/admin/pages/${data.slug}`;
-});
-
-document.getElementById("seo-btn").addEventListener("click", () => {
-  runSEOCheck(`/admin/pages/${slug}/seo`);
 });
 
 document.getElementById("delete-btn").addEventListener("click", async () => {

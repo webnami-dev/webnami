@@ -35,10 +35,3 @@
   {{ post.data.date | postDate }}
 </span>
 {% endmacro %}
-
-{# Category badge - terminal style #}
-{% macro categoryBadge(post) %}
-{% if post.data.category %}
-<span class="font-mono text-xs text-primary-500">/{{ post.data.category | lower }}</span>
-{% endif %}
-{% endmacro %}

@@ -2,32 +2,22 @@
 
 {% block content %}
   <div>
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-7">
-      <div class="flex items-center gap-3 min-w-0">
-        <a href="/admin/posts"
-          class="shrink-0 p-1.5 rounded transition-colors duration-100"
-          style="color: var(--color-accent);"
-          onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
-          onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
-          aria-label="Back to posts"
-          >
-          <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-        </a>
-        <div class="min-w-0">
-          <p class="text-[11px] font-medium" style="color: var(--color-accent); letter-spacing: 0.06em; text-transform: uppercase;">Edit Post</p>
-        </div>
-      </div>
-    </div>
-
     <!-- Form -->
     <form id="post-form" data-slug="{{ post.slug }}" class="flex flex-col gap-5">
 
       <!-- Title -->
-      <div>
+      <div class="flex items-center">
         <input type="text" id="title" name="title" required value="{{ post.title }}"
           class="admin-input text-3xl font-semibold"
           placeholder="Post title">
+        <a href="/{{ post.slug }}" target="_blank" title="Preview page"
+          class="shrink-0 p-1.5 rounded transition-colors duration-100"
+          style="color: var(--color-accent);"
+          onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
+          onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
+          >
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+        </a>
       </div>
 
       <!-- Category + Tags -->
@@ -37,12 +27,13 @@
           <input type="text" id="category" name="category" value="{{ post.category }}"
             class="admin-input text-[13px]" placeholder="e.g. Technology">
         </div>
-        <div class="flex items-center gap-2 flex-1">
+        <div class="flex items-center gap-2 flex-3">
           <label for="tags" class="admin-label mb-0 shrink-0">Tags: </label>
           <input type="text" id="tags" name="tags" value="{{ post.tags }}"
             class="admin-input text-[13px]" placeholder="Comma-separated">
         </div>
       </div>
+      <span class="text-accent">-----</span>
 
       <!-- Content -->
       <div>
@@ -52,21 +43,21 @@
       <!-- Actions -->
       <div class="flex items-center gap-2 pt-1">
         <button type="submit"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
+          class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium text-white transition-opacity duration-100"
           style="background-color: var(--color-primary);"
           onmouseover="this.style.opacity='0.88';"
           onmouseout="this.style.opacity='1';"
           >
-          <i data-lucide="save" style="width:14px;height:14px;"></i>
+          <i data-lucide="save" style="width:12px;height:12px;"></i>
           Save Changes
         </button>
         <button type="button" id="delete-btn"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-[12.5px] font-medium transition-colors duration-100"
+          class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium transition-colors duration-100"
           style="color: #e03131; border: 1px solid color-mix(in srgb, #e03131 25%, transparent); background-color: var(--color-surface);"
           onmouseover="this.style.backgroundColor='color-mix(in srgb, #e03131 8%, transparent)';"
           onmouseout="this.style.backgroundColor='var(--color-surface)';"
           >
-          <i data-lucide="trash-2" style="width:13px;height:13px;"></i>
+          <i data-lucide="trash-2" style="width:12px;height:12px;"></i>
           Delete
         </button>
       </div>

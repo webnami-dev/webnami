@@ -4,8 +4,8 @@
 {% macro renderCategoryPage(categoryPage) %}
 <section class="text-content min-h-screen py-12">
   <div class="max-w-2xl mx-auto px-5 mb-8">
-    <h1 class="font-mono text-lg font-bold">
-      <span class="text-primary-500">ls</span> /category/{{ categoryPage.name | lower }}{% if categoryPage.page > 1 %} <span class="text-accent font-normal text-sm">--page={{ categoryPage.page }}</span>{% endif %}
+    <h1 class="font-mono text-lg font-medium">
+      Category : {{ categoryPage.name }}{% if categoryPage.page > 1 %} -Page={{ categoryPage.page }}{% endif %}
     </h1>
   </div>
   {%- include 'partials/categorynav.njk' -%}
@@ -16,8 +16,8 @@
 {% macro renderTagPage(tagPage) %}
 <section class="text-content min-h-screen py-12">
   <div class="max-w-2xl mx-auto px-5 mb-8">
-    <h1 class="font-mono text-lg font-bold">
-      <span class="text-primary-500">grep</span> --tag="{{ tagPage.name }}"{% if tagPage.page > 1 %} <span class="text-accent font-normal text-sm">--page={{ tagPage.page }}</span>{% endif %}
+    <h1 class="font-mono text-lg font-medium">
+      Tag : {{ tagPage.name }}{% if tagPage.page > 1 %} -Page={{ tagPage.page }}{% endif %}
     </h1>
   </div>
   {{ cl.postsGrid(tagPage, "tags") }}
@@ -32,7 +32,7 @@
   {% if config.homepage.heading %}
   <div class="max-w-2xl mx-auto px-5 mb-8">
     <div class="mb-6">
-      <h1 class="font-mono text-xl sm:text-2xl font-bold text-content">{{ config.homepage.heading }}</h1>
+      <h1 class="font-mono text-xl sm:text-2xl font-medium text-content">{{ config.homepage.heading }}</h1>
     </div>
   </div>
   {% endif %}
@@ -41,7 +41,7 @@
   {% else %}
   {# Page 2+: just the list #}
   <div class="max-w-2xl mx-auto px-5 mb-8">
-    <h1 class="font-mono text-lg font-bold">
+    <h1 class="font-mono text-lg font-medium">
       <span class="text-primary-500">ls</span> /posts <span class="text-accent font-normal text-sm">--page={{ postsPage.page }}</span>
     </h1>
   </div>
