@@ -1,12 +1,5 @@
 const form = document.getElementById("settings-form");
 
-const typographyPresets = {
-  default: { headerFont: "Geist", bodyFont: "Inter" },
-  editorial: { headerFont: "Lora", bodyFont: "Inter" },
-  minimal: { headerFont: "Geist", bodyFont: "Source Sans 3" },
-  developer: { headerFont: "JetBrains Mono", bodyFont: "Inter" },
-};
-
 // ── Collect rows into array of {name, placeholder, href} ──
 function collectLinks(container, nameClass, hrefClass) {
   return [...container.querySelectorAll(`.${nameClass}`)]
@@ -32,10 +25,6 @@ form.addEventListener("submit", async (e) => {
     "social-link-href",
   );
 
-  const typographyValue = document.getElementById("typography").value;
-  const { headerFont, bodyFont } =
-    typographyPresets[typographyValue] || typographyPresets.default;
-
   const colorThemeInput = document.querySelector(
     'input[name="colorPalette"]:checked',
   );
@@ -43,13 +32,7 @@ form.addEventListener("submit", async (e) => {
   const body = {
     blogName: document.getElementById("blogName").value,
     blogUrl: document.getElementById("blogUrl").value,
-    siteLogo: document.getElementById("siteLogo").value,
-    siteFavicon: document.getElementById("siteFavicon").value,
     homepageHeading: document.getElementById("homepageHeading").value,
-    homepageImg: document.getElementById("homepageImg").value,
-    typography: typographyValue,
-    headerFont,
-    bodyFont,
     colorPalette: colorThemeInput ? colorThemeInput.value : "Default",
     socialLinks: JSON.stringify(socialLinks),
   };

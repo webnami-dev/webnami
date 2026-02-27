@@ -9,9 +9,7 @@ const configPath = path.resolve("src/_data/config.json");
 const themesDir = path.resolve("themes");
 
 const colorPalettes = [
-  { name: "Amber", bg: "#fefce8", primary: "#d97706", accent: "#7a6020" },
-  { name: "Crimson", bg: "#fdf8f8", primary: "#b91c1c", accent: "#9f6060" },
-  { name: "Default", bg: "#fffff8", primary: "#3d3d3d", accent: "#8a8a8a" },
+  { name: "Default", bg: "#fafafa", primary: "#3b5bdb", accent: "#6b7280" },
   { name: "Forest", bg: "#f4f7f2", primary: "#16a34a", accent: "#4a7a54" },
   { name: "Ink", bg: "#ffffff", primary: "#27272a", accent: "#64748b" },
   { name: "Ocean", bg: "#f0f9fc", primary: "#2563eb", accent: "#466e7c" },
@@ -19,26 +17,25 @@ const colorPalettes = [
   { name: "Rose", bg: "#fff5f7", primary: "#e11d48", accent: "#8c3f52" },
   { name: "Slate", bg: "#f8fafc", primary: "#475569", accent: "#5c7080" },
   { name: "Sunset", bg: "#fffbf5", primary: "#ea580c", accent: "#8a5820" },
-  { name: "Warm", bg: "#fef9f0", primary: "#b45309", accent: "#92765a" },
 ];
 
-function getColorTheme(themeName) {
+function getColorPalette(themeName) {
   const inputCssPath = path.resolve(`themes/${themeName}/assets/css/input.css`);
   try {
     const css = fs.readFileSync(inputCssPath, "utf-8");
-    const match = css.match(/@import\s+["'][^"']*theme-(\w+)\.css["']/);
+    const match = css.match(/@import\s+["'][^"']*palette-(\w+)\.css["']/);
     return match ? match[1] : "Default";
   } catch {
     return "Default";
   }
 }
 
-function setColorTheme(themeName, colorName) {
+function setColorPalette(themeName, paletteName) {
   const inputCssPath = path.resolve(`themes/${themeName}/assets/css/input.css`);
   const css = fs.readFileSync(inputCssPath, "utf-8");
   const updated = css.replace(
-    /@import\s+["'][^"']*theme-\w+\.css["']/,
-    `@import "./theme-${colorName}.css"`,
+    /@import\s+["'][^"']*palette-\w+\.css["']/,
+    `@import "./palette-${paletteName}.css"`,
   );
   fs.writeFileSync(inputCssPath, updated);
 }
@@ -50,13 +47,13 @@ router.get("/", (req, res) => {
     .filter((d) => d.isDirectory())
     .map((d) => d.name);
 
-  const colorTheme = getColorTheme(config.theme);
+  const colorPalette = getColorPalette(config.theme);
 
   res.render("settings/settings.njk", {
     title: "Settings",
     config,
     themes,
-    colorTheme,
+    colorPalette,
     colorPalettes,
   });
 });
@@ -83,15 +80,15 @@ router.put("/", async (req, res) => {
 
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
-  const oldColorTheme = getColorTheme(oldConfig.theme);
-  const newColorTheme = data.colorTheme || "Default";
-  const colorChanged = oldColorTheme !== newColorTheme;
+  const oldColorPalette = getColorPalette(oldConfig.theme);
+  const newColorPalette = data.colorPalette || "Default";
+  const colorChanged = oldColorPalette !== newColorPalette;
 
   if (colorChanged) {
-    setColorTheme(config.theme, newColorTheme);
+    setColorPalette(config.theme, newColorPalette);
     await buildSiteWithVite();
     log.success(
-      `Color theme changed from "${oldColorTheme}" to "${newColorTheme}".`,
+      `Color theme changed from "${oldColorPalette}" to "${newColorPalette}".`,
     );
   } else {
     await buildSite();
