@@ -1,16 +1,16 @@
 /* Ocean theme - cool blue-teal focused */
 :root[data-theme="light"] {
-  --color-primary: #0e7490;
+  --color-primary: #2563eb;
   --color-background: #f0f9fc;
-  --color-content: #0c2a35;
-  --color-accent: #5f9aaa;
-  --color-footer: #e4f4f8;
+  --color-content: #1a1a2e;
+  --color-accent: #466e7c;
+  --color-footer: #d9ecf4;
 }
 
 :root[data-theme="dark"] {
-  --color-primary: #22d3ee;
+  --color-primary: #60a5fa;
   --color-background: #071820;
-  --color-content: #cce9f0;
-  --color-accent: #4a8a9a;
-  --color-footer: #04111a;
+  --color-content: #e6edf3;
+  --color-accent: #6a9aaa;
+  --color-footer: #040f17;
 }

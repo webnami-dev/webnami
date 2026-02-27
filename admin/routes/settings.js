@@ -9,13 +9,16 @@ const configPath = path.resolve("src/_data/config.json");
 const themesDir = path.resolve("themes");
 
 const colorPalettes = [
+  { name: "Amber", bg: "#fefce8", primary: "#d97706", accent: "#7a6020" },
   { name: "Crimson", bg: "#fdf8f8", primary: "#b91c1c", accent: "#9f6060" },
   { name: "Default", bg: "#fffff8", primary: "#3d3d3d", accent: "#8a8a8a" },
-  { name: "Forest", bg: "#f4f7f2", primary: "#3a6b4a", accent: "#7a9a82" },
-  { name: "Ink", bg: "#ffffff", primary: "#0a0a0a", accent: "#666666" },
-  { name: "Ocean", bg: "#f0f9fc", primary: "#0e7490", accent: "#5f9aaa" },
-  { name: "Plum", bg: "#faf8fd", primary: "#7e22ce", accent: "#9070a8" },
-  { name: "Sunset", bg: "#fffbf5", primary: "#c2410c", accent: "#a8784a" },
+  { name: "Forest", bg: "#f4f7f2", primary: "#16a34a", accent: "#4a7a54" },
+  { name: "Ink", bg: "#ffffff", primary: "#27272a", accent: "#64748b" },
+  { name: "Ocean", bg: "#f0f9fc", primary: "#2563eb", accent: "#466e7c" },
+  { name: "Plum", bg: "#faf8fd", primary: "#7c3aed", accent: "#7a5c96" },
+  { name: "Rose", bg: "#fff5f7", primary: "#e11d48", accent: "#8c3f52" },
+  { name: "Slate", bg: "#f8fafc", primary: "#475569", accent: "#5c7080" },
+  { name: "Sunset", bg: "#fffbf5", primary: "#ea580c", accent: "#8a5820" },
   { name: "Warm", bg: "#fef9f0", primary: "#b45309", accent: "#92765a" },
 ];
 
