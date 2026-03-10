@@ -11,3 +11,4 @@ CLAUDE.md
 .playwright-mcp/
 images/favicon.svg
 images/og-image.png
+.npmrc
