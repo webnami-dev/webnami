@@ -3,11 +3,11 @@
 <h1 align="center">WebNami</h1>
 
 <p align="center">
-🚀 <b>A Fast, Lightweight, SEO-ready blogging tool for developers</b>
+🚀 <b>A fast, zero-config, local-first blogging platform for developers</b>
 </p>
 
 <p align="center">
-  <a href="https://webnami-blog.pages.dev/" target="_blank">🌐 Live Demo</a>
+Own your content. Write in Markdown. Ship blazing-fast static blogs.
 </p>
 
 <p align="center">
@@ -19,30 +19,87 @@
 
 ---
 
-## 📝 Project Overview
+# 📝 Project Overview
 
-WebNami is an opinionated blogging platform built on Eleventy and Vite. It pairs a static site generator with a full admin dashboard — create and manage posts, pages, and site settings from a browser UI, or write Markdown files directly. The site builds to static HTML with optimized images, Tailwind CSS, and zero client-side framework overhead. Themes are swappable, SEO checks run per-page from the admin, and the whole thing deploys anywhere that serves static files.
+**WebNami** is an opinionated blogging platform built for developers who want **full ownership of their content without the complexity of traditional CMS platforms**.
 
-## ✨ Features
+It combines the simplicity of **Markdown writing** with a **browser-based admin dashboard**, while generating a **fully static, SEO-optimized site without any configuration** powered by **Eleventy and Vite**.
 
-- **Lightning Fast:** Built with 11ty for optimal performance and instant page loads.
-- **Automatic Image Compression:** Optimized images for faster loading without quality loss.
-- **CSS Minification and JS Bundling:** Optimized assets for production builds.
-- **SEO Audit:** Per-page SEO analysis from the admin dashboard.
-- **Multiple Layouts:** Choose from 6 built-in layouts (trio, triofeatured, mono, duo, monofeatured, duofeatured).
-- **Perfect Performance:** Achieves 100/100 on Core Web Vitals for speed, accessibility, and best practices.
-- **RSS Feed:** Automatic RSS feed generation for easy syndication.
-- **Sitemap:** Auto-generated XML sitemap for better search engine indexing.
-- **Robots.txt:** SEO-friendly robots.txt included by default.
-- **Custom 404 Page:** Prestyled 404 error page.
-- **Canonical Links:** Proper canonical URL management to avoid duplicate content.
-- **Meta Tags:** Complete title, description, and Open Graph tags for social sharing.
-- **Syntax Highlighting:** Built-in code syntax highlighting.
-- **Structured Data Markup:** Rich snippets and structured data for enhanced SEO and search engine visibility.
-- **Dark/Light Mode:** Toggle between dark and light modes with automatic system preference detection.
-- **Theming:** Switch between themes from the admin dashboard. Add custom themes in the `themes/` directory.
-- **Admin Dashboard:** Built-in admin panel for managing posts, pages, and site settings with a visual editor (EasyMDE).
-- **Minimal Design:** Clean, beautiful, and fully responsive design out of the box.
+Unlike traditional blogging platforms, WebNami follows a **local-first philosophy**:
+
+- Your content lives in your repository
+- No vendor lock-in
+- No proprietary database
+- Deploy anywhere that serves static files
+
+Write posts in Markdown, manage them via the dashboard, and deploy a **fast, beautiful blog in minutes.**
+
+---
+
+# ✨ Key Features
+
+### 🧑‍💻 Developer Friendly
+
+- Markdown-first workflow
+- Works directly with your repository
+- No database or proprietary backend
+- Static output deployable anywhere
+
+### 🖥 Admin Dashboard
+
+A built-in browser UI for managing:
+
+- Posts
+- Pages
+- Categories & tags
+- Site settings
+
+Includes a Markdown editor powered by **EasyMDE** with slash commands:
+
+- `/upload-image`
+- `/insert-link`
+
+### 🎨 Customization
+
+- **8 built-in color palettes**  
+  Default, Forest, Ink, Ocean, Plum, Rose, Slate, Sunset
+
+- **Theme system**  
+  Swappable themes inside `themes/`
+
+- **Dark / Light mode**
+
+### ⚡ Performance
+
+- Static HTML output
+- No client-side framework
+- Optimized CSS via Tailwind CSS v4
+- Automatic asset optimization
+
+### 🖼 Image Handling
+
+- Image uploads from editor
+- Automatic responsive images
+- WebP conversion
+- Generated sizes: **360 / 720 / 1080 px**
+
+### 🔎 SEO Ready
+
+Built-in SEO features:
+
+- Meta tags like title, description
+- Canonical URLs
+- OpenGraph & Twitter cards
+- JSON-LD BlogPosting schema
+- Sitemap generation
+- RSS feed
+- robots.txt
+- Custom 404 page
+
+### 📄 Content Organization
+
+- Tag and category filtering
+- Paginated post listing
 
 ---
 
@@ -51,7 +108,7 @@ WebNami is an opinionated blogging platform built on Eleventy and Vite. It pairs
 ### Prerequisites
 
 - **Node.js** v20 or higher
-- **npm** v10 or higher (or use `yarn`/`pnpm`)
+- **npm** v10 or higher
 
 ### Installation
 
@@ -69,38 +126,33 @@ npm create webnami-blog my-blog-name
 cd my-blog-name
 ```
 
-### Initial Configuration
-
-- Edit `config.js` to set your site name, URL, and other settings.
-- Add your logo and favicon to the `images/` directory.
-
 ### First Run
 
 ```bash
-npm run dev
+npm start
 ```
 
-Visit [http://localhost:8080](http://localhost:8080) to see your site.
+Visit [http://localhost:3000](http://localhost:3000) for the blog and [http://localhost:3000/admin](http://localhost:3000/admin) for the admin dashboard.
 
 ---
 
 ## ⌨️ Commands
 
-- **Start admin dashboard:**
+- **Start admin + blog server:**
 
   ```bash
-  node admin/app.js
+  npm start
   ```
 
-  Starts the admin panel at [http://localhost:3000/admin](http://localhost:3000/admin) and serves the blog at [http://localhost:3000](http://localhost:3000). Create, edit, and delete posts/pages, run SEO checks, and manage site settings from the browser.
+  Builds assets (Vite) and the static site (Eleventy), then serves both at [http://localhost:3000](http://localhost:3000). Admin at [http://localhost:3000/admin](http://localhost:3000/admin). Content changes trigger automatic rebuilds.
 
-- **Start development server (static site only):**
+- **Development mode (static site only, no admin):**
 
   ```bash
   npm run dev
   ```
 
-  Runs Eleventy with hot reload at [http://localhost:8080](http://localhost:8080). Use this when working on templates or themes without the admin.
+  Vite and Eleventy in watch mode with hot reload at [http://localhost:8080](http://localhost:8080). Use this when working on templates or themes.
 
 - **Build for production:**
 
@@ -108,29 +160,7 @@ Visit [http://localhost:8080](http://localhost:8080) to see your site.
   npm run build
   ```
 
-  Generates the optimized static site in `_site/` with image compression, CSS/JS minification, and cache-busted assets.
-
-- **Lint code:**
-
-  ```bash
-  npm run lint
-  ```
-
-  Runs ESLint across the project. Use `npm run lint:fix` to auto-fix issues.
-
-- **Run tests:**
-
-  ```bash
-  npm run test
-  ```
-
-  Runs Playwright E2E tests (auto-starts the admin server).
-
----
-
-## 📚 Documentation
-
-**👉 [Visit Full Documentation](https://webnami.in/docs/)**
+  Generates the optimized static site in `_site/` with image optimization, HTML/CSS/JS minification, and cache-busted assets.
 
 ---
 

@@ -15,64 +15,72 @@ if (!projectName) {
   process.exit(1);
 }
 
-// Template is one level up from bin/
 const templateDir = path.join(__dirname, "..");
 const targetDir = path.join(process.cwd(), projectName);
 
 console.log("Creating new blog project...");
 
-// Copy all template files except package/ and node_modules
-const excludePatterns = [
-  "bin",
-  "node_modules",
-  "_site",
-  ".git",
-  "README.md",
-  ".env",
-  ".prettierignore",
-  "docs",
-  ".cache",
-  "LICENSE",
+// Copy scaffold directories (admin/dist is a build artifact — skip it)
+const scaffoldDirs = [
+  "admin",
+  "images",
+  "pages",
+  "posts",
+  "palettes",
+  "src",
+  "themes",
 ];
 
-fs.copySync(templateDir, targetDir, {
-  filter: (src) => {
-    const basename = path.basename(src);
-    return !excludePatterns.some((pattern) => basename.includes(pattern));
-  },
-});
+for (const dir of scaffoldDirs) {
+  const src = path.join(templateDir, dir);
+  const dest = path.join(targetDir, dir);
+  if (fs.existsSync(src)) {
+    fs.copySync(src, dest, {
+      filter: (srcPath) =>
+        !srcPath.startsWith(path.join(templateDir, "admin", "dist")),
+    });
+  }
+}
 
-fs.copySync(
-  path.join(templateDir, ".gitignore.template"),
+// Write .gitignore directly — avoids npm stripping .gitignore/.gitignore.template on publish
+fs.writeFileSync(
   path.join(targetDir, ".gitignore"),
+  `${[
+    "node_modules/",
+    "_site/",
+    "admin/dist/",
+    ".cache/",
+    ".env",
+    "*.log",
+    ".DS_Store",
+    ".vscode/",
+  ].join("\n")}\n`,
 );
 
-const gitignoreTarget = path.join(targetDir, ".gitignore");
-
-const gitignoreCandidates = [
-  path.join(templateDir, ".gitignore.template"),
-  path.join(templateDir, ".gitignore"),
-];
-const gitignoreSource = gitignoreCandidates.find((p) => fs.existsSync(p));
-
-if (gitignoreSource) {
-  fs.copySync(gitignoreSource, gitignoreTarget);
-} else {
-  // Last-resort: keep scaffolding working even if template was not packaged.
-  fs.writeFileSync(
-    gitignoreTarget,
-    `${["node_modules/", "_site/", ".cache/", ".env", "*.log", "dist/"].join(
-      "\n",
-    )}\n`,
-  );
-  console.warn(
-    "⚠️  .gitignore template not found in package; created a minimal .gitignore.",
-  );
-}
+// Generate a clean package.json for the scaffolded project
+const sourcePkg = JSON.parse(
+  fs.readFileSync(path.join(templateDir, "package.json"), "utf-8"),
+);
+const scaffoldPkg = {
+  name: projectName.toLowerCase().replace(/[^a-z0-9-]+/g, "-"),
+  version: "1.0.0",
+  type: "module",
+  scripts: {
+    start: sourcePkg.scripts.start,
+    build: sourcePkg.scripts.build,
+  },
+  dependencies: sourcePkg.dependencies,
+  devDependencies: sourcePkg.devDependencies,
+  engines: sourcePkg.engines,
+};
+fs.writeFileSync(
+  path.join(targetDir, "package.json"),
+  `${JSON.stringify(scaffoldPkg, null, 2)}\n`,
+);
 
 // Install dependencies
 console.log("Installing dependencies...");
 execSync("npm install", { cwd: targetDir, stdio: "inherit" });
 
 console.log(`✅ Blog created in ${projectName}/`);
-console.log(`Run: cd ${projectName} && npm run dev`);
+console.log(`Run: cd ${projectName} && npm start`);

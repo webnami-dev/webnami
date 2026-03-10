@@ -1,6 +1,0 @@
-.vscode/
-.env
-node_modules/
-\_site/
-.cache/*
-.DS_Store
