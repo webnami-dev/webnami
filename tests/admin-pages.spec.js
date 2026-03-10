@@ -14,13 +14,9 @@ test.afterAll(() => {
   if (fs.existsSync(renamedFile)) fs.unlinkSync(renamedFile);
 });
 
-/** Open the Details side panel on page new/edit forms */
-async function openDetailsPanel(page) {
-  await page.getByRole("button", { name: "Details" }).click();
-  await page.locator("#description").waitFor({ state: "visible" });
-}
-
 test.describe("Pages CRUD", () => {
+  test.describe.configure({ mode: "serial" });
+
   test("should show the pages list page", async ({ page }) => {
     await page.goto("/admin/pages");
     await expect(page.locator("h1", { hasText: "Pages" })).toBeVisible();
@@ -37,11 +33,8 @@ test.describe("Pages CRUD", () => {
   }) => {
     await page.goto("/admin/pages/new");
     await page.locator("#title").fill("Playwright Test Page");
-    await openDetailsPanel(page);
-    await page
-      .locator("#description")
-      .fill("A test page created by Playwright");
     await page.locator('button[type="submit"]').click();
+    await page.waitForURL(`**/admin/pages/${testSlug}`);
 
     await expect(page.locator(".alert-success")).toBeVisible();
     await expect(page.locator(".alert-success")).toContainText(
@@ -62,8 +55,6 @@ test.describe("Pages CRUD", () => {
   }) => {
     await page.goto("/admin/pages/new");
     await page.locator("#title").fill("Playwright Test Page");
-    await openDetailsPanel(page);
-    await page.locator("#description").fill("Duplicate page attempt");
     await page.locator('button[type="submit"]').click();
 
     await expect(page.locator(".alert-error")).toBeVisible();
@@ -73,18 +64,13 @@ test.describe("Pages CRUD", () => {
   test("should show the edit form with page data", async ({ page }) => {
     await page.goto(`/admin/pages/${testSlug}`);
     await expect(page.locator("#title")).toHaveValue("Playwright Test Page");
-    await openDetailsPanel(page);
-    await expect(page.locator("#description")).toHaveValue(
-      "A test page created by Playwright",
-    );
   });
 
   test("should rename file when title is updated", async ({ page }) => {
     await page.goto(`/admin/pages/${testSlug}`);
     await page.locator("#title").fill("Updated Test Page");
-    await openDetailsPanel(page);
-    await page.locator("#description").fill("Updated description");
     await page.locator('button[type="submit"]').click();
+    await page.waitForURL(`**/admin/pages/${renamedSlug}`);
 
     await expect(page.locator(".alert-success")).toBeVisible();
     await expect(page.locator(".alert-success")).toContainText(
@@ -110,7 +96,6 @@ test.describe("Pages CRUD", () => {
     const resp = await request.put(`/admin/pages/${renamedSlug}`, {
       data: {
         title: "Admin",
-        description: "Trying reserved slug",
         content: "Reserved slug rename test.",
       },
     });
@@ -128,7 +113,6 @@ test.describe("Pages CRUD", () => {
     await request.post("/admin/pages/new", {
       data: {
         title: "Collision Page",
-        description: "Temporary",
         content: "Temp.",
       },
     });
@@ -136,7 +120,6 @@ test.describe("Pages CRUD", () => {
     const resp = await request.put(`/admin/pages/${renamedSlug}`, {
       data: {
         title: "Collision Page",
-        description: "Trying duplicate slug",
         content: "Duplicate slug rename test.",
       },
     });
@@ -190,6 +173,7 @@ test.describe("Pages CRUD", () => {
       "Are you sure you want to delete this page?",
     );
     await page.locator("#confirm-accept").click();
+    await page.waitForURL("**/admin/pages");
 
     await expect(page.locator(".alert-success")).toBeVisible();
     await expect(page.locator(".alert-success")).toContainText(
@@ -213,7 +197,6 @@ test.describe("Pages CRUD", () => {
     const resp = await request.post("/admin/pages/new", {
       data: {
         title: "Admin",
-        description: "This should be rejected",
         content: "Reserved slug test.",
       },
     });
@@ -229,7 +212,6 @@ test.describe("Pages CRUD", () => {
     const resp = await request.post("/admin/pages/new", {
       data: {
         title: "API",
-        description: "This should be rejected",
         content: "Reserved slug test.",
       },
     });

@@ -14,13 +14,9 @@ test.afterAll(() => {
   if (fs.existsSync(renamedFile)) fs.unlinkSync(renamedFile);
 });
 
-/** Open the Details side panel on post new/edit forms */
-async function openDetailsPanel(page) {
-  await page.getByRole("button", { name: "Details" }).click();
-  await page.locator("#description").waitFor({ state: "visible" });
-}
-
 test.describe("Posts CRUD", () => {
+  test.describe.configure({ mode: "serial" });
+
   test("should show the posts list page", async ({ page }) => {
     await page.goto("/admin/posts");
     await expect(page.locator("h1", { hasText: "Posts" })).toBeVisible();
@@ -30,8 +26,8 @@ test.describe("Posts CRUD", () => {
     await page.goto("/admin/posts/new");
     await expect(page.locator("h1", { hasText: "New Post" })).toBeVisible();
     await expect(page.locator("#title")).toBeVisible();
-    await openDetailsPanel(page);
-    await expect(page.locator("#date")).toBeVisible();
+    await expect(page.locator("#category")).toBeVisible();
+    await expect(page.locator("#tags")).toBeVisible();
   });
 
   test("should create a new post via the form and show a success alert", async ({
@@ -39,17 +35,10 @@ test.describe("Posts CRUD", () => {
   }) => {
     await page.goto("/admin/posts/new");
     await page.locator("#title").fill("Playwright Test Post");
-    await openDetailsPanel(page);
-    await page
-      .locator("#description")
-      .fill("A test post created by Playwright");
     await page.locator("#tags").fill("test, playwright");
     await page.locator("#category").fill("testing");
-    await page.locator("#date").evaluate((el) => {
-      el.removeAttribute("readonly");
-    });
-    await page.locator("#date").fill("2025-01-01");
     await page.locator('button[type="submit"]').click();
+    await page.waitForURL(`**/admin/posts/${testSlug}`);
 
     await expect(page.locator(".alert-success")).toBeVisible();
     await expect(page.locator(".alert-success")).toContainText(
@@ -70,14 +59,8 @@ test.describe("Posts CRUD", () => {
   }) => {
     await page.goto("/admin/posts/new");
     await page.locator("#title").fill("Playwright Test Post");
-    await openDetailsPanel(page);
-    await page.locator("#description").fill("Duplicate post attempt");
     await page.locator("#tags").fill("test");
     await page.locator("#category").fill("testing");
-    await page.locator("#date").evaluate((el) => {
-      el.removeAttribute("readonly");
-    });
-    await page.locator("#date").fill("2025-01-01");
     await page.locator('button[type="submit"]').click();
 
     await expect(page.locator(".alert-error")).toBeVisible();
@@ -87,16 +70,14 @@ test.describe("Posts CRUD", () => {
   test("should show the edit form with post data", async ({ page }) => {
     await page.goto(`/admin/posts/${testSlug}`);
     await expect(page.locator("#title")).toHaveValue("Playwright Test Post");
-    await openDetailsPanel(page);
     await expect(page.locator("#category")).toHaveValue("testing");
   });
 
   test("should rename file when title is updated", async ({ page }) => {
     await page.goto(`/admin/posts/${testSlug}`);
     await page.locator("#title").fill("Updated Test Post");
-    await openDetailsPanel(page);
-    await page.locator("#description").fill("Updated description");
     await page.locator('button[type="submit"]').click();
+    await page.waitForURL(`**/admin/posts/${renamedSlug}`);
 
     await expect(page.locator(".alert-success")).toBeVisible();
     await expect(page.locator(".alert-success")).toContainText(
@@ -122,10 +103,8 @@ test.describe("Posts CRUD", () => {
     const resp = await request.put(`/admin/posts/${renamedSlug}`, {
       data: {
         title: "Admin",
-        description: "Trying reserved slug",
         tags: "test",
         category: "testing",
-        date: "2025-01-01",
         content: "Reserved slug rename test.",
       },
     });
@@ -143,10 +122,8 @@ test.describe("Posts CRUD", () => {
     await request.post("/admin/posts/new", {
       data: {
         title: "Collision Post",
-        description: "Temporary",
         tags: "test",
         category: "test",
-        date: "2025-01-01",
         content: "Temp.",
       },
     });
@@ -154,10 +131,8 @@ test.describe("Posts CRUD", () => {
     const resp = await request.put(`/admin/posts/${renamedSlug}`, {
       data: {
         title: "Collision Post",
-        description: "Trying duplicate slug",
         tags: "test",
         category: "testing",
-        date: "2025-01-01",
         content: "Duplicate slug rename test.",
       },
     });
@@ -211,6 +186,7 @@ test.describe("Posts CRUD", () => {
       "Are you sure you want to delete this post?",
     );
     await page.locator("#confirm-accept").click();
+    await page.waitForURL("**/admin/posts");
 
     await expect(page.locator(".alert-success")).toBeVisible();
     await expect(page.locator(".alert-success")).toContainText(
@@ -234,10 +210,8 @@ test.describe("Posts CRUD", () => {
     const resp = await request.post("/admin/posts/new", {
       data: {
         title: "Admin",
-        description: "This should be rejected",
         tags: "test",
         category: "test",
-        date: "2025-01-01",
         content: "Reserved slug test.",
       },
     });
@@ -253,10 +227,8 @@ test.describe("Posts CRUD", () => {
     const resp = await request.post("/admin/posts/new", {
       data: {
         title: "API",
-        description: "This should be rejected",
         tags: "test",
         category: "test",
-        date: "2025-01-01",
         content: "Reserved slug test.",
       },
     });

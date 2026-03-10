@@ -1,7 +1,7 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
-import { buildSite, buildSiteWithVite } from "../eleventy.js";
+import { buildSite } from "../eleventy.js";
 import log from "../logger.js";
 
 const router = express.Router();
@@ -35,7 +35,7 @@ function setColorPalette(themeName, paletteName) {
   const css = fs.readFileSync(inputCssPath, "utf-8");
   const updated = css.replace(
     /@import\s+["'][^"']*palette-\w+\.css["']/,
-    `@import "./palette-${paletteName}.css"`,
+    `@import "@palettes/palette-${paletteName}.css"`,
   );
   fs.writeFileSync(inputCssPath, updated);
 }
@@ -86,14 +86,17 @@ router.put("/", async (req, res) => {
 
   if (colorChanged) {
     setColorPalette(config.theme, newColorPalette);
-    await buildSiteWithVite();
-    log.success(
-      `Color theme changed from "${oldColorPalette}" to "${newColorPalette}".`,
+    log.warn(
+      `Color palette changed from "${oldColorPalette}" to "${newColorPalette}". Restart required.`,
     );
-  } else {
-    await buildSite();
+    return res.json({
+      restartRequired: true,
+      message:
+        "Color palette changed. Please restart the server for changes to take effect.",
+    });
   }
 
+  await buildSite();
   log.success("Settings updated");
   res.json({ success: true });
 });

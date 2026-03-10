@@ -1,4 +1,5 @@
 import { readFileSync } from "fs";
+import { resolve } from "path";
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -6,6 +7,11 @@ const config = JSON.parse(readFileSync("src/_data/config.json", "utf-8"));
 const { theme } = config;
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@palettes": resolve("palettes"),
+    },
+  },
   plugins: [tailwindcss()],
   build: {
     outDir: "_site",
