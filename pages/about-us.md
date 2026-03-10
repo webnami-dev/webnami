@@ -1,22 +1,19 @@
 ---
 layout: page
-title: About Us
+title: About
 ---
 
-# About Us
+WebNami is a fast, lightweight, local-first blogging platform built for developers who want full ownership of their content.
 
-At **WebNami**, we build fast, beautiful, and SEO-friendly static websites that help businesses grow without the tech headaches.
+It pairs a **Markdown-first workflow** with a **browser-based admin dashboard**, generating a fully static, SEO-optimized site powered by [Eleventy](https://www.11ty.dev/) and [Vite](https://vite.dev/) — with no database, no vendor lock-in, and no proprietary backend.
 
-We’re a small team of developers and designers who believe in clean code, responsive design, and putting performance first. Whether you're a freelancer, consultant, or small business owner, we make it easy to get a website that works — without the hassle of WordPress or bloated site builders.
+## Why WebNami?
 
-## Why Choose Us?
+Most blogging platforms either lock you into their ecosystem or require complex infrastructure to self-host. WebNami takes a different approach — your content lives in your repository as plain Markdown files, your site builds to static HTML, and you deploy anywhere that serves static files.
 
-- 🚀 Sub-1-second load times
-- 📱 Mobile-first, responsive layouts
-- 🔍 Technical SEO baked in
-- 🛠️ Fully managed and maintenance-free
-- 💼 Simple annual pricing
+## Get Started
 
-Let’s help your business make the right first impression — online.
-
-Want something custom? [Get in touch](/contact/) and we’ll make it happen.
+```bash
+npx create-webnami-blog my-blog
+npm start
+```

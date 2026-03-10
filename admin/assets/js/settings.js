@@ -47,6 +47,8 @@ form.addEventListener("submit", async (e) => {
     const data = await res.json();
     if (data.restartRequired) {
       showAlert("warning", data.message);
+    } else if (data.nameChanged) {
+      showAlert("warning", data.message);
     } else {
       flashAlert("success", "Settings saved successfully.");
       window.location.reload();

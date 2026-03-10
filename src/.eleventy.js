@@ -1,4 +1,4 @@
-import { readFileSync, existsSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
@@ -30,25 +30,21 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.before", async () => {
     const { default: sharp } = await import("sharp");
     const siteName = config.site.name;
-    const bgColor = config.ogImage?.bgColor ?? "#0f0f0f";
-    const textColor = config.ogImage?.textColor ?? "#ffffff";
+    const bgColor = "#155dfc";
+    const textColor = "#ffffff";
 
-    if (!existsSync("images/og-image.png")) {
-      const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+    const og = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="630" fill="${bgColor}" />
-  <text x="600" y="315" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="80" font-weight="bold" fill="${textColor}">${siteName}</text>
+  <text x="600" y="315" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="80" font-weight="bold" fill="${textColor}">${siteName}</text>
 </svg>`;
-      await sharp(Buffer.from(svg)).png().toFile("images/og-image.png");
-    }
+    await sharp(Buffer.from(og)).png().toFile("images/og-image.png");
 
-    if (!existsSync("images/favicon.svg")) {
-      const initials = siteName.slice(0, 2).toUpperCase();
-      const svg = `<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+    const initials = siteName.slice(0, 2).toUpperCase();
+    const favicon = `<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
   <rect width="32" height="32" fill="${bgColor}" rx="4" />
-  <text x="16" y="16" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="${textColor}">${initials}</text>
+  <text x="16" y="16" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="${textColor}">${initials}</text>
 </svg>`;
-      writeFileSync("images/favicon.svg", svg);
-    }
+    writeFileSync("images/favicon.svg", favicon);
   });
 
   eleventyConfig.addGlobalData("config", config);

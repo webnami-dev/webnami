@@ -17,6 +17,14 @@ Own your content. Write in Markdown. Ship blazing-fast static blogs.
   <img src="https://img.shields.io/github/issues-closed/webnami-dev/webnami" />
 </p>
 
+<p align="center">
+  <img src="docs/screenshots/admin.png" alt="Admin Dashboard" width="100%" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/blog.png" alt="Blog" width="100%" />
+</p>
+
 ---
 
 # 📝 Project Overview

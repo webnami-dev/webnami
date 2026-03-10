@@ -83,6 +83,7 @@ router.put("/", async (req, res) => {
   const oldColorPalette = getColorPalette(oldConfig.theme);
   const newColorPalette = data.colorPalette || "Default";
   const colorChanged = oldColorPalette !== newColorPalette;
+  const nameChanged = oldConfig.site.name !== data.blogName;
 
   if (colorChanged) {
     setColorPalette(config.theme, newColorPalette);
@@ -96,8 +97,17 @@ router.put("/", async (req, res) => {
     });
   }
 
+  if (nameChanged) {
+    return res.json({
+      success: true,
+      nameChanged: true,
+      message: "Blog name changed. Please restart the server.",
+    });
+  }
+
   await buildSite();
   log.success("Settings updated");
+
   res.json({ success: true });
 });
 
