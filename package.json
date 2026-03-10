@@ -1,6 +1,6 @@
 {
   "name": "create-webnami-blog",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "An opinionated blogging website generator optimized for SEO, speed, and performance",
   "type": "module",
   "main": "bin/cli.js",
