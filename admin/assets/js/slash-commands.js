@@ -15,7 +15,7 @@ const COMMANDS = [
   },
 ];
 
-export function initSlashCommands(editor) {
+export function initSlashCommands(editor, { slug, type } = {}) {
   const cm = editor.codemirror;
   let slashPos = null;
   let selectedIdx = 0;
@@ -116,7 +116,7 @@ export function initSlashCommands(editor) {
     if (!cmd) return;
     const pos = slashPos; // capture before hideMenu nulls it
     hideMenu();
-    if (cmd.id === "upload-image") uploadImage(editor, pos);
+    if (cmd.id === "upload-image") uploadImage(editor, pos, { slug, type });
     if (cmd.id === "insert-link") insertLink(editor, pos);
   }
 
@@ -240,7 +240,7 @@ async function insertLink(editor, slashPos) {
 }
 
 // ── Image upload ───────────────────────────────────────────────
-function uploadImage(editor, slashPos) {
+function uploadImage(editor, slashPos, { slug, type } = {}) {
   const cm = editor.codemirror;
 
   // Remove the "/query" text before opening the file dialog
@@ -257,6 +257,10 @@ function uploadImage(editor, slashPos) {
     if (!file) return;
 
     const body = new FormData();
+    if (slug && type) {
+      body.append("slug", slug);
+      body.append("type", type);
+    }
     body.append("image", file);
 
     fetch("/admin/upload", { method: "POST", body })

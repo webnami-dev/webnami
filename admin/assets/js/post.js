@@ -1,7 +1,7 @@
 import { initSlashCommands } from "./slash-commands.js";
 
 const form = document.getElementById("post-form");
-const { slug } = form.dataset;
+const { slug, isDraft } = form.dataset;
 
 const editor = new EasyMDE({
   element: document.getElementById("content"),
@@ -10,7 +10,7 @@ const editor = new EasyMDE({
   toolbar: false,
 });
 
-initSlashCommands(editor);
+initSlashCommands(editor, { slug, type: "posts" });
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -32,6 +32,19 @@ form.addEventListener("submit", async (e) => {
   flashAlert("success", "Post updated successfully.");
   window.location.href = `/admin/posts/${data.slug}`;
 });
+
+if (isDraft === "true") {
+  document.getElementById("publish-btn").addEventListener("click", async () => {
+    const res = await fetch(`/admin/posts/${slug}/publish`, { method: "POST" });
+    const data = await res.json();
+    if (!res.ok) {
+      showAlert("error", data.error || "Failed to publish post.");
+      return;
+    }
+    flashAlert("success", "Post published successfully.");
+    window.location.href = `/admin/posts/${data.slug}`;
+  });
+}
 
 document.getElementById("delete-btn").addEventListener("click", async () => {
   const confirmed = await showConfirm(

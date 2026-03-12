@@ -1,5 +1,8 @@
 import { initSlashCommands } from "./slash-commands.js";
 
+const form = document.getElementById("post-form");
+const { draft: draftName } = form.dataset;
+
 const editor = new EasyMDE({
   element: document.getElementById("content"),
   spellChecker: false,
@@ -7,9 +10,16 @@ const editor = new EasyMDE({
   toolbar: false,
 });
 
-initSlashCommands(editor);
+initSlashCommands(editor, { slug: `_drafts/${draftName}`, type: "posts" });
 
-document.getElementById("post-form").addEventListener("submit", async (e) => {
+async function cancelNewPost() {
+  await fetch(`/admin/posts/new/${draftName}`, { method: "DELETE" });
+  window.location.href = "/admin/posts";
+}
+
+document.getElementById("cancel-btn").addEventListener("click", cancelNewPost);
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const title = document.getElementById("title").value;
   const tags = document.getElementById("tags").value;
@@ -19,7 +29,7 @@ document.getElementById("post-form").addEventListener("submit", async (e) => {
   const resp = await fetch("/admin/posts/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, tags, category, content }),
+    body: JSON.stringify({ title, tags, category, content, draftName }),
   });
   const data = await resp.json();
   if (!resp.ok) {

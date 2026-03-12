@@ -1,14 +1,14 @@
 ---
 layout: post
-title: My first blog with a long title
+title: This is the latest post
 tags:
-  - First
-  - News
-category: Journal
-date: 2025-07-23
+  - Latest
+  - Tech
+category: Blog
+date: 2025-07-25
 ---
 
-![test image](/images/image3.jpg)
+![test image](image2.png)
 
 ## Modo Pyrrha ludunt limina
 
@@ -23,7 +23,7 @@ extrema tamen flebile [voce](http://www.undas.io/), nec in et sororis perfida
 silentum curat debita Aeoliden suo campi? Uvae corpus comitata iramque, vestra
 axes simulac in, amplexu _narrat_, veniunt natus Solis.
 
-![test image](/images/image4.jpg)
+![test image](image4.jpg)
 
 ## Imperat ad in iaculum silvis nunc luctatusque
 

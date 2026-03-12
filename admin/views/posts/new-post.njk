@@ -21,7 +21,7 @@
     </div>
 
     <!-- Form -->
-    <form id="post-form" class="flex flex-col gap-5">
+    <form id="post-form" data-draft="{{ draftName }}" class="flex flex-col gap-5">
 
       <!-- Title -->
       <div>
@@ -50,7 +50,7 @@
       </div>
 
       <!-- Actions -->
-      <div class="pt-1">
+      <div class="flex items-center gap-2 pt-1">
         <button type="submit"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
           style="background-color: var(--color-primary);"
@@ -59,6 +59,14 @@
           >
           <i data-lucide="plus" style="width:14px;height:14px;"></i>
           Create Post
+        </button>
+        <button type="button" id="cancel-btn"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded text-[13px] font-medium transition-colors duration-100"
+          style="color: var(--color-accent); border: 1px solid var(--color-border);"
+          onmouseover="this.style.backgroundColor='var(--color-hover)';"
+          onmouseout="this.style.backgroundColor='';"
+          >
+          Cancel
         </button>
       </div>
 

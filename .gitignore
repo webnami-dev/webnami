@@ -9,6 +9,6 @@ test-results/
 CLAUDE.md
 .claude/
 .playwright-mcp/
-images/favicon.svg
-images/og-image.png
+content/site/favicon.svg
+content/site/og-image.png
 .npmrc

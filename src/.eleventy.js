@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, readdirSync, existsSync } from "fs";
 import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
@@ -37,18 +37,28 @@ export default function (eleventyConfig) {
   <rect width="1200" height="630" fill="${bgColor}" />
   <text x="600" y="315" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="80" font-weight="bold" fill="${textColor}">${siteName}</text>
 </svg>`;
-    await sharp(Buffer.from(og)).png().toFile("images/og-image.png");
+    await sharp(Buffer.from(og)).png().toFile("content/site/og-image.png");
 
     const initials = siteName.slice(0, 2).toUpperCase();
     const favicon = `<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
   <rect width="32" height="32" fill="${bgColor}" rx="4" />
   <text x="16" y="16" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="${textColor}">${initials}</text>
 </svg>`;
-    writeFileSync("images/favicon.svg", favicon);
+    writeFileSync("content/site/favicon.svg", favicon);
   });
 
   eleventyConfig.addGlobalData("config", config);
-  eleventyConfig.addPassthroughCopy({ "./images": "images" });
+  eleventyConfig.addPassthroughCopy({ "./content/site": "images" });
+  const imgGlob = "*.{jpg,jpeg,png,webp,gif,svg}";
+  for (const type of ["posts", "pages"]) {
+    const dir = `./content/${type}`;
+    if (!existsSync(dir)) continue;
+    for (const slug of readdirSync(dir).filter((s) => s !== "_drafts")) {
+      eleventyConfig.addPassthroughCopy({
+        [`${dir}/${slug}/${imgGlob}`]: slug,
+      });
+    }
+  }
   eleventyConfig.addPassthroughCopy({
     [`./themes/${config.theme}/assets/fonts`]: "assets/fonts",
   });
@@ -115,8 +125,6 @@ export default function (eleventyConfig) {
 
   if (isProd) {
     eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-      outputDir: "./_site/images/",
-      urlPath: "/images/",
       // output image formats
       formats: ["webp"],
       // output image widths

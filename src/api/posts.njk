@@ -9,7 +9,8 @@ permalink: /api/posts.json
     "url": "{{ post.url }}",
     "date": "{{ post.date | date('YYYY-MM-DD') }}",
     "category": {{ post.data.category | dump | safe }},
-    "tags": {{ post.data.tags | dump | safe }}
+    "tags": {{ post.data.tags | dump | safe }},
+    "isDraft": {{ "true" if post.data.isDraft else "false" }}
   }{% if not loop.last %},{% endif %}
 {%- endfor %}
 ]

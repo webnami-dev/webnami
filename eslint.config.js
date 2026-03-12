@@ -13,6 +13,7 @@ export default [
     },
     rules: {
       // Possible problems
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
       "no-duplicate-imports": "error",
       "no-self-compare": "error",
       "no-template-curly-in-string": "warn",

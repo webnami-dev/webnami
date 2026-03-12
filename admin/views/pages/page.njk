@@ -4,21 +4,29 @@
   <div>
 
     <!-- Form -->
-    <form id="page-form" data-slug="{{ page.slug }}" class="flex flex-col gap-5">
+    <form id="page-form" data-slug="{{ page.slug }}" data-is-draft="{{ 'true' if page.isDraft else 'false' }}" class="flex flex-col gap-5">
 
       <!-- Title -->
-      <div class="flex items-center">
+      <div class="flex items-center gap-2">
+        {% if page.isDraft %}
+          <span class="text-[11px] font-medium px-1.5 py-0.5 rounded shrink-0"
+            style="background-color: color-mix(in srgb, #f08c00 12%, transparent); color: #f08c00; border: 1px solid color-mix(in srgb, #f08c00 30%, transparent);">
+            Draft
+          </span>
+        {% endif %}
         <input type="text" id="title" name="title" required value="{{ page.title }}"
           class="admin-input text-3xl font-semibold"
           placeholder="Page title">
-          <a href="/{{ page.slug }}" target="_blank" title="Preview page"
-          class="shrink-0 p-1.5 rounded transition-colors duration-100"
-          style="color: var(--color-accent);"
-          onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
-          onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
-          >
-          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
-        </a>
+        {% if not page.isDraft %}
+          <a href="{{ page.url }}" target="_blank" title="Preview page"
+            class="shrink-0 p-1.5 rounded transition-colors duration-100"
+            style="color: var(--color-accent);"
+            onmouseover="this.style.color='var(--color-content)'; this.style.backgroundColor='var(--color-hover)';"
+            onmouseout="this.style.color='var(--color-accent)'; this.style.backgroundColor='';"
+            >
+            <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+          </a>
+        {% endif %}
       </div>
       <span class="text-accent">-----</span>
 
@@ -36,8 +44,19 @@
           onmouseout="this.style.opacity='1';"
           >
           <i data-lucide="save" style="width:12px;height:12px;"></i>
-          Save Changes
+          {{ "Save Draft" if page.isDraft else "Save Changes" }}
         </button>
+        {% if page.isDraft %}
+        <button type="button" id="publish-btn"
+          class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium text-white transition-opacity duration-100"
+          style="background-color: #2f9e44;"
+          onmouseover="this.style.opacity='0.88';"
+          onmouseout="this.style.opacity='1';"
+          >
+          <i data-lucide="send" style="width:12px;height:12px;"></i>
+          Publish
+        </button>
+        {% endif %}
         <button type="button" id="delete-btn"
           class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium transition-colors duration-100"
           style="color: #e03131; border: 1px solid color-mix(in srgb, #e03131 25%, transparent); background-color: var(--color-surface);"

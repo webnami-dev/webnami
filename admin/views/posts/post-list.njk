@@ -19,6 +19,31 @@
       </a>
     </div>
 
+    {% if drafts | length > 0 %}
+      <!-- Drafts -->
+      <div class="mb-6">
+        <p class="text-[11px] font-medium uppercase tracking-widest mb-2" style="color: var(--color-accent);">Drafts</p>
+        <div class="flex flex-col">
+          {% for draft in drafts %}
+            <div class="content-row" style="border-bottom: 1px solid var(--color-border-subtle);">
+              <a href="/admin/posts/{{ draft.slug }}"
+                class="flex-1 text-[13.5px] font-medium truncate pr-4 transition-colors duration-100"
+                style="color: var(--color-content);"
+                onmouseover="this.style.color='var(--color-primary)';"
+                onmouseout="this.style.color='var(--color-content)';"
+                >
+                {{ draft.title if draft.title else draft.slug }}
+              </a>
+              <span class="text-[11px] font-medium px-1.5 py-0.5 rounded shrink-0"
+                style="background-color: color-mix(in srgb, #f08c00 12%, transparent); color: #f08c00; border: 1px solid color-mix(in srgb, #f08c00 30%, transparent);">
+                Draft
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
     {% if data | length > 0 %}
       <!-- Filters -->
       <div class="mb-4 flex flex-col gap-2.5">

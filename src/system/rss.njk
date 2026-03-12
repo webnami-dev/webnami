@@ -17,6 +17,7 @@ eleventyExcludeFromCollections: true
     </image>
     {%- set posts = collections.meta.posts | slice(0, 10) -%}
     {%- for post in posts %}
+    {% if not post.data.isDraft %}
     {%- set absolutePostUrl = post.url | htmlBaseUrl(config.site.url) %}
     <item>
       <title>{{ post.data.title }}</title>
@@ -25,6 +26,7 @@ eleventyExcludeFromCollections: true
       <pubDate>{{ post.date | dateToRfc822 }}</pubDate>
       <guid>{{ absolutePostUrl }}</guid>
     </item>
+    {% endif %}
     {%- endfor %}
   </channel>
 </rss>
