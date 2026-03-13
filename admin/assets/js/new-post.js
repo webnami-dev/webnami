@@ -1,5 +1,3 @@
-import { initSlashCommands } from "./slash-commands.js";
-
 const form = document.getElementById("post-form");
 const { draft: draftName } = form.dataset;
 
@@ -8,9 +6,23 @@ const editor = new EasyMDE({
   spellChecker: false,
   status: false,
   toolbar: false,
+  uploadImage: true,
+  imageUploadFunction(file, onSuccess, onError) {
+    const body = new FormData();
+    body.append("slug", `_drafts/${draftName}`);
+    body.append("type", "posts");
+    body.append("image", file);
+    fetch("/admin/upload", { method: "POST", body })
+      .then((r) => r.json())
+      .then((d) =>
+        d.url ? onSuccess(d.url) : onError(d.error ?? "Upload failed."),
+      )
+      .catch(() => onError("Upload failed."));
+  },
+  imageErrorCallback(msg) {
+    showAlert("error", msg);
+  },
 });
-
-initSlashCommands(editor, { slug: `_drafts/${draftName}`, type: "posts" });
 
 async function cancelNewPost() {
   await fetch(`/admin/posts/new/${draftName}`, { method: "DELETE" });

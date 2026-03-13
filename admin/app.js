@@ -9,6 +9,7 @@ import postsRouter from "./routes/posts.js";
 import settingsRouter from "./routes/settings.js";
 import uploadRouter from "./routes/upload.js";
 import { buildSite } from "./eleventy.js";
+import { initCache } from "./cache.js";
 import log from "./logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -38,6 +39,7 @@ log.success("Vite build complete");
 
 process.env.NODE_ENV = "development";
 await buildSite();
+initCache();
 
 app.use(express.static(path.join(rootDir, "_site")));
 app.use("/admin", express.static(path.join(__dirname, "dist")));

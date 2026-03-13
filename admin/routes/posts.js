@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { buildSite, buildSiteWithVite } from "../eleventy.js";
+import { readPostsCache, upsertPost, removePost } from "../cache.js";
 import log from "../logger.js";
 
 const router = express.Router();
@@ -34,39 +35,13 @@ function toSlug(title) {
     .replace(/(^-|-$)/g, "");
 }
 
-function readPostMeta(dir, slug, isDraft) {
-  const filePath = path.join(dir, slug, "index.md");
-  if (!fs.existsSync(filePath)) return null;
-  const { data } = matter(fs.readFileSync(filePath, "utf-8"));
-  return {
-    slug,
-    title: data.title || "",
-    category: data.category || "",
-    tags: Array.isArray(data.tags) ? data.tags : [],
-    date: data.date || null,
-    url: isDraft ? null : `/${slug}/`,
-    isDraft,
-  };
-}
-
 function listPosts() {
-  const published = [];
-  if (fs.existsSync(postsDir)) {
-    for (const slug of fs
-      .readdirSync(postsDir)
-      .filter((s) => s !== "_drafts")) {
-      const meta = readPostMeta(postsDir, slug, false);
-      if (meta) published.push(meta);
-    }
-    published.sort((a, b) => new Date(b.date) - new Date(a.date));
-  }
-  const drafts = [];
-  if (fs.existsSync(draftsDir)) {
-    for (const slug of fs.readdirSync(draftsDir)) {
-      const meta = readPostMeta(draftsDir, slug, true);
-      if (meta) drafts.push(meta);
-    }
-  }
+  const all = readPostsCache();
+  const published = all
+    .filter((p) => !p.isDraft)
+    .map((p) => ({ ...p, url: `/${p.slug}/` }))
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const drafts = all.filter((p) => p.isDraft).map((p) => ({ ...p, url: null }));
   return { published, drafts };
 }
 
@@ -88,18 +63,28 @@ router.get("/", (req, res) => {
 router.get("/new", (req, res) => {
   const draftName = nextDraftName();
   fs.mkdirSync(path.join(draftsDir, draftName));
+  const date = new Date();
   const frontmatter = {
     layout: "post",
     title: "",
     isDraft: true,
     tags: [],
     category: "",
-    date: new Date(),
+    date,
   };
   fs.writeFileSync(
     path.join(draftsDir, draftName, "index.md"),
     matter.stringify("", frontmatter),
   );
+  upsertPost({
+    title: "",
+    id: draftName,
+    slug: draftName,
+    date,
+    tags: [],
+    category: "",
+    isDraft: true,
+  });
   res.redirect(`/admin/posts/${draftName}`);
 });
 
@@ -133,43 +118,63 @@ router.put("/:slug", async (req, res) => {
     fs.readFileSync(path.join(postDir, "index.md"), "utf-8"),
   );
 
+  const parsedTags = tags
+    .split(",")
+    .map((t) => t.trim())
+    .filter(Boolean);
+
   // Drafts: save title/content in place, no id field
   if (existingFile.data.isDraft) {
+    const date = existingFile.data.date || new Date();
     const frontmatter = {
       layout: "post",
       title,
-      tags: tags
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean),
+      tags: parsedTags,
       category,
-      date: existingFile.data.date || new Date(),
+      date,
       isDraft: true,
     };
     fs.writeFileSync(
       path.join(postDir, "index.md"),
       matter.stringify(content || "", frontmatter),
     );
+    upsertPost({
+      title,
+      id: slug,
+      slug,
+      date,
+      tags: parsedTags,
+      category,
+      isDraft: true,
+    });
     log.success(`Draft saved: "${title}" (${slug})`);
     return res.json({ slug });
   }
 
   // Published posts: update title/tags/category/content/uri — id and folder are stable
+  const date = existingFile.data.date || new Date();
+  const id = existingFile.data.id || slug;
   const frontmatter = {
     layout: "post",
     title,
-    tags: tags
-      .split(",")
-      .map((t) => t.trim())
-      .filter(Boolean),
+    tags: parsedTags,
     category,
-    date: existingFile.data.date || new Date(),
-    id: existingFile.data.id || slug,
+    date,
+    id,
   };
   fs.writeFileSync(
     path.join(postDir, "index.md"),
     matter.stringify(content || "", frontmatter),
   );
+  upsertPost({
+    title,
+    id,
+    slug,
+    date,
+    tags: parsedTags,
+    category,
+    isDraft: false,
+  });
   await buildSite();
   log.success(`Post updated: "${title}" (${slug})`);
   res.json({ slug });
@@ -208,6 +213,16 @@ router.post("/:slug/publish", async (req, res) => {
     path.join(postsDir, newSlug, "index.md"),
     matter.stringify(file.content, frontmatter),
   );
+  removePost(draftSlug);
+  upsertPost({
+    title: frontmatter.title,
+    id: newSlug,
+    slug: newSlug,
+    date: frontmatter.date,
+    tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
+    category: frontmatter.category || "",
+    isDraft: false,
+  });
   await buildSite();
   log.success(`Post published: "${frontmatter.title}" (${newSlug})`);
   res.json({ slug: newSlug });
@@ -238,6 +253,7 @@ router.delete("/:slug", async (req, res) => {
   if (fs.existsSync(dirPath)) {
     fs.rmSync(dirPath, { recursive: true });
   }
+  removePost(slug);
   if (!isDraftSlug) await buildSiteWithVite();
   log.success(`Post deleted: ${slug}`);
   res.json({ success: true });

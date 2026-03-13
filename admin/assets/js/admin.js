@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Image,
   Link,
+  Send,
 } from "lucide";
 import Alpine from "alpinejs";
 import EasyMDE from "easymde";
@@ -41,6 +42,7 @@ const icons = {
   ChevronRight,
   Image,
   Link,
+  Send,
 };
 
 createIcons({ icons });

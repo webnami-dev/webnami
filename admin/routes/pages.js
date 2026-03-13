@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { buildSite, buildSiteWithVite } from "../eleventy.js";
+import { readPagesCache, upsertPage, removePage } from "../cache.js";
 import log from "../logger.js";
 
 const router = express.Router();
@@ -34,35 +35,12 @@ function toSlug(title) {
     .replace(/(^-|-$)/g, "");
 }
 
-function readPageMeta(dir, slug, isDraft) {
-  const filePath = path.join(dir, slug, "index.md");
-  if (!fs.existsSync(filePath)) return null;
-  const { data } = matter(fs.readFileSync(filePath, "utf-8"));
-  return {
-    slug,
-    title: data.title || "",
-    url: isDraft ? null : `/${slug}/`,
-    isDraft,
-  };
-}
-
 function listPages() {
-  const published = [];
-  if (fs.existsSync(pagesDir)) {
-    for (const slug of fs
-      .readdirSync(pagesDir)
-      .filter((s) => s !== "_drafts")) {
-      const meta = readPageMeta(pagesDir, slug, false);
-      if (meta) published.push(meta);
-    }
-  }
-  const drafts = [];
-  if (fs.existsSync(draftsDir)) {
-    for (const slug of fs.readdirSync(draftsDir)) {
-      const meta = readPageMeta(draftsDir, slug, true);
-      if (meta) drafts.push(meta);
-    }
-  }
+  const all = readPagesCache();
+  const published = all
+    .filter((p) => !p.isDraft)
+    .map((p) => ({ ...p, url: `/${p.slug}/` }));
+  const drafts = all.filter((p) => p.isDraft).map((p) => ({ ...p, url: null }));
   return { published, drafts };
 }
 
@@ -78,16 +56,13 @@ router.get("/", (req, res) => {
 router.get("/new", (req, res) => {
   const draftName = nextDraftName();
   fs.mkdirSync(path.join(draftsDir, draftName));
-  const frontmatter = {
-    layout: "page",
-    title: "",
-    isDraft: true,
-    date: new Date(),
-  };
+  const date = new Date();
+  const frontmatter = { layout: "page", title: "", isDraft: true, date };
   fs.writeFileSync(
     path.join(draftsDir, draftName, "index.md"),
     matter.stringify("", frontmatter),
   );
+  upsertPage({ title: "", slug: draftName, id: draftName, isDraft: true });
   res.redirect(`/admin/pages/${draftName}`);
 });
 
@@ -121,31 +96,26 @@ router.put("/:slug", async (req, res) => {
 
   // Drafts: save in place, no id field
   if (existingFile.data.isDraft) {
-    const frontmatter = {
-      layout: "page",
-      title,
-      date: existingFile.data.date || new Date(),
-      isDraft: true,
-    };
+    const date = existingFile.data.date || new Date();
+    const frontmatter = { layout: "page", title, date, isDraft: true };
     fs.writeFileSync(
       path.join(pageDir, "index.md"),
       matter.stringify(content || "", frontmatter),
     );
+    upsertPage({ title, slug, id: slug, isDraft: true });
     log.success(`Draft saved: "${title}" (${slug})`);
     return res.json({ slug });
   }
 
   // Published pages: update title/content/uri — id and folder are stable
-  const frontmatter = {
-    layout: "page",
-    title,
-    date: existingFile.data.date || new Date(),
-    id: existingFile.data.id || slug,
-  };
+  const date = existingFile.data.date || new Date();
+  const id = existingFile.data.id || slug;
+  const frontmatter = { layout: "page", title, date, id };
   fs.writeFileSync(
     path.join(pageDir, "index.md"),
     matter.stringify(content || "", frontmatter),
   );
+  upsertPage({ title, slug, id, isDraft: false });
   await buildSite();
   log.success(`Page updated: "${title}" (${slug})`);
   res.json({ slug });
@@ -184,6 +154,13 @@ router.post("/:slug/publish", async (req, res) => {
     path.join(pagesDir, newSlug, "index.md"),
     matter.stringify(file.content, frontmatter),
   );
+  removePage(draftSlug);
+  upsertPage({
+    title: frontmatter.title,
+    slug: newSlug,
+    id: newSlug,
+    isDraft: false,
+  });
   await buildSite();
   log.success(`Page published: "${frontmatter.title}" (${newSlug})`);
   res.json({ slug: newSlug });
@@ -213,6 +190,7 @@ router.delete("/:slug", async (req, res) => {
   if (fs.existsSync(dirPath)) {
     fs.rmSync(dirPath, { recursive: true });
   }
+  removePage(slug);
   if (!isDraftSlug) await buildSiteWithVite();
   log.success(`Page deleted: ${slug}`);
   res.json({ success: true });
