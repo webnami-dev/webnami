@@ -1,5 +1,5 @@
 ---
-layout: "base.njk"
+layout: "postlist.njk"
 pagination:
   data: collections.meta.tagPages
   size: 1
@@ -10,5 +10,10 @@ eleventyComputed:
   description: "Posts tagged with {{ tagPage.name }}{% if tagPage.page > 1 %} (Page {{ tagPage.page }}){% endif %}"
 ---
 
-{% import "macros/pages.njk" as pages %}
-{{ pages.renderTagPage(tagPage) }}
+{% import "macros/card.njk" as c with context %}
+{% import "macros/navigation.njk" as n with context %}
+{% import "macros/common.njk" as common with context %}
+
+{{ common.pageHeading("Tag", tagPage.name, tagPage.page) }}
+{{ c.cardsGrid(tagPage, false) }}
+{{ n.pagination(tagPage, "tags") }}

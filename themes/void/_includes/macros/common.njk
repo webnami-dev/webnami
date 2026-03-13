@@ -1,0 +1,7 @@
+{% macro pageHeading(label, name, page) %}
+<div class="max-w-2xl mx-auto px-5 mb-8">
+  <h1 class="font-mono text-base font-medium text-content">
+    {{ label }}{% if name %} : {{ name }}{% endif %}{% if page and page > 1 %} - Page={{ page }}{% endif %}
+  </h1>
+</div>
+{% endmacro %}

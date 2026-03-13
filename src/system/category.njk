@@ -1,5 +1,5 @@
 ---
-layout: "base.njk"
+layout: "postlist.njk"
 pagination:
   data: collections.meta.categoryPages
   size: 1
@@ -10,6 +10,12 @@ eleventyComputed:
   description: "Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} (Page {{ categoryPage.page }}){% endif %}"
 ---
 
-{% import "macros/pages.njk" as pages with context %}
-{{ pages.renderCategoryPage(categoryPage) }}
+{% import "macros/card.njk" as c with context %}
+{% import "macros/navigation.njk" as n with context %}
+{% import "macros/common.njk" as common with context %}
+
+{{ common.pageHeading("Category", categoryPage.name, categoryPage.page) }}
+{%- include 'partials/categorynav.njk' -%}
+{{ c.cardsGrid(categoryPage, false) }}
+{{ n.pagination(categoryPage, "category") }}
 
