@@ -1,3 +1,5 @@
+import { getToolbar } from "./toolbar.js";
+
 const form = document.getElementById("page-form");
 const { draft: draftName } = form.dataset;
 
@@ -5,7 +7,7 @@ const editor = new EasyMDE({
   element: document.getElementById("content"),
   spellChecker: false,
   status: false,
-  toolbar: false,
+  toolbar: getToolbar(),
   uploadImage: true,
   imageUploadFunction(file, onSuccess, onError) {
     const body = new FormData();

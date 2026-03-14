@@ -11,7 +11,6 @@
     "bin/",
     "content/",
     "system/",
-    "api/",
     "_metadata/"
   ],
   "keywords": [

@@ -1,5 +1,6 @@
 {
   "theme": "void",
+  "author": "",
   "themeSettings": {
     "headerFont": "Geist",
     "bodyFont": "Inter"

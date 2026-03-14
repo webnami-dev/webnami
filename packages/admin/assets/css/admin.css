@@ -174,10 +174,17 @@ html {
 }
 
 .EasyMDEContainer .editor-toolbar {
-  border-radius: 6px 6px 0 0;
-  border-bottom: none;
+  border-radius: 2px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 14px;
   opacity: 1;
   padding: 4px 14px;
+}
+
+.EasyMDEContainer .editor-toolbar button.heading-1:after,
+.EasyMDEContainer .editor-toolbar button.heading-2:after,
+.EasyMDEContainer .editor-toolbar button.heading-3:after {
+  content: none;
 }
 
 .EasyMDEContainer .editor-toolbar button {

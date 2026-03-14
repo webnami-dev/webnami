@@ -16,9 +16,6 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add("*.md");
   eleventyConfig.ignores.add("*.njk");
   eleventyConfig.ignores.add("themes/**");
-  if (isProd) {
-    eleventyConfig.ignores.add("api/**");
-  }
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight, {
     preAttributes: { tabindex: 0 },
