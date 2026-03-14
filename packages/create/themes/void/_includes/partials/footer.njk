@@ -1,0 +1,31 @@
+{% macro socialLink(href, iconName, label) %}
+<a
+  href="{{ href }}"
+  class="hover:text-primary-500 transition-colors"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="{{ label }}"
+>{% icon iconName, "w-5 h-5" | safe %}</a>
+{% endmacro %}
+
+{% macro builtWith() %}
+<div class="mt-3 font-mono text-xs text-accent/40">
+  <span class="text-primary-500/40"></span> Built with <a class="hover:text-primary-500 transition-colors text-accent/60" href="https://webnami.in" target="_blank" rel="noopener">webnami</a>
+</div>
+{% endmacro %}
+
+<footer class="bg-footer border-t border-accent/10">
+  <div class="max-w-2xl mx-auto px-5 py-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-sm text-accent">
+      <div class="flex items-center gap-3">
+        {{ socialLink("/rss.xml", "rss", "RSS") }}
+        {% for link in config.footer.socialLinks %}
+          {% if link.href %}
+            {{ socialLink(link.href, link.name, link.name | title) }}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {{ builtWith() }}
+  </div>
+</footer>

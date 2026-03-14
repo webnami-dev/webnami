@@ -1,0 +1,73 @@
+{% macro themeToggleBtn(action, icon, showWhen, label) %}
+<button
+  @click="{{ action }}"
+  class="p-1.5 text-accent hover:text-primary-500 transition-colors font-mono text-xs"
+  aria-label="{{ label }}"
+  x-show="{{ showWhen }}"
+>
+  {% icon icon, "w-4 h-4" | safe %}
+</button>
+{% endmacro %}
+
+{% macro desktopNavLink(url, title, isFirst) %}
+{% if not isFirst %}<span class="text-accent/30 mx-1">/</span>{% endif %}
+<a href="{{ url }}" class="text-accent hover:text-primary-500 px-1 py-1 transition-colors">{{ title }}</a>
+{% endmacro %}
+
+{% macro mobileNavLink(url, title) %}
+<a href="{{ url }}" @click="open = false" class="block text-accent hover:text-primary-500 py-1.5 transition-colors">{{ title }}</a>
+{% endmacro %}
+
+{% set pages = collections.meta.pages | headerPages %}
+
+<div x-data="{ open: false }">
+  <nav class="border-b border-accent/10">
+    <div class="max-w-2xl mx-auto px-5">
+      <div class="flex justify-between items-center h-12">
+        <a href="/" class="font-mono text-base font-medium text-content hover:text-primary-500 transition-colors">
+          {{ config.site.name }}
+        </a>
+
+        <div class="flex items-center gap-1">
+          <nav class="hidden md:flex items-center font-mono text-sm">
+            {% for p in pages %}
+            {{ desktopNavLink(p.url, p.data.title, loop.first) }}
+            {% endfor %}
+          </nav>
+
+          <div x-data class="ml-2">
+            {{ themeToggleBtn("$store.theme.lightTheme()", "sun", "$store.theme.dark", "Switch to light mode") }}
+            {{ themeToggleBtn("$store.theme.darkTheme()", "moon", "!$store.theme.dark", "Switch to dark mode") }}
+          </div>
+
+          {% if pages.length %}
+          <button
+            @click="open = !open"
+            class="md:hidden p-1.5 text-accent hover:text-primary-500 transition-colors"
+            aria-label="Toggle menu"
+            :aria-expanded="open"
+          >
+            <span x-show="!open">{% icon "menu", "w-4 h-4" | safe %}</span>
+            <span x-show="open">{% icon "x", "w-4 h-4" | safe %}</span>
+          </button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {% if pages.length %}
+  <div
+    x-show="open"
+    x-collapse
+    @keydown.escape.window="open = false"
+    class="md:hidden bg-background border-b border-accent/10 overflow-hidden"
+  >
+    <div class="max-w-2xl mx-auto px-5 py-3 font-mono text-sm">
+      {% for p in pages %}
+      {{ mobileNavLink(p.url, p.data.title) }}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,16 @@
+/* Slate theme - cool professional blue-grays */
+:root[data-theme="light"] {
+  --color-primary: #475569;
+  --color-background: #f8fafc;
+  --color-content: #1a1a2e;
+  --color-accent: #5c7080;
+  --color-footer: #eef2f7;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #94a3b8;
+  --color-background: #0f172a;
+  --color-content: #e6edf3;
+  --color-accent: #7b9db8;
+  --color-footer: #090f1c;
+}

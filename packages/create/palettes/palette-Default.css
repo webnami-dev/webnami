@@ -1,0 +1,15 @@
+:root[data-theme="light"] {
+  --color-primary: #3b5bdb;
+  --color-background: #fafafa;
+  --color-content: #1a1a2e;
+  --color-accent: #6b7280;
+  --color-footer: #f0f0f0;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #4c6ef5;
+  --color-background: #0a0a0a;
+  --color-content: #e6edf3;
+  --color-accent: #7d8590;
+  --color-footer: #060606;
+}

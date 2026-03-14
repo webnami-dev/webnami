@@ -1,0 +1,16 @@
+/* Forest theme - muted greens and earthy naturals */
+:root[data-theme="light"] {
+  --color-primary: #16a34a;
+  --color-background: #f4f7f2;
+  --color-content: #1a1a2e;
+  --color-accent: #4a7a54;
+  --color-footer: #e4ede0;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #4ade80;
+  --color-background: #0f1a12;
+  --color-content: #e6edf3;
+  --color-accent: #6a9e74;
+  --color-footer: #0a1209;
+}

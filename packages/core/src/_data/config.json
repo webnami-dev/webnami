@@ -1,0 +1,49 @@
+{
+  "theme": "void",
+  "themeSettings": {
+    "headerFont": "Geist",
+    "bodyFont": "Inter"
+  },
+  "postsPerPage": 30,
+  "site": {
+    "name": "WebNami",
+    "url": "http://localhost:3000"
+  },
+  "homepage": {
+    "heading": "WebNami - a simple and lightweight blogging tool"
+  },
+  "footer": {
+    "socialLinks": [
+      {
+        "name": "github",
+        "placeholder": "https://github.com/username",
+        "href": ""
+      },
+      {
+        "name": "twitter",
+        "placeholder": "https://x.com/username",
+        "href": ""
+      },
+      {
+        "name": "linkedin",
+        "placeholder": "https://linkedin.com/in/username",
+        "href": ""
+      },
+      {
+        "name": "youtube",
+        "placeholder": "https://youtube.com/@channel",
+        "href": ""
+      },
+      {
+        "name": "instagram",
+        "placeholder": "https://instagram.com/username",
+        "href": ""
+      },
+      {
+        "name": "mail",
+        "placeholder": "mailto:hello@mail.com",
+        "href": ""
+      }
+    ]
+  }
+}

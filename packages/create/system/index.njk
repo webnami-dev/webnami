@@ -1,0 +1,34 @@
+---
+layout: "postlist.njk"
+pagination:
+  data: collections.meta.paginatedPosts
+  size: 1
+  alias: postsPage
+permalink: "{% if postsPage.page == 1 %}/{% else %}/posts/{{ postsPage.page }}/{% endif %}"
+eleventyComputed:
+  title: "{% if postsPage.page == 1 %}{{ config.site.name }}{% else %}{{ config.site.name }} - Page {{ postsPage.page }}{% endif %}"
+  description: "{{ (config.homepage.heading or ('Thoughts, notes, and writing from ' + config.site.name)) | singleLine }}"
+---
+
+{% import "macros/navigation.njk" as n with context %}
+{% import "macros/card.njk" as c with context %}
+{% import "macros/common.njk" as common with context %}
+
+
+{% if postsPage.page == 1 %}
+  {# Page 1: heading + category nav + post list #}
+  {% if config.homepage.heading %}
+    {{ common.pageHeading(config.homepage.heading) }}
+  {% endif %}
+  {%- include 'partials/categorynav.njk' -%}
+  {{ c.featuredCard(postsPage.items[0]) }}
+  {{ c.cardsGrid(postsPage, true) }}
+  {{ n.paginationHomePage(postsPage) }}
+{% else %}
+  {# Page 2+: just the list #}
+  {{ common.pageHeading("Posts", null, postsPage.page) }}
+  {{ c.cardsGrid(postsPage, false) }}
+  {{ n.pagination(postsPage, "posts") }}
+{% endif %}
+
+

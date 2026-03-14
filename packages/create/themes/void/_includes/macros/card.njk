@@ -1,0 +1,73 @@
+{% macro featuredCard(post) %}
+{% if post %}
+<div class="w-full max-w-2xl mx-auto px-5">
+  {% set meta = post | postMeta %}
+  <div>
+    <a
+      href="{{ post.url }}"
+      class="block py-3 border-b border-accent/10 hover:border-primary-500/30 transition-colors"
+    >
+      <div class="flex gap-3 items-center">
+        <div class="min-w-0 flex-grow">
+          <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+            <time
+              datetime="{{ post.data.date | date('YYYY-MM-DD') }}"
+              class="font-mono text-sm text-accent shrink-0 tabular-nums"
+            >{{ post.data.date | date('YYYY-MM-DD') }}</time>
+            <div class="min-w-0 flex-grow">
+              <div class="flex items-baseline gap-2 min-w-0">
+                <h2 class="font-mono text-md font-medium text-content group-hover:text-primary-500 transition-colors">{{ post.data.title }}</h2>
+              </div>
+              <p class="text-sm text-accent mt-1 line-clamp-2">{{ meta.excerpt }}</p>
+              {% if post.data.category %}
+              <span class="font-mono text-sm text-primary-500 shrink-0">{{ post.data.category }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro postCard(post) %}
+{% set meta = post | postMeta %}
+<div>
+  <a
+    href="{{ post.url }}"
+    class="block py-3 border-b border-accent/10 hover:border-primary-500/30 transition-colors"
+  >
+    <div class="flex gap-3 items-center">
+      <div class="min-w-0 flex-grow">
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <time
+            datetime="{{ post.data.date | date('YYYY-MM-DD') }}"
+            class="font-mono text-sm text-accent shrink-0 tabular-nums"
+          >{{ post.data.date | date('YYYY-MM-DD') }}</time>
+          <div class="min-w-0 flex-grow">
+            <div class="flex items-baseline gap-2 min-w-0">
+              <h2 class="font-mono text-md font-medium text-content group-hover:text-primary-500 transition-colors">{{ post.data.title }}</h2>
+            </div>
+            <p class="text-sm text-accent mt-1 line-clamp-2">{{ meta.excerpt }}</p>
+            {% if post.data.category %}
+            <span class="font-mono text-sm text-primary-500 shrink-0">{{ post.data.category }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+{% endmacro %}
+
+{% macro cardsGrid(posts, skipFirst) %}
+<div class="w-full max-w-2xl mx-auto px-5">
+  {% for post in posts.items %}
+  {% if not (skipFirst and loop.first) %}
+  {{ postCard(post) }}
+  {% endif %}
+  {% endfor %}
+</div>
+{% endmacro %}

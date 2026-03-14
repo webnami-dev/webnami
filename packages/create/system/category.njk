@@ -1,0 +1,21 @@
+---
+layout: "postlist.njk"
+pagination:
+  data: collections.meta.categoryPages
+  size: 1
+  alias: categoryPage
+permalink: "/category/{{ categoryPage.name | slugify }}/{% if categoryPage.page > 1 %}{{ categoryPage.page }}/{% endif %}"
+eleventyComputed:
+  title: "Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} - Page {{ categoryPage.page }}{% endif %}"
+  description: "Posts in category: {{ categoryPage.name }}{% if categoryPage.page > 1 %} (Page {{ categoryPage.page }}){% endif %}"
+---
+
+{% import "macros/card.njk" as c with context %}
+{% import "macros/navigation.njk" as n with context %}
+{% import "macros/common.njk" as common with context %}
+
+{{ common.pageHeading("Category", categoryPage.name, categoryPage.page) }}
+{%- include 'partials/categorynav.njk' -%}
+{{ c.cardsGrid(categoryPage, false) }}
+{{ n.pagination(categoryPage, "category") }}
+

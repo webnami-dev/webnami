@@ -1,0 +1,15 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>{{ config.site.url }}/sitemap-pages.xml</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>{{ config.site.url }}/sitemap-posts.xml</loc>
+    <lastmod>{{ "" | date('iso') }}</lastmod>
+  </sitemap>
+</sitemapindex>

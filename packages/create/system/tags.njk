@@ -1,0 +1,19 @@
+---
+layout: "postlist.njk"
+pagination:
+  data: collections.meta.tagPages
+  size: 1
+  alias: tagPage
+permalink: "/tags/{{ tagPage.name | slugify }}/{% if tagPage.page > 1 %}{{ tagPage.page }}/{% endif %}"
+eleventyComputed:
+  title: "Posts tagged: {{ tagPage.name }}{% if tagPage.page > 1 %} - Page {{ tagPage.page }}{% endif %}"
+  description: "Posts tagged with {{ tagPage.name }}{% if tagPage.page > 1 %} (Page {{ tagPage.page }}){% endif %}"
+---
+
+{% import "macros/card.njk" as c with context %}
+{% import "macros/navigation.njk" as n with context %}
+{% import "macros/common.njk" as common with context %}
+
+{{ common.pageHeading("Tag", tagPage.name, tagPage.page) }}
+{{ c.cardsGrid(tagPage, false) }}
+{{ n.pagination(tagPage, "tags") }}

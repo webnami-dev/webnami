@@ -1,0 +1,66 @@
+---
+layout: "base.njk"
+---
+{% import "macros/navigation.njk" as n with context %}
+
+{% macro shareLink(href, iconName) %}
+<a href="{{ href }}" class="hover:text-primary-500 transition-colors" target="_blank" rel="noopener noreferrer">
+  {% icon iconName, "w-4 h-4" | safe %}
+</a>
+{% endmacro %}
+
+{% macro shareIcons(url) %}
+<div class="flex items-center gap-4 text-xs font-mono text-accent">
+  {{ shareLink("https://twitter.com/intent/tweet?url=" + url, "twitter") }}
+  {{ shareLink("https://www.linkedin.com/shareArticle?mini=true&url=" + url, "linkedin") }}
+  {{ shareLink("https://www.facebook.com/sharer/sharer.php?u=" + url, "facebook") }}
+</div>
+{% endmacro %}
+
+{% macro postTags(tags) %}
+{% if tags.length > 0 %}
+<div class="not-prose mt-12 pt-6 border-t border-dashed border-accent/20">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="font-mono text-xs text-accent">Tags:</span>
+    {% for tag in tags %}
+    <a href="/tags/{{ tag | slugify }}" class="font-mono text-xs px-2 py-0.5 border            border-accent/30 transition-colors
+    duration-200 hover:border-primary-500         
+    hover:text-primary-500 text-accent hover:text-primary-500">{{ tag }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+<main class="min-h-screen py-12">
+  <article
+    class="max-w-2xl mx-auto px-5 sm:px-6 prose prose-base prose-invert prose-headings:font-semibold prose-strong:text-content prose-ol:text-content prose-li:text-content prose-ul:text-content prose-headings:text-content prose-headings:font-mono prose-p:text-content prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline"
+  >
+    {# Post header - styled like a file comment block #}
+    <header class="not-prose mb-10 border-b border-dashed border-accent/20 pb-8">
+      <div class="font-mono text-xs text-accent mb-4 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <time datetime="{{ date | date('YYYY-MM-DD') }}">{{ date | date('YYYY-MM-DD') }}</time>
+        <span class="text-accent/40">|</span>
+        {% if category %}
+        <a href="/category/{{ category | slugify }}" class="text-primary-500 hover:text-primary-300 transition-colors">{{ category }}</a>
+        {% endif %}
+      </div>
+      <h1 class="font-mono text-2xl sm:text-3xl font-medium text-content leading-tight mb-4">{{ title }}</h1>
+      {{ shareIcons(config.site.url + page.url) }}
+    </header>
+
+    {# Post content #}
+    {% set meta = content | postMeta %}
+    {{ meta.contentAnchorLinks | safe }}
+
+    {# Tags #}
+    {{ postTags(tags) }}
+
+    {# Previous / Next navigation #}
+    {%- if collections.meta.posts %}
+    {%- set previousPost = collections.meta.posts | getPreviousCollectionItem %}
+    {%- set nextPost = collections.meta.posts | getNextCollectionItem %}
+    {{ n.postNavigation(previousPost, nextPost) }}
+    {%- endif %}
+  </article>
+</main>

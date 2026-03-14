@@ -42,7 +42,7 @@ export default [
   },
   // Browser scripts (admin frontend)
   {
-    files: ["admin/assets/js/**/*.js"],
+    files: ["admin/assets/js/**/*.js", "packages/admin/assets/js/**/*.js"],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -59,7 +59,11 @@ export default [
   },
   // Theme frontend assets
   {
-    files: ["themes/**/assets/**/*.js"],
+    files: [
+      "themes/**/assets/**/*.js",
+      "sandbox/themes/**/assets/**/*.js",
+      "packages/**/themes/**/assets/**/*.js",
+    ],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -67,6 +71,12 @@ export default [
     },
   },
   {
-    ignores: ["_site/", "node_modules/", "admin/dist/", ".cache/"],
+    ignores: [
+      "_site/",
+      "node_modules/",
+      "admin/dist/",
+      "packages/*/dist/",
+      ".cache/",
+    ],
   },
 ];

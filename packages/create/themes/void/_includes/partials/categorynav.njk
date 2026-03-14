@@ -1,0 +1,17 @@
+{% macro navTab(href, label, isActive) %}
+<a
+  href="{{ href }}"
+  class="px-2.5 py-1 whitespace-nowrap transition-colors {% if isActive %} text-background bg-primary-500 font-medium {% else %} text-accent hover:text-primary-500 border border-accent/20 hover:border-primary-500/40 {% endif %}"
+>{{ label }}</a>
+{% endmacro %}
+
+{% if collections.meta.categoryList.length > 0 %}
+<div class="max-w-2xl mx-auto px-5 mb-8 overflow-x-auto">
+  <div class="flex items-center gap-1 font-mono text-xs min-w-max">
+    {{ navTab("/", "All", page.url == '/' or page.url.includes('/posts/')) }}
+    {% for category in collections.meta.categoryList %}
+    {{ navTab("/category/" + (category | slug) + "/", category, page.url == '/category/' + (category | slug) + '/') }}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
