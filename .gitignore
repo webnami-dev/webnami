@@ -4,9 +4,9 @@ node_modules/
 sandbox/_site/
 \_site/
 .cache/*
-admin/.cache/
+packages/admin/.cache/
 .DS_Store
-admin/dist/
+packages/admin/dist/
 test-results/
 CLAUDE.md
 .claude/
