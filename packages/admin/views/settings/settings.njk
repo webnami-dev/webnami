@@ -13,6 +13,31 @@
       <section class="settings-section">
         <div class="flex flex-col gap-2">
           <div class="flex items-center gap-2">
+            <span class="w-28 shrink-0 text-sm" style="color: var(--color-accent);">Logo</span>
+            <div class="flex items-center gap-3">
+              {% if config.site.logo %}
+                <img id="logo-preview" src="/admin/site/{{ config.site.logo }}" alt="Logo" class="h-8 object-contain rounded">
+              {% else %}
+                <img id="logo-preview" src="" alt="" class="h-8 object-contain rounded hidden">
+              {% endif %}
+              <label class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium cursor-pointer transition-colors duration-100"
+                style="color: var(--color-accent); border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);"
+                onmouseover="this.style.backgroundColor='var(--color-hover)';"
+                onmouseout="this.style.backgroundColor='';">
+                <i data-lucide="upload" style="width:12px;height:12px;"></i>
+                Upload Logo
+                <input type="file" id="logo-input" accept="image/jpeg,image/png,image/webp,image/svg+xml" class="sr-only">
+              </label>
+              {% if config.site.logo %}
+                <button type="button" id="logo-remove"
+                  class="text-[12px] transition-colors duration-100"
+                  style="color: var(--color-accent);"
+                  onmouseover="this.style.color='#e03131';"
+                  onmouseout="this.style.color='var(--color-accent)';">Remove</button>
+              {% endif %}
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
             <span class="w-28 shrink-0 text-sm" style="color: var(--color-accent);">Blog Name</span>
             <input type="text" id="blogName" name="blogName" value="{{ config.site.name }}" class="admin-input text-sm">
           </div>

@@ -4,6 +4,7 @@ import nunjucks from "nunjucks";
 import path from "path";
 import { fileURLToPath } from "url";
 import { build as viteBuild } from "vite";
+import adminRouter from "./src/routes/admin.js";
 import pagesRouter from "./src/routes/pages.js";
 import postsRouter from "./src/routes/posts.js";
 import settingsRouter from "./src/routes/settings.js";
@@ -48,12 +49,10 @@ initCache();
 
 app.use(express.static(path.join(rootDir, "_site")));
 app.use("/admin", express.static(path.join(__dirname, "dist")));
+app.use("/admin/site", express.static(path.join(rootDir, "content/site")));
 log.info("Static file middleware mounted");
 
-app.get("/admin", (req, res) => {
-  res.redirect("/admin/posts");
-});
-
+app.use("/admin", adminRouter);
 app.use("/admin/pages", pagesRouter);
 app.use("/admin/posts", postsRouter);
 app.use("/admin/settings", settingsRouter);

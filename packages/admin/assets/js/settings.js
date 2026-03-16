@@ -1,5 +1,44 @@
 const form = document.getElementById("settings-form");
 
+// ── Logo upload ──
+const logoInput = document.getElementById("logo-input");
+const logoRemove = document.getElementById("logo-remove");
+
+if (logoInput) {
+  logoInput.addEventListener("change", async () => {
+    const file = logoInput.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("logo", file);
+
+    const res = await fetch("/admin/settings/logo", {
+      method: "POST",
+      body: formData,
+    });
+    if (res.ok) {
+      flashAlert("success", "Logo uploaded.");
+      window.location.href = "/admin/settings";
+    } else {
+      const { error } = await res.json();
+      showAlert("error", error ?? "Logo upload failed.");
+      logoInput.value = "";
+    }
+  });
+}
+
+if (logoRemove) {
+  logoRemove.addEventListener("click", async () => {
+    const res = await fetch("/admin/settings/logo", { method: "DELETE" });
+    if (res.ok) {
+      flashAlert("success", "Logo removed.");
+      window.location.href = "/admin/settings";
+    } else {
+      showAlert("error", "Failed to remove logo.");
+    }
+  });
+}
+
 // ── Collect rows into array of {name, placeholder, href} ──
 function collectLinks(container, nameClass, hrefClass) {
   return [...container.querySelectorAll(`.${nameClass}`)]
@@ -50,6 +89,7 @@ form.addEventListener("submit", async (e) => {
     } else if (data.nameChanged) {
       showAlert("warning", data.message);
     } else {
+      window.markSiteDirty();
       flashAlert("success", "Settings saved successfully.");
       window.location.reload();
     }

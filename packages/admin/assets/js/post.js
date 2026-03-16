@@ -43,6 +43,7 @@ form.addEventListener("submit", async (e) => {
     showAlert("error", data.error || "Failed to update post.");
     return;
   }
+  window.markSiteDirty();
   flashAlert("success", "Post updated successfully.");
   window.location.href = `/admin/posts/${data.slug}`;
 });
@@ -55,6 +56,7 @@ if (isDraft === "true") {
       showAlert("error", data.error || "Failed to publish post.");
       return;
     }
+    window.markSiteDirty();
     flashAlert("success", "Post published successfully.");
     window.location.href = `/admin/posts/${data.slug}`;
   });
@@ -70,6 +72,7 @@ document.getElementById("delete-btn").addEventListener("click", async () => {
     showAlert("error", "Failed to delete post.");
     return;
   }
+  window.markSiteDirty();
   flashAlert("success", "Post deleted successfully.");
   window.location.href = "/admin/posts";
 });

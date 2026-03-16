@@ -8,6 +8,7 @@
   "postsPerPage": 30,
   "site": {
     "name": "WebNami",
+    "logo": "",
     "url": "http://localhost:3000"
   },
   "homepage": {

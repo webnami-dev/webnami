@@ -1,8 +1,43 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
+import multer from "multer";
 import { buildSite } from "../eleventy.js";
 import log from "../logger.js";
+
+const siteDir = path.resolve("content/site");
+const ALLOWED_LOGO_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/svg+xml",
+]);
+const LOGO_EXT_MAP = {
+  "image/jpeg": ".jpg",
+  "image/png": ".png",
+  "image/webp": ".webp",
+  "image/svg+xml": ".svg",
+};
+
+const logoStorage = multer.diskStorage({
+  destination(_req, _file, cb) {
+    if (!fs.existsSync(siteDir)) fs.mkdirSync(siteDir, { recursive: true });
+    cb(null, siteDir);
+  },
+  filename(_req, file, cb) {
+    const ext = LOGO_EXT_MAP[file.mimetype] ?? path.extname(file.originalname);
+    cb(null, `logo${ext}`);
+  },
+});
+
+const uploadLogo = multer({
+  storage: logoStorage,
+  limits: { fileSize: 2 * 1024 * 1024 },
+  fileFilter(_req, file, cb) {
+    if (ALLOWED_LOGO_TYPES.has(file.mimetype)) cb(null, true);
+    else cb(new Error("Only JPEG, PNG, WebP, and SVG images are allowed."));
+  },
+});
 
 const router = express.Router();
 const configPath = path.resolve("_metadata/config.json");
@@ -40,6 +75,47 @@ function setColorPalette(themeName, paletteName) {
   fs.writeFileSync(inputCssPath, updated);
 }
 
+router.post("/logo", uploadLogo.single("logo"), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "No file uploaded." });
+
+  // Delete old logo files with different extensions
+  const ext = path.extname(req.file.filename);
+  for (const e of Object.values(LOGO_EXT_MAP)) {
+    if (e !== ext) {
+      const old = path.join(siteDir, `logo${e}`);
+      if (fs.existsSync(old)) fs.unlinkSync(old);
+    }
+  }
+
+  const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  config.site.logo = req.file.filename;
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+
+  log.success(`Logo uploaded: ${req.file.filename}`);
+  res.json({ logo: req.file.filename });
+});
+
+router.delete("/logo", (req, res) => {
+  const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  if (config.site.logo) {
+    const filePath = path.join(siteDir, config.site.logo);
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+    config.site.logo = "";
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+  }
+  log.success("Logo removed");
+  res.json({ success: true });
+});
+
+router.use((err, _req, res, _next) => {
+  if (err?.code === "LIMIT_FILE_SIZE") {
+    return res
+      .status(413)
+      .json({ error: "File too large. Maximum size is 2 MB." });
+  }
+  res.status(400).json({ error: err.message ?? "Upload failed." });
+});
+
 router.get("/", (req, res) => {
   const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
   const themes = fs
@@ -70,6 +146,7 @@ router.put("/", async (req, res) => {
     site: {
       name: data.blogName,
       url: data.blogUrl,
+      ...(oldConfig.site.logo && { logo: oldConfig.site.logo }),
     },
     homepage: {
       heading: data.homepageHeading,

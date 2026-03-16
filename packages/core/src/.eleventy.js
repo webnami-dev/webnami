@@ -107,6 +107,18 @@ export default function (eleventyConfig) {
     return cleaned.length > maxLength ? cleaned.slice(0, maxLength) : cleaned;
   });
 
+  const builtWithHtml = `<div class="mt-3 font-mono text-xs text-accent/40"> Built with <a class="hover:text-primary-500 transition-colors text-accent/60" href="https://webnami.in" target="_blank" rel="noopener">webnami</a></div>`;
+
+  eleventyConfig.addTransform("builtWith", (content, outputPath) => {
+    if (outputPath && outputPath.endsWith(".html")) {
+      return content.replace(
+        /\s*<\/div>\s*<\/footer>/,
+        `${builtWithHtml}</div></footer>`,
+      );
+    }
+    return content;
+  });
+
   eleventyConfig.addTransform("htmlmin", (content, outputPath) => {
     if (outputPath && outputPath.endsWith(".html")) {
       return htmlmin.minify(content, {

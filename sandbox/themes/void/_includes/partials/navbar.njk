@@ -25,6 +25,13 @@
     <div class="max-w-2xl mx-auto px-5">
       <div class="flex justify-between items-center h-12">
         <a href="/" class="font-mono text-base font-medium text-content hover:text-primary-500 transition-colors">
+          {% if config.site.logo %}
+          <img
+            class="h-5 w-auto inline-block mr-2 -mt-0.5"
+            src="/images/{{ config.site.logo }}"
+            alt="{{ config.site.name }}"
+          />
+          {% endif %}
           {{ config.site.name }}
         </a>
 
