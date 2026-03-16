@@ -9,6 +9,15 @@ import log from "../logger.js";
 const router = express.Router();
 const postsDir = path.resolve("content/posts");
 const draftsDir = path.join(postsDir, "_drafts");
+const configPath = path.resolve("_metadata/config.json");
+
+function getConfigAuthor() {
+  try {
+    return JSON.parse(fs.readFileSync(configPath, "utf-8")).author || "";
+  } catch {
+    return "";
+  }
+}
 const RESERVED_SLUGS = ["admin", "api"];
 const DRAFT_PREFIX = "draft-post-";
 
@@ -67,6 +76,7 @@ router.get("/new", (req, res) => {
   const frontmatter = {
     layout: "post",
     title: "",
+    author: getConfigAuthor(),
     isDraft: true,
     tags: [],
     category: "",
@@ -99,6 +109,7 @@ router.get("/:slug", (req, res) => {
     title: file.data.title || "Draft",
     post: {
       title: file.data.title || "",
+      author: getConfigAuthor(),
       tags: (file.data.tags || []).join(", "),
       category: file.data.category || "",
       content: file.content,
@@ -129,6 +140,7 @@ router.put("/:slug", async (req, res) => {
     const frontmatter = {
       layout: "post",
       title,
+      author: getConfigAuthor(),
       tags: parsedTags,
       category,
       date,
@@ -157,6 +169,7 @@ router.put("/:slug", async (req, res) => {
   const frontmatter = {
     layout: "post",
     title,
+    author: getConfigAuthor(),
     tags: parsedTags,
     category,
     date,

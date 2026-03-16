@@ -226,6 +226,7 @@ export default function (eleventyConfig) {
     const pages = [];
     const tagPosts = new Map();
     const categoryPosts = new Map();
+    const authorPosts = new Map();
     const categorySet = new Set();
 
     for (const item of allItems) {
@@ -246,6 +247,13 @@ export default function (eleventyConfig) {
           if (!tagPosts.has(tag)) tagPosts.set(tag, []);
           tagPosts.get(tag).push(item);
         }
+      }
+
+      // Collect authors
+      if ("author" in item.data && item.data.author) {
+        const { author } = item.data;
+        if (!authorPosts.has(author)) authorPosts.set(author, []);
+        authorPosts.get(author).push(item);
       }
 
       // Collect and validate categories
@@ -298,11 +306,18 @@ export default function (eleventyConfig) {
       categoryPages.push(...paginate(items, categoryName));
     }
 
+    // Build author pages
+    const authorPages = [];
+    for (const [authorName, items] of authorPosts) {
+      authorPages.push(...paginate(items, authorName));
+    }
+
     const collectionsCache = {
       posts,
       pages,
       paginatedPosts,
       tagPages,
+      authorPages,
       categoryList: [...categorySet],
       categoryPages,
     };

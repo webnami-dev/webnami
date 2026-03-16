@@ -1,6 +1,7 @@
 ---
 layout: post
 title: My second blog title
+author:
 tags:
   - Second
   - News

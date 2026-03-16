@@ -64,6 +64,7 @@ router.put("/", async (req, res) => {
 
   const config = {
     theme: oldConfig.theme,
+    author: data.author || "",
     themeSettings: oldConfig.themeSettings,
     postsPerPage: oldConfig.postsPerPage,
     site: {

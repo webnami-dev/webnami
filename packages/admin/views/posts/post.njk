@@ -28,7 +28,7 @@
         {% endif %}
       </div>
 
-      <!-- Category + Tags -->
+      <!-- Category + Tags + Author -->
       <div class="flex gap-3">
         <div class="flex items-center gap-2 flex-1">
           <label for="category" class="admin-label mb-0 shrink-0">Category: </label>
@@ -40,8 +40,13 @@
           <input type="text" id="tags" name="tags" value="{{ post.tags }}"
             class="admin-input text-[13px]" placeholder="Comma-separated">
         </div>
+        {% if post.author %}
+        <div class="flex items-center gap-2">
+          <span class="admin-label mb-0 shrink-0">Author: </span>
+          <span class="text-[13px]" style="color: var(--color-accent);">{{ post.author }}</span>
+        </div>
+        {% endif %}
       </div>
-      <span class="text-accent">-----</span>
 
       <!-- Content -->
       <div>

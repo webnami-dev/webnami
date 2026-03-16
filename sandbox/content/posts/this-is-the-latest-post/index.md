@@ -1,6 +1,7 @@
 ---
 layout: post
 title: This is the latest post
+author:
 tags:
   - Latest
   - Tech
