@@ -2,7 +2,6 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { buildSite, buildSiteWithVite } from "../eleventy.js";
 import { readPagesCache, upsertPage, removePage } from "../cache.js";
 import log from "../logger.js";
 
@@ -116,7 +115,6 @@ router.put("/:slug", async (req, res) => {
     matter.stringify(content || "", frontmatter),
   );
   upsertPage({ title, slug, id, isDraft: false });
-  await buildSite();
   log.success(`Page updated: "${title}" (${slug})`);
   res.json({ slug });
 });
@@ -161,7 +159,6 @@ router.post("/:slug/publish", async (req, res) => {
     id: newSlug,
     isDraft: false,
   });
-  await buildSite();
   log.success(`Page published: "${frontmatter.title}" (${newSlug})`);
   res.json({ slug: newSlug });
 });
@@ -191,7 +188,6 @@ router.delete("/:slug", async (req, res) => {
     fs.rmSync(dirPath, { recursive: true });
   }
   removePage(slug);
-  if (!isDraftSlug) await buildSiteWithVite();
   log.success(`Page deleted: ${slug}`);
   res.json({ success: true });
 });

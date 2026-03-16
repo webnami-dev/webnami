@@ -1,5 +1,5 @@
 import express from "express";
-import { buildSite } from "../eleventy.js";
+import { buildSiteWithVite } from "../eleventy.js";
 import log from "../logger.js";
 
 const router = express.Router();
@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 
 router.post("/rebuild", async (req, res) => {
   try {
-    await buildSite();
+    await buildSiteWithVite();
     log.success("Site rebuilt via toolbar");
     res.json({ success: true });
   } catch {

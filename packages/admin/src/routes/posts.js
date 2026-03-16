@@ -2,7 +2,6 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { buildSite, buildSiteWithVite } from "../eleventy.js";
 import { readPostsCache, upsertPost, removePost } from "../cache.js";
 import log from "../logger.js";
 
@@ -188,7 +187,6 @@ router.put("/:slug", async (req, res) => {
     category,
     isDraft: false,
   });
-  await buildSite();
   log.success(`Post updated: "${title}" (${slug})`);
   res.json({ slug });
 });
@@ -236,7 +234,6 @@ router.post("/:slug/publish", async (req, res) => {
     category: frontmatter.category || "",
     isDraft: false,
   });
-  await buildSite();
   log.success(`Post published: "${frontmatter.title}" (${newSlug})`);
   res.json({ slug: newSlug });
 });
@@ -267,7 +264,6 @@ router.delete("/:slug", async (req, res) => {
     fs.rmSync(dirPath, { recursive: true });
   }
   removePost(slug);
-  if (!isDraftSlug) await buildSiteWithVite();
   log.success(`Post deleted: ${slug}`);
   res.json({ success: true });
 });

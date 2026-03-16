@@ -83,16 +83,9 @@ form.addEventListener("submit", async (e) => {
   });
 
   if (res.ok) {
-    const data = await res.json();
-    if (data.restartRequired) {
-      showAlert("warning", data.message);
-    } else if (data.nameChanged) {
-      showAlert("warning", data.message);
-    } else {
-      window.markSiteDirty();
-      flashAlert("success", "Settings saved successfully.");
-      window.location.reload();
-    }
+    window.markSiteDirty();
+    flashAlert("success", "Settings saved successfully.");
+    window.location.reload();
   } else {
     showAlert("error", "Failed to save settings.");
   }

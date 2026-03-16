@@ -2,7 +2,6 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import multer from "multer";
-import { buildSite } from "../eleventy.js";
 import log from "../logger.js";
 
 const siteDir = path.resolve("content/site");
@@ -158,32 +157,9 @@ router.put("/", async (req, res) => {
 
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
-  const oldColorPalette = getColorPalette(oldConfig.theme);
   const newColorPalette = data.colorPalette || "Default";
-  const colorChanged = oldColorPalette !== newColorPalette;
-  const nameChanged = oldConfig.site.name !== data.blogName;
 
-  if (colorChanged) {
-    setColorPalette(config.theme, newColorPalette);
-    log.warn(
-      `Color palette changed from "${oldColorPalette}" to "${newColorPalette}". Restart required.`,
-    );
-    return res.json({
-      restartRequired: true,
-      message:
-        "Color palette changed. Please restart the server for changes to take effect.",
-    });
-  }
-
-  if (nameChanged) {
-    return res.json({
-      success: true,
-      nameChanged: true,
-      message: "Blog name changed. Please restart the server.",
-    });
-  }
-
-  await buildSite();
+  setColorPalette(config.theme, newColorPalette);
   log.success("Settings updated");
 
   res.json({ success: true });
