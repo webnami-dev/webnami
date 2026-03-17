@@ -13,3 +13,4 @@ CLAUDE.md
 .playwright-mcp/
 .npmrc
 sandbox/.cache/
+packages/admin-vue/dist/
