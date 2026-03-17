@@ -1,0 +1,50 @@
+---
+layout: "layouts/base"
+---
+
+{%- include 'partials/hero.njk' -%}
+
+{% from 'macros/cards.njk' import featureCard %}
+
+<section id="features" class="px-6 py-24">
+  <div class="mx-auto max-w-6xl">
+
+    <div class="mb-14 text-center">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">Features</p>
+      <h2 class="text-3xl font-bold tracking-tight text-content sm:text-4xl">
+        Everything you need, nothing you don't
+      </h2>
+    </div>
+
+    <div class="flex flex-col">
+
+      {% call featureCard(index.features[0], false) %}
+        {% include 'mockups/feature-files.njk' %}
+      {% endcall %}
+
+      {% call featureCard(index.features[1], true) %}
+        {% include 'mockups/feature-zero-config.njk' %}
+      {% endcall %}
+
+      {% call featureCard(index.features[2], false) %}
+        {% include 'mockups/feature-no-database.njk' %}
+      {% endcall %}
+
+      {% call featureCard(index.features[3], true) %}
+        {% include 'mockups/feature-ownership.njk' %}
+      {% endcall %}
+
+      {% call featureCard(index.features[4], false) %}
+        {% include 'mockups/feature-speed.njk' %}
+      {% endcall %}
+
+      {% call featureCard(index.features[5], true) %}
+        {% include 'mockups/feature-seo.njk' %}
+      {% endcall %}
+
+    </div>
+
+  </div>
+</section>
+
+{%- include 'partials/cta.njk' -%}

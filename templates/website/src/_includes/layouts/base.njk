@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "WebNami" }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | assetHash }}" />
+    <script
+      type="module"
+      src="{{ '/assets/js/bundle.js' | assetHash }}"
+      defer
+    ></script>
+  </head>
+  <body>
+    {%- include 'partials/header.njk' -%}
+    <div class="flex-grow">
+      {{ content | safe }}
+    </div>
+    {%- include 'partials/footer.njk' -%}
+  </body>
+</html>

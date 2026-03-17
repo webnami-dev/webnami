@@ -1,0 +1,8 @@
+{
+  "heading": "Start Your Blog in Seconds",
+  "button": {
+    "label": "Get Started",
+    "href": "/docs"
+  },
+  "command": "npx create-webnami-blog@latest"
+}

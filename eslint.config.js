@@ -69,6 +69,15 @@ export default [
       },
     },
   },
+  // Template website frontend assets
+  {
+    files: ["templates/website/src/assets/js/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+  },
   // Theme frontend assets
   {
     files: [

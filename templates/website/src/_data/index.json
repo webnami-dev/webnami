@@ -1,0 +1,61 @@
+{
+  "hero": {
+    "heading": "Own Your Blog",
+    "subheading": "A local-first flat-file CMS that turns markdown files into fast, beautiful, SEO-optimized blogs",
+    "command": "npx create-webnami-blog@latest",
+    "image": {
+      "src": "https://obsidian.md/images/publish-example-dark.png",
+      "alt": "hero image"
+    }
+  },
+  "features": [
+    {
+      "text": "Just Files and Folders",
+      "subtext": "Your content lives as simple Markdown files. Pages and posts are just folders. Add images, documents and publish instantly — no database required.",
+      "image": {
+        "src": "/assets/images/features/files.svg",
+        "alt": "Files and folders illustration"
+      }
+    },
+    {
+      "text": "Zero Configuration",
+      "subtext": "No plugins. No complex setup. No endless configuration screens. Start writing and your blog is ready.",
+      "image": {
+        "src": "/assets/images/features/zero-config.svg",
+        "alt": "Zero configuration illustration"
+      }
+    },
+    {
+      "text": "No Database, No Headaches",
+      "subtext": "No database to maintain, no plugin updates to worry about, and a drastically smaller attack surface.",
+      "image": {
+        "src": "/assets/images/features/no-database.svg",
+        "alt": "No database illustration"
+      }
+    },
+    {
+      "text": "You Own Your Content",
+      "subtext": "No vendor lock-in. Your blog is just files you control, so your content stays fully portable and under your ownership.",
+      "image": {
+        "src": "/assets/images/features/ownership.svg",
+        "alt": "Content ownership illustration"
+      }
+    },
+    {
+      "text": "Fast by Default",
+      "subtext": "WebNami generates static sites that load instantly. No heavy runtimes, no slow queries — just clean, blazing-fast pages.",
+      "image": {
+        "src": "/assets/images/features/speed.svg",
+        "alt": "Speed illustration"
+      }
+    },
+    {
+      "text": "SEO Ready",
+      "subtext": "Essential SEO features are built in from the start — structured metadata, clean URLs, and optimized markup.",
+      "image": {
+        "src": "/assets/images/features/seo.svg",
+        "alt": "SEO illustration"
+      }
+    }
+  ]
+}

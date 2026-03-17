@@ -1,0 +1,44 @@
+<div class="flex flex-col gap-5 rounded-xl border border-content/10 bg-content/3 px-8 py-6">
+
+  {# Score row #}
+  <div class="flex items-center justify-around">
+    {% set scores = [
+      { label: "Performance", value: "100" },
+      { label: "Accessibility", value: "98" },
+      { label: "Best Practices", value: "100" },
+      { label: "SEO", value: "100" }
+    ] %}
+    {% for score in scores %}
+      <div class="flex flex-col items-center gap-1.5">
+        <div class="flex h-14 w-14 items-center justify-center rounded-full border-4 border-green-400/70 bg-background text-lg font-bold text-content">
+          {{ score.value }}
+        </div>
+        <span class="text-center text-xs text-content/40 leading-tight">{{ score.label }}</span>
+      </div>
+    {% endfor %}
+  </div>
+
+  {# Divider #}
+  <div class="border-t border-content/10"></div>
+
+  {# Core Web Vitals #}
+  <div class="flex flex-col gap-2.5 text-sm">
+    <div class="flex items-center justify-between">
+      <span class="text-content/60">First Contentful Paint</span>
+      <span class="font-medium text-green-500">0.4 s</span>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="text-content/60">Largest Contentful Paint</span>
+      <span class="font-medium text-green-500">0.6 s</span>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="text-content/60">Total Blocking Time</span>
+      <span class="font-medium text-green-500">0 ms</span>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="text-content/60">Cumulative Layout Shift</span>
+      <span class="font-medium text-green-500">0</span>
+    </div>
+  </div>
+
+</div>

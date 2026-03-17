@@ -1,0 +1,39 @@
+<div class="flex flex-col gap-3 rounded-xl border border-content/10 bg-content/3 px-8 py-6 text-sm">
+
+  {# Search bar #}
+  <div class="flex items-center gap-3 rounded-lg border border-content/15 bg-background px-4 py-2.5">
+    {% icon "search", "w-4 h-4 text-content/30 shrink-0" %}
+    <span class="text-content/50">how to start a blog with markdown</span>
+  </div>
+
+  {# Result #1 — highlighted #}
+  <div class="rounded-lg border border-primary/20 bg-primary/5 px-4 py-3">
+    <div class="flex items-center gap-2">
+      <span class="rounded bg-primary/15 px-1.5 py-0.5 text-xs font-semibold text-primary">#1</span>
+      <span class="text-xs text-content/30">myblog.com › posts › hello-world</span>
+    </div>
+    <div class="mt-1 font-medium text-primary/80">Hello World — My Blog</div>
+    <div class="mt-1 text-xs leading-relaxed text-content/50">
+      Welcome to my blog. A fast, file-based blog built with WebNami and Markdown. No database required.
+    </div>
+  </div>
+
+  {# Result #2 — faded #}
+  <div class="rounded-lg border border-content/8 bg-background px-4 py-3 opacity-60">
+    <div class="text-xs text-content/30">medium.com › hello-world</div>
+    <div class="mt-1 font-medium text-content/60">Hello World - Medium</div>
+    <div class="mt-1 text-xs leading-relaxed text-content/40">
+      My first post on Medium. I decided to start writing...
+    </div>
+  </div>
+
+  {# Result #3 — more faded #}
+  <div class="rounded-lg border border-content/8 bg-background px-4 py-3 opacity-35">
+    <div class="text-xs text-content/30">wordpress.com › hello-world</div>
+    <div class="mt-1 font-medium text-content/50">Hello World — WordPress</div>
+    <div class="mt-1 text-xs leading-relaxed text-content/40">
+      Welcome to WordPress. This is your first post...
+    </div>
+  </div>
+
+</div>

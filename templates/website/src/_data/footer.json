@@ -1,0 +1,34 @@
+{
+  "siteName": "WebNami",
+  "logoPath": "/assets/images/logo.svg",
+  "subtext": "A fast, open-source blogging platform built on Eleventy and Tailwind CSS.",
+  "footer": [
+    {
+      "categoryLabel": "PRODUCT",
+      "links": [
+        { "label": "Features", "href": "/features" },
+        { "label": "Themes", "href": "/themes" },
+        { "label": "Pricing", "href": "/pricing" }
+      ]
+    },
+    {
+      "categoryLabel": "RESOURCES",
+      "links": [
+        { "label": "Documentation", "href": "/docs" },
+        {
+          "label": "Source Code",
+          "href": "https://github.com/webnami-dev/webnami"
+        }
+      ]
+    },
+    {
+      "categoryLabel": "COMPARE",
+      "links": [
+        { "label": "vs WordPress", "href": "/compare/wordpress" },
+        { "label": "vs Ghost", "href": "/compare/ghost" },
+        { "label": "vs Medium", "href": "/compare/medium" },
+        { "label": "View all", "href": "/compare" }
+      ]
+    }
+  ]
+}

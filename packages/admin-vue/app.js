@@ -2,7 +2,6 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { build as viteBuild } from "vite";
 import adminRouter from "./server/routes/admin.js";
 import pagesRouter from "./server/routes/pages.js";
 import postsRouter from "./server/routes/posts.js";
@@ -22,13 +21,6 @@ const siteConfig = JSON.parse(
   fs.readFileSync("_metadata/config.json", "utf-8"),
 );
 log.info(`Loading theme: "${siteConfig.theme}"`);
-
-log.info("Building Vue client assets...");
-await viteBuild({
-  configFile: path.join(__dirname, "client/vite.config.js"),
-  logLevel: "silent",
-});
-log.success("Vite build complete");
 
 process.env.NODE_ENV = "development";
 await buildSite();

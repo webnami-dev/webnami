@@ -1,0 +1,52 @@
+<div class="flex items-center justify-center gap-6 rounded-xl border border-content/10 bg-content/3 px-8 py-10">
+
+  {# Files side #}
+  <div class="flex flex-col items-center gap-2">
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center gap-2 rounded-lg border border-content/10 bg-background px-3 py-2 text-sm text-content/70 shadow-sm">
+        {% icon "file-text", "w-4 h-4 text-primary shrink-0" %}
+        <span>hello-world.md</span>
+      </div>
+      <div class="flex items-center gap-2 rounded-lg border border-content/10 bg-background px-3 py-2 text-sm text-content/70 shadow-sm">
+        {% icon "file-text", "w-4 h-4 text-primary shrink-0" %}
+        <span>getting-started.md</span>
+      </div>
+      <div class="flex items-center gap-2 rounded-lg border border-content/10 bg-background px-3 py-2 text-sm text-content/70 shadow-sm">
+        {% icon "file-text", "w-4 h-4 text-primary shrink-0" %}
+        <span>my-first-post.md</span>
+      </div>
+    </div>
+    <span class="text-xs text-content/40">markdown files</span>
+  </div>
+
+  {# Arrow #}
+  <div class="flex flex-col items-center gap-1">
+    {% icon "arrow-right", "w-5 h-5 text-primary/50" %}
+  </div>
+
+  {# No DB badge #}
+  <div class="flex flex-col items-center gap-2">
+    <div class="relative">
+      {% icon "database", "w-10 h-10 text-content/15" %}
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="h-0.5 w-full rotate-45 bg-red-400/60 rounded"></div>
+      </div>
+    </div>
+    <span class="text-xs text-content/30">no database</span>
+  </div>
+
+  {# Arrow #}
+  <div class="flex flex-col items-center gap-1">
+    {% icon "arrow-right", "w-5 h-5 text-primary/50" %}
+  </div>
+
+  {# Output side #}
+  <div class="flex flex-col items-center gap-2">
+    <div class="flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-primary shadow-sm">
+      {% icon "globe", "w-4 h-4 shrink-0" %}
+      <span>myblog.com</span>
+    </div>
+    <span class="text-xs text-content/40">static site</span>
+  </div>
+
+</div>

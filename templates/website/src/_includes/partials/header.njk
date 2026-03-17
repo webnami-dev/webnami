@@ -1,0 +1,86 @@
+<header
+  class="sticky top-0 z-50 border-b border-content/10 bg-background/90 backdrop-blur-sm"
+  x-data="{ open: false }"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+    {# Logo + Name #}
+    <a href="/" class="flex items-center gap-2 text-content hover:text-primary transition-colors">
+      {% if header.logoPath %}
+        <img src="{{ header.logoPath }}" alt="{{ header.siteName }} logo" class="h-7 w-auto" />
+      {% endif %}
+      <span class="text-lg font-semibold tracking-tight">{{ header.siteName }}</span>
+    </a>
+
+    {# Desktop nav #}
+    <nav class="hidden items-center gap-1 md:flex">
+      {% for item in header.nav %}
+        <a
+          href="{{ item.href }}"
+          class="rounded px-3 py-1.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"
+        >
+          {{ item.label }}
+        </a>
+      {% endfor %}
+
+      {# GitHub link #}
+      <a
+        href="{{ header.githubUrl }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ml-3 flex items-center gap-1.5 rounded px-3 py-1.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"
+        aria-label="GitHub"
+      >
+        {% icon "github", "w-4 h-4" %}
+        <span>GitHub</span>
+      </a>
+    </nav>
+
+    {# Mobile hamburger button #}
+    <button
+      class="flex items-center justify-center rounded p-1.5 text-content/70 transition-colors hover:bg-primary/10 hover:text-primary md:hidden"
+      @click="open = !open"
+      :aria-expanded="open"
+      aria-label="Toggle menu"
+    >
+      <span x-show="!open">{% icon "menu", "w-5 h-5" %}</span>
+      <span x-show="open" style="display:none">{% icon "x", "w-5 h-5" %}</span>
+    </button>
+  </div>
+
+  {# Mobile menu #}
+  <div
+    x-show="open"
+    x-transition:enter="transition duration-200 ease-out"
+    x-transition:enter-start="-translate-y-2 opacity-0"
+    x-transition:enter-end="translate-y-0 opacity-100"
+    x-transition:leave="transition duration-150 ease-in"
+    x-transition:leave-start="translate-y-0 opacity-100"
+    x-transition:leave-end="-translate-y-2 opacity-0"
+    class="border-t border-content/10 md:hidden"
+    @click.outside="open = false"
+  >
+    <nav class="flex flex-col px-6 py-3">
+      {% for item in header.nav %}
+        <a
+          href="{{ item.href }}"
+          class="flex items-center rounded px-2 py-2.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"
+          @click="open = false"
+        >
+          {{ item.label }}
+        </a>
+      {% endfor %}
+
+      <a
+        href="{{ header.githubUrl }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-1 flex items-center gap-2 rounded px-2 py-2.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"
+        @click="open = false"
+      >
+        {% icon "github", "w-4 h-4" %}
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>

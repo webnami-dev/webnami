@@ -1,0 +1,44 @@
+<footer class="text-content/60">
+  <div class="mx-auto max-w-6xl px-6 py-14">
+
+    {# Top: logo + link columns #}
+    <div class="grid grid-cols-2 gap-10 sm:grid-cols-2 md:grid-cols-4">
+
+      {# Brand column #}
+      <div class="col-span-2 sm:col-span-2 md:col-span-1">
+        <a href="/" class="inline-flex items-center gap-2 text-content hover:text-primary transition-colors">
+          {% if footer.logoPath %}
+            <img src="{{ footer.logoPath }}" alt="{{ footer.siteName }} logo" class="h-7 w-auto" />
+          {% endif %}
+          <span class="text-lg font-semibold tracking-tight">{{ footer.siteName }}</span>
+        </a>
+        <p class="mt-3 text-sm leading-relaxed">
+          {{ footer.subtext }}
+        </p>
+      </div>
+
+      {# Link columns #}
+      {% for column in footer.footer %}
+        <div>
+          <p class="mb-3 text-xs font-semibold tracking-widest text-content/40 uppercase">
+            {{ column.categoryLabel }}
+          </p>
+          <ul class="space-y-2">
+            {% for link in column.links %}
+              <li>
+                <a
+                  href="{{ link.href }}"
+                  class="text-sm transition-colors hover:text-primary"
+                  {% if "http" in link.href %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >
+                  {{ link.label }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+
+      </div>
+  </div>
+</footer>

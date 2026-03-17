@@ -13,18 +13,18 @@
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.11",
+    "cheerio": "^1.1.2",
     "html-minifier-terser": "^7.2.0",
     "lucide": "^0.513.0",
     "luxon": "^3.5.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "tailwindcss": "^4.1.11",
+    "vite": "^6.3.5"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.11",
-    "cross-env": "^10.1.0",
-    "tailwindcss": "^4.1.11",
-    "vite": "^6.3.5",
-    "cheerio": "^1.1.2"
+    "cross-env": "^10.1.0"
   },
   "engines": {
     "node": ">=20.0.0",

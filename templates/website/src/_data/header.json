@@ -1,0 +1,12 @@
+{
+  "siteName": "WebNami",
+  "logoPath": "/assets/images/logo.svg",
+  "githubUrl": "https://github.com/your-org/webnami",
+  "nav": [
+    { "label": "Features", "href": "/#features" },
+    { "label": "Themes", "href": "/themes" },
+    { "label": "Docs", "href": "/docs" },
+    { "label": "Pricing", "href": "/pricing" },
+    { "label": "Contact", "href": "/contact" }
+  ]
+}
