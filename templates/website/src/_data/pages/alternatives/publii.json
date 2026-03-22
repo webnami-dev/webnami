@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs Publii — A Web-Based Alternative to Publii Desktop CMS",
+  "description": "Publii is a desktop-only static CMS. WebNami offers the same static-site benefits with a web-based admin you can access from any browser, no app install required.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs Publii",
+    "heading": "Static site blogging without the desktop app",
+    "subheading": "Publii is a smart desktop CMS that generates static sites, but it ties you to one machine and requires an app install to manage your blog. WebNami delivers the same static-site speed through a browser-based admin you can use from any device."
+  },
+  "table": {
+    "competitorName": "Publii",
+    "rows": [
+      {
+        "feature": "Admin access",
+        "webnami": "Browser-based (any device)",
+        "competitor": "Desktop app only",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Multi-device editing",
+        "webnami": "Yes",
+        "competitor": "Single machine only",
+        "webnamiWins": true
+      },
+      {
+        "feature": "App installation required",
+        "webnami": "No",
+        "competitor": "Yes (desktop app)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed output",
+        "webnami": "Static, instant",
+        "competitor": "Static, instant",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Content storage",
+        "webnami": "Plain Markdown files",
+        "competitor": "SQLite database (local)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "Yes (GPLv3)",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Theme ecosystem",
+        "webnami": "Custom Tailwind themes",
+        "competitor": "Growing theme marketplace",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Setup time",
+        "webnami": "5 minutes (npx)",
+        "competitor": "Download + install + configure",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Deploy integration",
+        "webnami": "Any static host via CLI/CI",
+        "competitor": "Built-in FTP/S3/GitHub sync",
+        "webnamiWins": false
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "monitor",
+      "heading": "Access from any device",
+      "body": "Publii requires its desktop app installed on one computer. WebNami's admin runs in a browser — manage your blog from your laptop, tablet, or another machine entirely."
+    },
+    {
+      "icon": "zap",
+      "heading": "Faster to get started",
+      "body": "Publii requires downloading and installing a desktop application. WebNami spins up with a single `npx` command — no installer, no setup wizard, just start writing."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Markdown over SQLite",
+      "body": "Publii stores content in a local SQLite database. WebNami stores everything as readable Markdown files, making content easy to version-control, diff, and back up."
+    },
+    {
+      "icon": "code",
+      "heading": "Modern CSS tooling",
+      "body": "WebNami themes are built with Tailwind CSS v4 — the latest utility-first CSS framework. Customizing your design means editing real CSS, not a limited theme panel."
+    }
+  ]
+}

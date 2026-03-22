@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs WordPress — A Free, Faster Alternative",
+  "description": "See how WebNami compares to WordPress. No database, no plugins to update, blazing-fast static pages, and zero hosting costs. Start blogging in minutes.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs WordPress",
+    "heading": "A simpler, faster alternative to WordPress",
+    "subheading": "WordPress powers millions of sites but brings a database, PHP runtime, plugin bloat, and constant security patches. WebNami strips all that away — just Markdown files, a clean admin, and a static site that loads instantly."
+  },
+  "table": {
+    "competitorName": "WordPress",
+    "rows": [
+      {
+        "feature": "Setup time",
+        "webnami": "5 minutes",
+        "competitor": "30+ minutes",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Database required",
+        "webnami": "No",
+        "competitor": "MySQL required",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Hosting cost",
+        "webnami": "Free / self-hosted",
+        "competitor": "$5–$50/month",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed",
+        "webnami": "Static, instant",
+        "competitor": "Dynamic PHP, slower",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Security surface",
+        "webnami": "Minimal (static files)",
+        "competitor": "Large (PHP + DB + plugins)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Content ownership",
+        "webnami": "Local Markdown files",
+        "competitor": "Database lock-in",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Maintenance overhead",
+        "webnami": "None",
+        "competitor": "Ongoing plugin & core updates",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Plugin ecosystem",
+        "webnami": "Focused",
+        "competitor": "60,000+ plugins",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "Yes (GPL)",
+        "webnamiWins": false
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "zap",
+      "heading": "Instant setup",
+      "body": "One command — `npx create-webnami-blog@latest` — and you have a running blog. No server provisioning, no database configuration, no FTP."
+    },
+    {
+      "icon": "shield",
+      "heading": "No security headaches",
+      "body": "WordPress accounts for over 90% of hacked CMS sites. WebNami serves static files with no PHP runtime and no database, eliminating the entire attack surface."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Your content, your files",
+      "body": "Posts are plain Markdown files on your machine. No database export needed, no proprietary format — your content is always portable and readable."
+    },
+    {
+      "icon": "gauge",
+      "heading": "Blazing fast by default",
+      "body": "Static HTML loads in milliseconds. No PHP execution, no database queries, no caching plugins required to achieve great Core Web Vitals scores."
+    }
+  ]
+}

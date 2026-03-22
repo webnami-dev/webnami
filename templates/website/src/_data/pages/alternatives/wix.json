@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs Wix — A Free, Faster Blog Without the Drag-and-Drop Lock-in",
+  "description": "Wix charges $17–$159/month and locks you into its editor. WebNami is free, open source, and generates a blazing-fast static blog you fully own.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs Wix",
+    "heading": "A faster, free alternative to Wix for bloggers",
+    "subheading": "Wix is a website builder that happens to have a blog — you pay a monthly fee, get a slow JavaScript-heavy site, and can never export your content cleanly. WebNami is purpose-built for blogging: fast, free, and built on files you own."
+  },
+  "table": {
+    "competitorName": "Wix",
+    "rows": [
+      {
+        "feature": "Monthly cost",
+        "webnami": "Free",
+        "competitor": "$17–$159/month",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed",
+        "webnami": "Static, instant",
+        "competitor": "Heavy JS runtime, slower",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Content portability",
+        "webnami": "Plain Markdown files",
+        "competitor": "Cannot export to other platforms",
+        "webnamiWins": true
+      },
+      {
+        "feature": "SEO control",
+        "webnami": "Full — custom meta & sitemaps",
+        "competitor": "Partial — some options locked",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "No (proprietary)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Ads on free plan",
+        "webnami": "None",
+        "competitor": "Wix ads on free plan",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Drag-and-drop editor",
+        "webnami": "No (code-based)",
+        "competitor": "Yes",
+        "webnamiWins": false
+      },
+      {
+        "feature": "E-commerce features",
+        "webnami": "Not built-in",
+        "competitor": "Built-in (paid plan)",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Setup time",
+        "webnami": "5 minutes",
+        "competitor": "Varies (visual editor)",
+        "webnamiWins": true
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "dollar-sign",
+      "heading": "Actually free",
+      "body": "Wix's free plan forces Wix branding and ads. Paid plans start at $17/month. WebNami is free and open source — host it on any static hosting provider at zero cost."
+    },
+    {
+      "icon": "gauge",
+      "heading": "Pages that actually load fast",
+      "body": "Wix sites are notorious for heavy JavaScript bundles and poor Core Web Vitals. WebNami outputs static HTML that loads instantly with no client-side rendering overhead."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Escape the walled garden",
+      "body": "Wix content can't be cleanly exported to any other platform. WebNami stores every post as a Markdown file — move to any platform, any time, with zero friction."
+    },
+    {
+      "icon": "search",
+      "heading": "Better SEO by default",
+      "body": "Static HTML is exactly what search engines love. WebNami generates clean URLs, proper meta tags, and sitemaps automatically — no extra app or premium plan needed."
+    }
+  ]
+}

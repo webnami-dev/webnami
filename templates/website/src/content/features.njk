@@ -1,0 +1,81 @@
+---
+layout: "layouts/base"
+title: "Features — WebNami"
+permalink: "/features/"
+---
+
+{% set f = pages.features %}
+
+{# ── Hero ───────────────────────────────────────────────────── #}
+<section class="px-6 py-24 text-center">
+  <div class="mx-auto max-w-3xl">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">
+      {{ f.hero.eyebrow }}
+    </p>
+    <h1 class="text-4xl font-bold tracking-tight text-content sm:text-5xl">
+      {{ f.hero.heading }}
+    </h1>
+    <p class="mt-5 text-lg leading-relaxed text-content/60">
+      {{ f.hero.subheading }}
+    </p>
+
+    {# Section jump nav #}
+    <div class="mt-10 flex flex-wrap justify-center gap-2">
+      {% for section in f.sections %}
+        <a
+          href="#{{ section.id }}"
+          class="flex items-center gap-1.5 rounded-full border border-content/15 px-4 py-1.5 text-xs font-medium text-content/60 transition-colors hover:border-primary/40 hover:text-primary"
+        >
+          {% icon section.icon, "w-3.5 h-3.5" %}
+          {{ section.label }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── Feature sections ───────────────────────────────────────── #}
+{% for section in f.sections %}
+<section id="{{ section.id }}" class="px-6 py-20 {{ 'bg-content/[0.03]' if loop.index % 2 == 0 }}">
+  <div class="mx-auto max-w-6xl">
+
+    {# Section header #}
+    <div class="mb-12">
+      <div class="mb-3 flex items-center gap-2">
+        <span class="flex items-center justify-center rounded-lg border border-primary/20 bg-primary/10 p-2 text-primary">
+          {% icon section.icon, "w-4 h-4" %}
+        </span>
+        <p class="text-xs font-semibold uppercase tracking-widest text-primary">
+          {{ section.label }}
+        </p>
+      </div>
+      <h2 class="text-2xl font-bold tracking-tight text-content sm:text-3xl">
+        {{ section.heading }}
+      </h2>
+      <p class="mt-2 text-base text-content/60">
+        {{ section.subheading }}
+      </p>
+    </div>
+
+    {# Feature cards #}
+    {% if section.items | length == 4 %}{% set colClass = "lg:grid-cols-4" %}
+    {% elif section.items | length == 3 %}{% set colClass = "lg:grid-cols-3" %}
+    {% else %}{% set colClass = "lg:grid-cols-2" %}{% endif %}
+    <div class="grid gap-4 sm:grid-cols-2 {{ colClass }}">
+      {% for item in section.items %}
+        <div class="rounded-xl border border-content/10 bg-background p-6">
+          <div class="mb-4 flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
+            {% icon item.icon, "w-4 h-4" %}
+          </div>
+          <h3 class="mb-2 text-sm font-semibold text-content">{{ item.heading }}</h3>
+          <p class="text-sm leading-relaxed text-content/60">{{ item.body }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endfor %}
+
+{# ── CTA ────────────────────────────────────────────────────── #}
+{%- include 'partials/cta.njk' -%}

@@ -7,8 +7,7 @@
       "categoryLabel": "PRODUCT",
       "links": [
         { "label": "Features", "href": "/features" },
-        { "label": "Themes", "href": "/themes" },
-        { "label": "Pricing", "href": "/pricing" }
+        { "label": "Themes", "href": "/themes" }
       ]
     },
     {
@@ -24,10 +23,13 @@
     {
       "categoryLabel": "COMPARE",
       "links": [
-        { "label": "vs WordPress", "href": "/compare/wordpress" },
-        { "label": "vs Ghost", "href": "/compare/ghost" },
-        { "label": "vs Medium", "href": "/compare/medium" },
-        { "label": "View all", "href": "/compare" }
+        {
+          "label": "vs WordPress",
+          "href": "/alternative/wordpress-alternative"
+        },
+        { "label": "vs Ghost", "href": "/alternatives/ghost-alternative" },
+        { "label": "vs Medium", "href": "/alternatives/medium-alternative" },
+        { "label": "View all", "href": "/alternatives" }
       ]
     }
   ]

@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs Squarespace — A Free, Open-Source Blogging Alternative",
+  "description": "Squarespace costs $16–$49/month and locks your content away. WebNami is free, open source, and gives you a fast static blog you fully own.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs Squarespace",
+    "heading": "Beautiful blogging without the Squarespace subscription",
+    "subheading": "Squarespace has gorgeous templates but charges $16–$49/month, makes it difficult to leave, and runs on a slow dynamic server. WebNami is free, open source, and generates lightning-fast static pages — with your content stored as plain files you always own."
+  },
+  "table": {
+    "competitorName": "Squarespace",
+    "rows": [
+      {
+        "feature": "Monthly cost",
+        "webnami": "Free",
+        "competitor": "$16–$49/month",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed",
+        "webnami": "Static, instant",
+        "competitor": "Dynamic, server-rendered",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Content portability",
+        "webnami": "Plain Markdown files",
+        "competitor": "Limited export (XML)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "No (proprietary)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "SEO control",
+        "webnami": "Full — custom meta & sitemaps",
+        "competitor": "Good but some options locked",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Vendor lock-in",
+        "webnami": "None",
+        "competitor": "High — hard to migrate away",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Design polish",
+        "webnami": "Developer-focused",
+        "competitor": "Award-winning templates",
+        "webnamiWins": false
+      },
+      {
+        "feature": "E-commerce",
+        "webnami": "Not built-in",
+        "competitor": "Built-in (higher plans)",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Setup time",
+        "webnami": "5 minutes",
+        "competitor": "Hours (visual customization)",
+        "webnamiWins": true
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "dollar-sign",
+      "heading": "Stop paying monthly",
+      "body": "Squarespace's cheapest plan is $16/month — $192/year for a blog. WebNami is free and open source. Host your static site on Netlify or Vercel at no cost."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Take your content with you",
+      "body": "Squarespace exports a limited XML file that doesn't work cleanly on other platforms. WebNami's posts are standard Markdown — paste them anywhere, instantly."
+    },
+    {
+      "icon": "gauge",
+      "heading": "Static speed vs dynamic lag",
+      "body": "Squarespace serves pages from a dynamic server. WebNami pre-builds everything into static HTML that loads in milliseconds, with no server processing on each visit."
+    },
+    {
+      "icon": "code",
+      "heading": "Full code control",
+      "body": "Squarespace's customization is limited to their editor. WebNami is open source — modify themes, add shortcodes, tweak every detail of your blog with full access to the code."
+    }
+  ]
+}

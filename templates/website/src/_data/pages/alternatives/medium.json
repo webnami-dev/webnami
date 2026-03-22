@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs Medium — Own Your Blog, Keep Your Revenue",
+  "description": "Medium takes a cut of your earnings and locks your audience behind a paywall. WebNami is free, self-hosted, and gives you full ownership of your content and readers.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs Medium",
+    "heading": "Your blog, your audience, your revenue",
+    "subheading": "Medium puts your content behind a metered paywall, takes a cut of your earnings, and owns the relationship with your readers. WebNami is free, self-hosted, and gives you complete control — your content lives as plain files, and your audience is yours alone."
+  },
+  "table": {
+    "competitorName": "Medium",
+    "rows": [
+      {
+        "feature": "Content ownership",
+        "webnami": "Local Markdown files",
+        "competitor": "Medium-owned platform",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Monthly cost",
+        "webnami": "Free",
+        "competitor": "Free tier + $5–$9/month Partner",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Custom domain",
+        "webnami": "Full control",
+        "competitor": "Paid plans only",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Reader paywall",
+        "webnami": "None",
+        "competitor": "Metered paywall on free tier",
+        "webnamiWins": true
+      },
+      {
+        "feature": "SEO control",
+        "webnami": "Full — custom meta & sitemaps",
+        "competitor": "Limited — Medium controls canonical",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Ads / platform branding",
+        "webnami": "None",
+        "competitor": "Medium branding on all posts",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Export your content",
+        "webnami": "Already on your machine",
+        "competitor": "ZIP export available",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Built-in audience",
+        "webnami": "None — build your own",
+        "competitor": "Large existing readership",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "No (proprietary)",
+        "webnamiWins": true
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "hard-drive",
+      "heading": "You own your content",
+      "body": "Every post you publish on Medium lives on Medium's servers under Medium's terms. WebNami stores your posts as plain Markdown files on your own machine — no platform can take them away."
+    },
+    {
+      "icon": "users",
+      "heading": "Your audience, not Medium's",
+      "body": "Medium controls who sees your content and when. With WebNami your blog is your own domain — readers subscribe to you directly, not to a platform that can change the rules anytime."
+    },
+    {
+      "icon": "search",
+      "heading": "Better SEO ownership",
+      "body": "Medium posts rank under medium.com, not your domain. WebNami gives every post its own canonical URL on your domain, building domain authority that belongs to you permanently."
+    },
+    {
+      "icon": "dollar-sign",
+      "heading": "Keep 100% of your earnings",
+      "body": "Medium's Partner Program takes a revenue cut and ties your income to their algorithm. WebNami is free — monetise however you choose with no platform in between."
+    }
+  ]
+}

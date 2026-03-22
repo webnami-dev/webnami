@@ -6,15 +6,15 @@
 
     {# Logo + Name #}
     <a href="/" class="flex items-center gap-2 text-content hover:text-primary transition-colors">
-      {% if header.logoPath %}
-        <img src="{{ header.logoPath }}" alt="{{ header.siteName }} logo" class="h-7 w-auto" />
+      {% if partials.header.logoPath %}
+        <img src="{{ partials.header.logoPath }}" alt="{{ partials.header.siteName }} logo" class="h-7 w-auto" />
       {% endif %}
-      <span class="text-lg font-semibold tracking-tight">{{ header.siteName }}</span>
+      <span class="text-lg font-semibold tracking-tight">{{ partials.header.siteName }}</span>
     </a>
 
     {# Desktop nav #}
     <nav class="hidden items-center gap-1 md:flex">
-      {% for item in header.nav %}
+      {% for item in partials.header.nav %}
         <a
           href="{{ item.href }}"
           class="rounded px-3 py-1.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"
@@ -25,7 +25,7 @@
 
       {# GitHub link #}
       <a
-        href="{{ header.githubUrl }}"
+        href="{{ partials.header.githubUrl }}"
         target="_blank"
         rel="noopener noreferrer"
         class="ml-3 flex items-center gap-1.5 rounded px-3 py-1.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"
@@ -61,7 +61,7 @@
     @click.outside="open = false"
   >
     <nav class="flex flex-col px-6 py-3">
-      {% for item in header.nav %}
+      {% for item in partials.header.nav %}
         <a
           href="{{ item.href }}"
           class="flex items-center rounded px-2 py-2.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"
@@ -72,7 +72,7 @@
       {% endfor %}
 
       <a
-        href="{{ header.githubUrl }}"
+        href="{{ partials.header.githubUrl }}"
         target="_blank"
         rel="noopener noreferrer"
         class="mt-1 flex items-center gap-2 rounded px-2 py-2.5 text-sm text-content/70 transition-colors hover:bg-primary/10 hover:text-primary"

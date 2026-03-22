@@ -1,0 +1,194 @@
+{
+  "title": "Features — WebNami",
+  "description": "Everything WebNami offers: a developer-friendly flat-file CMS with a built-in admin dashboard, Markdown editor, SEO tools, image handling, and full theme customization.",
+  "hero": {
+    "eyebrow": "Features",
+    "heading": "Everything your blog needs",
+    "subheading": "A complete blogging platform built on plain files, static output, and zero lock-in."
+  },
+  "sections": [
+    {
+      "id": "developer",
+      "icon": "code-2",
+      "label": "Developer Friendly",
+      "heading": "Built the way developers expect",
+      "subheading": "Markdown files, a Git-friendly structure, and static output you can deploy anywhere.",
+      "items": [
+        {
+          "icon": "file-text",
+          "heading": "Markdown-first workflow",
+          "body": "Every post and page is a plain Markdown file with YAML frontmatter. Edit in any text editor or through the admin."
+        },
+        {
+          "icon": "git-branch",
+          "heading": "Works with your repository",
+          "body": "Content lives in your project directory. Commit, diff, branch, and roll back with standard Git workflows."
+        },
+        {
+          "icon": "database-zap",
+          "heading": "No database",
+          "body": "No MySQL, no PostgreSQL, no migrations. Content is just files — nothing to maintain, back up, or corrupt."
+        },
+        {
+          "icon": "globe",
+          "heading": "Deploy anywhere",
+          "body": "Static HTML output works on any host — Netlify, Vercel, Cloudflare Pages, S3, or a plain VPS."
+        }
+      ]
+    },
+    {
+      "id": "admin",
+      "icon": "layout-dashboard",
+      "label": "Admin Dashboard",
+      "heading": "A clean browser UI for everything",
+      "subheading": "Manage your entire blog without touching the filesystem.",
+      "items": [
+        {
+          "icon": "newspaper",
+          "heading": "Posts & Pages",
+          "body": "Create, edit, publish, and delete posts and pages from a clean interface. Draft support included."
+        },
+        {
+          "icon": "tags",
+          "heading": "Categories & Tags",
+          "body": "Organise content with categories and comma-separated tags. Filter and browse by any combination."
+        },
+        {
+          "icon": "settings-2",
+          "heading": "Site settings",
+          "body": "Update your site name, description, social links, theme, and colour palette from a single settings screen."
+        },
+        {
+          "icon": "pencil-line",
+          "heading": "Markdown editor",
+          "body": "A full-featured Markdown editor (powered by EasyMDE) with toolbar, live preview, drag-and-drop image upload, and clipboard paste."
+        }
+      ]
+    },
+    {
+      "id": "customization",
+      "icon": "paintbrush",
+      "label": "Customization",
+      "heading": "Make it yours",
+      "subheading": "Eight built-in colour palettes, swappable themes, and first-class dark mode.",
+      "items": [
+        {
+          "icon": "palette",
+          "heading": "8 colour palettes",
+          "body": "Default, Forest, Ink, Ocean, Plum, Rose, Slate, and Sunset — switchable from the settings screen instantly."
+        },
+        {
+          "icon": "layers",
+          "heading": "Theme system",
+          "body": "Themes live in the themes/ directory as Nunjucks templates. Swap or build your own without touching core code."
+        },
+        {
+          "icon": "moon",
+          "heading": "Dark / Light mode",
+          "body": "Every built-in theme ships with a dark and light variant. Readers can toggle or it follows system preference."
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "icon": "zap",
+      "label": "Performance",
+      "heading": "Fast by default",
+      "subheading": "Static HTML with optimised CSS and no client-side framework weight.",
+      "items": [
+        {
+          "icon": "file-code",
+          "heading": "Static HTML output",
+          "body": "Eleventy compiles everything to plain HTML files. No server rendering, no runtime overhead."
+        },
+        {
+          "icon": "cpu",
+          "heading": "No client-side framework",
+          "body": "Zero React, Vue, or Angular shipped to visitors. Pages load immediately on any device or connection."
+        },
+        {
+          "icon": "wind",
+          "heading": "Tailwind CSS v4",
+          "body": "Only the CSS classes actually used in your templates are shipped. No dead code, no bloat."
+        },
+        {
+          "icon": "package-check",
+          "heading": "Automatic asset optimisation",
+          "body": "CSS and JS are bundled and minified on every production build via Vite. Assets are cache-busted automatically."
+        }
+      ]
+    },
+    {
+      "id": "images",
+      "icon": "image",
+      "label": "Image Handling",
+      "heading": "Images without the hassle",
+      "subheading": "Upload, optimise, and serve responsive images — all handled for you.",
+      "items": [
+        {
+          "icon": "upload",
+          "heading": "Upload from the editor",
+          "body": "Drag-and-drop or paste images directly into the Markdown editor. They are saved alongside the post's content files."
+        },
+        {
+          "icon": "monitor-smartphone",
+          "heading": "Automatic responsive images",
+          "body": "Every image is resized to 360, 720, and 1080 px variants and served via a srcset for the right device."
+        },
+        {
+          "icon": "image-play",
+          "heading": "WebP conversion",
+          "body": "All uploaded images are automatically converted to WebP for smaller file sizes and faster load times."
+        }
+      ]
+    },
+    {
+      "id": "seo",
+      "icon": "search",
+      "label": "SEO Ready",
+      "heading": "Built-in SEO, out of the box",
+      "subheading": "Everything search engines and social platforms expect — no plugins required.",
+      "items": [
+        {
+          "icon": "tag",
+          "heading": "Meta tags",
+          "body": "Title, description, and canonical URL are generated automatically from each post's frontmatter."
+        },
+        {
+          "icon": "share-2",
+          "heading": "OpenGraph & Twitter cards",
+          "body": "Rich previews on every major social platform. OG image is auto-generated from your site name."
+        },
+        {
+          "icon": "code",
+          "heading": "JSON-LD schema",
+          "body": "BlogPosting structured data is injected on every post so search engines understand your content fully."
+        },
+        {
+          "icon": "map",
+          "heading": "Sitemap & RSS",
+          "body": "A sitemap.xml and RSS feed are generated on every build, along with robots.txt and a custom 404 page."
+        }
+      ]
+    },
+    {
+      "id": "content",
+      "icon": "folder-open",
+      "label": "Content Organisation",
+      "heading": "Keep your content organised",
+      "subheading": "Tags, categories, and pagination built in from day one.",
+      "items": [
+        {
+          "icon": "filter",
+          "heading": "Tag & category filtering",
+          "body": "Readers can browse posts by tag or category. Filtered views are statically generated — no query strings needed."
+        },
+        {
+          "icon": "book-open",
+          "heading": "Paginated post listing",
+          "body": "Post lists are automatically split into pages based on your configured posts-per-page setting."
+        }
+      ]
+    }
+  ]
+}

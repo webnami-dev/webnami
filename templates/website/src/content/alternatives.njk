@@ -1,0 +1,56 @@
+---
+layout: "layouts/base"
+title: "WebNami Alternatives — Compare Blogging Platforms"
+permalink: "/alternatives/"
+---
+
+{% set c = pages.alternatives %}
+
+{# ── Hero ────────────────────────────────────────────────────── #}
+<section class="px-6 py-24 text-center">
+  <div class="mx-auto max-w-2xl">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">
+      {{ c.hero.eyebrow }}
+    </p>
+    <h1 class="text-4xl font-bold tracking-tight text-content sm:text-5xl">
+      {{ c.hero.heading }}
+    </h1>
+    <p class="mt-5 text-lg leading-relaxed text-content/60">
+      {{ c.hero.subheading }}
+    </p>
+  </div>
+</section>
+
+{# ── Alternatives grid ───────────────────────────────────────── #}
+<section class="px-6 pb-24">
+  <div class="mx-auto max-w-5xl">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {% for alt in c.alternatives %}
+        <a
+          href="{{ alt.href }}"
+          class="group flex flex-col gap-4 rounded-xl border border-content/10 bg-background p-6 transition-colors hover:border-primary/30 hover:bg-primary/[0.03]"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg border border-content/10 bg-content/5 text-content/50 transition-colors group-hover:border-primary/20 group-hover:bg-primary/10 group-hover:text-primary">
+              {% icon alt.icon, "w-4 h-4" %}
+            </div>
+            <span class="flex items-center gap-1 text-xs text-content/30 transition-colors group-hover:text-primary/60">
+              {% icon "arrow-right", "w-3.5 h-3.5" %}
+            </span>
+          </div>
+          <div>
+            <h2 class="mb-1.5 text-sm font-semibold text-content">
+              WebNami vs {{ alt.name }}
+            </h2>
+            <p class="text-sm leading-relaxed text-content/55">
+              {{ alt.description }}
+            </p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── CTA ─────────────────────────────────────────────────────── #}
+{%- include 'partials/cta.njk' -%}

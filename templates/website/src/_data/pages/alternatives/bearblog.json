@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs Bear Blog — More Features, Still Minimal",
+  "description": "Bear Blog is minimal and fast, but hosted-only with limited customization. WebNami is self-hosted, open source, and gives you a full admin with the same simplicity.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs Bear Blog",
+    "heading": "Minimal blogging with more control than Bear Blog",
+    "subheading": "Bear Blog's appeal is simplicity and speed — WebNami shares those values and goes further. You get a full admin dashboard, custom theming, and complete content ownership, all without the hosted-only constraints of Bear Blog."
+  },
+  "table": {
+    "competitorName": "Bear Blog",
+    "rows": [
+      {
+        "feature": "Self-hosted option",
+        "webnami": "Yes",
+        "competitor": "No (hosted only)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "Yes (open source)",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Content ownership",
+        "webnami": "Local Markdown files",
+        "competitor": "Platform-hosted",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Admin dashboard",
+        "webnami": "Full CRUD dashboard",
+        "competitor": "Minimal web editor",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Theme customization",
+        "webnami": "Full Tailwind CSS control",
+        "competitor": "CSS snippet only",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Custom domain",
+        "webnami": "Full control",
+        "competitor": "Supported (paid plan)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Hosting cost",
+        "webnami": "Free / self-hosted",
+        "competitor": "Free tier + $5/month paid",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed",
+        "webnami": "Static, instant",
+        "competitor": "Static, fast",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Built-in analytics",
+        "webnami": "Not built-in",
+        "competitor": "Basic analytics included",
+        "webnamiWins": false
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "server",
+      "heading": "Truly self-hosted",
+      "body": "Bear Blog is hosted-only — your content lives on their servers. WebNami runs locally, and you deploy static files anywhere you choose."
+    },
+    {
+      "icon": "sliders",
+      "heading": "Real theme control",
+      "body": "Bear Blog lets you add custom CSS but that's it. WebNami uses Tailwind CSS v4 with full Nunjucks templating — build any look you want from scratch."
+    },
+    {
+      "icon": "layout-dashboard",
+      "heading": "A proper admin dashboard",
+      "body": "Bear Blog's editor is intentionally bare-bones. WebNami includes a full admin with post management, page management, settings, and media uploads."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Your files, not their servers",
+      "body": "With Bear Blog your posts are stored on someone else's database. WebNami keeps everything as local Markdown files under your full control."
+    }
+  ]
+}

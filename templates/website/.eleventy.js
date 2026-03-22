@@ -87,6 +87,7 @@ export default function (eleventyConfig) {
   });
 
   return {
+    markdownTemplateEngine: false,
     dir: {
       input: "src",
       output: "_site",

@@ -1,0 +1,65 @@
+{
+  "title": "WebNami Alternatives — Compare Blogging Platforms",
+  "description": "See how WebNami compares to WordPress, Ghost, Medium, Wix, Squarespace, and more. Free, self-hosted, and built on plain files.",
+  "hero": {
+    "eyebrow": "Compare",
+    "heading": "WebNami vs everything else",
+    "subheading": "How does WebNami stack up against the most popular blogging platforms? Pick a comparison to find out."
+  },
+  "alternatives": [
+    {
+      "name": "WordPress",
+      "href": "/alternatives/wordpress-alternative/",
+      "description": "No database, no plugins to maintain, no PHP security patches. Just Markdown files and a static site.",
+      "icon": "layout-template"
+    },
+    {
+      "name": "Ghost",
+      "href": "/alternatives/ghost-alternative/",
+      "description": "All the writing focus of Ghost without the $9–$199/month hosting bill or the Node.js server to maintain.",
+      "icon": "ghost"
+    },
+    {
+      "name": "Medium",
+      "href": "/alternatives/medium-alternative/",
+      "description": "Your content on your domain, your audience yours to keep, and no platform taking a cut of your earnings.",
+      "icon": "book-open"
+    },
+    {
+      "name": "Blogger",
+      "href": "/alternatives/blogger-alternative/",
+      "description": "Modern, fast, and fully owned by you — no risk of Google shutting it down like Reader or Google+.",
+      "icon": "rss"
+    },
+    {
+      "name": "Wix",
+      "href": "/alternatives/wix-alternative/",
+      "description": "No monthly fees, no heavy JavaScript runtime, and no walled garden that prevents you from leaving.",
+      "icon": "globe"
+    },
+    {
+      "name": "Squarespace",
+      "href": "/alternatives/squarespace-alternative/",
+      "description": "Beautiful blogs without the $16–$49/month subscription or the content lock-in that makes migrating painful.",
+      "icon": "square"
+    },
+    {
+      "name": "Bear Blog",
+      "href": "/alternatives/bearblog-alternative/",
+      "description": "The same minimal philosophy with a full admin dashboard, custom theming, and content you actually own.",
+      "icon": "feather"
+    },
+    {
+      "name": "Publii",
+      "href": "/alternatives/publii-alternative/",
+      "description": "Static site benefits without the desktop-only constraint — manage your blog from any browser.",
+      "icon": "monitor"
+    },
+    {
+      "name": "DropInBlog",
+      "href": "/alternatives/dropinblog-alternative/",
+      "description": "A complete standalone blog for free instead of a $29–$99/month embedded widget tied to someone else's SaaS.",
+      "icon": "package"
+    }
+  ]
+}

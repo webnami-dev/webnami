@@ -1,5 +1,6 @@
 ---
 layout: "layouts/base"
+permalink: "/"
 ---
 
 {%- include 'partials/hero.njk' -%}
@@ -18,27 +19,27 @@ layout: "layouts/base"
 
     <div class="flex flex-col">
 
-      {% call featureCard(index.features[0], false) %}
+      {% call featureCard(pages.index.features[0], false) %}
         {% include 'mockups/feature-files.njk' %}
       {% endcall %}
 
-      {% call featureCard(index.features[1], true) %}
+      {% call featureCard(pages.index.features[1], true) %}
         {% include 'mockups/feature-zero-config.njk' %}
       {% endcall %}
 
-      {% call featureCard(index.features[2], false) %}
+      {% call featureCard(pages.index.features[2], false) %}
         {% include 'mockups/feature-no-database.njk' %}
       {% endcall %}
 
-      {% call featureCard(index.features[3], true) %}
+      {% call featureCard(pages.index.features[3], true) %}
         {% include 'mockups/feature-ownership.njk' %}
       {% endcall %}
 
-      {% call featureCard(index.features[4], false) %}
+      {% call featureCard(pages.index.features[4], false) %}
         {% include 'mockups/feature-speed.njk' %}
       {% endcall %}
 
-      {% call featureCard(index.features[5], true) %}
+      {% call featureCard(pages.index.features[5], true) %}
         {% include 'mockups/feature-seo.njk' %}
       {% endcall %}
 

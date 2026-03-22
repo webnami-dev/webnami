@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs DropInBlog — A Free, Self-Hosted Alternative",
+  "description": "DropInBlog charges $29–$99/month to embed a blog on your site. WebNami is free and self-hosted — a complete blogging platform with no monthly fee.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs DropInBlog",
+    "heading": "A complete blog platform without the DropInBlog monthly fee",
+    "subheading": "DropInBlog is a SaaS embeddable blog that charges $29–$99/month just to add blogging to your site. WebNami is a complete, free, self-hosted blogging platform — own your content, pay nothing recurring, and get a faster static site in the bargain."
+  },
+  "table": {
+    "competitorName": "DropInBlog",
+    "rows": [
+      {
+        "feature": "Monthly cost",
+        "webnami": "Free",
+        "competitor": "$29–$99/month",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Content ownership",
+        "webnami": "Local Markdown files",
+        "competitor": "SaaS platform database",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "No (proprietary SaaS)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed",
+        "webnami": "Static, instant",
+        "competitor": "Embedded iframe/JS widget",
+        "webnamiWins": true
+      },
+      {
+        "feature": "SEO performance",
+        "webnami": "Full static HTML",
+        "competitor": "Can suffer from embed latency",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Standalone blog site",
+        "webnami": "Yes — full site",
+        "competitor": "Embedded widget only",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Embed on existing site",
+        "webnami": "Not designed for embed",
+        "competitor": "Core use case",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Setup complexity",
+        "webnami": "One npx command",
+        "competitor": "Requires existing site + integration",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Vendor lock-in risk",
+        "webnami": "None",
+        "competitor": "High — SaaS dependency",
+        "webnamiWins": true
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "dollar-sign",
+      "heading": "Zero recurring cost",
+      "body": "DropInBlog starts at $29/month — $348/year just to have a blog. WebNami is completely free and open source. Host the static output on any free tier provider."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Own your content",
+      "body": "DropInBlog stores your posts in their database. If they shut down or raise prices, your content is at risk. WebNami keeps everything as local Markdown files you fully control."
+    },
+    {
+      "icon": "gauge",
+      "heading": "No widget lag",
+      "body": "DropInBlog loads content through a JavaScript embed, adding latency to every page. WebNami generates static HTML — your blog content is part of the page from the first byte."
+    },
+    {
+      "icon": "search",
+      "heading": "Better SEO architecture",
+      "body": "Embedded widgets can hurt SEO because content loads after the initial HTML. WebNami's static output gives search engines clean, fully-rendered HTML on every request."
+    }
+  ]
+}

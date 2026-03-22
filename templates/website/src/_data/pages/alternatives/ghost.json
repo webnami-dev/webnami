@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs Ghost — A Free, Simpler Blogging Alternative",
+  "description": "Compare WebNami and Ghost. WebNami is free, file-based, and needs no Node.js server to run in production. Own your content without a monthly bill.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs Ghost",
+    "heading": "All the simplicity of Ghost, without the hosting bill",
+    "subheading": "Ghost is a polished blogging platform but charges $9–$199/month for hosting, and self-hosting requires a Node.js server and a database. WebNami gives you a clean writing experience and a static site you can host anywhere for free."
+  },
+  "table": {
+    "competitorName": "Ghost",
+    "rows": [
+      {
+        "feature": "Managed hosting cost",
+        "webnami": "Free (self-hosted)",
+        "competitor": "$9–$199/month",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Self-host complexity",
+        "webnami": "One npx command",
+        "competitor": "Node.js server + SQLite/MySQL",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Database required",
+        "webnami": "No",
+        "competitor": "SQLite / MySQL",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed",
+        "webnami": "Static, instant",
+        "competitor": "Server-rendered, slower",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Content ownership",
+        "webnami": "Local Markdown files",
+        "competitor": "Database export required",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Setup time",
+        "webnami": "5 minutes",
+        "competitor": "20–60 minutes",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "Yes (MIT)",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Membership & subscriptions",
+        "webnami": "Not built-in",
+        "competitor": "Built-in",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Newsletter integration",
+        "webnami": "Third-party",
+        "competitor": "Built-in",
+        "webnamiWins": false
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "dollar-sign",
+      "heading": "Zero hosting costs",
+      "body": "Ghost Pro starts at $9/month. WebNami generates a static site you can host on Netlify, Vercel, or GitHub Pages — for free, forever."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Files, not databases",
+      "body": "Ghost stores content in a database. WebNami stores it as Markdown files you can open in any editor, back up with Git, and move anywhere without an export step."
+    },
+    {
+      "icon": "zap",
+      "heading": "No server to maintain",
+      "body": "Self-hosted Ghost needs Node.js, a process manager, and regular upgrades. WebNami's output is static HTML — deploy it and forget about runtime maintenance."
+    },
+    {
+      "icon": "gauge",
+      "heading": "Faster pages out of the box",
+      "body": "Ghost renders pages on each request. WebNami pre-builds everything into static HTML so every visitor gets an instant response with no server processing time."
+    }
+  ]
+}

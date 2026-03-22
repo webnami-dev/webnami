@@ -1,0 +1,95 @@
+{
+  "title": "WebNami vs Blogger — Own Your Blog, Leave Google Behind",
+  "description": "Blogger is free but locks your content in Google's ecosystem. WebNami is free too, and gives you full ownership, faster pages, and no vendor lock-in.",
+  "ui": {
+    "cta": "Get Started Free",
+    "webnamiColumn": "WebNami",
+    "reasonsHeading": "Why switch to WebNami?"
+  },
+  "hero": {
+    "eyebrow": "WebNami vs Blogger",
+    "heading": "A modern alternative to Blogger that you actually own",
+    "subheading": "Blogger has been around since 1999 and hasn't changed much since. WebNami gives you a fast, modern static blog with a clean admin — and since your content is just Markdown files, you're never at the mercy of Google deciding to shut it down."
+  },
+  "table": {
+    "competitorName": "Blogger",
+    "rows": [
+      {
+        "feature": "Content ownership",
+        "webnami": "Local Markdown files",
+        "competitor": "Google-owned database",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Custom domain",
+        "webnami": "Full control",
+        "competitor": "Supported (with caveats)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Page speed",
+        "webnami": "Static, instant",
+        "competitor": "Google-hosted, moderate",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Design flexibility",
+        "webnami": "Full Tailwind CSS control",
+        "competitor": "Limited theme editor",
+        "webnamiWins": true
+      },
+      {
+        "feature": "SEO control",
+        "webnami": "Full — custom meta, sitemaps",
+        "competitor": "Basic, limited control",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Vendor lock-in risk",
+        "webnami": "None",
+        "competitor": "High (Google can shut down)",
+        "webnamiWins": true
+      },
+      {
+        "feature": "Hosting cost",
+        "webnami": "Free / self-hosted",
+        "competitor": "Free (Google-hosted)",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Setup required",
+        "webnami": "One command",
+        "competitor": "Zero — sign in with Google",
+        "webnamiWins": false
+      },
+      {
+        "feature": "Open source",
+        "webnami": "Yes",
+        "competitor": "No (proprietary)",
+        "webnamiWins": true
+      }
+    ]
+  },
+  "reasons": [
+    {
+      "icon": "lock",
+      "heading": "No Google lock-in",
+      "body": "Google has killed dozens of products — Reader, Google+, Sites. Blogger could be next. With WebNami your content is plain files you control completely."
+    },
+    {
+      "icon": "sliders",
+      "heading": "Real design control",
+      "body": "Blogger themes are restrictive and outdated. WebNami uses Tailwind CSS v4, giving you full control over typography, spacing, colors, and layout."
+    },
+    {
+      "icon": "search",
+      "heading": "Serious SEO built in",
+      "body": "Blogger gives you minimal SEO options. WebNami includes structured metadata, clean URLs, sitemap generation, and optimized markup right out of the box."
+    },
+    {
+      "icon": "hard-drive",
+      "heading": "Your content, forever",
+      "body": "Blogger posts live in Google's servers. WebNami posts are Markdown files on your machine — portable, version-controllable, and readable without any platform."
+    }
+  ]
+}

@@ -17,3 +17,4 @@ packages/admin-vue/client/dist/
 templates/website/_site/
 templates/website/node_modules/
 templates/website/.cache
+docs/*.md

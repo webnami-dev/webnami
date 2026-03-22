@@ -1,0 +1,87 @@
+{# Hero Section #}
+<section class="px-6 pt-20 pb-16 text-center">
+  <div class="mx-auto max-w-3xl">
+    <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-primary">
+      {{ alt.hero.eyebrow }}
+    </p>
+    <h1 class="text-4xl font-bold tracking-tight text-content sm:text-5xl lg:text-6xl">
+      {{ alt.hero.heading }}
+    </h1>
+    <p class="mt-6 text-lg leading-relaxed text-content/60">
+      {{ alt.hero.subheading }}
+    </p>
+    <div class="mt-8">
+      <a
+        href="/#get-started"
+        class="inline-block rounded bg-primary px-8 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-80"
+      >
+        {{ alt.ui.cta }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{# Comparison Table #}
+<section class="px-6 py-16">
+  <div class="mx-auto max-w-4xl">
+    <div class="overflow-x-auto rounded-xl border border-content/10">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-content/10 bg-content/5">
+            <th class="px-6 py-4 text-left font-semibold text-content/70">Feature</th>
+            <th class="px-6 py-4 text-left font-semibold text-primary">{{ alt.ui.webnamiColumn }}</th>
+            <th class="px-6 py-4 text-left font-semibold text-content/70">{{ alt.table.competitorName }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in alt.table.rows %}
+          <tr class="border-b border-content/10 {% if loop.index is odd %}bg-content/5{% endif %} transition-colors hover:bg-content/10">
+            <td class="px-6 py-4 font-medium text-content">{{ row.feature }}</td>
+            <td class="px-6 py-4">
+              {% if row.webnami == "true" %}
+                <span class="font-semibold text-green-500">✓</span>
+              {% elif row.webnami == "false" %}
+                <span class="font-medium text-red-400">✗</span>
+              {% else %}
+                <span class="{% if row.webnamiWins %}text-content{% else %}text-content/60{% endif %}">{{ row.webnami }}</span>
+              {% endif %}
+            </td>
+            <td class="px-6 py-4">
+              {% if row.competitor == "true" %}
+                <span class="font-semibold text-green-500">✓</span>
+              {% elif row.competitor == "false" %}
+                <span class="font-medium text-red-400">✗</span>
+              {% else %}
+                <span class="text-content/60">{{ row.competitor }}</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{# Why Switch Section #}
+<section class="px-6 py-16">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="mb-12 text-center text-3xl font-bold tracking-tight text-content">
+      {{ alt.ui.reasonsHeading }}
+    </h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {% for item in alt.reasons %}
+      <div class="rounded-xl border border-content/10 bg-content/5 p-6">
+        <div class="mb-4 text-primary">
+          {% icon item.icon, "w-5 h-5" %}
+        </div>
+        <h3 class="mb-2 font-semibold text-content">{{ item.heading }}</h3>
+        <p class="text-sm leading-relaxed text-content/60">{{ item.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# CTA #}
+{%- include 'partials/cta.njk' -%}
