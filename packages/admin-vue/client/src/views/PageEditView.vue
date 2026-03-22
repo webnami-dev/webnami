@@ -38,10 +38,11 @@
       <div class="flex items-center gap-2 pt-1">
         <button
           type="submit"
+          :disabled="!isDirty"
           class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium text-white transition-opacity duration-100"
-          :style="{ backgroundColor: 'var(--color-primary)' }"
-          @mouseenter="(e) => e.currentTarget.style.opacity='0.88'"
-          @mouseleave="(e) => e.currentTarget.style.opacity='1'"
+          :style="{ backgroundColor: 'var(--color-primary)', opacity: isDirty ? '1' : '0.4', cursor: isDirty ? 'pointer' : 'not-allowed' }"
+          @mouseenter="(e) => { if (isDirty) e.currentTarget.style.opacity='0.88'; }"
+          @mouseleave="(e) => { if (isDirty) e.currentTarget.style.opacity='1'; }"
         >
           <Save :size="12" />
           {{ page.isDraft ? 'Save Draft' : 'Save Changes' }}
@@ -75,7 +76,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Save, Send, Trash2, ExternalLink } from 'lucide-vue-next';
 import MarkdownEditor from '../components/MarkdownEditor.vue';
@@ -98,6 +99,13 @@ const page = ref({
   url: '',
   isDraft: false,
 });
+const original = ref(null);
+
+const isDirty = computed(() => {
+  if (!original.value) return false;
+  return page.value.title !== original.value.title
+    || page.value.content !== original.value.content;
+});
 
 onMounted(async () => {
   const res = await fetch(`/api/pages/${route.params.slug}`);
@@ -107,6 +115,10 @@ onMounted(async () => {
   }
   page.value = await res.json();
   loaded.value = true;
+  await nextTick();
+  const initialContent = editorRef.value?.getInitialValue() ?? page.value.content;
+  page.value.content = initialContent;
+  original.value = { title: page.value.title, content: initialContent };
 });
 
 async function savePage() {

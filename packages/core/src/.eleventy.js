@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "fs";
+import path from "path";
 import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
@@ -138,6 +139,10 @@ export default function (eleventyConfig) {
       // output image widths
       widths: [360, 720, 1080],
       sizes: "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw",
+      filenameFormat(_id, src, width, format) {
+        const stem = path.basename(src, path.extname(src));
+        return `${stem}-${width}.${format}`;
+      },
 
       // to disable dev server transform
       transformOnRequest: false,
@@ -175,6 +180,10 @@ export default function (eleventyConfig) {
           formats: ["webp"],
           outputDir: "./_site/images/",
           urlPath: "/images/",
+          filenameFormat(_id, src, width, format) {
+            const stem = path.basename(src, path.extname(src));
+            return `${stem}-${width}.${format}`;
+          },
           // Force caching for all images
           cacheOptions: {
             duration: "1d",

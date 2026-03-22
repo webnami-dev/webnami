@@ -52,7 +52,7 @@ function getToolbar() {
     '|',
     { name: 'code', action: EasyMDE.toggleCodeBlock, icon: lucideIcon('code'), title: 'Code' },
     { name: 'link', action: EasyMDE.drawLink, icon: lucideIcon('link'), title: 'Link' },
-    { name: 'image', action: EasyMDE.drawImage, icon: lucideIcon('image'), title: 'Image' },
+    { name: 'upload-image', action: EasyMDE.drawUploadedImage, icon: lucideIcon('image'), title: 'Upload Image' },
     { name: 'table', action: EasyMDE.drawTable, icon: lucideIcon('table'), title: 'Table' },
     '|',
     { name: 'horizontal-rule', action: EasyMDE.drawHorizontalRule, icon: lucideIcon('minus'), title: 'Horizontal Rule' },
@@ -74,7 +74,14 @@ onMounted(() => {
       body.append('image', file);
       fetch('/api/upload', { method: 'POST', body })
         .then((r) => r.json())
-        .then((d) => d.url ? onSuccess(d.url) : onError(d.error ?? 'Upload failed.'))
+        .then((d) => {
+          if (!d.url) { onError(d.error ?? 'Upload failed.'); return; }
+          const stem = d.url.split('/').pop().replace(/\.[^.]+$/, '').replace(/-/g, ' ');
+          const cm = editor.codemirror;
+          const cursor = cm.getCursor();
+          cm.replaceRange(`![${stem}](${d.url})`, cursor);
+          cm.focus();
+        })
         .catch(() => onError('Upload failed.'));
     },
     imageErrorCallback(msg) {
@@ -94,8 +101,8 @@ onBeforeUnmount(() => {
   }
 });
 
-// Expose getValue for parent to call directly if needed
 defineExpose({
   getValue: () => editor?.value() ?? '',
+  getInitialValue: () => editor?.value() ?? '',
 });
 </script>

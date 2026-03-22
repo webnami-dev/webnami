@@ -47,9 +47,28 @@ const storage = multer.diskStorage({
     }
     cb(null, dir);
   },
-  filename(_req, file, cb) {
+  filename(req, file, cb) {
+    const dir = resolveUploadDir(req);
     const ext = EXT_MAP[file.mimetype] ?? path.extname(file.originalname);
-    cb(null, `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`);
+    const stem = path.basename(
+      file.originalname,
+      path.extname(file.originalname),
+    );
+    const safeStem =
+      stem
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "") || "image";
+
+    let name = `${safeStem}${ext}`;
+    if (dir) {
+      let counter = 1;
+      while (fs.existsSync(path.join(dir, name))) {
+        name = `${safeStem}-${counter}${ext}`;
+        counter++;
+      }
+    }
+    cb(null, name);
   },
 });
 
