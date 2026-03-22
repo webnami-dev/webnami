@@ -57,5 +57,24 @@
         "alt": "SEO illustration"
       }
     }
-  ]
+  ],
+  "workflow": {
+    "title": "From Markdown to Live Site in Minutes",
+    "steps": [
+      "Create your blog with one command",
+      "Write posts in Markdown",
+      "Preview locally in the dashboard",
+      "Deploy anywhere as static HTML"
+    ]
+  },
+  "deployment": {
+    "title": "Deploy Anywhere",
+    "items": [
+      "Cloudflare Pages",
+      "Netlify",
+      "GitHub Pages",
+      "Vercel",
+      "Any static hosting provider"
+    ]
+  }
 }

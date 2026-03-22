@@ -1,7 +1,7 @@
 {
   "siteName": "WebNami",
   "logoPath": "/assets/images/logo.svg",
-  "subtext": "A fast, open-source blogging platform built on Eleventy and Tailwind CSS.",
+  "subtext": "A local-first flat-file CMS for creating fast, SEO-optimized blogs.",
   "footer": [
     {
       "categoryLabel": "PRODUCT",
