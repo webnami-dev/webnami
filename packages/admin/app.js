@@ -1,31 +1,20 @@
 import express from "express";
 import fs from "fs";
-import nunjucks from "nunjucks";
 import path from "path";
 import { fileURLToPath } from "url";
-import { build as viteBuild } from "vite";
-import adminRouter from "./src/routes/admin.js";
-import pagesRouter from "./src/routes/pages.js";
-import postsRouter from "./src/routes/posts.js";
-import settingsRouter from "./src/routes/settings.js";
-import uploadRouter from "./src/routes/upload.js";
-import { buildSite } from "./src/eleventy.js";
-import { initCache } from "./src/cache.js";
-import log from "./src/logger.js";
+import adminRouter from "./server/routes/admin.js";
+import pagesRouter from "./server/routes/pages.js";
+import postsRouter from "./server/routes/posts.js";
+import settingsRouter from "./server/routes/settings.js";
+import uploadRouter from "./server/routes/upload.js";
+import { buildSite } from "./server/eleventy.js";
+import { initCache } from "./server/cache.js";
+import log from "./server/logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = process.cwd();
 
 const app = express();
-
-// Configure nunjucks for admin views
-nunjucks.configure(path.join(__dirname, "views"), {
-  autoescape: true,
-  express: app,
-  watch: true,
-});
-
-app.set("view engine", "njk");
 app.use(express.json());
 
 const siteConfig = JSON.parse(
@@ -33,30 +22,26 @@ const siteConfig = JSON.parse(
 );
 log.info(`Loading theme: "${siteConfig.theme}"`);
 
-log.info("Building Vite assets ...");
-await viteBuild({
-  configFile: fileURLToPath(
-    import.meta.resolve("@webnami/core/src/vite.config.js"),
-  ),
-  logLevel: "silent",
-});
-//await viteBuild({ configFile: path.join(__dirname, "src/vite.config.js"), logLevel: "silent" });
-log.success("Vite build complete");
-
 process.env.NODE_ENV = "development";
 await buildSite();
 initCache();
 
 app.use(express.static(path.join(rootDir, "_site")));
-app.use("/admin", express.static(path.join(__dirname, "dist")));
+app.use("/admin", express.static(path.join(__dirname, "client/dist")));
 app.use("/admin/site", express.static(path.join(rootDir, "content/site")));
 log.info("Static file middleware mounted");
 
-app.use("/admin", adminRouter);
-app.use("/admin/pages", pagesRouter);
-app.use("/admin/posts", postsRouter);
-app.use("/admin/settings", settingsRouter);
-app.use("/admin/upload", uploadRouter);
+app.use("/api", adminRouter);
+app.use("/api/posts", postsRouter);
+app.use("/api/pages", pagesRouter);
+app.use("/api/settings", settingsRouter);
+app.use("/api/upload", uploadRouter);
+
+// SPA fallback
+app.get("/admin", (req, res) => res.redirect("/admin/"));
+app.get("/admin/*splat", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist/index.html"));
+});
 
 app.listen(3000, () => {
   log.server("✅ Admin dashboard running on http://localhost:3000/admin");

@@ -6,9 +6,7 @@ import path from "path";
 const require = createRequire(import.meta.url);
 
 const corePath = path.dirname(require.resolve("@webnami/core/package.json"));
-const adminPath = path.dirname(
-  require.resolve("@webnami/admin-vue/package.json"),
-);
+const adminPath = path.dirname(require.resolve("@webnami/admin/package.json"));
 
 const viteConfig = path.join(corePath, "src/vite.config.js");
 const eleventyConfig = path.join(corePath, "src/.eleventy.js");

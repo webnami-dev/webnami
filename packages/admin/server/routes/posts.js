@@ -17,6 +17,7 @@ function getConfigAuthor() {
     return "";
   }
 }
+
 const RESERVED_SLUGS = ["admin", "api"];
 const DRAFT_PREFIX = "draft-post-";
 
@@ -53,22 +54,18 @@ function listPosts() {
   return { published, drafts };
 }
 
+// GET / - list all posts
 router.get("/", (req, res) => {
   const { published, drafts } = listPosts();
   const allTags = [...new Set(published.flatMap((p) => p.tags))].sort();
   const allCategories = [
     ...new Set(published.map((p) => p.category).filter(Boolean)),
   ].sort();
-  res.render("posts/post-list.njk", {
-    title: "Posts",
-    data: published,
-    allTags,
-    allCategories,
-    drafts,
-  });
+  res.json({ published, drafts, allTags, allCategories });
 });
 
-router.get("/new", (req, res) => {
+// POST / - create new draft
+router.post("/", (req, res) => {
   const draftName = nextDraftName();
   fs.mkdirSync(path.join(draftsDir, draftName));
   const date = new Date();
@@ -94,32 +91,31 @@ router.get("/new", (req, res) => {
     category: "",
     isDraft: true,
   });
-  res.redirect(`/admin/posts/${draftName}`);
+  res.json({ slug: draftName });
 });
 
+// GET /:slug - get post data
 router.get("/:slug", (req, res) => {
   const { slug } = req.params;
   const filePath = path.join(resolvePostDir(slug), "index.md");
   if (!fs.existsSync(filePath)) {
-    return res.redirect("/admin/posts");
+    return res.status(404).json({ error: "Post not found." });
   }
   const file = matter(fs.readFileSync(filePath, "utf-8"));
-  res.render("posts/post.njk", {
-    title: file.data.title || "Draft",
-    post: {
-      title: file.data.title || "",
-      author: getConfigAuthor(),
-      tags: (file.data.tags || []).join(", "),
-      category: file.data.category || "",
-      content: file.content,
-      slug,
-      id: file.data.id || slug,
-      url: `/${toSlug(file.data.title || slug)}/`,
-      isDraft: file.data.isDraft || false,
-    },
+  res.json({
+    title: file.data.title || "",
+    author: getConfigAuthor(),
+    tags: (file.data.tags || []).join(", "),
+    category: file.data.category || "",
+    content: file.content,
+    slug,
+    id: file.data.id || slug,
+    url: `/${toSlug(file.data.title || slug)}/`,
+    isDraft: file.data.isDraft || false,
   });
 });
 
+// PUT /:slug - update post
 router.put("/:slug", async (req, res) => {
   const { title, tags, category, content } = req.body;
   const { slug } = req.params;
@@ -133,7 +129,6 @@ router.put("/:slug", async (req, res) => {
     .map((t) => t.trim())
     .filter(Boolean);
 
-  // Drafts: save title/content in place, no id field
   if (existingFile.data.isDraft) {
     const date = existingFile.data.date || new Date();
     const frontmatter = {
@@ -162,7 +157,6 @@ router.put("/:slug", async (req, res) => {
     return res.json({ slug });
   }
 
-  // Published posts: update title/tags/category/content/uri — id and folder are stable
   const date = existingFile.data.date || new Date();
   const id = existingFile.data.id || slug;
   const frontmatter = {
@@ -191,6 +185,7 @@ router.put("/:slug", async (req, res) => {
   res.json({ slug });
 });
 
+// POST /:slug/publish
 router.post("/:slug/publish", async (req, res) => {
   const draftSlug = req.params.slug;
   const draftDir = path.join(draftsDir, draftSlug);
@@ -238,15 +233,14 @@ router.post("/:slug/publish", async (req, res) => {
   res.json({ slug: newSlug });
 });
 
+// DELETE /:slug
 router.delete("/:slug", async (req, res) => {
   const { slug } = req.params;
   const isDraftSlug = slug.startsWith(DRAFT_PREFIX);
-
   let dirPath;
   if (isDraftSlug) {
     dirPath = path.resolve(path.join(draftsDir, slug));
   } else {
-    // Use id from frontmatter as authoritative folder name
     const filePath = path.join(postsDir, slug, "index.md");
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ error: "Post not found." });
@@ -255,14 +249,11 @@ router.delete("/:slug", async (req, res) => {
     const id = file.data.id || slug;
     dirPath = path.resolve(path.join(postsDir, id));
   }
-
   const allowedRoots = [postsDir + path.sep, draftsDir + path.sep];
   if (!allowedRoots.some((root) => dirPath.startsWith(root))) {
     return res.status(400).json({ error: "Invalid slug." });
   }
-  if (fs.existsSync(dirPath)) {
-    fs.rmSync(dirPath, { recursive: true });
-  }
+  if (fs.existsSync(dirPath)) fs.rmSync(dirPath, { recursive: true });
   removePost(slug);
   log.success(`Post deleted: ${slug}`);
   res.json({ success: true });

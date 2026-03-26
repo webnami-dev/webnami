@@ -57,12 +57,9 @@ export default [
       },
     },
   },
-  // admin-vue client (Vue SPA — browser environment)
+  // admin client (Vue SPA — browser environment)
   {
-    files: [
-      "packages/admin-vue/client/**/*.js",
-      "packages/admin-vue/client/**/*.vue",
-    ],
+    files: ["packages/admin/client/**/*.js", "packages/admin/client/**/*.vue"],
     languageOptions: {
       globals: {
         ...globals.browser,

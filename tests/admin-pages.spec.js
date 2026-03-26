@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import fs from "fs";
 import path from "path";
 
-const pagesDir = path.resolve("pages");
+const pagesDir = path.resolve("sandbox/content/pages");
 const testSlug = "playwright-test-page";
 const renamedSlug = "updated-test-page";
 const testFile = path.join(pagesDir, `${testSlug}.md`);

@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 const config = JSON.parse(
-  fs.readFileSync(path.resolve("src/_data/config.json"), "utf-8"),
+  fs.readFileSync(path.resolve("sandbox/_metadata/config.json"), "utf-8"),
 );
 
 test.describe("Homepage", () => {
@@ -33,7 +33,7 @@ test.describe("Homepage", () => {
     await page.goto("/");
     // Read config fresh in case another test modified it
     const freshConfig = JSON.parse(
-      fs.readFileSync(path.resolve("src/_data/config.json"), "utf-8"),
+      fs.readFileSync(path.resolve("sandbox/_metadata/config.json"), "utf-8"),
     );
     const title = await page.title();
     expect(title).toContain(freshConfig.site.name);

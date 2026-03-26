@@ -16,7 +16,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "node admin/app.js",
+    command: "node ../packages/admin/app.js",
+    cwd: "./sandbox",
     port: 3000,
     timeout: 60000,
     reuseExistingServer: !process.env.CI,

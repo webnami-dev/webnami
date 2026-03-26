@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import fs from "fs";
 import path from "path";
 
-const configPath = path.resolve("src/_data/config.json");
+const configPath = path.resolve("sandbox/_metadata/config.json");
 
 function readConfig() {
   return JSON.parse(fs.readFileSync(configPath, "utf-8"));
@@ -16,7 +16,9 @@ test.beforeAll(() => {
 test.afterAll(async ({ request }) => {
   const original = JSON.parse(originalConfig);
   // Read current palette from theme CSS to avoid triggering palette-change restart
-  const cssPath = path.resolve(`themes/${original.theme}/assets/css/input.css`);
+  const cssPath = path.resolve(
+    `sandbox/themes/${original.theme}/assets/css/input.css`,
+  );
   const css = fs.readFileSync(cssPath, "utf-8");
   const paletteMatch = css.match(/@import\s+["'][^"']*palette-(\w+)\.css["']/);
   const colorPalette = paletteMatch ? paletteMatch[1] : "Default";
