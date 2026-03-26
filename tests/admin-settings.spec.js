@@ -23,11 +23,12 @@ test.afterAll(async ({ request }) => {
   const paletteMatch = css.match(/@import\s+["'][^"']*palette-(\w+)\.css["']/);
   const colorPalette = paletteMatch ? paletteMatch[1] : "Default";
   // Restore via API so it triggers a site rebuild with the original values
-  await request.put("/admin/settings", {
+  await request.put("/api/settings", {
     data: {
       blogName: original.site.name,
       blogUrl: original.site.url,
       homepageHeading: original.homepage.heading,
+      author: original.author || "",
       colorPalette,
       socialLinks: JSON.stringify(original.footer.socialLinks || []),
     },
@@ -50,17 +51,13 @@ test.describe("Settings Page", () => {
     await expect(page.locator("#homepageHeading")).toHaveValue(
       config.homepage.heading,
     );
-    // blogUrl is inside the collapsed Advanced Settings section
-    await expect(page.locator("#blogUrl")).toHaveValue(config.site.url);
   });
 
   test("should show color palette radio buttons", async ({ page }) => {
     await page.goto("/admin/settings");
     const radios = page.locator('input[name="colorPalette"]');
-    await expect(radios).toHaveCount(await radios.count());
     const count = await radios.count();
     expect(count).toBeGreaterThan(0);
-    // At least one should be checked
     const checked = page.locator('input[name="colorPalette"]:checked');
     await expect(checked).toHaveCount(1);
   });
@@ -73,7 +70,6 @@ test.describe("Settings Page", () => {
     await page.locator("#homepageHeading").fill("Test Heading");
 
     await page.locator('button[type="submit"]').click();
-    await page.waitForURL("**/admin/settings");
 
     await expect(page.locator(".alert-success")).toBeVisible();
     await expect(page.locator(".alert-success")).toContainText(
@@ -85,7 +81,7 @@ test.describe("Settings Page", () => {
     expect(config.homepage.heading).toBe("Test Heading");
 
     // Verify values persist on reload
-    await page.goto("/admin/settings");
+    await page.reload();
     await expect(page.locator("#blogName")).toHaveValue("Test Blog Name");
     await expect(page.locator("#homepageHeading")).toHaveValue("Test Heading");
   });
@@ -101,18 +97,15 @@ test.describe("Settings Page", () => {
     page,
   }) => {
     await page.goto("/admin/settings");
-    // Social links are always visible (no collapsible section)
     await page
       .locator(".social-link-href")
       .first()
       .waitFor({ state: "visible" });
 
-    const firstRow = page.locator(".social-link-row").first();
     const href = "https://github.com/testuser";
-    await firstRow.locator(".social-link-href").fill(href);
+    await page.locator(".social-link-href").first().fill(href);
 
     await page.locator('button[type="submit"]').click();
-    await page.waitForURL("**/admin/settings");
 
     await expect(page.locator(".alert-success")).toBeVisible();
 

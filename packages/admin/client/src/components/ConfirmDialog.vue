@@ -1,6 +1,7 @@
 <template>
   <Transition name="overlay">
     <div
+      id="confirm-dialog"
       v-if="confirm.open"
       class="fixed inset-0 z-[200] flex items-center justify-center"
     >
@@ -20,6 +21,7 @@
           </p>
           <div class="flex items-center justify-end gap-2">
             <button
+              id="confirm-cancel"
               @click="confirm.cancel()"
               class="px-3.5 py-2 rounded text-[13px] font-medium transition-colors duration-100"
               :style="{ color: 'var(--color-content)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)' }"
@@ -29,6 +31,7 @@
               Cancel
             </button>
             <button
+              id="confirm-accept"
               @click="confirm.accept()"
               class="confirm-delete-btn px-3.5 py-2 rounded text-[13px] font-medium text-white transition-opacity duration-100"
               @mouseenter="(e) => e.currentTarget.style.opacity = '0.88'"

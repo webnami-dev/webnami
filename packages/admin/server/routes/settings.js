@@ -137,9 +137,9 @@ router.put("/", async (req, res) => {
     themeSettings: oldConfig.themeSettings,
     postsPerPage: oldConfig.postsPerPage,
     site: {
+      ...oldConfig.site,
       name: data.blogName,
       url: data.blogUrl,
-      ...(oldConfig.site.logo && { logo: oldConfig.site.logo }),
     },
     homepage: {
       heading: data.homepageHeading,

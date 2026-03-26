@@ -11,6 +11,7 @@
           Draft
         </span>
         <input
+          id="title"
           v-model="post.title"
           type="text"
           required
@@ -36,6 +37,7 @@
         <div class="flex items-center gap-2 flex-1">
           <label class="admin-label mb-0 shrink-0">Category:</label>
           <input
+            id="category"
             v-model="post.category"
             type="text"
             class="admin-input text-[13px]"
@@ -45,6 +47,7 @@
         <div class="flex items-center gap-2" style="flex: 3;">
           <label class="admin-label mb-0 shrink-0">Tags:</label>
           <input
+            id="tags"
             v-model="post.tags"
             type="text"
             class="admin-input text-[13px]"
@@ -86,6 +89,7 @@
           Publish
         </button>
         <button
+          id="delete-btn"
           type="button"
           @click="deletePost"
           class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium transition-colors duration-100"
@@ -170,7 +174,7 @@ async function savePost() {
     return;
   }
   rebuild.markDirty();
-  alerts.flash('success', 'Post saved successfully.');
+  alerts.show('success', 'Post saved successfully.');
   router.push(`/admin/posts/${data.slug}`);
 }
 
@@ -182,7 +186,7 @@ async function publishPost() {
     return;
   }
   rebuild.markDirty();
-  alerts.flash('success', 'Post published successfully.');
+  alerts.show('success', 'Post published successfully.');
   router.push(`/admin/posts/${data.slug}`);
 }
 
@@ -195,7 +199,7 @@ async function deletePost() {
     return;
   }
   rebuild.markDirty();
-  alerts.flash('success', 'Post deleted successfully.');
+  alerts.show('success', 'Post deleted successfully.');
   router.push('/admin/posts');
 }
 </script>

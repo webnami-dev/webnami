@@ -11,6 +11,7 @@
           Draft
         </span>
         <input
+          id="title"
           v-model="page.title"
           type="text"
           required
@@ -60,6 +61,7 @@
           Publish
         </button>
         <button
+          id="delete-btn"
           type="button"
           @click="deletePage"
           class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[12px] font-medium transition-colors duration-100"
@@ -137,7 +139,7 @@ async function savePage() {
     return;
   }
   rebuild.markDirty();
-  alerts.flash('success', 'Page saved successfully.');
+  alerts.show('success', 'Page saved successfully.');
   router.push(`/admin/pages/${data.slug}`);
 }
 
@@ -149,7 +151,7 @@ async function publishPage() {
     return;
   }
   rebuild.markDirty();
-  alerts.flash('success', 'Page published successfully.');
+  alerts.show('success', 'Page published successfully.');
   router.push(`/admin/pages/${data.slug}`);
 }
 
@@ -162,7 +164,7 @@ async function deletePage() {
     return;
   }
   rebuild.markDirty();
-  alerts.flash('success', 'Page deleted successfully.');
+  alerts.show('success', 'Page deleted successfully.');
   router.push('/admin/pages');
 }
 </script>

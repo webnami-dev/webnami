@@ -54,6 +54,7 @@
           <div class="flex items-center gap-2">
             <span class="w-28 shrink-0 text-sm" style="color: var(--color-accent);">Blog Name</span>
             <input
+              id="blogName"
               v-model="blogName"
               type="text"
               class="admin-input text-sm"
@@ -64,6 +65,7 @@
           <div class="flex items-center gap-2">
             <span class="w-28 shrink-0 text-sm" style="color: var(--color-accent);">Description</span>
             <input
+              id="homepageHeading"
               v-model="homepageHeading"
               type="text"
               class="admin-input text-sm"
@@ -126,14 +128,14 @@
           <div
             v-for="link in socialLinks"
             :key="link.name"
-            class="flex items-center gap-2"
+            class="social-link-row flex items-center gap-2"
           >
             <span class="w-28 shrink-0 text-sm capitalize" style="color: var(--color-accent);">{{ link.name }}</span>
             <input
               v-model="link.href"
               type="text"
               :placeholder="link.placeholder"
-              class="admin-input text-sm"
+              class="social-link-href admin-input text-sm"
             />
           </div>
         </div>
@@ -162,6 +164,7 @@
                 <span class="w-28 shrink-0 text-sm pt-1.5" style="color: var(--color-accent);">Site URL</span>
                 <div class="flex-1">
                   <input
+                    id="blogUrl"
                     v-model="blogUrl"
                     type="url"
                     class="admin-input text-sm"
@@ -296,7 +299,7 @@ async function saveSettings() {
     const data = await res.json();
     if (!res.ok) { alerts.show('error', data.error || 'Failed to save settings.'); return; }
     rebuild.markDirty();
-    alerts.flash('success', 'Settings saved successfully.');
+    alerts.show('success', 'Settings saved successfully.');
     await loadSettings();
   } catch {
     alerts.show('error', 'Failed to save settings.');
